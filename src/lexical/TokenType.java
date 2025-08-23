@@ -1,0 +1,62 @@
+package lexical;
+
+public enum TokenType {
+    classID,
+    methVarID,
+
+    sw_class,
+    sw_public,
+    sw_static,
+    sw_void,
+    sw_extends,
+    sw_implements,
+    sw_return,
+    sw_int,
+    sw_boolean,
+    sw_if,
+    sw_else,
+    sw_while,
+    sw_var,
+    sw_char,
+    sw_null,
+    sw_this,
+    sw_new,
+    sw_true,
+    sw_false,
+    sw_interface,
+    sw_private,
+
+    intType,
+    charType,
+    stringType,
+    nullType,
+
+    openCurly,
+    closeCurly,
+    openBracket,
+    closeBracket,
+    comma,
+    dot,
+    semicolon,
+
+    addOp,
+    subOp,
+    mulOp,
+    divOp,
+    orOp,
+    andOp,
+    notOp,
+    greaterOp,
+    lessOp,
+    greaterEqualOp,
+    lessEqualOp,
+    equalOp,
+    notEqualOp,
+    assignOp,
+    subAssignOp,
+    addAssignOp,
+    modOp,
+
+
+    eof
+}
