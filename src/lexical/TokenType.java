@@ -29,7 +29,6 @@ public enum TokenType {
     intType,
     charType,
     stringType,
-    nullType,
 
     openCurly,
     closeCurly,
