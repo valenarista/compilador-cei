@@ -2,7 +2,7 @@ package lexical;
 
 public enum TokenType {
     classID,
-    methVarID,
+    metVarID,
 
     sw_class,
     sw_public,
@@ -26,9 +26,9 @@ public enum TokenType {
     sw_interface,
     sw_private,
 
-    intType,
-    charType,
-    stringType,
+    intLiteral,
+    charLiteral,
+    stringLiteral,
 
     openCurly,
     closeCurly,
@@ -36,6 +36,7 @@ public enum TokenType {
     closeBracket,
     comma,
     dot,
+    colon,
     semicolon,
 
     addOp,
@@ -52,8 +53,8 @@ public enum TokenType {
     equalOp,
     notEqualOp,
     assignOp,
-    subAssignOp,
-    addAssignOp,
+    postDecrement,
+    postIncrement,
     modOp,
 
 

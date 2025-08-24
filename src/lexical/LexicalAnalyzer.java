@@ -5,6 +5,7 @@ import sourcemanager.SourceManager;
 import sourcemanager.SourceManagerImpl;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
 
 import static lexical.TokenType.*;
 
@@ -12,13 +13,14 @@ import static sourcemanager.SourceManager.END_OF_FILE;
 
 public class LexicalAnalyzer{
 
-        private SourceManager sourceManager;
+        private final SourceManager sourceManager;
         private char currentChar;
         private String lexeme;
         private HashMap<String, TokenType> reservedWords;
 
         public LexicalAnalyzer (SourceManager sourceManager)  {
             this.sourceManager = sourceManager;
+            buildWordMap();
             try {
                 this.currentChar = sourceManager.getNextChar();
             } catch (IOException e) {
@@ -79,15 +81,75 @@ public class LexicalAnalyzer{
                 addChar();
                 getChar();
                 return e15();
+            } else if (currentChar == '&'){
+                addChar();
+                getChar();
+                return e17();
+            } else if (currentChar == '|' ){
+                addChar();
+                getChar();
+                return e19();
+            } else if (currentChar == '+'){
+                addChar();
+                getChar();
+                return e21();
+            } else if (currentChar == '-'){
+                addChar();
+                getChar();
+                return e23();
+            } else if (currentChar == '*'){
+                addChar();
+                getChar();
+                return e25();
+            } else if (currentChar == '%' ) {
+                addChar();
+                getChar();
+                return e26();
+            } else if (currentChar == ';'){
+                addChar();
+                getChar();
+                return e27();
+            } else if (currentChar == ',' ) {
+                addChar();
+                getChar();
+                return e28();
+
+            } else if (currentChar == '.'){
+                addChar();
+                getChar();
+                return e29();
+            } else if (currentChar == ':'){
+                addChar();
+                getChar();
+                return e30();
+            } else if (currentChar == '{') {
+                addChar();
+                getChar();
+                return e31();
+            } else if (currentChar == '}'){
+                addChar();
+                getChar();
+                return e32();
+            } else if (Character.isUpperCase(currentChar)) {
+                addChar();
+                getChar();
+                return e33();
+            } else if (Character.isLowerCase(currentChar)) {
+                addChar();
+                getChar();
+                return e34();
+            } else if(currentChar == '"' ){
+                addChar();
+                getChar();
+                return e35();
+            } else if(currentChar == '\''){
+                addChar();
+                getChar();
+                return e37();
             }
 
 
-
-            else if (currentChar == '+' || currentChar == '-' || currentChar == '*' || currentChar == '%' || currentChar == ';' || currentChar == ',' || currentChar == '(' || currentChar == ')' || currentChar == '{' || currentChar == '}') {
-                addChar();
-                getChar();
-                return e();
-            } else {
+            else {
                 throw new LexicalException(lexeme, sourceManager.getLineNumber());
             }
         }
@@ -164,7 +226,7 @@ public class LexicalAnalyzer{
                 getChar();
                 return e8();
             } else if(lexeme.length()<=9){
-                return new Token(intType, lexeme, sourceManager.getLineNumber());
+                return new Token(intLiteral, lexeme, sourceManager.getLineNumber());
             } else {
                 throw new LexicalException(lexeme, sourceManager.getLineNumber());
             }
@@ -217,6 +279,155 @@ public class LexicalAnalyzer{
         private Token e16() {
             return new Token(notEqualOp, lexeme, sourceManager.getLineNumber());
         }
+        private Token e17() throws LexicalException, IOException {
+            if(currentChar == '&'){
+                addChar();
+                getChar();
+                return e18();
+            } else {
+                addChar();
+                throw new LexicalException(lexeme, sourceManager.getLineNumber());
+            }
+        }
+        private Token e18() {
+            return new Token(andOp, lexeme, sourceManager.getLineNumber());
+        }
+        private Token e19() throws LexicalException,IOException{
+            if (currentChar=='|'){
+                addChar();
+                getChar();
+                return e20();
+            } else {
+                addChar();
+                throw new LexicalException(lexeme, sourceManager.getLineNumber());
+            }
+        }
+        private Token e20() {
+            return new Token(orOp, lexeme, sourceManager.getLineNumber());
+        }
+        private Token e21() throws LexicalException, IOException {
+            if(currentChar == '+'){
+                addChar();
+                getChar();
+                return e22();
+            } else {
+                return new Token(addOp, lexeme, sourceManager.getLineNumber());
+            }
+        }
+        private Token e22() {
+            return new Token(postIncrement, lexeme, sourceManager.getLineNumber());
+        }
+        private Token e23() throws LexicalException, IOException {
+            if(currentChar == '-'){
+                addChar();
+                getChar();
+                return e24();
+            } else {
+                return new Token(subOp, lexeme, sourceManager.getLineNumber());
+            }
+        }
+        private Token e24() {
+            return new Token(postDecrement, lexeme, sourceManager.getLineNumber());
+        }
+        private Token e25() {
+            return new Token(mulOp, lexeme, sourceManager.getLineNumber());
+        }
+        private Token e26() {
+            return new Token(modOp, lexeme, sourceManager.getLineNumber());
+        }
+        private Token e27() {
+            return new Token(semicolon, lexeme, sourceManager.getLineNumber());
+        }
+        private Token e28() {
+            return new Token(comma, lexeme, sourceManager.getLineNumber());
+        }
+        private Token e29() {
+            return new Token(dot, lexeme, sourceManager.getLineNumber());
+        }
+        private Token e30() {
+            return new Token(colon, lexeme, sourceManager.getLineNumber());
+        }
+        private Token e31() throws IOException {
+            addChar();
+            getChar();
+            return new Token(openCurly, lexeme, sourceManager.getLineNumber());
+        }
+        private Token e32() throws IOException {
+            addChar();
+            getChar();
+            return new Token(closeCurly, lexeme, sourceManager.getLineNumber());
+        }
+        private Token e33() throws LexicalException, IOException {
+            if(Character.isLetterOrDigit(currentChar) || currentChar == '_'){
+                addChar();
+                getChar();
+                return e33();
+            } else {
+                return new Token(classID, lexeme, sourceManager.getLineNumber());
+            }
+        }
+        private Token e34() throws LexicalException,IOException{
+            addChar();
+            getChar();
+            if(Character.isLetterOrDigit(currentChar) || currentChar == '_'){
+                addChar();
+                getChar();
+                return e34();
+            } else{
+                TokenType type = reservedWords.get(lexeme);
+                return new Token(Objects.requireNonNullElse(type, metVarID), lexeme, sourceManager.getLineNumber());
+            }
+
+        }
+        private Token e35() throws LexicalException,IOException{
+            if(currentChar == END_OF_FILE || currentChar == '\n'){
+                throw new LexicalException(lexeme, sourceManager.getLineNumber());
+            } else if (currentChar == '"') {
+                addChar();
+                getChar();
+                return new Token(stringLiteral, lexeme, sourceManager.getLineNumber());
+            } else if (currentChar == '\\') {
+                addChar();
+                getChar();
+                return e36();
+                //TODO PREGUNTAR COMO REPRESENTAR EL \"
+            } else {
+                addChar();
+                getChar();
+                return e35();
+            }
+        }
+        private Token e36() throws LexicalException,IOException{
+            if(currentChar=='"'){
+                addChar();
+                getChar();
+                return e35();
+            } else if (currentChar == END_OF_FILE || currentChar == '\n') {
+                throw new LexicalException(lexeme, sourceManager.getLineNumber());
+            }
+            addChar();
+            getChar();
+            return e35();
+        }
+        private Token e37() throws LexicalException,IOException{
+            //TODO REVISAR
+            if(currentChar == END_OF_FILE || currentChar == '\n'){
+                throw new LexicalException(lexeme, sourceManager.getLineNumber());
+            }
+            addChar();
+            getChar();
+            if (currentChar!= '\''){
+                throw new LexicalException(lexeme, sourceManager.getLineNumber());
+            }
+            addChar();
+            getChar();
+            return new Token(charLiteral, lexeme, sourceManager.getLineNumber());
+        }
+
+
+
+
+
 
 
 
@@ -243,6 +454,5 @@ public class LexicalAnalyzer{
             reservedWords.put("false", sw_false);
             reservedWords.put("interface", sw_interface);
             reservedWords.put("private", sw_private);
-            reservedWords.put("String", stringType);
         }
 }
