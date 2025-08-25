@@ -61,4 +61,13 @@ public class SourceManagerImpl implements SourceManager{
         return lineNumber;
     }
 
+    public int getColumnNumber() {
+        return lineIndexNumber+1;
+    }
+
+    @Override
+    public String getCurrentLineText() {
+        return currentLine;
+    }
+
 }
