@@ -2,3 +2,7 @@
 /*
 !.gitignore
 !src
+
+# Ignorar carpetas de compilación comunes
+/out/
+/build/
