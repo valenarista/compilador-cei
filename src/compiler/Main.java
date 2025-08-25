@@ -29,7 +29,7 @@ public class Main {
 
                 System.out.println("[SinErrores]");
             } catch (LexicalException | IOException e) {
-                System.out.println("\n Lexical error in line " +sourceManager.getLineNumber());
+                System.out.println(e.getMessage());
             }
 
         }

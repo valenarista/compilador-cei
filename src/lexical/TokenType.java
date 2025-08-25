@@ -25,6 +25,8 @@ public enum TokenType {
     sw_false,
     sw_interface,
     sw_private,
+    sw_abstract,
+    sw_final,
 
     intLiteral,
     charLiteral,

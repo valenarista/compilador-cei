@@ -150,6 +150,8 @@ public class LexicalAnalyzer{
 
 
             else {
+                addChar();
+                getChar();
                 throw new LexicalException(lexeme, sourceManager.getLineNumber());
             }
         }
@@ -409,19 +411,41 @@ public class LexicalAnalyzer{
             getChar();
             return e35();
         }
-        private Token e37() throws LexicalException,IOException{
+
+        private Token e37() throws LexicalException, IOException {
             //TODO REVISAR
-            if(currentChar == END_OF_FILE || currentChar == '\n'){
+            if (currentChar == END_OF_FILE || currentChar == '\n') {
                 throw new LexicalException(lexeme, sourceManager.getLineNumber());
             }
             addChar();
             getChar();
-            if (currentChar!= '\''){
+
+            if (lexeme.length() == 2 && lexeme.charAt(1) == '\\') {
+                addChar();
+                getChar();
+                if (lexeme.length() == 3 && (lexeme.charAt(2) == '\\' || lexeme.charAt(2) == '\'')) {
+                    if (currentChar != '\'') {
+                        throw new LexicalException(lexeme, sourceManager.getLineNumber());
+                    }
+                    addChar();
+                    getChar();
+                    return new Token(charLiteral, lexeme, sourceManager.getLineNumber());
+                } else {
+                    throw new LexicalException(lexeme, sourceManager.getLineNumber());
+                }
+            }
+            else if (lexeme.length() == 2 && currentChar == '\'') {
+                char c = lexeme.charAt(1);
+                if (c == '\\' || c == '\'') {
+                    throw new LexicalException(lexeme, sourceManager.getLineNumber());
+                }
+                addChar();
+                getChar();
+                return new Token(charLiteral, lexeme, sourceManager.getLineNumber());
+            }
+            else {
                 throw new LexicalException(lexeme, sourceManager.getLineNumber());
             }
-            addChar();
-            getChar();
-            return new Token(charLiteral, lexeme, sourceManager.getLineNumber());
         }
 
 
@@ -454,5 +478,7 @@ public class LexicalAnalyzer{
             reservedWords.put("false", sw_false);
             reservedWords.put("interface", sw_interface);
             reservedWords.put("private", sw_private);
+            reservedWords.put("abstract", sw_abstract);
+            reservedWords.put("final", sw_final);
         }
 }
