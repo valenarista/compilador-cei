@@ -4,5 +4,5 @@
 !src
 
 # Ignorar carpetas de compilación comunes
-/out/
+/out/*
 /build/

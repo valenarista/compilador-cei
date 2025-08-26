@@ -1,0 +1,7 @@
+///[SinErrores]
+
+/*
+if
+else
+"hola!
+*/
