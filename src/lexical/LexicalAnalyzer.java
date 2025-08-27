@@ -575,7 +575,6 @@ public class LexicalAnalyzer {
                     "símbolo válido"
             );
 
-
         }
     }
 
@@ -634,8 +633,6 @@ public class LexicalAnalyzer {
                         sourceManager.getCurrentLineText(),
                         "símbolo válido"
                 );
-
-
             }
         }
         getChar();
