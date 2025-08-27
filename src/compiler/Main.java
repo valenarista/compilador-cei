@@ -5,7 +5,7 @@ import lexical.LexicalAnalyzer;
 import lexical.Token;
 import lexical.TokenType;
 import sourcemanager.SourceManager;
-import sourcemanager.SourceManagerImpl;
+import sourcemanager.SourceManagerCharImpl;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         String filePath;
-        SourceManager sourceManager = new SourceManagerImpl();
+        SourceManager sourceManager = new SourceManagerCharImpl();
         LexicalAnalyzer lexicalAnalyzer;
 
         if (args.length > 0) {
@@ -28,8 +28,10 @@ public class Main {
                 } while (token.getType() != TokenType.eof);
 
                 System.out.println("[SinErrores]");
-            } catch (LexicalException | IOException e) {
-                System.out.println(e.getMessage());
+            } catch (LexicalException e) {
+                System.out.println( e.getDetailedErrorMessage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
 
         }
