@@ -393,7 +393,8 @@ public class LexicalAnalyzer{
                 getChar();
                 return e36();
                 //TODO PREGUNTAR COMO REPRESENTAR EL \"
-            } else {
+            }
+            else {
                 addChar();
                 getChar();
                 return e35();
@@ -404,7 +405,10 @@ public class LexicalAnalyzer{
                 addChar();
                 getChar();
                 return e35();
-            } else if (currentChar == END_OF_FILE || currentChar == '\n') {
+            } else if (currentChar == 'u') {
+                return e39Unicode();
+            }
+            else if (currentChar == END_OF_FILE || currentChar == '\n'||Character.isWhitespace(currentChar)) {
                 throw new LexicalException(lexeme, sourceManager.getLineNumber());
             }
             addChar();
@@ -419,6 +423,11 @@ public class LexicalAnalyzer{
             }
             addChar();
             getChar();
+
+            //UNICODE CASE
+            if (lexeme.length() == 2 && lexeme.charAt(1) == '\\' && currentChar == 'u') {
+                return e38Unicode();
+            }
 
             if (lexeme.length() == 2 && lexeme.charAt(1) == '\\') {
                 addChar();
@@ -448,11 +457,53 @@ public class LexicalAnalyzer{
             }
         }
 
+        private Token e38Unicode() throws LexicalException, IOException {
+            addChar(); // add 'u'
+
+             StringBuilder unicodeSeq = new StringBuilder();
+            for (int i = 0; i < 4; i++) {
+                getChar();
+                if (isHexDigit(currentChar)) {
+                    unicodeSeq.append(currentChar);
+                    addChar();
+                } else {
+                    throw new LexicalException(lexeme, sourceManager.getLineNumber());
+                }
+            }
+            getChar();
+            if (currentChar!= '\'') {
+                throw new LexicalException(lexeme, sourceManager.getLineNumber());
+            }
+            addChar();
+            getChar();
+            return new Token(charLiteral, lexeme, sourceManager.getLineNumber());
+        }
+        private Token e39Unicode() throws LexicalException, IOException {
+            addChar(); // add 'u'
+
+            StringBuilder unicodeSeq = new StringBuilder();
+            for (int i = 0; i < 4; i++) {
+                getChar();
+                if (isHexDigit(currentChar)) {
+                    unicodeSeq.append(currentChar);
+                    addChar();
+                } else {
+                    throw new LexicalException(lexeme, sourceManager.getLineNumber());
+                }
+            }
+            getChar();
+            return e35();
+        }
 
 
 
 
 
+        private boolean isHexDigit(char c) {
+            return  (c >= '0' && c <= '9')||
+                    (c >= 'a' && c <= 'f')||
+                    (c >= 'A' && c <= 'F');
+        }
 
 
         private void buildWordMap(){
