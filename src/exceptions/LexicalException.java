@@ -14,6 +14,7 @@ public class LexicalException extends RuntimeException {
         this.columnNumber = columnNumber;
         this.lineText = lineText;
         this.reason = reason;
+        System.out.println("DEBUG - Lexeme bytes: " + java.util.Arrays.toString(lexeme.getBytes()));
     }
 
     public LexicalException(String lexeme, int lineNumber) {
@@ -21,13 +22,13 @@ public class LexicalException extends RuntimeException {
     }
 
     private static String buildErrorMessage(String lexeme, int lineNumber, String reason, int columnNumber) {
-        return String.format("Error Léxico en línea %d, columna %d: %s no es un %s", lineNumber,columnNumber,lexeme, reason);
+        return String.format("Error Léxico en línea %d, columna %d: %s %s", lineNumber,columnNumber,lexeme, reason);
     }
 
     public String getDetailedErrorMessage() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(String.format("Error Léxico en línea %d, columna %d: %s no es un %s\n",
+        sb.append(String.format("Error Léxico en línea %d, columna %d: %s  %s\n",
                 lineNumber, columnNumber,lexeme, reason));
 
         if (lineText != null && !lineText.trim().isEmpty()) {

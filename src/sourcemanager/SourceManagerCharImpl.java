@@ -67,7 +67,7 @@ public class SourceManagerCharImpl implements SourceManager {
             charCode = reader.read();
         }
 
-        if (charCode == -1) {
+        if (charCode == -1 || charCode == 26) {
             endOfFile = true;
             return END_OF_FILE;
         }
@@ -82,6 +82,10 @@ public class SourceManagerCharImpl implements SourceManager {
         } else if (currentChar == '\r') {
             nextChar = reader.read();
             hasNextChar = true;
+
+            if (nextChar == 26) {
+                nextChar = -1;
+            }
 
             if (nextChar == '\n') {
                 currentLineBuilder.append('\r');
