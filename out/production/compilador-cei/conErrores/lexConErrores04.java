@@ -1,7 +1,6 @@
-///[Error: |7]
+///[Error:|7]
 
 /*
 if
 else
 "hola!
-

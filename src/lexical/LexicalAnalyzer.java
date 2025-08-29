@@ -149,7 +149,7 @@ public class LexicalAnalyzer {
         } else {
             addChar();
             getChar();
-            throw new LexicalException(lexeme, sourceManager.getLineNumber(), sourceManager.getColumnNumber(), sourceManager.getCurrentLineText(), "símbolo válido");
+            throw new LexicalException(lexeme, sourceManager.getLineNumber(), sourceManager.getColumnNumber(), sourceManager.getCurrentLineText(), "símbolo inválido");
         }
     }
 
@@ -187,7 +187,7 @@ public class LexicalAnalyzer {
     private Token e4MultiComment() throws LexicalException, IOException {
         if (currentChar == END_OF_FILE) {
             throw new LexicalException(
-                    lexeme,
+                    "",
                     sourceManager.getLineNumber(),
                     sourceManager.getColumnNumber(),
                     sourceManager.getCurrentLineText(),
@@ -209,7 +209,7 @@ public class LexicalAnalyzer {
     private Token e5MultiComment() throws LexicalException, IOException {
         if (currentChar == END_OF_FILE) {
             throw new LexicalException(
-                    lexeme,
+                    "",
                     sourceManager.getLineNumber(),
                     sourceManager.getColumnNumber(),
                     sourceManager.getCurrentLineText(),
@@ -369,6 +369,15 @@ public class LexicalAnalyzer {
             addChar();
             getChar();
             return e22();
+        } else if (currentChar == '=') {
+            addChar();
+            throw new LexicalException(
+                    lexeme,
+                    sourceManager.getLineNumber(),
+                    sourceManager.getColumnNumber(),
+                    sourceManager.getCurrentLineText(),
+                    "Operador de suma con asignación no permitido"
+            );
         } else {
             return new Token(addOp, lexeme, sourceManager.getLineNumber());
         }
@@ -383,7 +392,17 @@ public class LexicalAnalyzer {
             addChar();
             getChar();
             return e24();
-        } else {
+        } else if (currentChar == '=') {
+            addChar();
+            throw new LexicalException(
+                    lexeme,
+                    sourceManager.getLineNumber(),
+                    sourceManager.getColumnNumber(),
+                    sourceManager.getCurrentLineText(),
+                    "Operador de resta con asignación no permitido"
+            );
+        }
+        else {
             return new Token(subOp, lexeme, sourceManager.getLineNumber());
         }
     }
@@ -392,6 +411,7 @@ public class LexicalAnalyzer {
         return new Token(postDecrement, lexeme, sourceManager.getLineNumber());
     }
 
+    //TODO PREGUNTAR SI SE PUEDEN DOS OPERADORES JUNTOS (**, %% etc)
     private Token e25() {
         return new Token(mulOp, lexeme, sourceManager.getLineNumber());
     }
@@ -490,7 +510,7 @@ public class LexicalAnalyzer {
                     sourceManager.getLineNumber(),
                     sourceManager.getColumnNumber(),
                     sourceManager.getCurrentLineText(),
-                    "" //TODO COMPLETAR
+                    "string con secuencia de escape inválida"
             );
         }
         addChar();

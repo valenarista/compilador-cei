@@ -14,7 +14,6 @@ public class LexicalException extends RuntimeException {
         this.columnNumber = columnNumber;
         this.lineText = lineText;
         this.reason = reason;
-        System.out.println("DEBUG - Lexeme bytes: " + java.util.Arrays.toString(lexeme.getBytes()));
     }
 
     public LexicalException(String lexeme, int lineNumber) {
