@@ -2,3 +2,4 @@
 class Clase
 Class
 clase
+'\r'

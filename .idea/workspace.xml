@@ -5,26 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d10e087-5673-4518-949a-be8557448ba8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/lexConErrores09.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/lexConErrores10.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/lexConErrores11.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/lexConErrores12.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/lexConErrores13.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/lexConErrores14.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/lexConErrores15.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores10.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores11.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores12.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/lexConErrores16MultiDetect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores13.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lexical/LexicalAnalyzerMultiDetect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores04.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores04.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores08.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores08.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/exceptions/LexicalException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/exceptions/LexicalException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErrores.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErrores.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErrores.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErrores.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores13.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores14.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores15.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/lexical/LexicalAnalyzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/lexical/LexicalAnalyzer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores04.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/lexConErrores04.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores08.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/lexConErrores08.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exceptions/LexicalException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exceptions/LexicalException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores13.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores14.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores15.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores11.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores11.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErrores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErrores.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErrores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErrores.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexical/LexicalAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexical/LexicalAnalyzer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sourcemanager/SourceManagerCharImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sourcemanager/SourceManagerCharImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,27 +59,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "JUnit.TesterDeCasosConErrores.executor": "Run",
-    "JUnit.TesterDeCasosSinErrores.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/valua/OneDrive/Documentos/compilador-cei/resources/conErrores",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;JUnit.TesterDeCasosConErrores.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TesterDeCasosSinErrores.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/valua/OneDrive/Documentos/compilador-cei/resources/conErrores&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Mappings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\conErrores" />
@@ -90,6 +89,9 @@
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\src\compiler" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\src" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="lexical" />
     </key>
   </component>
   <component name="RunManager" selected="JUnit.TesterDeCasosConErrores">
