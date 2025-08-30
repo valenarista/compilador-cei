@@ -17,17 +17,17 @@ public class LexicalException extends RuntimeException {
     }
 
     public LexicalException(String lexeme, int lineNumber) {
-        this(lexeme, lineNumber, -1, "", "símbolo válido");
+        this(lexeme, lineNumber, -1, "", "simbolo valido");
     }
 
     private static String buildErrorMessage(String lexeme, int lineNumber, String reason, int columnNumber) {
-        return String.format("Error Léxico en línea %d, columna %d: %s %s", lineNumber,columnNumber,lexeme, reason);
+        return String.format("Error Lexico en linea %d, columna %d: %s %s", lineNumber,columnNumber,lexeme, reason);
     }
 
     public String getDetailedErrorMessage() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append(String.format("Error Léxico en línea %d, columna %d: %s  %s\n",
+        sb.append(String.format("Error Lexico en linea %d, columna %d: %s  %s\n",
                 lineNumber, columnNumber,lexeme, reason));
 
         if (lineText != null && !lineText.trim().isEmpty()) {

@@ -2,4 +2,12 @@
 metodo //hola!
 class
 //hola!
-"hola"
+"hola \n "
+'\n'
+'\t'
+'\b'
+'\r'
+'\f'
+'\''
+'\"'
+'\0'

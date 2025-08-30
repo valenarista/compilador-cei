@@ -153,14 +153,7 @@ public class LexicalAnalyzerMultiDetect {
             return e37();
         } else {
             addChar();
-            LexicalException error = new LexicalException(
-                    lexeme,
-                    sourceManager.getLineNumber(),
-                    sourceManager.getColumnNumber(),
-                    sourceManager.getCurrentLineText(),
-                    "símbolo no reconocido"
-            );
-            errors.add(error);
+            reportError("simbolo no reconocido");
             getChar();
             return getNextToken();
         }
@@ -204,7 +197,7 @@ public class LexicalAnalyzerMultiDetect {
                     sourceManager.getLineNumber(),
                     sourceManager.getColumnNumber(),
                     sourceManager.getCurrentLineText(),
-                    "comentario multilínea no cerrado"
+                    "comentario multilinea no cerrado"
             );
             errors.add(error);
             return getNextToken();
@@ -227,7 +220,7 @@ public class LexicalAnalyzerMultiDetect {
                     sourceManager.getLineNumber(),
                     sourceManager.getColumnNumber(),
                     sourceManager.getCurrentLineText(),
-                    "comentario multilínea no cerrado"
+                    "comentario multilinea no cerrado"
             );
             errors.add(error);
             return getNextToken();
@@ -267,14 +260,7 @@ public class LexicalAnalyzerMultiDetect {
         } else if (lexeme.length() <= 9) {
             return new Token(intLiteral, lexeme, sourceManager.getLineNumber());
         } else {
-            LexicalException error = new LexicalException(
-                    lexeme,
-                    sourceManager.getLineNumber(),
-                    sourceManager.getColumnNumber(),
-                    sourceManager.getCurrentLineText(),
-                    "literal entero fuera de rango"
-            );
-            errors.add(error);
+            reportError("literal entero fuera de rango");
             return getNextToken();
         }
     }
@@ -344,14 +330,7 @@ public class LexicalAnalyzerMultiDetect {
             if (currentChar != sourceManager.END_OF_FILE && currentChar != (char)26) {
                 addChar();
             }
-            LexicalException error = new LexicalException(
-                    lexeme,
-                    sourceManager.getLineNumber(),
-                    sourceManager.getColumnNumber(),
-                    sourceManager.getCurrentLineText(),
-                    "Operador AND incompleto"
-            );
-            errors.add(error);
+            reportError("Operador AND incompleto");
             return getNextToken();
         }
     }
@@ -369,14 +348,7 @@ public class LexicalAnalyzerMultiDetect {
             if (currentChar != sourceManager.END_OF_FILE && currentChar != (char)26) {
                 addChar();
             }
-            LexicalException error = new LexicalException(
-                    lexeme,
-                    sourceManager.getLineNumber(),
-                    sourceManager.getColumnNumber(),
-                    sourceManager.getCurrentLineText(),
-                    "Operador OR incompleto"
-            );
-            errors.add(error);
+            reportError("Operador OR incompleto");
             return getNextToken();
         }
     }
@@ -468,19 +440,11 @@ public class LexicalAnalyzerMultiDetect {
             TokenType type = reservedWords.get(lexeme);
             return new Token(Objects.requireNonNullElse(type, metVarID), lexeme, sourceManager.getLineNumber());
         }
-
     }
 
     private Token e35() throws LexicalException, IOException {
         if (currentChar == END_OF_FILE || currentChar == '\n') {
-            LexicalException error = new LexicalException(
-                    lexeme,
-                    sourceManager.getLineNumber(),
-                    sourceManager.getColumnNumber(),
-                    sourceManager.getCurrentLineText(),
-                    "literal de string mal cerrado"
-            );
-            errors.add(error);
+            reportError("literal de string mal cerrado");
             return getNextToken();
 
         } else if (currentChar == '"') {
@@ -506,14 +470,7 @@ public class LexicalAnalyzerMultiDetect {
         } else if (currentChar == 'u') {
             return e39Unicode();
         } else if (currentChar == END_OF_FILE || currentChar == '\n' || Character.isWhitespace(currentChar)) {
-            LexicalException error = new LexicalException(
-                    lexeme,
-                    sourceManager.getLineNumber(),
-                    sourceManager.getColumnNumber(),
-                    sourceManager.getCurrentLineText(),
-                    "literal de string mal cerrado"
-            );
-            errors.add(error);
+            reportError("literal de string mal cerrado");
             return getNextToken();
         }
         addChar();
@@ -523,84 +480,68 @@ public class LexicalAnalyzerMultiDetect {
 
     private Token e37() throws LexicalException, IOException {
         if (currentChar == END_OF_FILE || currentChar == '\n') {
-            LexicalException error = new LexicalException(
-                    lexeme,
-                    sourceManager.getLineNumber(),
-                    sourceManager.getColumnNumber(),
-                    sourceManager.getCurrentLineText(),
-                    "literal de carácter mal cerrado"
-            );
-            errors.add(error);
+            reportError("literal de caracter mal cerrado");
             return getNextToken();
-
         }
+
         addChar();
         getChar();
 
-        //UNICODE CASE
-        if (lexeme.length() == 2 && lexeme.charAt(1) == '\\' && currentChar == 'u') {
-            return e38Unicode();
+        if (lexeme.length()==2 && lexeme.charAt(1)=='\\'){
+            return handleEscapeSequence();
         }
-
-        if (lexeme.length() == 2 && lexeme.charAt(1) == '\\') {
-            addChar();
-            getChar();
-            if (lexeme.length() == 3 && (lexeme.charAt(2) == '\\' || lexeme.charAt(2) == '\'')) {
-                if (currentChar != '\'') {
-                    LexicalException error = new LexicalException(
-                            lexeme,
-                            sourceManager.getLineNumber(),
-                            sourceManager.getColumnNumber(),
-                            sourceManager.getCurrentLineText(),
-                            "literal de carácter mal cerrado"
-                    );
-                    errors.add(error);
-                    return getNextToken();
-                }
-                addChar();
-                getChar();
-                return new Token(charLiteral, lexeme, sourceManager.getLineNumber());
-            } else {
-                LexicalException error = new LexicalException(
-                        lexeme,
-                        sourceManager.getLineNumber(),
-                        sourceManager.getColumnNumber(),
-                        sourceManager.getCurrentLineText(),
-                        "literal de carácter invalido"
-                );
-                errors.add(error);
-                return getNextToken();
-
-            }
-        } else if (lexeme.length() == 2 && currentChar == '\'') {
-            char c = lexeme.charAt(1);
-            if (c == '\\' || c == '\'') {
-                LexicalException error = new LexicalException(
-                        lexeme,
-                        sourceManager.getLineNumber(),
-                        sourceManager.getColumnNumber(),
-                        sourceManager.getCurrentLineText(),
-                        "literal de carácter invalido"
-                );
-                errors.add(error);
-                return getNextToken();
-
-            }
-            addChar();
-            getChar();
-            return new Token(charLiteral, lexeme, sourceManager.getLineNumber());
-        } else {
-            LexicalException error = new LexicalException(
-                    lexeme,
-                    sourceManager.getLineNumber(),
-                    sourceManager.getColumnNumber(),
-                    sourceManager.getCurrentLineText(),
-                    "literal de carácter mal cerrado"
-            );
-            errors.add(error);
+        else if (lexeme.length()==2){
+            return handleRegularCharacter();
+        }
+        else {
+            reportError("literal de caracter mal cerrado");
             return getNextToken();
 
         }
+    }
+
+    private Token handleEscapeSequence() throws LexicalException,IOException{
+        if(currentChar == END_OF_FILE || currentChar == '\n'){
+            reportError("literal de caracter mal cerrado");
+            return getNextToken();
+        }
+
+        if(currentChar=='u')
+            return e38Unicode();
+
+        addChar();
+        getChar();
+
+        if(lexeme.length()!=3){
+            reportError("literal de caracter invalido");
+            return getNextToken();
+        }
+        char escapeChar = lexeme.charAt(2);
+        if(!isValidEscapeChar(escapeChar)){
+            reportError("literal de caracter invalido");
+            return getNextToken();
+        }
+        if(currentChar != '\''){
+            reportError("literal de caracter mal cerrado");
+            return getNextToken();
+        }
+        addChar();
+        getChar();
+        return new Token(charLiteral, lexeme, sourceManager.getLineNumber());
+    }
+    private Token handleRegularCharacter() throws LexicalException,IOException{
+        char c = lexeme.charAt(1);
+        if(c == '\\' || c == '\'') {
+            reportError("literal de caracter invalido");
+            return getNextToken();
+        }
+        if (currentChar != '\'') {
+            reportError("literal de caracter mal cerrado");
+            return getNextToken();
+        }
+        addChar();
+        getChar();
+        return new Token(charLiteral, lexeme, sourceManager.getLineNumber());
     }
 
     private Token e38Unicode() throws LexicalException, IOException {
@@ -613,28 +554,13 @@ public class LexicalAnalyzerMultiDetect {
                 unicodeSeq.append(currentChar);
                 addChar();
             } else {
-                LexicalException error = new LexicalException(
-                        lexeme,
-                        sourceManager.getLineNumber(),
-                        sourceManager.getColumnNumber(),
-                        sourceManager.getCurrentLineText(),
-                        "caracter unicode de longitud invalida"
-                );
-                errors.add(error);
+                reportError("caracter unicode de longitud invalida");
                 return getNextToken();
-
             }
         }
         getChar();
         if (currentChar != '\'') {
-            LexicalException error = new LexicalException(
-                    lexeme,
-                    sourceManager.getLineNumber(),
-                    sourceManager.getColumnNumber(),
-                    sourceManager.getCurrentLineText(),
-                    "literal de carácter mal cerrado"
-            );
-            errors.add(error);
+            reportError("literal de caracter mal cerrado");
             return getNextToken();
 
         }
@@ -653,14 +579,7 @@ public class LexicalAnalyzerMultiDetect {
                 unicodeSeq.append(currentChar);
                 addChar();
             } else {
-                LexicalException error = new LexicalException(
-                        lexeme,
-                        sourceManager.getLineNumber(),
-                        sourceManager.getColumnNumber(),
-                        sourceManager.getCurrentLineText(),
-                        "caracter unicode de longitud invalida"
-                );
-                errors.add(error);
+                reportError("caracter unicode de longitud invalida");
                 return getNextToken();
             }
         }
@@ -675,7 +594,20 @@ public class LexicalAnalyzerMultiDetect {
                 (c >= 'a' && c <= 'f') ||
                 (c >= 'A' && c <= 'F');
     }
+    private boolean isValidEscapeChar(char c) {
+        return c == 'n' || c == 't' || c == 'r' || c == 'b' || c == 'f' || c == '\'' || c == '\"' || c == '\\' || c == '0';
+    }
 
+    private void reportError(String message) throws LexicalException {
+        LexicalException error = new LexicalException(
+                lexeme,
+                sourceManager.getLineNumber(),
+                sourceManager.getColumnNumber(),
+                sourceManager.getCurrentLineText(),
+                message
+        );
+        errors.add(error);
+    }
 
     private void buildWordMap() {
         reservedWords = new HashMap<>();
