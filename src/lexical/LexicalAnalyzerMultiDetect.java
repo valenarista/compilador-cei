@@ -554,7 +554,7 @@ public class LexicalAnalyzerMultiDetect {
                 unicodeSeq.append(currentChar);
                 addChar();
             } else {
-                reportError("caracter unicode de longitud invalida");
+                reportError("caracter no hexadecimal en secuencia unicode");
                 return getNextToken();
             }
         }
@@ -579,7 +579,7 @@ public class LexicalAnalyzerMultiDetect {
                 unicodeSeq.append(currentChar);
                 addChar();
             } else {
-                reportError("caracter unicode de longitud invalida");
+                reportError("caradcter no hexadecimal en secuencia unicode");
                 return getNextToken();
             }
         }
