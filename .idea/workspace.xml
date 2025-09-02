@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d10e087-5673-4518-949a-be8557448ba8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/lexConErrores18.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/lexical/LexicalAnalyzer.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/lexical/LexicalAnalyzerMultiDetect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/lexical/LexicalAnalyzerMultiDetect.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexical/LexicalAnalyzer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores13.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores13.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sourcemanager/SourceManagerImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores13.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores13.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexical/LexicalAnalyzerMultiDetect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexical/LexicalAnalyzerMultiDetect.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -501,7 +501,7 @@ public class LexicalAnalyzerMultiDetect {
     }
 
     private Token handleEscapeSequence() throws LexicalException,IOException{
-        if(currentChar == END_OF_FILE || currentChar == '\n'){
+        if(currentChar == END_OF_FILE || currentChar == '\n' || Character.isWhitespace(currentChar)){
             reportError("literal de caracter mal cerrado");
             return getNextToken();
         }
@@ -516,11 +516,7 @@ public class LexicalAnalyzerMultiDetect {
             reportError("literal de caracter invalido");
             return getNextToken();
         }
-        char escapeChar = lexeme.charAt(2);
-        if(!isValidEscapeChar(escapeChar)){
-            reportError("literal de caracter invalido");
-            return getNextToken();
-        }
+
         if(currentChar != '\''){
             reportError("literal de caracter mal cerrado");
             return getNextToken();
@@ -594,9 +590,7 @@ public class LexicalAnalyzerMultiDetect {
                 (c >= 'a' && c <= 'f') ||
                 (c >= 'A' && c <= 'F');
     }
-    private boolean isValidEscapeChar(char c) {
-        return c == 'n' || c == 't' || c == 'r' || c == 'b' || c == 'f' || c == '\'' || c == '\"' || c == '\\' || c == '0';
-    }
+
 
     private void reportError(String message) throws LexicalException {
         LexicalException error = new LexicalException(
