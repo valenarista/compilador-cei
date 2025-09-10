@@ -48,6 +48,7 @@ public class SourceManagerCharImpl implements SourceManager {
     @Override
     public char getNextChar() throws IOException {
         if (endOfFile) {
+            close();
             return END_OF_FILE;
         }
 
@@ -69,6 +70,7 @@ public class SourceManagerCharImpl implements SourceManager {
 
         if (charCode == -1 || charCode == 26) {
             endOfFile = true;
+            close();
             return END_OF_FILE;
         }
 
