@@ -10,16 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d10e087-5673-4518-949a-be8557448ba8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/compilador_cei_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores14.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/exceptions/SyntacticException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores11.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores11.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores11.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores11.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sourcemanager/SourceManagerCharImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/sourcemanager/SourceManagerCharImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores11.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/lexConErrores11.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores11.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores11.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sourcemanager/SourceManagerCharImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sourcemanager/SourceManagerCharImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +29,17 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Exception" />
         <option value="Class" />
+        <option value="Exception" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -55,29 +53,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JAR Application.compilador-cei.jar.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TesterDeCasosConErrores.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TesterDeCasosSinErrores.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/valua/OneDrive/Documentos/compilador-cei/resources/conErrores&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Mappings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JAR Application.compilador-cei.jar.executor": "Run",
+    "JUnit.TesterDeCasosConErrores.executor": "Run",
+    "JUnit.TesterDeCasosSinErrores.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "etapaSintactico",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/valua/OneDrive/Documentos/compilador-cei/resources/conErrores",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\conErrores" />
@@ -150,10 +148,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TesterDeCasosConErrores" />
         <item itemvalue="JUnit.TesterDeCasosSinErrores" />
+        <item itemvalue="JUnit.TesterDeCasosConErrores" />
         <item itemvalue="JAR Application.compilador-cei.jar" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.TesterDeCasosSinErrores" />
       </list>
     </recent_temporary>
   </component>
