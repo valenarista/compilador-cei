@@ -17,13 +17,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 
 @RunWith(Parameterized.class)
-public class TesterDeCasosSinErrores {
+public class TesterDeCasosSinErroresLexicos {
 
     private static final String msgExito = "[SinErrores]";
     private static final String testFilesDirectoryPath = "resources/sinErrores/";
 
     //TODO: el tipo de esta variable init tiene que ser la clase que tiene el main
-    private static final Main init = null;
+    private static final Main init = new Main();
    
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -54,7 +54,7 @@ public class TesterDeCasosSinErrores {
     
     private String input;
     
-    public TesterDeCasosSinErrores(String input){
+    public TesterDeCasosSinErroresLexicos(String input){
         this.input = input;
     }
 

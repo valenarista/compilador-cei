@@ -10,16 +10,83 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d10e087-5673-4518-949a-be8557448ba8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/compilador_cei_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores14.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErroresLexicos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErroresLexicos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores11.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores11.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores11.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores11.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sourcemanager/SourceManagerCharImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/sourcemanager/SourceManagerCharImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores11.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/lexConErrores11.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores11.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores11.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sourcemanager/SourceManagerCharImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sourcemanager/SourceManagerCharImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErrores.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErrores.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErrores.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErrores.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores01.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores02.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores03.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores04.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores05Unicode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores06Unicode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores07Unicode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores08.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores09.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores10.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores11.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores12.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores13.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores14.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores15.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores16MultiDetect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores17.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/lexConErrores18.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/lexical/LexicalAnalyzerMultiDetect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/lexical/LexicalAnalyzerMultiDetect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores01.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores02.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores03.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores04.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores05.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores06Unicode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores07.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores08.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores09.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores10.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores11.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores12.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores13.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/lexSinErrores14.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores01.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores02.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores03.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores03.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores04.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores04.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores05Unicode.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores05Unicode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores06Unicode.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores06Unicode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores07Unicode.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores07Unicode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores08.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores08.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores09.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores09.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores10.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores10.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores11.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores11.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores12.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores12.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores13.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores13.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores14.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores14.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores15.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores15.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores16MultiDetect.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores16MultiDetect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores17.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores17.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/lexConErrores18.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresLexicos/lexConErrores18.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores01.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErroresLexicos/lexSinErrores01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores02.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErroresLexicos/lexSinErrores02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores03.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErroresLexicos/lexSinErrores03.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores04.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErroresLexicos/lexSinErrores04.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores05.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErroresLexicos/lexSinErrores05.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores06Unicode.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErroresLexicos/lexSinErrores06Unicode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores07.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErroresLexicos/lexSinErrores07.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores08.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErroresLexicos/lexSinErrores08.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores09.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErroresLexicos/lexSinErrores09.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores10.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErroresLexicos/lexSinErrores10.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores11.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErroresLexicos/lexSinErrores11.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores12.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErroresLexicos/lexSinErrores12.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores13.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErroresLexicos/lexSinErrores13.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/lexSinErrores14.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErroresLexicos/lexSinErrores14.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErrores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErrores.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErrores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErrores.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exceptions/SyntacticException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exceptions/SyntacticException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexical/LexicalAnalyzerMultiDetect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexical/LexicalAnalyzerMultiDetect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +103,17 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Exception" />
         <option value="Class" />
+        <option value="Exception" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -62,6 +134,7 @@
     &quot;JAR Application.compilador-cei.jar.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.TesterDeCasosConErrores.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.TesterDeCasosSinErrores.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TesterDeCasosSinErroresLexicos.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
     &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
@@ -69,10 +142,10 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;etapaSintactico&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/valua/OneDrive/Documentos/compilador-cei/resources/conErrores&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Mappings&quot;
@@ -84,8 +157,9 @@
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\conErrores" />
+      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\src\compiler" />
+      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\conErrores" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\src" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei" />
     </key>
@@ -94,8 +168,7 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.TesterDeCasosConErrores">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="compiler.Main" />
+    <configuration name="TesterDeCasosConErrores" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="compilador-cei" />
       <extension name="coverage">
         <pattern>
@@ -103,11 +176,14 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="compiler" />
+      <option name="MAIN_CLASS_NAME" value="compiler.TesterDeCasosConErrores" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TesterDeCasosConErrores" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TesterDeCasosConErroresLexicos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="compilador-cei" />
       <extension name="coverage">
         <pattern>
@@ -122,7 +198,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="ALTERNATIVE_JRE_PATH" value="21" />
       <option name="PACKAGE_NAME" value="compiler" />
-      <option name="MAIN_CLASS_NAME" value="compiler.TesterDeCasosConErrores" />
+      <option name="MAIN_CLASS_NAME" value="compiler.TesterDeCasosConErroresLexicos" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
@@ -144,6 +220,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TesterDeCasosSinErroresLexicos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="compilador-cei" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="compiler.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="compiler" />
+      <option name="MAIN_CLASS_NAME" value="compiler.TesterDeCasosSinErroresLexicos" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="compilador-cei.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/compilador-cei.jar" />
       <method v="2" />
@@ -152,8 +243,9 @@
       <list>
         <item itemvalue="JUnit.TesterDeCasosConErrores" />
         <item itemvalue="JUnit.TesterDeCasosSinErrores" />
+        <item itemvalue="JUnit.TesterDeCasosSinErroresLexicos" />
+        <item itemvalue="JUnit.TesterDeCasosConErroresLexicos" />
         <item itemvalue="JAR Application.compilador-cei.jar" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>

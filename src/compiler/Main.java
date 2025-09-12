@@ -1,11 +1,13 @@
 package compiler;
 
 import exceptions.LexicalException;
+import exceptions.SyntacticException;
 import lexical.LexicalAnalyzerMultiDetect;
 import lexical.Token;
 import lexical.TokenType;
 import sourcemanager.SourceManager;
 import sourcemanager.SourceManagerCharImpl;
+import syntactic.SyntacticAnalyzer;
 
 import java.io.IOException;
 
@@ -15,12 +17,15 @@ public class Main {
         String filePath;
         SourceManager sourceManager = new SourceManagerCharImpl();
         LexicalAnalyzerMultiDetect lexicalAnalyzer;
+        SyntacticAnalyzer syntacticAnalyzer;
 
         if (args.length > 0) {
             try{
                 filePath = args[0];
                 sourceManager.open(filePath);
                 lexicalAnalyzer = new LexicalAnalyzerMultiDetect(sourceManager);
+                syntacticAnalyzer = new SyntacticAnalyzer(lexicalAnalyzer);
+                /*
                 Token token;
                 do {
                     token = lexicalAnalyzer.getNextToken();
@@ -31,8 +36,12 @@ public class Main {
                 }
                 if(lexicalAnalyzer.getErrors().isEmpty())
                     System.out.println("[SinErrores]");
-            } catch (LexicalException e) {
-                System.out.println( e.getDetailedErrorMessage());
+
+                 */
+                syntacticAnalyzer.inicial();
+                System.out.println("[SinErrores]");
+            } catch (SyntacticException e) {
+                System.out.println( e.getMessage() );
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
