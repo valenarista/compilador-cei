@@ -620,5 +620,6 @@ public class LexicalAnalyzerMultiDetect {
         reservedWords.put("private", sw_private);
         reservedWords.put("abstract", sw_abstract);
         reservedWords.put("final", sw_final);
+        reservedWords.put("for", sw_for);
     }
 }

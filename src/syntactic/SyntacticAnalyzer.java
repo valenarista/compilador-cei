@@ -32,11 +32,8 @@ public class SyntacticAnalyzer {
             clase();
             listaClases();
         }
-        else if (currentToken.getType().equals(TokenType.eof)) {
+        else {
             //epsilon
-        }
-        else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
         }
     }
     void clase(){
@@ -90,7 +87,7 @@ public class SyntacticAnalyzer {
             miembroMetVar();
         }
         else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un token: [public-abstract-final-static void] o un tipo valido");
         }
     }
     void constructor(){
@@ -151,7 +148,7 @@ public class SyntacticAnalyzer {
             match(TokenType.sw_boolean);
         }
         else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear un tipo primitivo" );
         }
     }
 
@@ -180,7 +177,7 @@ public class SyntacticAnalyzer {
             match(TokenType.sw_abstract);
         }
         else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un modificador [static-abstract-final]" );
         }
     }
     void metodoConMod(){
@@ -203,8 +200,11 @@ public class SyntacticAnalyzer {
     void bloqueOpcional(){
         if(primerosBloque(currentToken)){
             bloque();
-        }else{
-            //epsilon
+        }else if(currentToken.getType().equals(TokenType.semicolon)){
+            match(TokenType.semicolon);
+        } else{
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un primero de bloque o un token: "+TokenType.semicolon);
+
         }
     }
     void miembroMetVar(){
@@ -219,19 +219,18 @@ public class SyntacticAnalyzer {
             metodoTail();
         }
         else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un  tipo o un token: "+TokenType.sw_void);
         }
     }
     void miembroTail(){
         if(primerosMetodoTail(currentToken)){
-            System.out.println("metodoTail");
             metodoTail();
         }
         else if(currentToken.getType().equals(TokenType.semicolon)){
             match(TokenType.semicolon);
         }
         else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un token:"+TokenType.openCurly+" o un token: "+TokenType.semicolon);
         }
     }
     void sentencia(){
@@ -260,7 +259,7 @@ public class SyntacticAnalyzer {
             match(TokenType.semicolon);
         }
         else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un primero de sentencia" );
         }
     }
     void ifSentencia(){
@@ -312,17 +311,8 @@ public class SyntacticAnalyzer {
     void operadorAsignacion(){
         if(currentToken.getType().equals(TokenType.assignOp)){
             match(TokenType.assignOp);
-        } else if(currentToken.getType().equals(TokenType.subOp)){
-            match(TokenType.subOp);
-            if(currentToken.getType().equals(TokenType.assignOp)){
-                match(TokenType.assignOp);
-            }
-        } else if(currentToken.getType().equals(TokenType.addOp)){
-            match(TokenType.addOp);
-            if(currentToken.getType().equals(TokenType.assignOp))
-                match(TokenType.assignOp);
         } else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba un operador de asignacion");
         }
     }
     void expresionCompuesta(){
@@ -359,7 +349,8 @@ public class SyntacticAnalyzer {
         } else if(currentToken.getType().equals(TokenType.notOp)){
             match(TokenType.notOp);
         } else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType()
+                    ,"Se esperaba matchear con un operador unario ["+TokenType.addOp+TokenType.subOp+TokenType.postDecrement+TokenType.postIncrement+TokenType.notOp+"]");
         }
     }
     void operadorBinario(){
@@ -390,7 +381,7 @@ public class SyntacticAnalyzer {
         } else if(currentToken.getType().equals(TokenType.modOp)){
             match(TokenType.modOp);
         } else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un operador binario");
         }
     }
     void operando(){
@@ -399,7 +390,7 @@ public class SyntacticAnalyzer {
         } else if(primerosReferencia(currentToken)){
             referencia();
         } else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un operando valido" );
         }
     }
     void primitivo(){
@@ -414,7 +405,7 @@ public class SyntacticAnalyzer {
         } else if(currentToken.getType().equals(TokenType.sw_null)){
             match(TokenType.sw_null);
         } else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un primitivo [literalInt-literalChar-true-false-null]" );
         }
     }
     void referencia(){
@@ -485,7 +476,7 @@ public class SyntacticAnalyzer {
         } else if(primerosLlamadaMetodoEstatico(currentToken)){
             llamadaMetodoEstatico();
         } else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con una llamada a constructor, expresion parentizada, llamada a metodo estatico o [literalString-this-idMetodoVariable]" );
         }
     }
     void llamadaTail(){
@@ -516,22 +507,20 @@ public class SyntacticAnalyzer {
     void match(TokenType tokenName) {
         if(tokenName.equals(currentToken.getType())){
             try {
-                System.out.println("Haciendo match con: "+currentToken.getType());
                 currentToken = lexicalAnalyzer.getNextToken();
-                System.out.println("NEXT: "+currentToken.getType());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
         else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear el token: "+tokenName);
         }
     }
     boolean primerosListaArgsFormales(Token token){
-        return primerosArgFormal();
+        return primerosArgFormal(token);
     }
-    boolean primerosArgFormal(){
-        return primerosTipo(currentToken);
+    boolean primerosArgFormal(Token token){
+        return primerosTipo(token);
     }
     boolean primerosOperadorAsignacion(Token token){
         HashSet<TokenType> primeros = new HashSet<>(List.of(
