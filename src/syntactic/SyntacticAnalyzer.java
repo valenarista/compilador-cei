@@ -22,7 +22,7 @@ public class SyntacticAnalyzer {
         }
     }
 
-    void inicial(){
+    public void inicial() throws SyntacticException{
         listaClases();
         match(TokenType.eof);
     }
@@ -36,7 +36,7 @@ public class SyntacticAnalyzer {
             //epsilon
         }
         else{
-            throw new SyntacticException(currentToken, TokenType.sw_class, TokenType.sw_interface, TokenType.eof);
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
         }
     }
     void clase(){
@@ -90,7 +90,7 @@ public class SyntacticAnalyzer {
             miembroMetVar();
         }
         else{
-            throw new SyntacticException(currentToken,);
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
         }
     }
     void constructor(){
@@ -104,6 +104,7 @@ public class SyntacticAnalyzer {
         match(TokenType.openBracket);
         listaArgsFormalesOpcional();
         match(TokenType.closeBracket);
+
     }
     void listaArgsFormalesOpcional(){
         if(primerosListaArgsFormales(currentToken)){
@@ -150,7 +151,7 @@ public class SyntacticAnalyzer {
             match(TokenType.sw_boolean);
         }
         else{
-            throw new SyntacticException(currentToken, TokenType.sw_int, TokenType.sw_char, TokenType.sw_boolean);
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
         }
     }
 
@@ -179,7 +180,7 @@ public class SyntacticAnalyzer {
             match(TokenType.sw_abstract);
         }
         else{
-            throw new SyntacticException(currentToken, TokenType.sw_static, TokenType.sw_final, TokenType.sw_abstract);
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
         }
     }
     void metodoConMod(){
@@ -218,18 +219,19 @@ public class SyntacticAnalyzer {
             metodoTail();
         }
         else{
-            throw new SyntacticException(currentToken, TokenType.sw_void, TokenType.classID, TokenType.sw_int, TokenType.sw_char, TokenType.sw_boolean);
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
         }
     }
     void miembroTail(){
         if(primerosMetodoTail(currentToken)){
+            System.out.println("metodoTail");
             metodoTail();
         }
         else if(currentToken.getType().equals(TokenType.semicolon)){
             match(TokenType.semicolon);
         }
         else{
-            throw new SyntacticException(currentToken, TokenType.openBracket, TokenType.semicolon);
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
         }
     }
     void sentencia(){
@@ -258,7 +260,7 @@ public class SyntacticAnalyzer {
             match(TokenType.semicolon);
         }
         else{
-            throw new SyntacticException(currentToken, TokenType.semicolon /* agregar los primeros de las otras producciones */);
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
         }
     }
     void ifSentencia(){
@@ -320,7 +322,7 @@ public class SyntacticAnalyzer {
             if(currentToken.getType().equals(TokenType.assignOp))
                 match(TokenType.assignOp);
         } else{
-            throw new SyntacticException(currentToken,);
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
         }
     }
     void expresionCompuesta(){
@@ -345,23 +347,208 @@ public class SyntacticAnalyzer {
             operando();
         }
     }
-
-
-
+    void operadorUnario(){
+        if(currentToken.getType().equals(TokenType.addOp)){
+            match(TokenType.addOp);
+        } else if(currentToken.getType().equals(TokenType.subOp)){
+            match(TokenType.subOp);
+        } else if(currentToken.getType().equals(TokenType.postIncrement)){
+            match(TokenType.postIncrement);
+        } else if(currentToken.getType().equals(TokenType.postDecrement)){
+            match(TokenType.postDecrement);
+        } else if(currentToken.getType().equals(TokenType.notOp)){
+            match(TokenType.notOp);
+        } else{
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+        }
+    }
+    void operadorBinario(){
+        if(currentToken.getType().equals(TokenType.orOp)){
+            match(TokenType.orOp);
+        } else if(currentToken.getType().equals(TokenType.andOp)){
+            match(TokenType.andOp);
+        } else if(currentToken.getType().equals(TokenType.equalOp)){
+            match(TokenType.equalOp);
+        } else if(currentToken.getType().equals(TokenType.notEqualOp)){
+            match(TokenType.notEqualOp);
+        } else if(currentToken.getType().equals(TokenType.greaterOp)){
+            match(TokenType.greaterOp);
+        } else if(currentToken.getType().equals(TokenType.lessOp)){
+            match(TokenType.lessOp);
+        } else if(currentToken.getType().equals(TokenType.greaterEqualOp)){
+            match(TokenType.greaterEqualOp);
+        } else if(currentToken.getType().equals(TokenType.lessEqualOp)){
+            match(TokenType.lessEqualOp);
+        } else if(currentToken.getType().equals(TokenType.addOp)){
+            match(TokenType.addOp);
+        } else if(currentToken.getType().equals(TokenType.subOp)){
+            match(TokenType.subOp);
+        } else if(currentToken.getType().equals(TokenType.mulOp)){
+            match(TokenType.mulOp);
+        } else if(currentToken.getType().equals(TokenType.divOp)){
+            match(TokenType.divOp);
+        } else if(currentToken.getType().equals(TokenType.modOp)){
+            match(TokenType.modOp);
+        } else{
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+        }
+    }
+    void operando(){
+        if(primerosPrimitivo(currentToken)){
+            primitivo();
+        } else if(primerosReferencia(currentToken)){
+            referencia();
+        } else{
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+        }
+    }
+    void primitivo(){
+        if(currentToken.getType().equals(TokenType.intLiteral)){
+            match(TokenType.intLiteral);
+        } else if(currentToken.getType().equals(TokenType.charLiteral)){
+            match(TokenType.charLiteral);
+        } else if(currentToken.getType().equals(TokenType.sw_true)){
+            match(TokenType.sw_true);
+        } else if(currentToken.getType().equals(TokenType.sw_false)){
+            match(TokenType.sw_false);
+        } else if(currentToken.getType().equals(TokenType.sw_null)){
+            match(TokenType.sw_null);
+        } else{
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+        }
+    }
+    void referencia(){
+        primario();
+        referencia_Recursiva();
+    }
+    void referencia_Recursiva(){
+        if(currentToken.getType().equals(TokenType.dot)){
+            match(TokenType.dot);
+            match(TokenType.metVarID);
+            argsActualesOpcional();
+            referencia_Recursiva();
+        } else{
+            //epsilon
+        }
+    }
+    void argsActualesOpcional(){
+        if(primerosArgsActuales(currentToken)){
+            argsActuales();
+        } else{
+            //epsilon
+        }
+    }
+    void argsActuales(){
+        match(TokenType.openBracket);
+        listaExpresionesOpcional();
+        match(TokenType.closeBracket);
+    }
+    void listaExpresionesOpcional(){
+        if(primerosListaExpresiones(currentToken)){
+            listaExpresiones();
+        } else{
+            //epsilon
+        }
+    }
+    void listaExpresiones(){
+        expresion();
+        listaExpresiones_Recursiva();
+    }
+    void listaExpresiones_Recursiva(){
+        if(currentToken.getType().equals(TokenType.comma)){
+            match(TokenType.comma);
+            expresion();
+            listaExpresiones_Recursiva();
+        } else{
+            //epsilon
+        }
+    }
+    void expresionOpcional(){
+        if(primerosExpresion(currentToken)){
+            expresion();
+        } else{
+            //epsilon
+        }
+    }
+    void primario(){
+        if(currentToken.getType().equals(TokenType.stringLiteral)){
+            match(TokenType.stringLiteral);
+        } else if(currentToken.getType().equals(TokenType.sw_this)){
+            match(TokenType.sw_this);
+        } else if(currentToken.getType().equals(TokenType.metVarID)){
+            match(TokenType.metVarID);
+            llamadaTail();
+        } else if(primerosLlamadaConstructor(currentToken)){
+            llamadaConstructor();
+        } else if(primerosExpresionParentizada(currentToken)){
+            expresionParentizada();
+        } else if(primerosLlamadaMetodoEstatico(currentToken)){
+            llamadaMetodoEstatico();
+        } else{
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
+        }
+    }
+    void llamadaTail(){
+        if(primerosArgsActuales(currentToken)){
+            argsActuales();
+        } else{
+            //epsilon
+        }
+    }
+    void llamadaConstructor(){
+        match(TokenType.sw_new);
+        match(TokenType.classID);
+        argsActuales();
+    }
+    void expresionParentizada(){
+        match(TokenType.openBracket);
+        expresion();
+        match(TokenType.closeBracket);
+    }
+    void llamadaMetodoEstatico(){
+        match(TokenType.classID);
+        match(TokenType.dot);
+        match(TokenType.metVarID);
+        argsActuales();
+    }
 
 
     void match(TokenType tokenName) {
         if(tokenName.equals(currentToken.getType())){
             try {
+                System.out.println("Haciendo match con: "+currentToken.getType());
                 currentToken = lexicalAnalyzer.getNextToken();
+                System.out.println("NEXT: "+currentToken.getType());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
         else{
-            throw new SyntacticException(currentToken,tokenName);
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber());
         }
     }
+    boolean primerosListaArgsFormales(Token token){
+        return primerosArgFormal();
+    }
+    boolean primerosArgFormal(){
+        return primerosTipo(currentToken);
+    }
+    boolean primerosOperadorAsignacion(Token token){
+        HashSet<TokenType> primeros = new HashSet<>(List.of(
+                TokenType.assignOp,
+                TokenType.addOp,
+                TokenType.subOp
+        ));
+        return primeros.contains(token.getType());
+    }
+    boolean primerosListaExpresiones(Token token){
+        return primerosExpresion(token);
+    }
+    boolean primerosArgsActuales(Token token){
+        return token.getType() == TokenType.openBracket;
+    }
+
+
     boolean primerosMiembro(Token token){
         return primerosConstructor(token) | primerosModificador(token) | primerosMiembroMetVar(token);
     }
@@ -418,21 +605,12 @@ public class SyntacticAnalyzer {
         return token.getType() == TokenType.sw_var;
     }
     boolean primerosExpresion(Token token){
-        HashSet<TokenType> primeros = new HashSet<>(List.of(
-
-        ));
         return primerosExpresionCompuesta(token);
     }
     boolean primerosExpresionCompuesta(Token token){
-        HashSet<TokenType> primeros = new HashSet<>(List.of(
-
-        ));
         return primerosExpresionBasica(token);
     }
     boolean primerosExpresionBasica(Token token){
-        HashSet<TokenType> primeros = new HashSet<>(List.of(
-
-        ));
         return primerosOperadorUnario(token) || primerosOperando(token);
     }
     boolean primerosOperadorUnario(Token token){

@@ -241,14 +241,10 @@ public class LexicalAnalyzerMultiDetect {
     }
 
     private Token e6() throws IOException {
-        addChar();
-        getChar();
         return new Token(openBracket, lexeme, sourceManager.getLineNumber());
     }
 
     private Token e7() throws IOException {
-        addChar();
-        getChar();
         return new Token(closeBracket, lexeme, sourceManager.getLineNumber());
     }
 
@@ -410,14 +406,10 @@ public class LexicalAnalyzerMultiDetect {
     }
 
     private Token e31() throws IOException {
-        addChar();
-        getChar();
         return new Token(openCurly, lexeme, sourceManager.getLineNumber());
     }
 
     private Token e32() throws IOException {
-        addChar();
-        getChar();
         return new Token(closeCurly, lexeme, sourceManager.getLineNumber());
     }
 
