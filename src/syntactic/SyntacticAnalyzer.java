@@ -241,6 +241,9 @@ public class SyntacticAnalyzer {
             expresion();
             match(TokenType.semicolon);
         }
+        else if(primerosFor(currentToken)){
+            forSentencia();
+        }
         else if(primerosBloque(currentToken)){
             bloque();
         }
@@ -259,7 +262,45 @@ public class SyntacticAnalyzer {
             match(TokenType.semicolon);
         }
         else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un primero de sentencia" );
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con una sentencia valida" );
+        }
+    }
+    void forSentencia(){
+        match(TokenType.sw_for);
+        match(TokenType.openBracket);
+        contenidoFor();
+        match(TokenType.closeBracket);
+        bloqueOpcional();
+    }
+    void contenidoFor(){
+        if(primerosTipo(currentToken)){
+            tipo();
+            match(TokenType.metVarID);
+            forTipo();
+        }
+        else if(primerosExpresion(currentToken)){
+            expresion();
+            match(TokenType.semicolon);
+            expresion();
+            match(TokenType.semicolon);
+            expresion();
+        }
+        else{
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un tipo o una expresion");
+        }
+    }
+    void forTipo(){
+        if(currentToken.getType().equals(TokenType.colon)){
+            match(TokenType.colon);
+            expresion();
+        } else if (primerosExpresionCompuesta(currentToken)) {
+            expresionCompuesta();
+            match(TokenType.semicolon);
+            expresion();
+            match(TokenType.semicolon);
+            expresion();
+        } else{
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con el simbolo [:] o con una expresion compuesta");
         }
     }
     void ifSentencia(){
@@ -516,6 +557,9 @@ public class SyntacticAnalyzer {
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear el token: "+tokenName);
         }
     }
+    boolean primerosFor(Token token){
+        return token.getType().equals(TokenType.sw_for);
+    }
     boolean primerosListaArgsFormales(Token token){
         return primerosArgFormal(token);
     }
@@ -576,7 +620,7 @@ public class SyntacticAnalyzer {
         HashSet<TokenType> primeros = new HashSet<>(List.of(
                 TokenType.semicolon
         ));
-        return primeros.contains(token.getType()) || primerosExpresion(token) || primerosBloque(token) || primerosIf(token) || primerosWhile(token) || primerosReturn(token) || primerosVarLocal(token);
+        return primeros.contains(token.getType()) || primerosExpresion(token) || primerosFor(token) || primerosBloque(token) || primerosIf(token) || primerosWhile(token) || primerosReturn(token) || primerosVarLocal(token);
     }
     boolean primerosBloque(Token token){
         return token.getType() == TokenType.openCurly;
