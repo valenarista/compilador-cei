@@ -360,6 +360,7 @@ public class SyntacticAnalyzer {
         expresionBasica();
         expresionCompuesta_Recursiva();
     }
+
     void expresionCompuesta_Recursiva(){
         if(primerosOperadorBinario(currentToken)) {
             operadorBinario();
@@ -376,6 +377,8 @@ public class SyntacticAnalyzer {
             operando();
         } else if(primerosOperando(currentToken)){
             operando();
+        } else {
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un operador unario o un operando valido" );
         }
     }
     void operadorUnario(){
@@ -554,6 +557,9 @@ public class SyntacticAnalyzer {
             }
         }
         else{
+            if(currentToken.getType().equals(TokenType.eof))
+                throw new SyntacticException("EOF",currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear el token: "+tokenName);
+            
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear el token: "+tokenName);
         }
     }
