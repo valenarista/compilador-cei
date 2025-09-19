@@ -1,3 +1,3 @@
 ///[SinErrores]
-class ClaseFinal{
+final class ClaseFinal{
 }

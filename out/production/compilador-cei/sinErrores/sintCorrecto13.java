@@ -1,0 +1,3 @@
+///[SinErrores]
+static class ClaseEstatica{
+}

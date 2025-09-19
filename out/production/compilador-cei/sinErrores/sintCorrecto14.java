@@ -1,0 +1,3 @@
+///[SinErrores]
+abstract class ClaseEstatica{
+}

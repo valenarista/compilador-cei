@@ -10,30 +10,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d10e087-5673-4518-949a-be8557448ba8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError05.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError06.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError07.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError08.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError09.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError10.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError11.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError12.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError13.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError14.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError15.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto06.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto07.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto08.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto09.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto10.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto11.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto12.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError16.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError17.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError18.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError19.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError20.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError21.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto13.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto14.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto15.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto16.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto17.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto18.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto19.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto20.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto21.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto22.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/sintError06.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/sintError06.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/sintCorrecto05.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/sintCorrecto05.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/sintCorrecto12.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/sintCorrecto12.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/sintError06.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/sintError06.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto05.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto05.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto12.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto12.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
