@@ -434,13 +434,26 @@ public class SyntacticAnalyzer {
     }
     void expresionCompuesta(){
         expresionBasica();
+        operacionTernariaOpcional();
         expresionCompuesta_Recursiva();
+    }
+
+    void operacionTernariaOpcional(){
+        if(currentToken.getType().equals(TokenType.questionMark)){
+            match(TokenType.questionMark);
+            expresionCompuesta();
+            match(TokenType.colon);
+            expresionCompuesta();
+        } else{
+            //epsilon
+        }
     }
 
     void expresionCompuesta_Recursiva(){
         if(primerosOperadorBinario(currentToken)) {
             operadorBinario();
             expresionBasica();
+            operacionTernariaOpcional();
             expresionCompuesta_Recursiva();
         }else{
             //epsilon
@@ -655,6 +668,9 @@ public class SyntacticAnalyzer {
             
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear el token: "+tokenName);
         }
+    }
+    boolean primerosExpresionCompuestaRecursiva(Token token){
+        return primerosOperadorBinario(token);
     }
 
     boolean primerosVisibilidadMiembro(Token token){

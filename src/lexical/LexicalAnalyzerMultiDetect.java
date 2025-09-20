@@ -151,7 +151,12 @@ public class LexicalAnalyzerMultiDetect {
             addChar();
             getChar();
             return e37();
-        } else {
+        } else if(currentChar == '?'){
+            addChar();
+            getChar();
+            return e40();
+        }
+        else {
             addChar();
             reportError("simbolo no reconocido");
             getChar();
@@ -411,6 +416,9 @@ public class LexicalAnalyzerMultiDetect {
 
     private Token e32() throws IOException {
         return new Token(closeCurly, lexeme, sourceManager.getLineNumber());
+    }
+    private Token e40() throws IOException {
+        return new Token(questionMark, lexeme, sourceManager.getLineNumber());
     }
 
     private Token e33() throws LexicalException, IOException {

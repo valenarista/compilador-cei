@@ -10,30 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d10e087-5673-4518-949a-be8557448ba8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError16.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError17.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError18.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError19.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError20.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError21.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto13.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto14.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto15.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto16.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto17.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto18.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto19.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto20.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto21.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto22.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto23.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/sintError06.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/sintError06.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/sintCorrecto05.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/sintCorrecto05.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/sintCorrecto12.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/sintCorrecto12.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/lexical/LexicalAnalyzerMultiDetect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/lexical/LexicalAnalyzerMultiDetect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/lexical/TokenType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/lexical/TokenType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/sintError06.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/sintError06.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto05.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto05.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto12.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto12.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexical/LexicalAnalyzerMultiDetect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexical/LexicalAnalyzerMultiDetect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexical/TokenType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexical/TokenType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
