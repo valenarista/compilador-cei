@@ -6,15 +6,21 @@ import lexical.Token;
 import lexical.TokenType;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class SyntacticAnalyzer {
+public class SyntacticAnalyzerRecover {
     LexicalAnalyzerMultiDetect lexicalAnalyzer;
     Token currentToken;
 
-    public SyntacticAnalyzer(LexicalAnalyzerMultiDetect lexicalAnalyzer) {
+    private ArrayList<SyntacticException> errors;
+    private boolean hasErrors;
+
+    public SyntacticAnalyzerRecover(LexicalAnalyzerMultiDetect lexicalAnalyzer) {
         this.lexicalAnalyzer = lexicalAnalyzer;
+        this.errors = new ArrayList<>();
+        this.hasErrors = false;
         try {
             this.currentToken = lexicalAnalyzer.getNextToken();
         } catch (IOException e) {
@@ -22,9 +28,61 @@ public class SyntacticAnalyzer {
         }
     }
 
+    private void reportError(SyntacticException e) {
+        hasErrors = true;
+        errors.add(e);
+        System.err.println(e.getMessage());
+    }
+    private static final HashSet<TokenType> SYNC_TOKENS_STATEMENT = new HashSet<>(List.of(
+            TokenType.semicolon,
+            TokenType.closeCurly
+    ));
+    private static final HashSet<TokenType> SYNC_TOKENS_MEMBER = new HashSet<>(List.of(
+            TokenType.semicolon,
+            TokenType.closeCurly,
+            TokenType.openCurly
+    ));
+    private static final HashSet<TokenType> SYNC_TOKENS_EXPRESSION = new HashSet<>(List.of(
+            TokenType.semicolon,
+            TokenType.closeBracket,
+            TokenType.closeCurly
+    ));
+    private void syncTo(HashSet<TokenType> syncTokens) {
+        while (!currentToken.getType().equals(TokenType.eof) && !syncTokens.contains(currentToken.getType())) {
+            try {
+                currentToken = lexicalAnalyzer.getNextToken();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    void matchWithRecovery(TokenType tokenName, HashSet<TokenType> syncTokens) {
+        if (tokenName.equals(currentToken.getType())) {
+            try {
+                currentToken = lexicalAnalyzer.getNextToken();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            SyntacticException e = new SyntacticException(currentToken.getLexeme(), currentToken.getLineNumber(), currentToken.getType(), "Se esperaba matchear el token: " + tokenName);
+            reportError(e);
+            syncTo(syncTokens);
+        }
+    }
+
+
+
     public void inicial() throws SyntacticException{
         listaClases();
         match(TokenType.eof);
+
+        if(hasErrors){
+            StringBuilder allErrors = new StringBuilder("Se encontraron los siguientes errores sintacticos:\n");
+            for(SyntacticException e : errors) {
+                allErrors.append(e.getMessage()).append("\n");
+            }
+            throw new SyntacticException(allErrors.toString(), -1, null, "Errores Sintacticos");
+        }
     }
 
     void listaClases(){
@@ -60,9 +118,8 @@ public class SyntacticAnalyzer {
         match(TokenType.closeCurly);
     }
     void herenciaImplementacionOpcional(){
-        if(currentToken.getType().equals(TokenType.sw_extends))
-            herenciaOpcional();
-        else if(currentToken.getType().equals(TokenType.sw_implements)){
+        herenciaOpcional();
+        if(currentToken.getType().equals(TokenType.sw_implements)){
             match(TokenType.sw_implements);
             match(TokenType.classID);
             tipoParametricoOpcional();

@@ -16,7 +16,7 @@ public class Main {
 
         String filePath;
         SourceManager sourceManager = new SourceManagerCharImpl();
-        LexicalAnalyzerMultiDetect lexicalAnalyzer;
+        LexicalAnalyzerMultiDetect lexicalAnalyzer = null;
         SyntacticAnalyzer syntacticAnalyzer;
 
         if (args.length > 0) {
@@ -25,22 +25,24 @@ public class Main {
                 sourceManager.open(filePath);
                 lexicalAnalyzer = new LexicalAnalyzerMultiDetect(sourceManager);
                 syntacticAnalyzer = new SyntacticAnalyzer(lexicalAnalyzer);
-                /*
-                Token token;
-                do {
-                    token = lexicalAnalyzer.getNextToken();
-                    System.out.println(token.toString());
-                } while (token.getType() != TokenType.eof);
-                for(LexicalException errors : lexicalAnalyzer.getErrors()){
-                    System.out.println(errors.getDetailedErrorMessage());
-                }
-                if(lexicalAnalyzer.getErrors().isEmpty())
-                    System.out.println("[SinErrores]");
 
-                 */
                 syntacticAnalyzer.inicial();
-                System.out.println("[SinErrores]");
+
+                if (!lexicalAnalyzer.getErrors().isEmpty()) {
+                    for(LexicalException error : lexicalAnalyzer.getErrors()){
+                        System.out.println(error.getDetailedErrorMessage());
+                    }
+                } else {
+                    System.out.println("[SinErrores]");
+                }
+
+
             } catch (SyntacticException e) {
+                if(lexicalAnalyzer!=null && !lexicalAnalyzer.getErrors().isEmpty()){
+                    for(LexicalException error : lexicalAnalyzer.getErrors()){
+                        System.out.println(error.getDetailedErrorMessage());
+                    }
+                }
                 System.out.println( e.getMessage() );
             } catch (IOException e) {
                 throw new RuntimeException(e);
