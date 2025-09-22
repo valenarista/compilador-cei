@@ -384,8 +384,9 @@ public class SyntacticAnalyzer {
         sentencia();
     }
     void contenidoFor(){
-        if(primerosVarLocal(currentToken)){
-            varLocal();
+        if(currentToken.getType().equals(TokenType.sw_var)){
+            match(TokenType.sw_var);
+            match(TokenType.metVarID);
             forTipo();
         }
         else if(primerosExpresion(currentToken)){
@@ -398,6 +399,8 @@ public class SyntacticAnalyzer {
     }
     void forTipo(){
         if(primerosForStandard(currentToken)){
+            match(TokenType.assignOp);
+            expresionCompuesta();
             forStandard();
         } else if (primerosForIterador(currentToken)) {
             forIterador();
@@ -708,9 +711,6 @@ public class SyntacticAnalyzer {
     boolean primerosMiembroInterfaz(Token token){
         return primerosModificador(token) || primerosMiembroMetVar(token) || token.getType().equals(TokenType.sw_public) || token.getType().equals(TokenType.sw_private);
     }
-    boolean primerosExpresionCompuestaRecursiva(Token token){
-        return primerosOperadorBinario(token);
-    }
 
     boolean primerosVisibilidadMiembro(Token token){
         return token.getType().equals(TokenType.sw_public) || token.getType().equals(TokenType.sw_private) || primerosMiembro(token);
@@ -722,7 +722,7 @@ public class SyntacticAnalyzer {
         return token.getType().equals(TokenType.assignOp);
     }
     boolean primerosForStandard(Token token){
-        return token.getType().equals(TokenType.semicolon);
+        return token.getType().equals(TokenType.assignOp);
     }
     boolean primerosForIterador(Token token){
         return token.getType().equals(TokenType.colon);

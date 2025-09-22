@@ -3,8 +3,6 @@ package compiler;
 import exceptions.LexicalException;
 import exceptions.SyntacticException;
 import lexical.LexicalAnalyzerMultiDetect;
-import lexical.Token;
-import lexical.TokenType;
 import sourcemanager.SourceManager;
 import sourcemanager.SourceManagerCharImpl;
 import syntactic.SyntacticAnalyzer;

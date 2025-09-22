@@ -5,11 +5,11 @@ class Prueba1{
         }
         for (i = 0; i < 3;++i){
         }
-        for(var coleccion = "buenas": hola){
+        for(var hola : coleccion){
         }
         for (var i = 0; i < 3;++i);
         for (i = 0; i < 3;++i);
-        for(var coleccion = "buenas": hola);
+        for(var hola : coleccion);
     }
 }
 

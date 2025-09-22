@@ -10,7 +10,7 @@ abstract interface A {
         }
         for (i = 0; i < 3;++i){
         }
-        for(var coleccion = "buenas": hola){
+        for(var hola: coleccion){
         }
     }
 }
