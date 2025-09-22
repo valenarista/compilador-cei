@@ -28,6 +28,15 @@ public class SyntacticAnalyzer {
     }
 
     void listaClases(){
+        if(primerosClase(currentToken)||primerosInterface(currentToken)){
+            modificadorOpcional();
+            conjuntoClaseOInterfaz();
+        }
+        else {
+            //Epsilon
+        }
+    }
+    void conjuntoClaseOInterfaz(){
         if (primerosClase(currentToken)) {
             clase();
             listaClases();
@@ -36,8 +45,8 @@ public class SyntacticAnalyzer {
             interfaz();
             listaClases();
         }
-        else {
-            //epsilon
+        else{
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un token: "+TokenType.sw_class+" o un token: "+TokenType.sw_interface);
         }
     }
     void interfaz(){
@@ -46,11 +55,37 @@ public class SyntacticAnalyzer {
         tipoParametricoOpcional();
         herenciaOpcional();
         match(TokenType.openCurly);
-        //TODOlistaMiembrosInterfaz();
+        listaMiembrosInterfaz();
         match(TokenType.closeCurly);
     }
+
+    void listaMiembrosInterfaz(){
+        if(primerosMiembroInterfaz(currentToken)){
+            miembroInterfaz();
+            listaMiembrosInterfaz();
+        }
+        else {
+            //Epsilon
+        }
+    }
+
+    void miembroInterfaz(){
+        visibilidadOpcional();
+        cuerpoMiembroInterfaz();
+    }
+    void cuerpoMiembroInterfaz(){
+        if(primerosModificador(currentToken)){
+            modificador();
+            metodoConMod();
+        }
+        else if(primerosMiembroMetVar(currentToken)){
+            miembroMetVar();
+        }
+        else{
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un token: [public-abstract-final-static void] o un tipo valido");
+        }
+    }
     void clase(){
-        modificadorOpcional();
         match(TokenType.sw_class);
         match(TokenType.classID);
         tipoParametricoOpcional();
@@ -670,6 +705,9 @@ public class SyntacticAnalyzer {
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear el token: "+tokenName);
         }
     }
+    boolean primerosMiembroInterfaz(Token token){
+        return primerosModificador(token) || primerosMiembroMetVar(token) || token.getType().equals(TokenType.sw_public) || token.getType().equals(TokenType.sw_private);
+    }
     boolean primerosExpresionCompuestaRecursiva(Token token){
         return primerosOperadorBinario(token);
     }
@@ -678,7 +716,7 @@ public class SyntacticAnalyzer {
         return token.getType().equals(TokenType.sw_public) || token.getType().equals(TokenType.sw_private) || primerosMiembro(token);
     }
     boolean primerosInterface(Token token){
-        return token.getType().equals(TokenType.sw_interface);
+        return token.getType().equals(TokenType.sw_interface) || primerosModificador(token);
     }
     boolean primerosAtributoTail(Token token){
         return token.getType().equals(TokenType.assignOp);
@@ -703,9 +741,7 @@ public class SyntacticAnalyzer {
     }
     boolean primerosOperadorAsignacion(Token token){
         HashSet<TokenType> primeros = new HashSet<>(List.of(
-                TokenType.assignOp,
-                TokenType.addOp,
-                TokenType.subOp
+                TokenType.assignOp
         ));
         return primeros.contains(token.getType());
     }
