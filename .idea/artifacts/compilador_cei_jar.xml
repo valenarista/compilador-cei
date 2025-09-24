@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="compilador-cei:jar">
+  <artifact type="jar" build-on-make="true" name="compilador-cei:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/compilador_cei_jar</output-path>
     <root id="archive" name="compilador-cei.jar">
       <element id="module-output" name="compilador-cei" />

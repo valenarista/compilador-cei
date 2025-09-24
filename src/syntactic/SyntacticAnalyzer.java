@@ -326,7 +326,7 @@ public class SyntacticAnalyzer {
         if(primerosMetodoTail(currentToken)){
             metodoTail();
         }
-        else if(currentToken.getType().equals(TokenType.semicolon)||primerosAtributoTail(currentToken)){
+        else if(currentToken.getType().equals(TokenType.semicolon) || primerosAtributoTail(currentToken)){
             atributoTail();
             match(TokenType.semicolon);
         }
@@ -405,7 +405,7 @@ public class SyntacticAnalyzer {
         } else if (primerosForIterador(currentToken)) {
             forIterador();
         } else{
-            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con el simbolo [:] o con el simbolo [;]");
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con el simbolo [:] o con el simbolo [=]");
         }
     }
     void forStandard(){
@@ -889,8 +889,4 @@ public class SyntacticAnalyzer {
         ));
         return primeros.contains(token.getType());
     }
-
-
-
-
 }
