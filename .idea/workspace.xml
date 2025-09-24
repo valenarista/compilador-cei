@@ -10,15 +10,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d10e087-5673-4518-949a-be8557448ba8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/compilador_cei_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/compilador_cei_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError36.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError37.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError38.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/sintError59.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/sintCorrecto29.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/compilador-cei.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/compiler/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/compiler/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/lexical/LexicalAnalyzerMultiDetect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/lexical/LexicalAnalyzerMultiDetect.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/lexical/TokenType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/lexical/TokenType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/exceptions/LexicalException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/exceptions/LexicalException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/lexical/LexicalAnalyzerMultiDetect.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/lexical/LexicalAnalyzerMultiDetect.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/sourcemanager/SourceManagerCharImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/sourcemanager/SourceManagerCharImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exceptions/LexicalException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exceptions/LexicalException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexical/LexicalAnalyzerMultiDetect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexical/LexicalAnalyzerMultiDetect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,6 +77,10 @@
     "JUnit.TesterDeCasosConErroresLexicos.executor": "Run",
     "JUnit.TesterDeCasosSinErrores.executor": "Run",
     "JUnit.TesterDeCasosSinErroresLexicos.executor": "Run",
+    "JUnit.conErrores11.* and 2 more.executor": "Run",
+    "JUnit.sinErrores.* and 1 more.executor": "Coverage",
+    "JUnit.sinErrores.* and 2 more.executor": "Coverage",
+    "JUnit.sinErrores.* and 3 more.executor": "Coverage",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
@@ -79,7 +90,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/valua/OneDrive/Documentos/compilador-cei/src",
+    "last_opened_file_path": "C:/Users/valua/OneDrive/Documentos/compilador-cei/resources/sinErrores11",
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -88,24 +99,25 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\src" />
+      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\sinErrores11" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\conErrores" />
+      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\src" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\sinErrores" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\conErrores11" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources" />
+      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\sinErrores" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\src\compiler" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\conErrores" />
-      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\src" />
-      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="syntactic" />
       <recent name="lexical" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TesterDeCasosConErrores">
+  <component name="RunManager" selected="JUnit.TesterDeCasosSinErrores">
     <configuration name="TesterDeCasosConErrores" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="compilador-cei" />
       <extension name="coverage">
@@ -116,28 +128,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="compiler" />
       <option name="MAIN_CLASS_NAME" value="compiler.TesterDeCasosConErrores" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TesterDeCasosConErroresLexicos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="compilador-cei" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="compiler.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-        <pattern>
-          <option name="PATTERN" value="lexical.LexicalAnalyzer" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="ALTERNATIVE_JRE_PATH" value="21" />
-      <option name="PACKAGE_NAME" value="compiler" />
-      <option name="MAIN_CLASS_NAME" value="compiler.TesterDeCasosConErroresLexicos" />
-      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -158,32 +148,49 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TesterDeCasosSinErroresLexicos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="conErrores11.* and 2 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="compilador-cei" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="compiler.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="compiler" />
-      <option name="MAIN_CLASS_NAME" value="compiler.TesterDeCasosSinErroresLexicos" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="pattern" />
+      <patterns>
+        <pattern testClass="conErrores11.*" />
+        <pattern testClass="compiler.TesterDeCasosSinErrores" />
+        <pattern testClass="compiler.TesterDeCasosConErrores" />
+      </patterns>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="compilador-cei.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/compilador-cei.jar" />
-      <method v="2" />
+    <configuration name="sinErrores.* and 1 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="compilador-cei" />
+      <option name="TEST_OBJECT" value="pattern" />
+      <patterns>
+        <pattern testClass="sinErrores.*" />
+        <pattern testClass="conErrores.*" />
+      </patterns>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="sinErrores.* and 3 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="compilador-cei" />
+      <option name="TEST_OBJECT" value="pattern" />
+      <patterns>
+        <pattern testClass="sinErrores.*" />
+        <pattern testClass="conErrores.*" />
+        <pattern testClass="compiler.TesterDeCasosConErrores" />
+        <pattern testClass="compiler.TesterDeCasosSinErrores" />
+      </patterns>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TesterDeCasosConErrores" />
         <item itemvalue="JUnit.TesterDeCasosSinErrores" />
-        <item itemvalue="JAR Application.compilador-cei.jar" />
-        <item itemvalue="JUnit.TesterDeCasosConErroresLexicos" />
-        <item itemvalue="JUnit.TesterDeCasosSinErroresLexicos" />
+        <item itemvalue="JUnit.TesterDeCasosConErrores" />
+        <item itemvalue="JUnit.conErrores11.* and 2 more" />
+        <item itemvalue="JUnit.sinErrores.* and 3 more" />
+        <item itemvalue="JUnit.sinErrores.* and 1 more" />
       </list>
     </recent_temporary>
   </component>
@@ -202,5 +209,8 @@
       <FILTER>compiler.*</FILTER>
       <FILTER>lexical.LexicalAnalyzer</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/compilador_cei$sinErrores___and_1_more.ic" NAME="sinErrores.* and 1 more Coverage Results" MODIFIED="1758723572580" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/compilador_cei$sinErrores___and_3_more.ic" NAME="sinErrores.* and 3 more Coverage Results" MODIFIED="1758724585721" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/compilador_cei$sinErrores___and_2_more.ic" NAME="sinErrores.* and 2 more Coverage Results" MODIFIED="1758723452830" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
 </project>

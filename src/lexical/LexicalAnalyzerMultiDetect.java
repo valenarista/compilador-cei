@@ -166,7 +166,7 @@ public class LexicalAnalyzerMultiDetect {
 
     private Token e1EOF() {
         addChar();
-        return new Token(eof, lexeme, sourceManager.getLineNumber());
+        return new Token(eof, "", sourceManager.getLineNumber());
     }
 
     private Token e2Comment() throws LexicalException, IOException {

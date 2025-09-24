@@ -49,7 +49,7 @@ public class LexicalException extends RuntimeException {
             }
         }
 
-        sb.append(String.format("[Error:%s|%d]", lexeme, lineNumber));
+        //sb.append(String.format("[Error:%s|%d]", lexeme, lineNumber));
 
         return sb.toString();
     }

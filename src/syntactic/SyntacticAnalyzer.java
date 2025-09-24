@@ -308,8 +308,8 @@ public class SyntacticAnalyzer {
         }
     }
     void miembroMetVar(){
-        if(primerosTipoPrimitivo(currentToken)){
-            tipoPrimitivo();
+        if(primerosTipo(currentToken)){
+            tipo();
             match(TokenType.metVarID);
             miembroTail();
         }
@@ -774,7 +774,7 @@ public class SyntacticAnalyzer {
         HashSet<TokenType> primeros = new HashSet<>(List.of(
                 TokenType.sw_void
         ));
-        return primeros.contains(token.getType())||primerosTipoPrimitivo(token);
+        return primeros.contains(token.getType())||primerosTipo(token);
     }
     boolean primerosTipo(Token token){
         HashSet<TokenType> primeros = new HashSet<>(List.of(
