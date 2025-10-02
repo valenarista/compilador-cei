@@ -78,13 +78,30 @@ public class SyntacticAnalyzer {
             modificador();
             metodoConMod();
         }
-        else if(primerosMiembroMetVar(currentToken)){
-            miembroMetVar();
+        else if(primerosMiembroMetVarInterfaz(currentToken)){
+            miembroMetVarIntefaz();
         }
         else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un token: [public-abstract-final-static void] o un tipo valido");
         }
     }
+    void miembroMetVarIntefaz(){
+        if(primerosTipo(currentToken)){
+            tipo();
+            match(TokenType.metVarID);
+            miembroTail();
+        }
+        else if(currentToken.getType().equals(TokenType.sw_void)){
+            match(TokenType.sw_void);
+            match(TokenType.metVarID);
+            metodoTail();
+        }
+        else{
+            throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un  tipo o un token: "+TokenType.sw_void);
+        }
+    }
+
+
     void clase(){
         match(TokenType.sw_class);
         match(TokenType.classID);
@@ -308,8 +325,8 @@ public class SyntacticAnalyzer {
         }
     }
     void miembroMetVar(){
-        if(primerosTipo(currentToken)){
-            tipo();
+        if(primerosTipoPrimitivo(currentToken)){
+            tipoPrimitivo();
             match(TokenType.metVarID);
             miembroTail();
         }
@@ -770,11 +787,18 @@ public class SyntacticAnalyzer {
         ));
         return primeros.contains(token.getType());
     }
-    boolean primerosMiembroMetVar(Token token){
+    boolean primerosMiembroMetVarInterfaz(Token token){
         HashSet<TokenType> primeros = new HashSet<>(List.of(
                 TokenType.sw_void
         ));
         return primeros.contains(token.getType())||primerosTipo(token);
+    }
+
+    boolean primerosMiembroMetVar(Token token){
+        HashSet<TokenType> primeros = new HashSet<>(List.of(
+                TokenType.sw_void
+        ));
+        return primeros.contains(token.getType())||primerosTipoPrimitivo(token);
     }
     boolean primerosTipo(Token token){
         HashSet<TokenType> primeros = new HashSet<>(List.of(

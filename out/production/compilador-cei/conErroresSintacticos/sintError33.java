@@ -1,6 +1,7 @@
-///[Error:Constructor|4]
+///[Error:(|5]
 interface Test {
     public int attr;
+    public Constructor hola(){}
     public Constructor(){}
     void metodo() {
         var a = 1 + 2 - 3;

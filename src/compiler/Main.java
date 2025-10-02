@@ -30,9 +30,11 @@ public class Main {
                     for(LexicalException error : lexicalAnalyzer.getErrors()){
                         System.out.println(error.getDetailedErrorMessage());
                     }
+                } else{
+                    System.out.println("[SinErrores]");
                 }
 
-                System.out.println("[SinErrores]");
+
 
 
 
