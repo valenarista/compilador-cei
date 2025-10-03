@@ -1,13 +1,16 @@
 package semantic;
 
-public interface EntidadClase {
+import lexical.Token;
+
+public interface EntityClass {
     public void estaBienDeclarado();
     public void consolidar();
 
     String getName();
     int getLine();
 
-    void addAtributo(Atributo atributo);
-    void addMetodo(Metodo metodo);
+    void addAttribute(Attribute attribute);
+    void addMethod(Method method);
     void addConstructor(Constructor constructor);
+    void addInheritance(Token herencia);
 }

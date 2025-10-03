@@ -3,13 +3,16 @@ package compiler;
 import exceptions.LexicalException;
 import exceptions.SyntacticException;
 import lexical.LexicalAnalyzerMultiDetect;
+import semantic.SymbolTable;
 import sourcemanager.SourceManager;
 import sourcemanager.SourceManagerCharImpl;
 import syntactic.SyntacticAnalyzer;
 
 import java.io.IOException;
 
+
 public class Main {
+    public static SymbolTable symbolTable = new SymbolTable();
     public static void main(String[] args) {
 
         String filePath;

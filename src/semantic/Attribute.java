@@ -2,7 +2,7 @@ package semantic;
 
 import lexical.Token;
 
-public class Parametro {
+public class Attribute {
     Token idToken;
     Type type;
     String name;

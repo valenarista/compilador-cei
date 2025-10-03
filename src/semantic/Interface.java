@@ -4,9 +4,9 @@ import lexical.Token;
 
 import java.util.HashSet;
 
-public class Interfaz implements EntidadClase{
+public class Interface implements EntityClass {
     private Token idToken;
-    HashSet<Metodo> metodos;
+    HashSet<Method> methods;
 
     public void estaBienDeclarado(){
     }
@@ -18,10 +18,14 @@ public class Interfaz implements EntidadClase{
     public int getLine() {
         return idToken.getLineNumber();
     }
-    public void addMetodo(Metodo metodo) {
-        metodos.add(metodo);
+    public void addMethod(Method method) {
+        methods.add(method);
     }
-    public void addAtributo(Atributo atributo) {
+    public void addInheritance(Token herencia) {
+        // Las interfaces no pueden heredar en este diseño
+        throw new UnsupportedOperationException("Las interfaces no pueden heredar.");
+    }
+    public void addAttribute(Attribute attribute) {
         // Las interfaces no tienen atributos
         throw new UnsupportedOperationException("Las interfaces no pueden tener atributos.");
     }

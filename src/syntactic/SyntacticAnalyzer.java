@@ -1,9 +1,14 @@
 package syntactic;
 
+import compiler.Main;
 import exceptions.SyntacticException;
 import lexical.LexicalAnalyzerMultiDetect;
 import lexical.Token;
 import lexical.TokenType;
+import semantic.ConcreteClass;
+import semantic.EntityClass;
+import static compiler.Main.symbolTable;
+
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -104,23 +109,31 @@ public class SyntacticAnalyzer {
 
     void clase(){
         match(TokenType.sw_class);
+        Token nombre = currentToken;
         match(TokenType.classID);
+        EntityClass nuevaClase = new ConcreteClass(nombre);
+        symbolTable.setCurrentClass(nuevaClase.getName(),nuevaClase);
         tipoParametricoOpcional();
-        herenciaImplementacionOpcional();
+        Token nombreAncestro = herenciaImplementacionOpcional();
+        symbolTable.claseActual.addInheritance(nombreAncestro);
         match(TokenType.openCurly);
         listaMiembros();
         match(TokenType.closeCurly);
+        symbolTable.addCurrentClass();
     }
-    void herenciaImplementacionOpcional(){
+
+    Token herenciaImplementacionOpcional(){
         if(currentToken.getType().equals(TokenType.sw_extends))
-            herenciaOpcional();
+            return herenciaOpcional();
         else if(currentToken.getType().equals(TokenType.sw_implements)){
             match(TokenType.sw_implements);
             match(TokenType.classID);
             tipoParametricoOpcional();
+            return new Token(TokenType.classID,"Object",0);
         }
         else{
             //epsilon
+            return null;
         }
     }
     void tipoParametricoOpcional(){
@@ -147,14 +160,17 @@ public class SyntacticAnalyzer {
             //epsilon
         }
     }
-    void herenciaOpcional(){
+    Token herenciaOpcional(){
         if (currentToken.getType().equals(TokenType.sw_extends)){
             match(TokenType.sw_extends);
+            Token nombre = currentToken;
             match(TokenType.classID);
             tipoParametricoOpcional();
+            return nombre;
         }
         else{
             //epsilon
+            return new Token(TokenType.classID,"Object",0);
         }
     }
     void listaMiembros(){
