@@ -1,8 +1,8 @@
 ///[Error:(|5]
 interface Test {
     public int attr;
-    public Constructor hola(){}
-    public Constructor(){}
+    public Hola hola(){}
+    public Hola(){}
     void metodo() {
         var a = 1 + 2 - 3;
     }

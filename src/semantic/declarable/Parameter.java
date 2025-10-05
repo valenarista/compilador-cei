@@ -1,0 +1,33 @@
+package semantic.declarable;
+
+import exceptions.SemanticException;
+import lexical.Token;
+import semantic.types.Type;
+
+import static compiler.Main.symbolTable;
+
+public class Parameter {
+    private Token idToken;
+    private Type type;
+    private int position;
+
+    public Parameter(Token idToken, Type type) {
+        this.idToken = idToken;
+        this.type = type;
+    }
+
+    public String getName() {
+        return idToken.getLexeme();
+    }
+    public int getLine() {
+        return idToken.getLineNumber();
+    }
+    public Type getType(){
+        return type;
+    }
+    public void estaBienDeclarado(){
+        if(!type.isPrimitive() && (symbolTable.getClass(getName())==null)){
+            throw new SemanticException("El parametro fue declarado como tipo de clase inexistente. ",idToken.getLexeme(), idToken.getLineNumber());
+        }
+    }
+}

@@ -23,7 +23,7 @@ public class TesterDeCasosSinErroresLexicos {
     private static final String testFilesDirectoryPath = "resources/sinErrores/";
 
     //TODO: el tipo de esta variable init tiene que ser la clase que tiene el main
-    private static final Main init = new Main();
+    private static final MainSintactico init = new MainSintactico();
    
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;

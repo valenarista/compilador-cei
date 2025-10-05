@@ -10,31 +10,55 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d10e087-5673-4518-949a-be8557448ba8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/compiler/MainSintactico.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/semantic/declarable/Method.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/semantic/types/BooleanType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/semantic/types/CharType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/semantic/types/IntType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/semantic/types/ReferenceType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/semantic/types/Type.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/semantic/types/VoidType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Atributo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Clase.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Constructor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Constructor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/EntidadClase.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Interfaz.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Metodo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Parametro.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErrores.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErrores.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErroresLexicos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErroresLexicos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErroresSintacticos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErroresSintacticos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErrores.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErrores.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErroresLexicos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErroresLexicos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErroresSintacticos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErroresSintacticos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/exceptions/SemanticException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/exceptions/SemanticException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Attribute.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ConcreteClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Constructor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/EntityClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Interface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Method.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Parameter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/PrimitiveType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ReferenceType.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/SymbolTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/TipoPrimitivo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/TipoReferencia.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Type.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/Atributo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/Attribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/Clase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ConcreteClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/Constructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/Constructor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/EntidadClase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/EntityClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/Interfaz.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/Interface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/Metodo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/Method.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/Parametro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/Parameter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErroresSintacticos/sintError33.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresSintacticos/sintError33.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErrores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErrores.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErroresLexicos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErroresLexicos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErroresSintacticos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErroresSintacticos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErrores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErrores.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErroresLexicos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErroresLexicos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErroresSintacticos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErroresSintacticos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/exceptions/SemanticException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exceptions/SemanticException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/Attribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Attribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ConcreteClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/ConcreteClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/Constructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Constructor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/EntityClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/EntityClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/Interface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/Method.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/Parameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Parameter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/PrimitiveType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/types/PrimitiveType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ReferenceType.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/SymbolTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/TipoPrimitivo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/PrimitiveType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/TipoReferencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ReferenceType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/Type.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,6 +152,7 @@
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\conErrores" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="compiler" />
       <recent name="syntactic" />
       <recent name="lexical" />
     </key>

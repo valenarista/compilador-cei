@@ -1,13 +1,12 @@
 package syntactic;
 
-import compiler.Main;
 import exceptions.SyntacticException;
 import lexical.LexicalAnalyzerMultiDetect;
 import lexical.Token;
 import lexical.TokenType;
-import semantic.ConcreteClass;
-import semantic.EntityClass;
-import static compiler.Main.symbolTable;
+import semantic.entity.ConcreteClass;
+import semantic.entity.EntityClass;
+import static compiler.MainSintactico.symbolTable;
 
 
 import java.io.IOException;

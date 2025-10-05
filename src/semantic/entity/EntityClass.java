@@ -1,10 +1,13 @@
-package semantic;
+package semantic.entity;
 
 import lexical.Token;
+import semantic.declarable.Attribute;
+import semantic.declarable.Constructor;
+import semantic.declarable.Method;
 
 public interface EntityClass {
-    public void estaBienDeclarado();
-    public void consolidar();
+    void estaBienDeclarado();
+    void consolidar();
 
     String getName();
     int getLine();

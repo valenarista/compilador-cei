@@ -1,6 +1,9 @@
-package semantic;
+package semantic.entity;
 
 import lexical.Token;
+import semantic.declarable.Attribute;
+import semantic.declarable.Constructor;
+import semantic.declarable.Method;
 
 import java.util.HashSet;
 
