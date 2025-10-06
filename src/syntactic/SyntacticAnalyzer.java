@@ -4,9 +4,15 @@ import exceptions.SyntacticException;
 import lexical.LexicalAnalyzerMultiDetect;
 import lexical.Token;
 import lexical.TokenType;
+import semantic.declarable.Attribute;
+import semantic.declarable.Constructor;
+import semantic.declarable.Method;
+import semantic.declarable.Parameter;
 import semantic.entity.ConcreteClass;
 import semantic.entity.EntityClass;
-import static compiler.MainSintactico.symbolTable;
+import semantic.types.*;
+
+import static compiler.Main.symbolTable;
 
 
 import java.io.IOException;
@@ -33,27 +39,27 @@ public class SyntacticAnalyzer {
 
     void listaClases(){
         if(primerosClase(currentToken)||primerosInterface(currentToken)){
-            modificadorOpcional();
-            conjuntoClaseOInterfaz();
+            Token modificador = modificadorOpcional();
+            conjuntoClaseOInterfaz(modificador);
         }
         else {
             //Epsilon
         }
     }
-    void conjuntoClaseOInterfaz(){
+    void conjuntoClaseOInterfaz(Token modificador){
         if (primerosClase(currentToken)) {
-            clase();
+            clase(modificador);
             listaClases();
         }
         else if(primerosInterface(currentToken)){
-            interfaz();
+            interfaz(modificador);
             listaClases();
         }
         else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un token: "+TokenType.sw_class+" o un token: "+TokenType.sw_interface);
         }
     }
-    void interfaz(){
+    void interfaz(Token modificador){
         match(TokenType.sw_interface);
         match(TokenType.classID);
         tipoParametricoOpcional();
@@ -79,8 +85,8 @@ public class SyntacticAnalyzer {
     }
     void cuerpoMiembroInterfaz(){
         if(primerosModificador(currentToken)){
-            modificador();
-            metodoConMod();
+            Token modificador = modificador();
+            metodoConMod(modificador);
         }
         else if(primerosMiembroMetVarInterfaz(currentToken)){
             miembroMetVarIntefaz();
@@ -91,9 +97,10 @@ public class SyntacticAnalyzer {
     }
     void miembroMetVarIntefaz(){
         if(primerosTipo(currentToken)){
-            tipo();
+            Type type = tipo();
+            Token nombre = currentToken;
             match(TokenType.metVarID);
-            miembroTail();
+            miembroTail(nombre,type);
         }
         else if(currentToken.getType().equals(TokenType.sw_void)){
             match(TokenType.sw_void);
@@ -106,7 +113,7 @@ public class SyntacticAnalyzer {
     }
 
 
-    void clase(){
+    void clase(Token modificador){
         match(TokenType.sw_class);
         Token nombre = currentToken;
         match(TokenType.classID);
@@ -145,18 +152,25 @@ public class SyntacticAnalyzer {
             //epsilon
         }
     }
-    void modificadorOpcional(){
+    Token modificadorOpcional(){
         if (currentToken.getType().equals(TokenType.sw_final)){
+            Token modificador = currentToken;
             match(TokenType.sw_final);
+            return modificador;
         }
         else if (currentToken.getType().equals(TokenType.sw_abstract)){
+            Token modificador = currentToken;
             match(TokenType.sw_abstract);
+            return modificador;
         }
         else if (currentToken.getType().equals(TokenType.sw_static)){
+            Token modificador = currentToken;
             match(TokenType.sw_static);
+            return modificador;
         }
         else{
             //epsilon
+            return null;
         }
     }
     Token herenciaOpcional(){
@@ -182,27 +196,34 @@ public class SyntacticAnalyzer {
         }
     }
     void visibilidadMiembro(){
-        visibilidadOpcional();
-        miembro();
+        Token visibilidad = visibilidadOpcional();
+        miembro(visibilidad);
     }
-    void visibilidadOpcional(){
+    Token visibilidadOpcional(){
         if(currentToken.getType().equals(TokenType.sw_public)){
+            Token visibilidad = currentToken;
             match(TokenType.sw_public);
+            return visibilidad;
         }
         else if(currentToken.getType().equals(TokenType.sw_private)){
+            Token visibilidad = currentToken;
             match(TokenType.sw_private);
+            return visibilidad;
         }
         else{
             //epsilon
+            //Visibilidad por defecto es private
+            return new Token(TokenType.sw_private,"private",0);
         }
     }
-    void miembro(){
+    void miembro(Token visibilidad){
         if(currentToken.getType().equals(TokenType.classID)){
-          match(TokenType.classID);
-          constructorOMetVar();
+            Token tipoOEncabezado = currentToken;
+            match(TokenType.classID);
+            constructorOMetVar(tipoOEncabezado);
         } else if (primerosModificador(currentToken)){
-            modificador();
-            metodoConMod();
+            Token modificador = modificador();
+            metodoConMod(modificador);
         } else if (primerosMiembroMetVar(currentToken)){
             miembroMetVar();
         }
@@ -210,74 +231,101 @@ public class SyntacticAnalyzer {
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un token: [public-abstract-final-static void] o un tipo valido");
         }
     }
-    void constructorOMetVar(){
+    void constructorOMetVar(Token tipoOEncabezado){
         if(primerosConstructor(currentToken)){
-            constructor();
+            constructor(tipoOEncabezado);
         }
         else if(currentToken.getType().equals(TokenType.metVarID)||currentToken.getType().equals(TokenType.lessOp)){
             tipoParametricoOpcional();
+            Token nombre = currentToken;
             match(TokenType.metVarID);
-            miembroTail();
+            Type tipo = new ReferenceType(tipoOEncabezado);
+            miembroTail(nombre, tipo);
         }
         else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un token: "+TokenType.openBracket+" o un token: "+TokenType.semicolon);
         }
     }
-    void constructor(){
-        argsFormales();
+    void constructor(Token nombre){
+        Constructor nuevoConstructor = new Constructor(nombre);
+        symbolTable.addCurrentConstructor(nuevoConstructor);
+        List<Parameter> paramList = argsFormales();
+        for(Parameter p : paramList){
+            nuevoConstructor.addParameter(p);
+        }
         bloque();
     }
 
-    void argsFormales(){
+    List<Parameter> argsFormales(){
         match(TokenType.openBracket);
-        listaArgsFormalesOpcional();
+        List<Parameter> paramList = listaArgsFormalesOpcional();
         match(TokenType.closeBracket);
-
+        return paramList;
     }
-    void listaArgsFormalesOpcional(){
+    List<Parameter> listaArgsFormalesOpcional(){
         if(primerosListaArgsFormales(currentToken)){
-            listaArgsFormales();
+            return listaArgsFormales();
         }
         else{
             //epsilon
+            return new java.util.ArrayList<>();
         }
     }
-    void listaArgsFormales(){
-        argFormal();
-        listaArgFormales_Recursivo();
+    List<Parameter> listaArgsFormales(){
+        Parameter parametro = argFormal();
+        List<Parameter> head = new java.util.ArrayList<>();
+        head.add(parametro);
+        List<Parameter> tail = listaArgFormales_Recursivo();
+        head.addAll(tail);
+        return head;
     }
-    void listaArgFormales_Recursivo(){
+    List<Parameter> listaArgFormales_Recursivo(){
         if(currentToken.getType().equals(TokenType.comma)){
             match(TokenType.comma);
-            argFormal();
-            listaArgFormales_Recursivo();
+            Parameter parametro = argFormal();
+            List<Parameter> head = new java.util.ArrayList<>();
+            head.add(parametro);
+            List<Parameter> tail = listaArgFormales_Recursivo();
+            head.addAll(tail);
+            return head;
         }
         else{
             //epsilon
+            return new java.util.ArrayList<>();
         }
     }
-    void argFormal(){
-        tipo();
+    Parameter argFormal(){
+        Type argType =  tipo();
+        Token nombre = currentToken;
         match(TokenType.metVarID);
+        return new Parameter(nombre,argType);
     }
-    void tipo(){
+    Type tipo(){
         if(primerosTipoPrimitivo(currentToken)){
-            tipoPrimitivo();
+            return tipoPrimitivo();
         }
         else {
+            Type argType = new ReferenceType(currentToken);
             match(TokenType.classID);
             tipoParametricoOpcional();
+            return argType;
         }
     }
-    void tipoPrimitivo(){
+    PrimitiveType tipoPrimitivo(){
         if(currentToken.getType().equals(TokenType.sw_int)){
+            PrimitiveType tipo = new IntType();
             match(TokenType.sw_int);
+            return tipo;
         }
         else if(currentToken.getType().equals(TokenType.sw_char)){
+            PrimitiveType tipo = new CharType();
             match(TokenType.sw_char);
+            return tipo;
         }
         else if(currentToken.getType().equals(TokenType.sw_boolean)){
+            PrimitiveType tipo = new BooleanType();
             match(TokenType.sw_boolean);
+            return tipo;
         }
         else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear un tipo primitivo" );
@@ -298,36 +346,50 @@ public class SyntacticAnalyzer {
             //epsilon
         }
     }
-    void modificador(){
+    Token modificador(){
         if(currentToken.getType().equals(TokenType.sw_static)){
+            Token modificador = currentToken;
             match(TokenType.sw_static);
+            return modificador;
         }
         else if(currentToken.getType().equals(TokenType.sw_final)){
+            Token modificador = currentToken;
             match(TokenType.sw_final);
+            return modificador;
         }
         else if(currentToken.getType().equals(TokenType.sw_abstract)){
+            Token modificador = currentToken;
             match(TokenType.sw_abstract);
+            return modificador;
         }
         else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un modificador [static-abstract-final]" );
         }
     }
-    void metodoConMod(){
-        tipoMetodo();
+    void metodoConMod(Token modificador){
+        Type tipo = tipoMetodo();
+        Token nombre = currentToken;
         match(TokenType.metVarID);
-        metodoTail();
-    }
-    void tipoMetodo(){
-        if(currentToken.getType().equals(TokenType.sw_void)){
-            match(TokenType.sw_void);
-           }
-        else{
-            tipo();
+        Method nuevoMetodo = new Method(nombre,tipo,modificador);
+        symbolTable.setCurrentMethod(nuevoMetodo);
+        List<Parameter> paramList = metodoTail();
+        for(Parameter p : paramList){
+            nuevoMetodo.addParameter(p);
         }
     }
-    void metodoTail(){
-        argsFormales();
+    Type tipoMetodo(){
+        if(currentToken.getType().equals(TokenType.sw_void)){
+            match(TokenType.sw_void);
+            return new VoidType();
+           }
+        else{
+            return tipo();
+        }
+    }
+    List<Parameter> metodoTail(){
+        List<Parameter> paramList = argsFormales();
         bloqueOpcional();
+        return paramList;
     }
     void bloqueOpcional(){
         if(primerosBloque(currentToken)){
@@ -341,9 +403,10 @@ public class SyntacticAnalyzer {
     }
     void miembroMetVar(){
         if(primerosTipoPrimitivo(currentToken)){
-            tipoPrimitivo();
+            Type type = tipoPrimitivo();
+            Token nombre = currentToken;
             match(TokenType.metVarID);
-            miembroTail();
+            miembroTail(nombre, type);
         }
         else if(currentToken.getType().equals(TokenType.sw_void)){
             match(TokenType.sw_void);
@@ -354,11 +417,18 @@ public class SyntacticAnalyzer {
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un  tipo o un token: "+TokenType.sw_void);
         }
     }
-    void miembroTail(){
+    void miembroTail(Token nombre, Type tipo){
         if(primerosMetodoTail(currentToken)){
-            metodoTail();
+            Method nuevoMetodo = new Method(nombre,tipo,null);
+            List<Parameter> paramList = metodoTail();
+            symbolTable.setCurrentMethod(nuevoMetodo);
+            for(Parameter p : paramList){
+                nuevoMetodo.addParameter(p);
+            }
         }
         else if(currentToken.getType().equals(TokenType.semicolon) || primerosAtributoTail(currentToken)){
+            Attribute nuevoAtributo = new Attribute(nombre,tipo,null);
+            symbolTable.setCurrentAttribute(nuevoAtributo);
             atributoTail();
             match(TokenType.semicolon);
         }

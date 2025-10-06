@@ -47,17 +47,17 @@ public class Method {
     public Token getModifier() {
         return modifier;
     }
-    public void estaBienDeclarado(){
-        if(!returnType.isPrimitive() && (symbolTable.getClass(returnType.getName())==null)){
-            throw new SemanticException("El metodo fue declarado como tipo de clase inexistente. ",returnType.getName(), returnType.getLine());
+    public void estaBienDeclarado() {
+        if (!returnType.isPrimitive() && (symbolTable.getClass(returnType.getName()) == null)) {
+            throw new SemanticException("El metodo fue declarado como tipo de clase inexistente. ", returnType.getName(), returnType.getLine());
         }
-        for (Parameter param : paramList) {
-            param.estaBienDeclarado();
+        if(!paramList.isEmpty()) {
+            for (Parameter param : paramList) {
+                param.estaBienDeclarado();
+            }
         }
-    }
-
-    public void consolidar(){
 
     }
-
 }
+
+

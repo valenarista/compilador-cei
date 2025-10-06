@@ -7,7 +7,8 @@ import semantic.declarable.Constructor;
 import semantic.declarable.Method;
 
 import java.util.HashMap;
-import java.util.HashSet;
+
+import static compiler.Main.symbolTable;
 
 public class ConcreteClass implements EntityClass {
     Token idToken;
@@ -24,6 +25,9 @@ public class ConcreteClass implements EntityClass {
     }
     public void estaBienDeclarado(){
 
+        checkInheritance();
+        checkCircularInheritance(herencia);
+
         for(Attribute a : attributes.values()){
             a.estaBienDeclarado();
         }
@@ -37,6 +41,11 @@ public class ConcreteClass implements EntityClass {
             this.constructor = new Constructor(this.idToken);
         }
 
+    }
+    public void checkInheritance(){
+        if(herencia!=null && symbolTable.getClass(herencia.getLexeme())==null){
+            throw new SemanticException("La clase padre "+herencia.getLexeme()+" no existe.",herencia.getLexeme(), herencia.getLineNumber());
+        }
     }
     public void consolidar(){
     }
@@ -70,5 +79,24 @@ public class ConcreteClass implements EntityClass {
     }
     public void addInheritance(Token herencia) {
         this.herencia = herencia;
+        //TODO PREGUNTAR SI SE CONTROLA EN EL AGREGADO O EN ESTA BIEN DECLARADO
     }
+    private void checkCircularInheritance(Token herencia) {
+        String currentClassName = this.getName();
+        Token current = herencia;
+        while (current != null) {
+            String parentName = current.getLexeme();
+            if (parentName.equals(currentClassName)) {
+                throw new SemanticException("Herencia circular detectada en la clase " + currentClassName, parentName, current.getLineNumber());
+            }
+            ConcreteClass parentClass = (ConcreteClass) symbolTable.getClass(parentName);
+            if (parentClass != null) {
+                current = parentClass.herencia;
+            } else {
+                break;
+            }
+        }
+    }
+
+
 }

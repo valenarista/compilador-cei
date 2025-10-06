@@ -1,6 +1,7 @@
 package compiler;
 
 import exceptions.LexicalException;
+import exceptions.SemanticException;
 import exceptions.SyntacticException;
 import lexical.LexicalAnalyzerMultiDetect;
 import semantic.SymbolTable;
@@ -12,9 +13,8 @@ import java.io.IOException;
 
 
 public class Main {
-    public static SymbolTable symbolTable = new SymbolTable();
+    public static SymbolTable symbolTable = null;
     public static void main(String[] args) {
-
         String filePath;
         SourceManager sourceManager = new SourceManagerCharImpl();
         LexicalAnalyzerMultiDetect lexicalAnalyzer = null;
@@ -22,12 +22,17 @@ public class Main {
 
         if (args.length > 0) {
             try{
+                //vaciar tabla de simbolos
+                symbolTable = new SymbolTable();
+                symbolTable.createPredefinedClasses();
+
                 filePath = args[0];
                 sourceManager.open(filePath);
                 lexicalAnalyzer = new LexicalAnalyzerMultiDetect(sourceManager);
                 syntacticAnalyzer = new SyntacticAnalyzer(lexicalAnalyzer);
-
                 syntacticAnalyzer.inicial();
+
+                symbolTable.chequeoDeclaraciones();
 
                 if (!lexicalAnalyzer.getErrors().isEmpty()) {
                     for(LexicalException error : lexicalAnalyzer.getErrors()){
@@ -39,9 +44,7 @@ public class Main {
 
 
 
-
-
-            } catch (SyntacticException e) {
+            } catch (SemanticException | SyntacticException e) {
                 if(lexicalAnalyzer!=null && !lexicalAnalyzer.getErrors().isEmpty()){
                     for(LexicalException error : lexicalAnalyzer.getErrors()){
                         System.out.println(error.getDetailedErrorMessage());

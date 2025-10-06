@@ -10,55 +10,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d10e087-5673-4518-949a-be8557448ba8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/compiler/MainSintactico.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/declarable/Method.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/types/BooleanType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/types/CharType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/types/IntType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/types/ReferenceType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/types/Type.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/types/VoidType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError06.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError07.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError08.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError09.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError10.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semICorrecto06.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErrores.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErrores.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErroresLexicos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErroresLexicos.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErroresSintacticos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErroresSintacticos.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErrores.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErrores.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErroresLexicos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErroresLexicos.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErroresSintacticos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErroresSintacticos.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/exceptions/SemanticException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/exceptions/SemanticException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Attribute.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ConcreteClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Constructor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/EntityClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Interface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Method.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Parameter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/PrimitiveType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ReferenceType.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/SymbolTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/Type.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Method.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Method.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Parameter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Parameter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/ConcreteClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/ConcreteClass.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresSintacticos/sintError33.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErroresSintacticos/sintError33.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/compiler/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErrores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErrores.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErroresLexicos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErroresLexicos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErroresSintacticos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErroresSintacticos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErrores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErrores.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErroresLexicos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErroresLexicos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErroresSintacticos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErroresSintacticos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/exceptions/SemanticException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exceptions/SemanticException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/Attribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Attribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ConcreteClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/ConcreteClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/Constructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Constructor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/EntityClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/EntityClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/Interface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/Method.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/Parameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Parameter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/PrimitiveType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/types/PrimitiveType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ReferenceType.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/SymbolTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/Type.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Method.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Method.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Parameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Parameter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/entity/ConcreteClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/ConcreteClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,47 +77,47 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JAR Application.compilador-cei.jar (1).executor&quot;: &quot;Run&quot;,
-    &quot;JAR Application.compilador-cei.jar.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit..* and 2 more.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TesterDeCasosConErrores.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TesterDeCasosConErroresLexicos.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TesterDeCasosConErroresSintacticos and 1 more.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TesterDeCasosSinErrores.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TesterDeCasosSinErroresLexicos.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.conErrores11.* and 2 more.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.sinErrores.* and 1 more.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.sinErrores.* and 2 more.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.sinErrores.* and 3 more.executor&quot;: &quot;Coverage&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/valua/OneDrive/Documentos/compilador-cei/resources/sinErrores11&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Mappings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JAR Application.compilador-cei.jar (1).executor": "Run",
+    "JAR Application.compilador-cei.jar.executor": "Run",
+    "JUnit..* and 2 more.executor": "Run",
+    "JUnit.TesterDeCasosConErrores.executor": "Run",
+    "JUnit.TesterDeCasosConErroresLexicos.executor": "Run",
+    "JUnit.TesterDeCasosConErroresSintacticos and 1 more.executor": "Run",
+    "JUnit.TesterDeCasosSinErrores.executor": "Run",
+    "JUnit.TesterDeCasosSinErroresLexicos.executor": "Run",
+    "JUnit.conErrores11.* and 2 more.executor": "Run",
+    "JUnit.sinErrores.* and 1 more.executor": "Coverage",
+    "JUnit.sinErrores.* and 2 more.executor": "Coverage",
+    "JUnit.sinErrores.* and 3 more.executor": "Coverage",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/valua/OneDrive/Documentos/compilador-cei/resources/conErrores",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="semantic" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\sinErrores11" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\conErrores" />
-      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\src" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\sinErrores" />
+      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\sinErrores11" />
+      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\src" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -157,7 +133,22 @@
       <recent name="lexical" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TesterDeCasosConErroresSintacticos and 1 more">
+  <component name="RunManager" selected="JUnit.TesterDeCasosConErrores">
+    <configuration name="TesterDeCasosConErrores" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="compilador-cei" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="compiler.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="compiler" />
+      <option name="MAIN_CLASS_NAME" value="compiler.TesterDeCasosConErrores" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TesterDeCasosConErroresSintacticos and 1 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="compilador-cei" />
       <option name="TEST_OBJECT" value="pattern" />
@@ -169,7 +160,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TesterDeCasosConErroresSintacticos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TesterDeCasosSinErrores" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="compilador-cei" />
       <extension name="coverage">
         <pattern>
@@ -178,22 +169,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="compiler" />
-      <option name="MAIN_CLASS_NAME" value="compiler.TesterDeCasosConErroresSintacticos" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TesterDeCasosSinErroresSintacticos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="compilador-cei" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="compiler.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="compiler" />
-      <option name="MAIN_CLASS_NAME" value="compiler.TesterDeCasosSinErroresSintacticos" />
+      <option name="MAIN_CLASS_NAME" value="compiler.TesterDeCasosSinErrores" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -217,11 +193,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TesterDeCasosConErrores" />
+        <item itemvalue="JUnit.TesterDeCasosSinErrores" />
         <item itemvalue="JUnit.TesterDeCasosConErroresSintacticos and 1 more" />
         <item itemvalue="JAR Application.compilador-cei.jar" />
         <item itemvalue="JUnit..* and 2 more" />
-        <item itemvalue="JUnit.TesterDeCasosConErroresSintacticos" />
-        <item itemvalue="JUnit.TesterDeCasosSinErroresSintacticos" />
       </list>
     </recent_temporary>
   </component>
@@ -234,17 +210,6 @@
       <updated>1755968555298</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/compiler/TesterDeCasosSinErrores.java</url>
-          <line>42</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/compilador_cei$TesterDeCasosConErrores.ic" NAME="TesterDeCasosConErrores Coverage Results" MODIFIED="1756429876687" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
