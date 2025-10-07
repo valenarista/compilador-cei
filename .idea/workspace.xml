@@ -10,31 +10,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d10e087-5673-4518-949a-be8557448ba8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError06.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError07.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError08.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError09.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError10.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semICorrecto06.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError11.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError12.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError13.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError14.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError15.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError16.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError17.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError18.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError19.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIError20.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semICorrecto07.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErrores.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosConErrores.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErrores.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/compiler/TesterDeCasosSinErrores.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/exceptions/SemanticException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/exceptions/SemanticException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError05.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError05.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/SymbolTable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Attribute.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Attribute.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Constructor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Constructor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Method.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Method.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Parameter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Parameter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/ConcreteClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/ConcreteClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/EntityClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/EntityClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/Interface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/Interface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto01.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto01.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErrores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosConErrores.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErrores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/TesterDeCasosSinErrores.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/exceptions/SemanticException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exceptions/SemanticException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError05.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError05.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto01.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semICorrecto01.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/SymbolTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Attribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Attribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Constructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Constructor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Method.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Method.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Parameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Parameter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/entity/ConcreteClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/ConcreteClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/entity/EntityClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/EntityClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/entity/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/Interface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -133,7 +140,7 @@
       <recent name="lexical" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TesterDeCasosConErrores">
+  <component name="RunManager" selected="JUnit.TesterDeCasosSinErrores">
     <configuration name="TesterDeCasosConErrores" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="compilador-cei" />
       <extension name="coverage">
@@ -193,8 +200,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TesterDeCasosConErrores" />
         <item itemvalue="JUnit.TesterDeCasosSinErrores" />
+        <item itemvalue="JUnit.TesterDeCasosConErrores" />
         <item itemvalue="JUnit.TesterDeCasosConErroresSintacticos and 1 more" />
         <item itemvalue="JAR Application.compilador-cei.jar" />
         <item itemvalue="JUnit..* and 2 more" />
@@ -210,6 +217,17 @@
       <updated>1755968555298</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/compilador_cei$TesterDeCasosConErrores.ic" NAME="TesterDeCasosConErrores Coverage Results" MODIFIED="1756429876687" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">

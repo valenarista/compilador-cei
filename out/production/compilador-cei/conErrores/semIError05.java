@@ -1,8 +1,8 @@
-///[Error:m1|4]
+///[Error:m1|5]
 //Tambien podria ser el token abstract
 
 class A{
-    abstract m1(){}
+    abstract void m1(){}
 }
 
 

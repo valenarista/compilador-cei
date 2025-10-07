@@ -9,17 +9,25 @@ import java.util.List;
 
 public class Constructor {
     private Token idToken;
+    private Token visibility;
     private HashMap<String,Parameter> parameters;
     private List<Parameter> paramList;
 
-    public Constructor(Token idToken){
+    public Constructor(Token idToken, Token visibility) {
         this.idToken = idToken;
+        this.visibility = visibility;
         parameters = new HashMap<>();
         paramList = new java.util.ArrayList<>();
     }
 
     public String getName(){
         return idToken.getLexeme();
+    }
+    public Token getVisibility() {
+        return visibility;
+    }
+    public List<Parameter> getParamList() {
+        return paramList;
     }
     public int getLine(){
         return idToken.getLineNumber();

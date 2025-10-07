@@ -2,6 +2,7 @@ package semantic.declarable;
 
 import exceptions.SemanticException;
 import lexical.Token;
+import lexical.TokenType;
 import semantic.types.Type;
 
 import java.util.HashMap;
@@ -15,11 +16,21 @@ public class Method {
     private Token idToken;
     private Type returnType;
     private Token modifier;
+    private Token visibility;
 
+    public Method(Token idToken, Type returnType, Token modifier, Token visibility) {
+        this.visibility = visibility;
+        this.returnType = returnType;
+        this.idToken = idToken;
+        this.modifier = modifier;
+        parameters = new HashMap<>();
+        paramList = new java.util.ArrayList<>();
+    }
     public Method(Token idToken, Type returnType, Token modifier) {
         this.returnType = returnType;
         this.idToken = idToken;
         this.modifier = modifier;
+        this.visibility = new Token(TokenType.sw_public,"public",idToken.getLineNumber());
         parameters = new HashMap<>();
         paramList = new java.util.ArrayList<>();
     }

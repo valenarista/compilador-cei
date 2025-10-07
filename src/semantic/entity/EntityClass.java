@@ -11,6 +11,10 @@ public interface EntityClass {
 
     String getName();
     int getLine();
+    Token getModificador();
+    boolean isAbstract();
+    boolean isStatic();
+    boolean isFinal();
 
     void addAttribute(Attribute attribute);
     void addMethod(Method method);

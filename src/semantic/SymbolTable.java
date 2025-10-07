@@ -28,19 +28,19 @@ public class SymbolTable {
 
     public void createPredefinedClasses() {
         //Object class
-        EntityClass objectClass = new ConcreteClass(new Token(TokenType.classID,"Object",0));
+        EntityClass objectClass = new ConcreteClass(new Token(TokenType.classID,"Object",0),null);
         Method debugPrint = new Method(new Token(TokenType.metVarID,"debugPrint",0),new VoidType(),new Token(TokenType.sw_static,"static",0));
         debugPrint.addParameter(new Parameter(new Token(TokenType.metVarID,"i",0),new IntType()));
         objectClass.addMethod(debugPrint);
         clases.put("Object",objectClass);
 
         //String class
-        EntityClass stringClass = new ConcreteClass(new Token(TokenType.classID,"String",0));
+        EntityClass stringClass = new ConcreteClass(new Token(TokenType.classID,"String",0),null);
         stringClass.addInheritance(new Token(TokenType.classID,"Object",0));
         clases.put("String",stringClass);
 
         //System class
-        EntityClass systemClass = new ConcreteClass(new Token(TokenType.classID,"System",0));
+        EntityClass systemClass = new ConcreteClass(new Token(TokenType.classID,"System",0),null);
         systemClass.addInheritance(new Token(TokenType.classID,"Object",0));
         clases.put("System",systemClass);
 
@@ -89,7 +89,7 @@ public class SymbolTable {
 
     public void chequeoDeclaraciones() {
         clases.forEach((name,clase) -> clase.estaBienDeclarado() );
-        //clases.forEach((name,clase) -> clase.consolidar() );
+        clases.forEach((name,clase) -> clase.consolidar() );
     }
 
 
