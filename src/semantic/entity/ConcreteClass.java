@@ -15,6 +15,7 @@ import static compiler.Main.symbolTable;
 public class ConcreteClass implements EntityClass {
     Token idToken;
     Token herencia;
+    Token implementation;
     Token modificador;
     HashMap<String,Attribute> attributes;
     HashMap<String,Method> methods;
@@ -23,6 +24,7 @@ public class ConcreteClass implements EntityClass {
     public ConcreteClass(Token idToken,Token modificador) {
         this.idToken = idToken;
         this.modificador = modificador;
+        this.implementation = null;
         this.attributes = new HashMap<>();
         this.methods = new HashMap<>();
         this.constructor = null;
@@ -30,6 +32,9 @@ public class ConcreteClass implements EntityClass {
     public void estaBienDeclarado(){
         checkInheritance();
         checkCircularInheritance(herencia);
+        if(implementation!=null){
+            checkImplementation();
+        }
 
         for(Attribute a : attributes.values()){
             a.estaBienDeclarado();
@@ -48,11 +53,15 @@ public class ConcreteClass implements EntityClass {
     public void checkInheritance(){
         if(herencia!=null && symbolTable.getClass(herencia.getLexeme())==null){
             throw new SemanticException("La clase padre "+herencia.getLexeme()+" no existe.",herencia.getLexeme(), herencia.getLineNumber());
-
+        }
+        if(herencia!=null && symbolTable.getClass(herencia.getLexeme()).isInterface()){
+            throw new SemanticException("Una clase no puede heredar de una interfaz.",herencia.getLexeme(), herencia.getLineNumber());
         }
         if(herencia!=null && isAbstract() && !(symbolTable.getClass(herencia.getLexeme()).isAbstract())){
-            throw new SemanticException("Una clase concreta no puede heredar de una clase abstracta.",herencia.getLexeme(), herencia.getLineNumber());
+            if(!herencia.getLexeme().equals("Object"))
+                throw new SemanticException("Una clase concreta no puede heredar de una clase abstracta.",herencia.getLexeme(), herencia.getLineNumber());
         }
+
         if(herencia!=null && symbolTable.getClass(herencia.getLexeme()).isStatic())
             throw new SemanticException("Una clase no puede heredar de una clase static.",herencia.getLexeme(), herencia.getLineNumber());
         if(herencia!=null && symbolTable.getClass(herencia.getLexeme()).isFinal())
@@ -98,7 +107,7 @@ public class ConcreteClass implements EntityClass {
         if(attributes.get(attribute.getName())==null){
             attributes.put(attribute.getName(),attribute);
         } else if (!attributes.get(attribute.getName()).getType().equals(attribute.getType())) {
-            throw new SemanticException("El atributo "+attribute.getName()+" ya fue declarado en la clase "+this.getName(),attribute.getName() ,attributes.get(attribute.getName()).getLine());
+            throw new SemanticException("No se puede heredar el atributo "+attribute.getName()+" porque ya fue declarado en la clase "+this.getName(),attribute.getName() ,attributes.get(attribute.getName()).getLine());
         }
     }
     private void inheriteMethod(Method method) {
@@ -119,7 +128,7 @@ public class ConcreteClass implements EntityClass {
                 }
             }
             if(method.getModifier()!=null)
-                checkMethodModifier(method);
+                checkMethodModifier(method, existingMethod);
         }
     }
     private void checkAbstractModifier(Method method) {
@@ -127,14 +136,22 @@ public class ConcreteClass implements EntityClass {
             throw new SemanticException("El metodo " + method.getName() + " no puede ser heredado en la clase " + this.getName() + " por ser abstracto y la clase concreta.", method.getName(), method.getLine());
         }
     }
-    private void checkMethodModifier(Method method) {
+    private void checkMethodModifier(Method method, Method existingMethod) {
         if(method.getModifier().getType().equals(TokenType.sw_final)||method.getModifier().getType().equals(TokenType.sw_static)) {
             throw new SemanticException("El metodo " + method.getName() + " no puede ser sobreescrito en la clase " + this.getName() + " por ser final o static.", methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
         } else if (method.getModifier().getType().equals(TokenType.sw_abstract) && (this.modificador==null || !(this.modificador.getType().equals(TokenType.sw_abstract)))) {
-            //TODO HACE FALTA ESTE CASO?
-            throw new SemanticException("El metodo " + method.getName() + " no puede ser heredado en la clase " + this.getName() + " por ser abstracto y la clase concreta.", methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
+            if(existingMethod.getModifier()!=null && existingMethod.getModifier().getType().equals(TokenType.sw_abstract))
+                throw new SemanticException("El metodo " + method.getName() + " tiene que ser implementado en la clase " + this.getName() + " sin ser abstracto.", methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
         }
     }
+    public boolean isClass() {
+        return true;
+    }
+
+    public boolean isInterface() {
+        return false;
+    }
+
     public String getName() {
         return idToken.getLexeme();
     }
@@ -150,6 +167,10 @@ public class ConcreteClass implements EntityClass {
     public HashMap<String, Method> getMethods() {
         return methods;
     }
+    public Token getHerencia() {
+        return herencia;
+    }
+
     public void addAttribute(Attribute attribute) {
         if(attributes.get(attribute.getName())==null){
             attributes.put(attribute.getName(),attribute);
@@ -173,6 +194,10 @@ public class ConcreteClass implements EntityClass {
         if(this.modificador!=null && this.modificador.getType().equals(TokenType.sw_abstract)){
             throw new SemanticException("Una clase abstracta no puede tener constructor.",constructor.getName() ,constructor.getLine());
         }
+
+        if(!constructor.getName().equals(getName()))
+            throw new SemanticException("El constructor debe tener el mismo nombre que la clase "+this.getName(),constructor.getName() ,constructor.getLine());
+
         if(this.constructor==null){
             this.constructor = constructor;
         } else {
@@ -181,8 +206,46 @@ public class ConcreteClass implements EntityClass {
     }
     public void addInheritance(Token herencia) {
         this.herencia = herencia;
-        //TODO PREGUNTAR SI SE CONTROLA EN EL AGREGADO O EN ESTA BIEN DECLARADO
     }
+    public void addImplementation(Token implementation) {
+        this.implementation = implementation;
+    }
+    private void checkImplementation(){
+        if(symbolTable.getClass(implementation.getLexeme())==null){
+            throw new SemanticException("La interfaz "+implementation.getLexeme()+" no existe.",implementation.getLexeme(), implementation.getLineNumber());
+        }
+        if(!symbolTable.getClass(implementation.getLexeme()).isInterface()){
+            throw new SemanticException("Una clase concreta no puede implementar una clase.",implementation.getLexeme(), implementation.getLineNumber());
+        }
+
+        //TODO CONSULTAR FINAL Y STATIC
+        if(symbolTable.getClass(implementation.getLexeme()).isFinal())
+            throw new SemanticException("No se puede implementar una interfaz final.",implementation.getLexeme(), implementation.getLineNumber());
+        if(symbolTable.getClass(implementation.getLexeme()).isStatic())
+            throw new SemanticException("No se puede implementar una interfaz static.",implementation.getLexeme(), implementation.getLineNumber());
+
+
+        Interface interfaceToImplement = (Interface) symbolTable.getClass(implementation.getLexeme());
+        for(Method m : interfaceToImplement.getMethods().values()) {
+            if (methods.get(m.getName()) == null) {
+                throw new SemanticException("La clase concreta " + this.getName() + " debe implementar el metodo " + m.getName() + " de la interfaz " + interfaceToImplement.getName(), m.getName(), m.getLine());
+            } else {
+                Method classMethod = methods.get(m.getName());
+                if (!(classMethod.getReturnType().getName().equals(m.getReturnType().getName())) || (classMethod.getParamList().size() != m.getParamList().size())) {
+                    throw new SemanticException("El metodo " + m.getName() + " de la clase concreta " + this.getName() + " no coincide con la firma del metodo de la interfaz " + interfaceToImplement.getName(), m.getName(), m.getLine());
+                }
+                for (int i = 0; i < classMethod.getParamList().size(); i++) {
+                    Parameter classParam = classMethod.getParamList().get(i);
+                    Parameter interfaceParam = m.getParamList().get(i);
+                    if (!(classParam.getType().getName().equals(interfaceParam.getType().getName()))) {
+                        throw new SemanticException("El metodo " + m.getName() + " de la clase concreta " + this.getName() + " no coincide con la firma del metodo de la interfaz " + interfaceToImplement.getName(), m.getName(), m.getLine());
+                    }
+                }
+
+            }
+        }
+    }
+
     private void checkCircularInheritance(Token herencia) {
         String currentClassName = this.getName();
         Token current = herencia;
@@ -191,9 +254,9 @@ public class ConcreteClass implements EntityClass {
             if (parentName.equals(currentClassName)) {
                 throw new SemanticException("Herencia circular detectada en la clase " + currentClassName, parentName, current.getLineNumber());
             }
-            ConcreteClass parentClass = (ConcreteClass) symbolTable.getClass(parentName);
+            EntityClass parentClass = symbolTable.getClass(parentName);
             if (parentClass != null) {
-                current = parentClass.herencia;
+                current = parentClass.getHerencia();
             } else {
                 break;
             }

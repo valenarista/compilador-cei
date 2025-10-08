@@ -67,11 +67,25 @@ public class SyntacticAnalyzer {
         EntityClass nuevaInterfaz = new Interface(nombre,modificador);
         symbolTable.setCurrentClass(nuevaInterfaz.getName(),nuevaInterfaz);
         tipoParametricoOpcional();
-        Token herencia = herenciaOpcional();
+        Token herencia = herenciaOpcionalInterfaz();
         nuevaInterfaz.addInheritance(herencia);
         match(TokenType.openCurly);
         listaMiembrosInterfaz();
         match(TokenType.closeCurly);
+        symbolTable.addCurrentClass();
+    }
+    Token herenciaOpcionalInterfaz(){
+        if (currentToken.getType().equals(TokenType.sw_extends)){
+            match(TokenType.sw_extends);
+            Token nombre = currentToken;
+            match(TokenType.classID);
+            tipoParametricoOpcional();
+            return nombre;
+        }
+        else{
+            //epsilon
+            return null;
+        }
     }
 
     void listaMiembrosInterfaz(){
@@ -130,29 +144,32 @@ public class SyntacticAnalyzer {
         match(TokenType.sw_class);
         Token nombre = currentToken;
         match(TokenType.classID);
-        EntityClass nuevaClase = new ConcreteClass(nombre,modificador);
+        ConcreteClass nuevaClase = new ConcreteClass(nombre,modificador);
         symbolTable.setCurrentClass(nuevaClase.getName(),nuevaClase);
         tipoParametricoOpcional();
-        Token nombreAncestro = herenciaImplementacionOpcional();
-        symbolTable.claseActual.addInheritance(nombreAncestro);
+        Token herencia = herenciaImplementacionOpcional(nuevaClase);
+        nuevaClase.addInheritance(herencia);
         match(TokenType.openCurly);
         listaMiembros();
         match(TokenType.closeCurly);
         symbolTable.addCurrentClass();
     }
 
-    Token herenciaImplementacionOpcional(){
-        if(currentToken.getType().equals(TokenType.sw_extends))
+    Token herenciaImplementacionOpcional(ConcreteClass clase){
+        if(currentToken.getType().equals(TokenType.sw_extends)){
             return herenciaOpcional();
+        }
         else if(currentToken.getType().equals(TokenType.sw_implements)){
             match(TokenType.sw_implements);
+            Token nombre = currentToken;
             match(TokenType.classID);
+            clase.addImplementation(nombre);
             tipoParametricoOpcional();
             return new Token(TokenType.classID,"Object",0);
         }
         else{
             //epsilon
-            return null;
+            return new Token(TokenType.classID,"Object",0);
         }
     }
     void tipoParametricoOpcional(){

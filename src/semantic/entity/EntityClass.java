@@ -12,9 +12,12 @@ public interface EntityClass {
     String getName();
     int getLine();
     Token getModificador();
+    Token getHerencia();
     boolean isAbstract();
     boolean isStatic();
     boolean isFinal();
+    boolean isClass();
+    boolean isInterface();
 
     void addAttribute(Attribute attribute);
     void addMethod(Method method);
