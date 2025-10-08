@@ -20,6 +20,7 @@ public class ConcreteClass implements EntityClass {
     HashMap<String,Attribute> attributes;
     HashMap<String,Method> methods;
     Constructor constructor;
+    boolean consolidated;
 
     public ConcreteClass(Token idToken,Token modificador) {
         this.idToken = idToken;
@@ -28,13 +29,13 @@ public class ConcreteClass implements EntityClass {
         this.attributes = new HashMap<>();
         this.methods = new HashMap<>();
         this.constructor = null;
+        consolidated = false;
     }
+    public boolean consolidated(){
+        return consolidated;
+    }
+
     public void estaBienDeclarado(){
-        checkInheritance();
-        checkCircularInheritance(herencia);
-        if(implementation!=null){
-            checkImplementation();
-        }
 
         for(Attribute a : attributes.values()){
             a.estaBienDeclarado();
@@ -49,6 +50,11 @@ public class ConcreteClass implements EntityClass {
             this.constructor = new Constructor(this.idToken,new Token(TokenType.sw_public,"public",this.idToken.getLineNumber()));
         }
 
+        checkInheritance();
+        checkCircularInheritance(herencia);
+        if(implementation!=null){
+            checkImplementation();
+        }
     }
     public void checkInheritance(){
         if(herencia!=null && symbolTable.getClass(herencia.getLexeme())==null){
@@ -82,8 +88,15 @@ public class ConcreteClass implements EntityClass {
             return this.modificador.getType().equals(TokenType.sw_static);
         return false;
     }
+    private boolean imObject(){
+        return getName().equals("Object");
+    }
 
     public void consolidar(){
+        if(imObject()) consolidated = true;
+        if(consolidated)
+            return ;
+        consolidatedParent();
         if(herencia!=null){
             ConcreteClass parentClass = (ConcreteClass) symbolTable.getClass(herencia.getLexeme());
             if(parentClass != null){
@@ -101,6 +114,42 @@ public class ConcreteClass implements EntityClass {
                 }
             }
         }
+        if(implementation!=null){
+            Interface toImplement = (Interface) symbolTable.getClass(implementation.getLexeme());
+            for(Attribute attribute : toImplement.getAttributes().values()){
+                inheriteAttribute(attribute);
+            }
+            for(Method method : toImplement.getMethods().values()){
+                implementMethod(method);
+            }
+        }
+        consolidated = true;
+    }
+    private void consolidatedParent(){
+        if(herencia!=null){
+            symbolTable.getClass(herencia.getLexeme()).consolidar();
+        }
+        if(implementation!=null){
+            symbolTable.getClass(implementation.getLexeme()).consolidar();
+        }
+    }
+    private void implementMethod(Method method){
+        if(methods.get(method.getName())==null){
+            throw new SemanticException("El metodo "+method.getName()+"no esta siendo implementado por la clase "+getName(),method.getName(), method.getLine());
+        }
+        //TODO CONSULTA POR LOS MODIFICADORES
+        Method implementedMethod = methods.get(method.getName());
+        if (!(implementedMethod.getReturnType().getName().equals(method.getReturnType().getName())) || (implementedMethod.getParamList().size() != method.getParamList().size())) {
+            throw new SemanticException("El metodo "+method.getName()+" esta siendo implementado en la clase "+this.getName()+" pero con una firma diferente.",implementedMethod.getName() ,implementedMethod.getLine());
+        }
+        for (int i = 0; i < implementedMethod.getParamList().size(); i++) {
+            Parameter existingParam = implementedMethod.getParamList().get(i);
+            Parameter newParam = method.getParamList().get(i);
+            if (!(existingParam.getType().getName().equals(newParam.getType().getName()))) {
+                throw new SemanticException("El metodo "+method.getName()+" esta siendo implementado en la clase "+this.getName()+" pero con una firma diferente.",implementedMethod.getName() ,implementedMethod.getLine());
+            }
+        }
+
     }
     private void inheriteAttribute(Attribute attribute) {
         //TODO CAMBIAR PARA PODER SOBREESCRIBIR ATRIBUTOS
@@ -109,6 +158,7 @@ public class ConcreteClass implements EntityClass {
         } else if (!attributes.get(attribute.getName()).getType().equals(attribute.getType())) {
             throw new SemanticException("No se puede heredar el atributo "+attribute.getName()+" porque ya fue declarado en la clase "+this.getName(),attribute.getName() ,attributes.get(attribute.getName()).getLine());
         }
+
     }
     private void inheriteMethod(Method method) {
         if(methods.get(method.getName())==null){
@@ -232,13 +282,13 @@ public class ConcreteClass implements EntityClass {
             } else {
                 Method classMethod = methods.get(m.getName());
                 if (!(classMethod.getReturnType().getName().equals(m.getReturnType().getName())) || (classMethod.getParamList().size() != m.getParamList().size())) {
-                    throw new SemanticException("El metodo " + m.getName() + " de la clase concreta " + this.getName() + " no coincide con la firma del metodo de la interfaz " + interfaceToImplement.getName(), m.getName(), m.getLine());
+                    throw new SemanticException("El metodo " + m.getName() + " de la clase concreta " + this.getName() + " no coincide con la firma del metodo de la interfaz " + interfaceToImplement.getName(), m.getName(), classMethod.getLine());
                 }
                 for (int i = 0; i < classMethod.getParamList().size(); i++) {
                     Parameter classParam = classMethod.getParamList().get(i);
                     Parameter interfaceParam = m.getParamList().get(i);
                     if (!(classParam.getType().getName().equals(interfaceParam.getType().getName()))) {
-                        throw new SemanticException("El metodo " + m.getName() + " de la clase concreta " + this.getName() + " no coincide con la firma del metodo de la interfaz " + interfaceToImplement.getName(), m.getName(), m.getLine());
+                        throw new SemanticException("El metodo " + m.getName() + " de la clase concreta " + this.getName() + " no coincide con la firma del metodo de la interfaz " + interfaceToImplement.getName(), m.getName(), classMethod.getLine());
                     }
                 }
 

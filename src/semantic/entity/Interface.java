@@ -16,6 +16,7 @@ public class Interface implements EntityClass {
     private Token modificador;
     HashMap<String,Method> methods;
     HashMap<String,Attribute> attributes;
+    private boolean consolidated;
 
     public Interface(Token idToken,Token modificador) {
         this.idToken = idToken;
@@ -24,10 +25,15 @@ public class Interface implements EntityClass {
         this.attributes = new HashMap<>();
     }
     public void estaBienDeclarado(){
-        checkInheritance();
-        checkCircularInheritance(herencia);
+
+
+    }
+    public boolean consolidated(){
+        return consolidated;
     }
     public void consolidar(){
+        checkInheritance();
+        checkCircularInheritance(herencia);
     }
     public boolean isClass() {
         return false;
@@ -47,6 +53,9 @@ public class Interface implements EntityClass {
 
     public int getLine() {
         return idToken.getLineNumber();
+    }
+    public HashMap<String,Attribute> getAttributes(){
+        return attributes;
     }
     public void addMethod(Method method) {
         methods.put(method.getName(),method);
@@ -91,7 +100,7 @@ public class Interface implements EntityClass {
         if(attributes.get(attribute.getName())==null){
             attributes.put(attribute.getName(),attribute);
         } else {
-            throw new SemanticException("El atributo "+attribute.getName()+" ya fue declarado en la clase "+this.getName(),attribute.getName() ,attribute.getLine());
+            throw new SemanticException("El atributo "+attribute.getName()+" ya fue declarado en la interface "+this.getName(),attribute.getName() ,attribute.getLine());
         }
     }
     public void addConstructor(Constructor constructor) {

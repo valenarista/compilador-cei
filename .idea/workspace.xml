@@ -10,60 +10,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d10e087-5673-4518-949a-be8557448ba8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError21.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError22.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError23.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError24.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError25.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError26.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError27.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError28.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError29.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError30.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError31.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError32.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError33.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError34.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError35.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError36.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError37.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError38.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError39.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError7.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semICorrecto08.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto09.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto10.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto11.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto12.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto13.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto14.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto15.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto16.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto17.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto18.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto19.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto20.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto21.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto22.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto23.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto24.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto25.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto26.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto27.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto28.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto29.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError40.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError42.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError43.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semlError44.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto30.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semlError7.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/ConcreteClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/ConcreteClass.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/EntityClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/EntityClass.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/Interface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/Interface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/conErrores/semlError7.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError41.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/entity/ConcreteClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/ConcreteClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/entity/EntityClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/EntityClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/entity/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/Interface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +91,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/valua/OneDrive/Documentos/compilador-cei/resources/sinErrores",
+    "last_opened_file_path": "C:/Users/valua/OneDrive/Documentos/compilador-cei/resources/conErrores",
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -142,8 +103,8 @@
       <recent name="semantic" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\sinErrores" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\conErrores" />
+      <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\sinErrores" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources\sinErrores11" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\src" />
       <recent name="C:\Users\valua\OneDrive\Documentos\compilador-cei\resources" />
@@ -161,7 +122,7 @@
       <recent name="lexical" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TesterDeCasosSinErrores">
+  <component name="RunManager" selected="JUnit.TesterDeCasosConErrores">
     <configuration name="TesterDeCasosConErrores" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="compilador-cei" />
       <extension name="coverage">
@@ -221,8 +182,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TesterDeCasosSinErrores" />
         <item itemvalue="JUnit.TesterDeCasosConErrores" />
+        <item itemvalue="JUnit.TesterDeCasosSinErrores" />
         <item itemvalue="JUnit.TesterDeCasosConErroresSintacticos and 1 more" />
         <item itemvalue="JAR Application.compilador-cei.jar" />
         <item itemvalue="JUnit..* and 2 more" />

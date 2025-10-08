@@ -18,6 +18,7 @@ public interface EntityClass {
     boolean isFinal();
     boolean isClass();
     boolean isInterface();
+    boolean consolidated();
 
     void addAttribute(Attribute attribute);
     void addMethod(Method method);
