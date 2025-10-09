@@ -36,7 +36,7 @@ public class Constructor {
             parameters.put(parameter.getName(), parameter);
             paramList.add(parameter);
         } else {
-            throw new SemanticException("Ya fue declarado un parametro con el nombre "+ parameter.getName()+" en el constructor "+this.getName(),parameter.getName(), parameter.getLine());
+            throw new SemanticException("Error semantico en linea "+parameter.getLine()+" Ya fue declarado un parametro con el nombre "+ parameter.getName()+" en el constructor "+this.getName(),parameter.getName(), parameter.getLine());
         }
     }
     public void estaBienDeclarado() throws SemanticException{

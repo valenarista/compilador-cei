@@ -1,13 +1,15 @@
-///[Error:C|7]
-//Tambien podria ser el token abstract
-
-interface A{
-}
-
-class B implements C {
+///[Error:A|10]
+// 
+class A extends B{
 
 }
 
+class B extends C{
+
+}
+class C extends A{
+
+}
 
 class Init{
     static void main()

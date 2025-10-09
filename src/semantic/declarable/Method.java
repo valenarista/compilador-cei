@@ -72,7 +72,7 @@ public class Method {
     }
     public void estaBienDeclarado() {
         if (!returnType.isPrimitive() && (symbolTable.getClass(returnType.getName()) == null)) {
-            throw new SemanticException("El metodo fue declarado como tipo de clase inexistente. ", returnType.getName(), returnType.getLine());
+            throw new SemanticException("Error semantico en linea "+returnType.getLine()+" El metodo fue declarado como tipo de clase inexistente. ", returnType.getName(), returnType.getLine());
         }
 
         if(!paramList.isEmpty()) {

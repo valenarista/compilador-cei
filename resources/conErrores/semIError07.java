@@ -1,10 +1,13 @@
-///[Error:C|7]
-//Tambien podria ser el token abstract
+///[Error:a|5]
+//Control simple de declaracion de clases con nombres validos
 
-interface A{
+class A{
+    public A(int a,int a){
+
+    }
 }
 
-interface B extends C {
+class B {
 
 }
 

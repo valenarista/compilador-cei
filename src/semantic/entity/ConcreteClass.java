@@ -39,7 +39,7 @@ public class ConcreteClass implements EntityClass {
 
     public void estaBienDeclarado(){
         if(modificador!=null && modificador.getType().equals(TokenType.sw_static))
-            throw new SemanticException("Una clase no anidada no puede ser static.",idToken.getLexeme(), idToken.getLineNumber());
+            throw new SemanticException("Error semantico en linea "+idToken.getLineNumber()+" Una clase no anidada no puede ser static.",idToken.getLexeme(), idToken.getLineNumber());
 
         for(Attribute a : attributes.values()){
             a.estaBienDeclarado();
@@ -47,7 +47,7 @@ public class ConcreteClass implements EntityClass {
         for(Method m : methods.values()) {
             m.estaBienDeclarado();
             if((m.getModifier()==null || !m.getModifier().getType().equals(TokenType.sw_abstract)) && !m.hasBody()){
-                throw new SemanticException("Los metodos no abstractos deben tener cuerpo.",m.getName(), m.getLine());
+                throw new SemanticException("Error semantico en linea "+m.getLine()+" Los metodos no abstractos deben tener cuerpo.",m.getName(), m.getLine());
             }
         }
         if(constructor!=null){
@@ -65,20 +65,20 @@ public class ConcreteClass implements EntityClass {
     }
     public void checkInheritance(){
         if(herencia!=null && symbolTable.getClass(herencia.getLexeme())==null){
-            throw new SemanticException("La clase padre "+herencia.getLexeme()+" no existe.",herencia.getLexeme(), herencia.getLineNumber());
+            throw new SemanticException("Error semantico en linea "+herencia.getLineNumber()+" La clase padre "+herencia.getLexeme()+" no existe.",herencia.getLexeme(), herencia.getLineNumber());
         }
         if(herencia!=null && symbolTable.getClass(herencia.getLexeme()).isInterface()){
-            throw new SemanticException("Una clase no puede heredar de una interfaz.",herencia.getLexeme(), herencia.getLineNumber());
+            throw new SemanticException("Error semantico en linea "+herencia.getLineNumber()+" Una clase no puede heredar de una interfaz.",herencia.getLexeme(), herencia.getLineNumber());
         }
         if(herencia!=null && isAbstract() && !(symbolTable.getClass(herencia.getLexeme()).isAbstract())){
             if(!herencia.getLexeme().equals("Object"))
-                throw new SemanticException("Una clase concreta no puede heredar de una clase abstracta.",herencia.getLexeme(), herencia.getLineNumber());
+                throw new SemanticException("Error semantico en linea "+herencia.getLineNumber()+" Una clase concreta no puede heredar de una clase abstracta.",herencia.getLexeme(), herencia.getLineNumber());
         }
 
         if(herencia!=null && symbolTable.getClass(herencia.getLexeme()).isStatic())
-            throw new SemanticException("Una clase no puede heredar de una clase static.",herencia.getLexeme(), herencia.getLineNumber());
+            throw new SemanticException("Error semantico en linea "+herencia.getLineNumber()+" Una clase no puede heredar de una clase static.",herencia.getLexeme(), herencia.getLineNumber());
         if(herencia!=null && symbolTable.getClass(herencia.getLexeme()).isFinal())
-            throw new SemanticException("Una clase no puede heredar de una clase final.",herencia.getLexeme(), herencia.getLineNumber());
+            throw new SemanticException("Error semantico en linea "+herencia.getLineNumber()+" Una clase no puede heredar de una clase final.",herencia.getLexeme(), herencia.getLineNumber());
     }
     public boolean isAbstract() {
         if(modificador!=null)
@@ -142,24 +142,25 @@ public class ConcreteClass implements EntityClass {
     }
     private void implementMethod(Method method){
         if(methods.get(method.getName())==null){
-            throw new SemanticException("El metodo "+method.getName()+"no esta siendo implementado por la clase "+getName(),method.getName(), method.getLine());
+            throw new SemanticException("Error semantico en linea "+method.getLine()+" El metodo "+method.getName()+"no esta siendo implementado por la clase "+getName(),method.getName(), method.getLine());
         }
-        //TODO CONSULTA POR LOS MODIFICADORES
+
         Method implementedMethod = methods.get(method.getName());
         if (!(implementedMethod.getReturnType().getName().equals(method.getReturnType().getName())) || (implementedMethod.getParamList().size() != method.getParamList().size())) {
-            throw new SemanticException("El metodo "+method.getName()+" esta siendo implementado en la clase "+this.getName()+" pero con una firma diferente.",implementedMethod.getName() ,implementedMethod.getLine());
+            throw new SemanticException("Error semantico en linea "+ implementedMethod.getLine()+" El metodo "+method.getName()+" esta siendo implementado en la clase "+this.getName()+" pero con una firma diferente.",implementedMethod.getName() ,implementedMethod.getLine());
         }
         for (int i = 0; i < implementedMethod.getParamList().size(); i++) {
             Parameter existingParam = implementedMethod.getParamList().get(i);
             Parameter newParam = method.getParamList().get(i);
             if (!(existingParam.getType().getName().equals(newParam.getType().getName()))) {
-                throw new SemanticException("El metodo "+method.getName()+" esta siendo implementado en la clase "+this.getName()+" pero con una firma diferente.",implementedMethod.getName() ,implementedMethod.getLine());
+                throw new SemanticException("Error semantico en linea "+ implementedMethod.getLine()+" El metodo "+method.getName()+" esta siendo implementado en la clase "+this.getName()+" pero con una firma diferente.",implementedMethod.getName() ,implementedMethod.getLine());
             }
         }
+        checkMethodModifier(method, implementedMethod);
+        checkVisibilityModifier(method, implementedMethod);
 
     }
     private void inheriteAttribute(Attribute attribute) {
-        //TODO CAMBIAR PARA PODER SOBREESCRIBIR ATRIBUTOS
         if(attributes.get(attribute.getName())==null){
             attributes.put(attribute.getName(),attribute);
         } else {
@@ -175,13 +176,13 @@ public class ConcreteClass implements EntityClass {
         } else {
             Method existingMethod = methods.get(method.getName());
             if (!(existingMethod.getReturnType().getName().equals(method.getReturnType().getName())) || (existingMethod.getParamList().size() != method.getParamList().size())) {
-                throw new SemanticException("El metodo "+method.getName()+" ya fue declarado en la clase "+this.getName()+" con una firma diferente.",existingMethod.getName() ,existingMethod.getLine());
+                throw new SemanticException("Error semantico en linea "+existingMethod.getLine()+" El metodo "+method.getName()+" ya fue declarado en la clase "+this.getName()+" con una firma diferente.",existingMethod.getName() ,existingMethod.getLine());
             }
             for (int i = 0; i < existingMethod.getParamList().size(); i++) {
                 Parameter existingParam = existingMethod.getParamList().get(i);
                 Parameter newParam = method.getParamList().get(i);
                 if (!(existingParam.getType().getName().equals(newParam.getType().getName()))) {
-                    throw new SemanticException("El metodo "+method.getName()+" ya fue declarado en la clase "+this.getName()+" con una firma diferente.",existingMethod.getName() ,existingMethod.getLine());
+                    throw new SemanticException("Error semantico en linea "+existingMethod.getLine()+" El metodo "+method.getName()+" ya fue declarado en la clase "+this.getName()+" con una firma diferente.",existingMethod.getName() ,existingMethod.getLine());
                 }
             }
 
@@ -192,39 +193,39 @@ public class ConcreteClass implements EntityClass {
     }
     private void checkVisibilityModifier(Method method, Method existingMethod) {
         if(method.getVisibility().getType().equals(TokenType.sw_public)&& existingMethod.getVisibility().getType().equals(TokenType.sw_private)) {
-            throw new SemanticException("El metodo " + method.getName() + " no puede reducir su visibilidad en la clase " + this.getName() + ".", methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
+            throw new SemanticException("Error semantico en linea "+methods.get(method.getName()).getLine()+" El metodo " + method.getName() + " no puede reducir su visibilidad en la clase " + this.getName() + ".", methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
 
         }
     }
     private void checkAbstractModifier(Method method) {
         if(method.getModifier().getType().equals(TokenType.sw_abstract) && (this.modificador==null || !(this.modificador.getType().equals(TokenType.sw_abstract)))) {
-            throw new SemanticException("El metodo " + method.getName() + " no puede ser heredado en la clase " + this.getName() + " por ser abstracto y la clase concreta.", method.getName(), method.getLine());
+            throw new SemanticException("Error semantico en linea "+method.getLine()+" El metodo " + method.getName() + " no puede ser heredado en la clase " + this.getName() + " por ser abstracto y la clase concreta.", method.getName(), method.getLine());
         }
     }
     private void checkMethodModifier(Method method, Method existingMethod) {
         if(method.getModifier()!=null){
             if(method.getModifier().getType().equals(TokenType.sw_final)||method.getModifier().getType().equals(TokenType.sw_static)) {
-                throw new SemanticException("El metodo " + method.getName() + " no puede ser sobreescrito en la clase " + this.getName() + " por ser final o static.", methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
+                throw new SemanticException("Error semantico en linea "+methods.get(method.getName()).getLine()+" El metodo " + method.getName() + " no puede ser sobreescrito en la clase " + this.getName() + " por ser final o static.", methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
             } else if (method.getModifier().getType().equals(TokenType.sw_abstract) && (this.modificador==null || !(this.modificador.getType().equals(TokenType.sw_abstract)))) {
                 if(existingMethod.getModifier()!=null && existingMethod.getModifier().getType().equals(TokenType.sw_abstract))
-                    throw new SemanticException("El metodo " + method.getName() + " tiene que ser implementado en la clase " + this.getName() + " sin ser abstracto.", methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
+                    throw new SemanticException("Error semantico en linea "+methods.get(method.getName()).getLine()+" El metodo " + method.getName() + " tiene que ser implementado en la clase " + this.getName() + " sin ser abstracto.", methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
             }
             if(method.getModifier().getType().equals(TokenType.sw_abstract) && !existingMethod.hasBody() && (this.modificador==null || !(this.modificador.getType().equals(TokenType.sw_abstract)))) {
-                throw new SemanticException("El metodo " + method.getName() + " tiene que ser implementado y tener bloque en la clase " + this.getName(), methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
+                throw new SemanticException("Error semantico en linea "+methods.get(method.getName()).getLine()+" El metodo " + method.getName() + " tiene que ser implementado y tener bloque en la clase " + this.getName(), methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
             }
 
 
             if(!(method.getModifier().getType().equals(TokenType.sw_static)) && existingMethod.getModifier()!=null && existingMethod.getModifier().getType().equals(TokenType.sw_static)) {
-                throw new SemanticException("El metodo " + method.getName() + " no puede ser sobreescrito en la clase " + this.getName() + " por ser static.", existingMethod.getName(), methods.get(method.getName()).getLine());
+                throw new SemanticException("Error semantico en linea "+methods.get(method.getName()).getLine()+" El metodo " + method.getName() + " no puede ser sobreescrito en la clase " + this.getName() + " por ser static.", existingMethod.getName(), methods.get(method.getName()).getLine());
             }
         } else{
             if(existingMethod.getModifier()!=null && existingMethod.getModifier().getType().equals(TokenType.sw_static)){
-                throw new SemanticException("El metodo " + method.getName() + " no puede cambiar de naturaleza en la clase " + this.getName() + " para ser static.", existingMethod.getName(), methods.get(method.getName()).getLine());
+                throw new SemanticException("Error semantico en linea "+methods.get(method.getName()).getLine()+" El metodo " + method.getName() + " no puede cambiar de naturaleza en la clase " + this.getName() + " para ser static.", existingMethod.getName(), methods.get(method.getName()).getLine());
             }
         }
 
-
     }
+
     public boolean isClass() {
         return true;
     }
@@ -259,33 +260,33 @@ public class ConcreteClass implements EntityClass {
         if(attributes.get(attribute.getName())==null){
             attributes.put(attribute.getName(),attribute);
         } else {
-            throw new SemanticException("El atributo "+attribute.getName()+" ya fue declarado en la clase "+this.getName(),attribute.getName() ,attribute.getLine());
+            throw new SemanticException("Error semantico en linea "+attribute.getLine()+" El atributo "+attribute.getName()+" ya fue declarado en la clase "+this.getName(),attribute.getName() ,attribute.getLine());
         }
     }
     public void addMethod(Method method) {
         if(methods.get(method.getName())==null){
             if(method.getModifier()!=null && method.getModifier().getType().equals(TokenType.sw_abstract) &&
                     (this.modificador==null || !(this.modificador.getType().equals(TokenType.sw_abstract)))){
-                throw new SemanticException("Una clase concreta no puede tener metodos abstractos.",method.getName() ,method.getLine());
+                throw new SemanticException("Error semantico en linea "+method.getLine()+" Una clase concreta no puede tener metodos abstractos.",method.getName() ,method.getLine());
             }
             methods.put(method.getName(),method);
         } else {
-            throw new SemanticException("El metodo "+method.getName()+" ya fue declarado en la clase "+this.getName(),method.getName() ,method.getLine());
+            throw new SemanticException("Error semantico en linea "+method.getLine()+" El metodo "+method.getName()+" ya fue declarado en la clase "+this.getName(),method.getName() ,method.getLine());
         }
 
     }
     public void addConstructor(Constructor constructor) {
         if(this.modificador!=null && this.modificador.getType().equals(TokenType.sw_abstract)){
-            throw new SemanticException("Una clase abstracta no puede tener constructor.",constructor.getName() ,constructor.getLine());
+            throw new SemanticException("Error semantico en linea "+constructor.getLine()+" Una clase abstracta no puede tener constructor.",constructor.getName() ,constructor.getLine());
         }
 
         if(!constructor.getName().equals(getName()))
-            throw new SemanticException("El constructor debe tener el mismo nombre que la clase "+this.getName(),constructor.getName() ,constructor.getLine());
+            throw new SemanticException("Error semantico en linea "+constructor.getLine()+" El constructor debe tener el mismo nombre que la clase "+this.getName(),constructor.getName() ,constructor.getLine());
 
         if(this.constructor==null){
             this.constructor = constructor;
         } else {
-            throw new SemanticException("El constructor ya fue declarado en la clase "+this.getName(),constructor.getName() ,constructor.getLine());
+            throw new SemanticException("Error semantico en linea "+constructor.getLine()+" El constructor ya fue declarado en la clase "+this.getName(),constructor.getName() ,constructor.getLine());
         }
     }
     public void addInheritance(Token herencia) {
@@ -296,17 +297,16 @@ public class ConcreteClass implements EntityClass {
     }
     private void checkImplementation(){
         if(symbolTable.getClass(implementation.getLexeme())==null){
-            throw new SemanticException("La interfaz "+implementation.getLexeme()+" no existe.",implementation.getLexeme(), implementation.getLineNumber());
+            throw new SemanticException("Error semantico en linea "+implementation.getLineNumber()+" La interfaz "+implementation.getLexeme()+" no existe.",implementation.getLexeme(), implementation.getLineNumber());
         }
         if(!symbolTable.getClass(implementation.getLexeme()).isInterface()){
-            throw new SemanticException("Una clase concreta no puede implementar una clase.",implementation.getLexeme(), implementation.getLineNumber());
+            throw new SemanticException("Error semantico en linea "+implementation.getLineNumber()+" Una clase concreta no puede implementar una clase.",implementation.getLexeme(), implementation.getLineNumber());
         }
 
-        //TODO CONSULTAR FINAL Y STATIC
         if(symbolTable.getClass(implementation.getLexeme()).isFinal())
-            throw new SemanticException("No se puede implementar una interfaz final.",implementation.getLexeme(), implementation.getLineNumber());
+            throw new SemanticException("Error semantico en linea "+implementation.getLineNumber()+" No se puede implementar una interfaz final.",implementation.getLexeme(), implementation.getLineNumber());
         if(symbolTable.getClass(implementation.getLexeme()).isStatic())
-            throw new SemanticException("No se puede implementar una interfaz static.",implementation.getLexeme(), implementation.getLineNumber());
+            throw new SemanticException("Error semantico en linea "+implementation.getLineNumber()+" No se puede implementar una interfaz static.",implementation.getLexeme(), implementation.getLineNumber());
 
     }
 
@@ -316,7 +316,7 @@ public class ConcreteClass implements EntityClass {
         while (current != null) {
             String parentName = current.getLexeme();
             if (parentName.equals(currentClassName)) {
-                throw new SemanticException("Herencia circular detectada en la clase " + currentClassName, parentName, current.getLineNumber());
+                throw new SemanticException("Error semantico en linea "+current.getLineNumber()+" Herencia circular detectada en la clase " + currentClassName, parentName, current.getLineNumber());
             }
             EntityClass parentClass = symbolTable.getClass(parentName);
             if (parentClass != null) {

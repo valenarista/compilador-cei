@@ -1,25 +1,13 @@
 ///[SinErrores]
 
-interface A {
+abstract class A{
+    abstract int m1();
 }
 
-interface B extends A {
-
-}
-
-class C implements A{
-
-}
-
-class D implements B {
-
+abstract class B extends A{
 }
 
 class Init{
     static void main()
     { }
 }
-
-
-
-

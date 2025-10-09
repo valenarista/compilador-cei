@@ -100,7 +100,7 @@ public class SymbolTable {
         if(clases.get(lexeme) == null){
             claseActual = nuevaClase;
         } else{
-            throw new SemanticException("Se intento crear una clase ya existente ",nuevaClase.getName(), nuevaClase.getLine());
+            throw new SemanticException("Error semantico en linea "+nuevaClase.getLine()+" Se intento crear una clase ya existente ",nuevaClase.getName(), nuevaClase.getLine());
         }
 
     }
@@ -122,64 +122,5 @@ public class SymbolTable {
         return clases.get(lexeme);
     }
 
-
-
-    public void printTable() {
-        System.out.println("===== TABLA DE SIMBOLOS =====");
-
-        for (EntityClass c : clases.values()) {
-            System.out.println("Clase: " + c.getName());
-            if (c.getHerencia() != null)
-                System.out.println("  Hereda de: " + c.getHerencia().getLexeme());
-            if (c.getModificador() != null)
-                System.out.println("  Modificador: " + c.getModificador());
-
-            // --- Constructor ---
-            Constructor ctor = c.getConstructor();
-            if (ctor != null) {
-                System.out.println("  Constructor: " + ctor.getName());
-                System.out.println("    Parámetros:");
-                if (ctor.getParamList().isEmpty()) {
-                    System.out.println("      (sin parámetros)");
-                } else {
-                    for (Parameter p : ctor.getParamList()) {
-                        System.out.println("      " + p.getType().getName() + " " + p.getName());
-                    }
-                }
-            }
-
-            // --- Atributos ---
-            System.out.println("  Atributos:");
-            if (c.getAttributes().isEmpty()) {
-                System.out.println("    (sin atributos)");
-            } else {
-                for (Attribute a : c.getAttributes().values()) {
-                    System.out.println("    " + a.getType().getName() + " " + a.getName());
-                }
-            }
-
-            // --- Métodos ---
-            System.out.println("  Métodos:");
-            if (c.getMethods().isEmpty()) {
-                System.out.println("    (sin métodos)");
-            } else {
-                for (Method m : c.getMethods().values()) {
-                    System.out.println("    " + m.getReturnType().getName() + " " + m.getName() + "()");
-                    System.out.println("      Parámetros:");
-                    if (m.getParamList().isEmpty()) {
-                        System.out.println("        (sin parámetros)");
-                    } else {
-                        for (Parameter p : m.getParamList()) {
-                            System.out.println("        " + p.getType().getName() + " " + p.getName());
-                        }
-                    }
-                }
-            }
-
-            System.out.println(); // salto de línea entre clases
-        }
-
-        System.out.println("==============================");
-    }
 
 }

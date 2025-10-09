@@ -27,7 +27,7 @@ public class Parameter {
     }
     public void estaBienDeclarado(){
         if(!type.isPrimitive() && (symbolTable.getClass(type.getName())==null)){
-            throw new SemanticException("El parametro con nombre "+ idToken.getLexeme() +" fue declarado como tipo de clase inexistente. ",type.getName(), type.getLine());
+            throw new SemanticException("Error semantico en linea "+type.getLine()+" El parametro con nombre "+ idToken.getLexeme() +" fue declarado como tipo de clase inexistente. ",type.getName(), type.getLine());
         }
     }
 }
