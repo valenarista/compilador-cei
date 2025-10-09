@@ -18,6 +18,7 @@ public class ConcreteClass implements EntityClass {
     Token implementation;
     Token modificador;
     HashMap<String,Attribute> attributes;
+    HashMap<String,Attribute> shadowedAttributes;
     HashMap<String,Method> methods;
     Constructor constructor;
     boolean consolidated;
@@ -27,6 +28,7 @@ public class ConcreteClass implements EntityClass {
         this.modificador = modificador;
         this.implementation = null;
         this.attributes = new HashMap<>();
+        this.shadowedAttributes = new HashMap<>();
         this.methods = new HashMap<>();
         this.constructor = null;
         consolidated = false;
@@ -44,6 +46,9 @@ public class ConcreteClass implements EntityClass {
         }
         for(Method m : methods.values()) {
             m.estaBienDeclarado();
+            if((m.getModifier()==null || !m.getModifier().getType().equals(TokenType.sw_abstract)) && !m.hasBody()){
+                throw new SemanticException("Los metodos no abstractos deben tener cuerpo.",m.getName(), m.getLine());
+            }
         }
         if(constructor!=null){
             constructor.estaBienDeclarado();
@@ -157,8 +162,8 @@ public class ConcreteClass implements EntityClass {
         //TODO CAMBIAR PARA PODER SOBREESCRIBIR ATRIBUTOS
         if(attributes.get(attribute.getName())==null){
             attributes.put(attribute.getName(),attribute);
-        } else if (!attributes.get(attribute.getName()).getType().equals(attribute.getType())) {
-            throw new SemanticException("No se puede heredar el atributo "+attribute.getName()+" porque ya fue declarado en la clase "+this.getName(),attribute.getName() ,attributes.get(attribute.getName()).getLine());
+        } else {
+            shadowedAttributes.put(attribute.getName(),attribute);
         }
 
     }
@@ -207,8 +212,7 @@ public class ConcreteClass implements EntityClass {
             if(method.getModifier().getType().equals(TokenType.sw_abstract) && !existingMethod.hasBody() && (this.modificador==null || !(this.modificador.getType().equals(TokenType.sw_abstract)))) {
                 throw new SemanticException("El metodo " + method.getName() + " tiene que ser implementado y tener bloque en la clase " + this.getName(), methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
             }
-            System.out.println(method.getModifier().getType());
-            System.out.println(existingMethod.getModifier().getType());
+
 
             if(!(method.getModifier().getType().equals(TokenType.sw_static)) && existingMethod.getModifier()!=null && existingMethod.getModifier().getType().equals(TokenType.sw_static)) {
                 throw new SemanticException("El metodo " + method.getName() + " no puede ser sobreescrito en la clase " + this.getName() + " por ser static.", existingMethod.getName(), methods.get(method.getName()).getLine());

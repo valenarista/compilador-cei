@@ -74,11 +74,7 @@ public class Method {
         if (!returnType.isPrimitive() && (symbolTable.getClass(returnType.getName()) == null)) {
             throw new SemanticException("El metodo fue declarado como tipo de clase inexistente. ", returnType.getName(), returnType.getLine());
         }
-        if(modifier==null || !modifier.getType().equals(TokenType.sw_abstract)){
-            if(!hasBody()){
-                throw new SemanticException("Un metodo no abstracto debe tener cuerpo. ", idToken.getLexeme(), idToken.getLineNumber());
-            }
-        }
+
         if(!paramList.isEmpty()) {
             for (Parameter param : paramList) {
                 param.estaBienDeclarado();

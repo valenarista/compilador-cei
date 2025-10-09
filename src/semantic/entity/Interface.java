@@ -36,6 +36,10 @@ public class Interface implements EntityClass {
         }
         for(Method m : methods.values()) {
             m.estaBienDeclarado();
+            if(m.hasBody() && ((m.getModifier()==null) || !m.getModifier().getType().equals(TokenType.sw_static)))
+                throw new SemanticException("Los metodos de una interface no pueden tener cuerpo.",m.getName(), m.getLine());
+            if(m.getModifier()!=null && m.getModifier().getType().equals(TokenType.sw_final))
+                throw new SemanticException("Los metodos de una interface no pueden ser final.",m.getName(), m.getLine());
         }
 
         checkInheritance();
@@ -121,7 +125,11 @@ public class Interface implements EntityClass {
         return null;
     }
     public void addMethod(Method method) {
-        methods.put(method.getName(),method);
+        if(methods.get(method.getName())==null){
+            methods.put(method.getName(),method);
+        } else {
+            throw  new SemanticException("El metodo "+method.getName()+" ya fue declarado en la interface "+this.getName(),method.getName() ,method.getLine());
+        }
     }
     public void addInheritance(Token herencia) {
         this.herencia = herencia;
