@@ -33,6 +33,7 @@ public class Main {
                 syntacticAnalyzer.inicial();
 
                 symbolTable.chequeoDeclaraciones();
+                //symbolTable.printTable();
 
                 if (!lexicalAnalyzer.getErrors().isEmpty()) {
                     for(LexicalException error : lexicalAnalyzer.getErrors()){

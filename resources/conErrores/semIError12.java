@@ -1,14 +1,17 @@
-///[Error:a|8]
-// 
-class A{
-    int a;
+///[Error:D|3]
+
+class A extends D{
+
 }
 
 class B extends A{
-    boolean a;
+
 }
 
-class Init{
-    static void main()
-    { }
+class C extends B {
+
+}
+
+class D extends C {
+
 }

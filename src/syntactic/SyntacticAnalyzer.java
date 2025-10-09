@@ -127,7 +127,7 @@ public class SyntacticAnalyzer {
             Token nombre = currentToken;
             match(TokenType.metVarID);
             Method nuevoMetodo = new Method(nombre,type,null,visibility);
-            List<Parameter> paramList = metodoTail();
+            List<Parameter> paramList = metodoTail(nuevoMetodo);
             for(Parameter p : paramList){
                 nuevoMetodo.addParameter(p);
             }
@@ -401,7 +401,7 @@ public class SyntacticAnalyzer {
         Token nombre = currentToken;
         match(TokenType.metVarID);
         Method nuevoMetodo = new Method(nombre,tipo,modificador,visibility);
-        List<Parameter> paramList = metodoTail();
+        List<Parameter> paramList = metodoTail(nuevoMetodo);
         for(Parameter p : paramList){
             nuevoMetodo.addParameter(p);
         }
@@ -416,15 +416,17 @@ public class SyntacticAnalyzer {
             return tipo();
         }
     }
-    List<Parameter> metodoTail(){
+    List<Parameter> metodoTail(Method method){
         List<Parameter> paramList = argsFormales();
-        bloqueOpcional();
+        bloqueOpcional(method);
         return paramList;
     }
-    void bloqueOpcional(){
+    void bloqueOpcional(Method method){
         if(primerosBloque(currentToken)){
+            method.setHasBody(true);
             bloque();
         }else if(currentToken.getType().equals(TokenType.semicolon)){
+            method.setHasBody(false);
             match(TokenType.semicolon);
         } else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un primero de bloque o un token: "+TokenType.semicolon);
@@ -444,7 +446,7 @@ public class SyntacticAnalyzer {
             Token nombre = currentToken;
             match(TokenType.metVarID);
             Method nuevoMetodo = new Method(nombre,type,null,visibility);
-            List<Parameter> paramList = metodoTail();
+            List<Parameter> paramList = metodoTail(nuevoMetodo);
             for(Parameter p : paramList){
                 nuevoMetodo.addParameter(p);
             }
@@ -457,7 +459,7 @@ public class SyntacticAnalyzer {
     void miembroTail(Token nombre, Type tipo,Token visibility){
         if(primerosMetodoTail(currentToken)){
             Method nuevoMetodo = new Method(nombre,tipo,null,visibility);
-            List<Parameter> paramList = metodoTail();
+            List<Parameter> paramList = metodoTail(nuevoMetodo);
             symbolTable.setCurrentMethod(nuevoMetodo);
             for(Parameter p : paramList){
                 nuevoMetodo.addParameter(p);

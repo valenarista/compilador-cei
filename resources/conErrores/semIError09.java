@@ -1,14 +1,8 @@
-///[Error:a|5]
-// 
-class A{
-    B a;
-    private A a;
-}
-class B{
+///[Error:A|3]
+
+class A extends A{
 
 }
-
-
 
 class Init{
     static void main()

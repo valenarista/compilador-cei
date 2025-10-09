@@ -1,14 +1,18 @@
 ///[SinErrores]
+// Prueba constructores
 
-abstract class A{
-    abstract int m1();
+interface A {
+}
+interface B extends A {
+
 }
 
-abstract class B extends A{
-    int m1();
-}
 
 class Init{
     static void main()
     { }
 }
+
+
+
+

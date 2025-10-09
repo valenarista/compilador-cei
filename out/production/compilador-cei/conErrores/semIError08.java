@@ -1,11 +1,12 @@
-///[Error:a|5]
-// 
-class A{
-    int a = 5;
-    boolean a = true;
+///[Error:B|3]
+
+class A extends B{
+
 }
 
+class B extends A{
 
+}
 
 class Init{
     static void main()

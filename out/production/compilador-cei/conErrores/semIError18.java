@@ -1,13 +1,19 @@
-///[Error:A|6]
-static class A{
-    int m1();
+///[Error:D|3]
+
+interface A extends D{
+
 }
 
-abstract class B extends A{
-    int m1();
+interface B extends A{
+
 }
 
-class Init{
-    static void main()
-    { }
+interface C extends B {
+
 }
+
+interface D extends C {
+
+}
+
+

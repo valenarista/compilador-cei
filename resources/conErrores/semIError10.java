@@ -1,15 +1,11 @@
-///[Error:a|7]
-// 
-class A{
-    public int a(){
+///[Error:A|6]
+class A {
 
-    }
-    public boolean a(){
-
-    }
 }
+//Interfaz no puede extender clase
+interface B extends A{
 
-
+}
 
 class Init{
     static void main()

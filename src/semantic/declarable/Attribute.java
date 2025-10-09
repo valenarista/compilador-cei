@@ -33,7 +33,7 @@ public class Attribute {
 
     public void estaBienDeclarado(){
         if(!type.isPrimitive() && (symbolTable.getClass(type.getName())==null)){
-            throw new SemanticException("El atributo fue declarado como tipo de clase inexistente. ",idToken.getLexeme(), idToken.getLineNumber());
+            throw new SemanticException("El atributo de nombre "+ idToken.getLexeme() +" fue declarado como tipo de clase inexistente. ",type.getName(), type.getLine());
         }
     }
 

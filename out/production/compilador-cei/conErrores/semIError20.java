@@ -1,13 +1,7 @@
-///[Error:A|6]
-final class A{
-    int m1();
+///[Error:implements|3]
+
+interface A implements Object {
+
 }
 
-class B extends A{
-    int m1();
-}
 
-class Init{
-    static void main()
-    { }
-}

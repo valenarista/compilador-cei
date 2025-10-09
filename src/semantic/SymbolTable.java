@@ -32,16 +32,19 @@ public class SymbolTable {
         Method debugPrint = new Method(new Token(TokenType.metVarID,"debugPrint",0),new VoidType(),new Token(TokenType.sw_static,"static",0));
         debugPrint.addParameter(new Parameter(new Token(TokenType.metVarID,"i",0),new IntType()));
         objectClass.addMethod(debugPrint);
+        objectClass.addConstructor(new Constructor(new Token(TokenType.classID,"Object",0),null));
         clases.put("Object",objectClass);
 
         //String class
         EntityClass stringClass = new ConcreteClass(new Token(TokenType.classID,"String",0),null);
         stringClass.addInheritance(new Token(TokenType.classID,"Object",0));
+        stringClass.addConstructor(new Constructor(new Token(TokenType.classID,"String",0),null));
         clases.put("String",stringClass);
 
         //System class
         EntityClass systemClass = new ConcreteClass(new Token(TokenType.classID,"System",0),null);
         systemClass.addInheritance(new Token(TokenType.classID,"Object",0));
+        systemClass.addConstructor(new Constructor(new Token(TokenType.classID,"System",0),null));
         clases.put("System",systemClass);
 
         Method read = new Method(new Token(TokenType.metVarID,"read",0),new IntType(),new Token(TokenType.sw_static,"static",0));
@@ -104,9 +107,6 @@ public class SymbolTable {
     public void addCurrentClass() {
         clases.put(claseActual.getName(),claseActual);
     }
-    public void setCurrentConstructor(Constructor constructor) {
-        this.constructorActual = constructor;
-    }
     public void setCurrentMethod(Method method) {
         claseActual.addMethod(method);
         this.methodActual = method;
@@ -115,14 +115,71 @@ public class SymbolTable {
         claseActual.addAttribute(attribute);
         this.attributeActual = attribute;
     }
-    public void addCurrentMethod(Method method) {
-        claseActual.addMethod(method);
-    }
     public void addCurrentConstructor(Constructor constructor) {
         claseActual.addConstructor(constructor);
     }
     public EntityClass getClass(String lexeme) {
         return clases.get(lexeme);
+    }
+
+
+
+    public void printTable() {
+        System.out.println("===== TABLA DE SIMBOLOS =====");
+
+        for (EntityClass c : clases.values()) {
+            System.out.println("Clase: " + c.getName());
+            if (c.getHerencia() != null)
+                System.out.println("  Hereda de: " + c.getHerencia().getLexeme());
+            if (c.getModificador() != null)
+                System.out.println("  Modificador: " + c.getModificador());
+
+            // --- Constructor ---
+            Constructor ctor = c.getConstructor();
+            if (ctor != null) {
+                System.out.println("  Constructor: " + ctor.getName());
+                System.out.println("    Parámetros:");
+                if (ctor.getParamList().isEmpty()) {
+                    System.out.println("      (sin parámetros)");
+                } else {
+                    for (Parameter p : ctor.getParamList()) {
+                        System.out.println("      " + p.getType().getName() + " " + p.getName());
+                    }
+                }
+            }
+
+            // --- Atributos ---
+            System.out.println("  Atributos:");
+            if (c.getAttributes().isEmpty()) {
+                System.out.println("    (sin atributos)");
+            } else {
+                for (Attribute a : c.getAttributes().values()) {
+                    System.out.println("    " + a.getType().getName() + " " + a.getName());
+                }
+            }
+
+            // --- Métodos ---
+            System.out.println("  Métodos:");
+            if (c.getMethods().isEmpty()) {
+                System.out.println("    (sin métodos)");
+            } else {
+                for (Method m : c.getMethods().values()) {
+                    System.out.println("    " + m.getReturnType().getName() + " " + m.getName() + "()");
+                    System.out.println("      Parámetros:");
+                    if (m.getParamList().isEmpty()) {
+                        System.out.println("        (sin parámetros)");
+                    } else {
+                        for (Parameter p : m.getParamList()) {
+                            System.out.println("        " + p.getType().getName() + " " + p.getName());
+                        }
+                    }
+                }
+            }
+
+            System.out.println(); // salto de línea entre clases
+        }
+
+        System.out.println("==============================");
     }
 
 }

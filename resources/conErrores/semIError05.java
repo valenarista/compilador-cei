@@ -2,11 +2,8 @@
 //Tambien podria ser el token abstract
 
 class A{
-    abstract void m1(){}
+    abstract m1(){}
 }
-
-
-
 
 class Init{
     static void main()

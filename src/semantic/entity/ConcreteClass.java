@@ -36,6 +36,8 @@ public class ConcreteClass implements EntityClass {
     }
 
     public void estaBienDeclarado(){
+        if(modificador!=null && modificador.getType().equals(TokenType.sw_static))
+            throw new SemanticException("Una clase no anidada no puede ser static.",idToken.getLexeme(), idToken.getLineNumber());
 
         for(Attribute a : attributes.values()){
             a.estaBienDeclarado();
@@ -177,8 +179,16 @@ public class ConcreteClass implements EntityClass {
                     throw new SemanticException("El metodo "+method.getName()+" ya fue declarado en la clase "+this.getName()+" con una firma diferente.",existingMethod.getName() ,existingMethod.getLine());
                 }
             }
-            if(method.getModifier()!=null)
-                checkMethodModifier(method, existingMethod);
+
+            checkMethodModifier(method, existingMethod);
+            checkVisibilityModifier(method, existingMethod);
+            //Sobreescritura exitosa
+        }
+    }
+    private void checkVisibilityModifier(Method method, Method existingMethod) {
+        if(method.getVisibility().getType().equals(TokenType.sw_public)&& existingMethod.getVisibility().getType().equals(TokenType.sw_private)) {
+            throw new SemanticException("El metodo " + method.getName() + " no puede reducir su visibilidad en la clase " + this.getName() + ".", methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
+
         }
     }
     private void checkAbstractModifier(Method method) {
@@ -187,12 +197,29 @@ public class ConcreteClass implements EntityClass {
         }
     }
     private void checkMethodModifier(Method method, Method existingMethod) {
-        if(method.getModifier().getType().equals(TokenType.sw_final)||method.getModifier().getType().equals(TokenType.sw_static)) {
-            throw new SemanticException("El metodo " + method.getName() + " no puede ser sobreescrito en la clase " + this.getName() + " por ser final o static.", methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
-        } else if (method.getModifier().getType().equals(TokenType.sw_abstract) && (this.modificador==null || !(this.modificador.getType().equals(TokenType.sw_abstract)))) {
-            if(existingMethod.getModifier()!=null && existingMethod.getModifier().getType().equals(TokenType.sw_abstract))
-                throw new SemanticException("El metodo " + method.getName() + " tiene que ser implementado en la clase " + this.getName() + " sin ser abstracto.", methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
+        if(method.getModifier()!=null){
+            if(method.getModifier().getType().equals(TokenType.sw_final)||method.getModifier().getType().equals(TokenType.sw_static)) {
+                throw new SemanticException("El metodo " + method.getName() + " no puede ser sobreescrito en la clase " + this.getName() + " por ser final o static.", methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
+            } else if (method.getModifier().getType().equals(TokenType.sw_abstract) && (this.modificador==null || !(this.modificador.getType().equals(TokenType.sw_abstract)))) {
+                if(existingMethod.getModifier()!=null && existingMethod.getModifier().getType().equals(TokenType.sw_abstract))
+                    throw new SemanticException("El metodo " + method.getName() + " tiene que ser implementado en la clase " + this.getName() + " sin ser abstracto.", methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
+            }
+            if(method.getModifier().getType().equals(TokenType.sw_abstract) && !existingMethod.hasBody() && (this.modificador==null || !(this.modificador.getType().equals(TokenType.sw_abstract)))) {
+                throw new SemanticException("El metodo " + method.getName() + " tiene que ser implementado y tener bloque en la clase " + this.getName(), methods.get(method.getName()).getName(), methods.get(method.getName()).getLine());
+            }
+            System.out.println(method.getModifier().getType());
+            System.out.println(existingMethod.getModifier().getType());
+
+            if(!(method.getModifier().getType().equals(TokenType.sw_static)) && existingMethod.getModifier()!=null && existingMethod.getModifier().getType().equals(TokenType.sw_static)) {
+                throw new SemanticException("El metodo " + method.getName() + " no puede ser sobreescrito en la clase " + this.getName() + " por ser static.", existingMethod.getName(), methods.get(method.getName()).getLine());
+            }
+        } else{
+            if(existingMethod.getModifier()!=null && existingMethod.getModifier().getType().equals(TokenType.sw_static)){
+                throw new SemanticException("El metodo " + method.getName() + " no puede cambiar de naturaleza en la clase " + this.getName() + " para ser static.", existingMethod.getName(), methods.get(method.getName()).getLine());
+            }
         }
+
+
     }
     public boolean isClass() {
         return true;
@@ -216,6 +243,9 @@ public class ConcreteClass implements EntityClass {
     }
     public HashMap<String, Method> getMethods() {
         return methods;
+    }
+    public Constructor getConstructor() {
+        return constructor;
     }
     public Token getHerencia() {
         return herencia;
@@ -274,26 +304,6 @@ public class ConcreteClass implements EntityClass {
         if(symbolTable.getClass(implementation.getLexeme()).isStatic())
             throw new SemanticException("No se puede implementar una interfaz static.",implementation.getLexeme(), implementation.getLineNumber());
 
-
-        Interface interfaceToImplement = (Interface) symbolTable.getClass(implementation.getLexeme());
-        for(Method m : interfaceToImplement.getMethods().values()) {
-            if (methods.get(m.getName()) == null) {
-                throw new SemanticException("La clase concreta " + this.getName() + " debe implementar el metodo " + m.getName() + " de la interfaz " + interfaceToImplement.getName(), m.getName(), m.getLine());
-            } else {
-                Method classMethod = methods.get(m.getName());
-                if (!(classMethod.getReturnType().getName().equals(m.getReturnType().getName())) || (classMethod.getParamList().size() != m.getParamList().size())) {
-                    throw new SemanticException("El metodo " + m.getName() + " de la clase concreta " + this.getName() + " no coincide con la firma del metodo de la interfaz " + interfaceToImplement.getName(), m.getName(), classMethod.getLine());
-                }
-                for (int i = 0; i < classMethod.getParamList().size(); i++) {
-                    Parameter classParam = classMethod.getParamList().get(i);
-                    Parameter interfaceParam = m.getParamList().get(i);
-                    if (!(classParam.getType().getName().equals(interfaceParam.getType().getName()))) {
-                        throw new SemanticException("El metodo " + m.getName() + " de la clase concreta " + this.getName() + " no coincide con la firma del metodo de la interfaz " + interfaceToImplement.getName(), m.getName(), classMethod.getLine());
-                    }
-                }
-
-            }
-        }
     }
 
     private void checkCircularInheritance(Token herencia) {

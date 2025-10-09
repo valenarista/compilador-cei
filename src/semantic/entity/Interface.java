@@ -6,6 +6,7 @@ import lexical.TokenType;
 import semantic.declarable.Attribute;
 import semantic.declarable.Constructor;
 import semantic.declarable.Method;
+import semantic.declarable.Parameter;
 
 import java.util.HashMap;
 import static compiler.Main.symbolTable;
@@ -25,19 +26,77 @@ public class Interface implements EntityClass {
         this.attributes = new HashMap<>();
     }
     public void estaBienDeclarado(){
+        if(modificador!=null && modificador.getType().equals(TokenType.sw_static))
+            throw new SemanticException("Una Interface no anidada no puede ser static.",idToken.getLexeme(), idToken.getLineNumber());
+        if(modificador!=null && modificador.getType().equals(TokenType.sw_final))
+            throw new SemanticException("Una Interface no puede ser final.",idToken.getLexeme(), idToken.getLineNumber());
 
+        for(Attribute a : attributes.values()){
+            a.estaBienDeclarado();
+        }
+        for(Method m : methods.values()) {
+            m.estaBienDeclarado();
+        }
+
+        checkInheritance();
+        checkCircularInheritance(herencia);
 
     }
     public boolean consolidated(){
         return consolidated;
     }
     public void consolidar(){
-        checkInheritance();
-        checkCircularInheritance(herencia);
+        if(consolidated)
+            return ;
+        if(herencia!=null) {
+            consolidatedParent();
+            EntityClass parent = symbolTable.getClass(herencia.getLexeme());
+            for(Attribute attribute : parent.getAttributes().values()){
+                inheritanceAttribute(attribute);
+            }
+            for(Method method : parent.getMethods().values()){
+                inheritanceMethod(method);
+            }
+
+        }
+
+        consolidated = true;
+
     }
-    public boolean isClass() {
-        return false;
+    private void consolidatedParent(){
+        EntityClass parent = symbolTable.getClass(herencia.getLexeme());
+        if(!parent.consolidated())
+            parent.consolidar();
     }
+    private void inheritanceAttribute(Attribute attribute){
+        if(attributes.get(attribute.getName())==null){
+            attributes.put(attribute.getName(),attribute);
+        } else if (!attributes.get(attribute.getName()).getType().equals(attribute.getType())) {
+            throw new SemanticException("No se puede heredar el atributo "+attribute.getName()+" porque ya fue declarado en la clase "+this.getName(),attribute.getName() ,attributes.get(attribute.getName()).getLine());
+        }
+    }
+    private void inheritanceMethod(Method m) {
+        if (methods.get(m.getName()) == null) {
+            methods.put(m.getName(), m);
+        } else {
+            Method existingMethod = methods.get(m.getName());
+            if (!(existingMethod.getReturnType().getName().equals(m.getReturnType().getName()))) {
+                throw new SemanticException("El metodo "+m.getName()+" ya fue declarado en la interface "+this.getName()+" con una firma diferente. (Error en tipo de retorno)",existingMethod.getName() ,existingMethod.getLine());
+            }
+            if((existingMethod.getParamList().size() != m.getParamList().size())){
+                throw new SemanticException("El metodo "+m.getName()+" ya fue declarado en la interface "+this.getName()+" con una firma diferente. (Error en cantidad de parametros)",existingMethod.getName() ,existingMethod.getLine());
+            }
+            for (int i = 0; i < existingMethod.getParamList().size(); i++) {
+                Parameter existingParam = existingMethod.getParamList().get(i);
+                Parameter newParam = m.getParamList().get(i);
+                if (!(existingParam.getType().getName().equals(newParam.getType().getName()))) {
+                    throw new SemanticException("El metodo "+m.getName()+" ya fue declarado en la interface "+this.getName()+" con una firma diferente. (Error en tipo de parametros)",existingMethod.getName() ,existingMethod.getLine());
+                }
+            }
+
+        }
+    }
+
     public boolean isInterface() {
         return true;
     }
@@ -57,6 +116,10 @@ public class Interface implements EntityClass {
     public HashMap<String,Attribute> getAttributes(){
         return attributes;
     }
+    public Constructor getConstructor() {
+        // Las interfaces no tienen constructores
+        return null;
+    }
     public void addMethod(Method method) {
         methods.put(method.getName(),method);
     }
@@ -72,7 +135,6 @@ public class Interface implements EntityClass {
             if (symbolTable.getClass(herencia.getLexeme()).isClass())
                 throw new SemanticException("Una interfaz no puede heredar de una clase.", herencia.getLexeme(), herencia.getLineNumber());
 
-            //TODO CONSULTAR FINAL Y STATIC
             if (symbolTable.getClass(herencia.getLexeme()).isFinal())
                 throw new SemanticException("No se puede heredar de una interfaz final.", herencia.getLexeme(), herencia.getLineNumber());
             if (symbolTable.getClass(herencia.getLexeme()).isStatic())
@@ -109,6 +171,9 @@ public class Interface implements EntityClass {
     }
     public boolean isAbstract() {
         return true;
+    }
+    public boolean isClass() {
+        return false;
     }
     public boolean isStatic() {
         if(modificador!=null)

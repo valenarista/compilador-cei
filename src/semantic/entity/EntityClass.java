@@ -13,6 +13,9 @@ public interface EntityClass {
     int getLine();
     Token getModificador();
     Token getHerencia();
+    java.util.HashMap<String, Method> getMethods();
+    java.util.HashMap<String, Attribute> getAttributes();
+    Constructor getConstructor();
     boolean isAbstract();
     boolean isStatic();
     boolean isFinal();

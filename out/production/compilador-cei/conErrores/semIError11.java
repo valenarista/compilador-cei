@@ -1,12 +1,13 @@
-///[Error:A|3]
-// 
-class A extends A{
+///[Error:C|3]
+
+class A extends C{
 
 }
 
+class B extends A{
 
+}
 
-class Init{
-    static void main()
-    { }
+class C extends B {
+
 }
