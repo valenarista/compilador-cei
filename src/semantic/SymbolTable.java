@@ -4,10 +4,8 @@ import compiler.Main;
 import exceptions.SemanticException;
 import lexical.Token;
 import lexical.TokenType;
-import semantic.declarable.Attribute;
-import semantic.declarable.Constructor;
-import semantic.declarable.Method;
-import semantic.declarable.Parameter;
+import semantic.ast.sentence.BlockNode;
+import semantic.declarable.*;
 import semantic.entity.ConcreteClass;
 import semantic.entity.EntityClass;
 import semantic.types.*;
@@ -17,9 +15,11 @@ import java.util.HashMap;
 public class SymbolTable {
     public EntityClass claseActual;
     Attribute attributeActual;
-    Method methodActual;
+    Invocable currentInvocable;
     Constructor constructorActual;
+    Method methodActual;
     public HashMap<String,EntityClass> clases;
+    BlockNode currentBlock;
 
 
     public SymbolTable(){
@@ -104,12 +104,42 @@ public class SymbolTable {
         }
 
     }
+    public void checkSentences() throws SemanticException{
+
+    }
     public void addCurrentClass() {
         clases.put(claseActual.getName(),claseActual);
     }
     public void setCurrentMethod(Method method) {
         claseActual.addMethod(method);
         this.methodActual = method;
+        this.currentInvocable = method;
+    }
+    public void setCurrentBlock(BlockNode block) {
+        this.currentBlock = block;
+    }
+    public void setCurrentInvocable(Invocable invocable) {
+        this.currentInvocable = invocable;
+    }
+    public Invocable getCurrentInvocable() {
+        return this.currentInvocable;
+    }
+    public Method getCurrentMethod() {
+        return this.methodActual;
+    }
+    public BlockNode getCurrentBlock() {
+        return this.currentBlock;
+    }
+    public Constructor getCurrentConstructor() {
+        return this.constructorActual;
+    }
+    public void setCurrentConstructor(Constructor constructor) {
+        claseActual.addConstructor(constructor);
+        this.constructorActual = constructor;
+        this.currentInvocable = constructor;
+    }
+    public Attribute getCurrentAttribute() {
+        return this.attributeActual;
     }
     public void setCurrentAttribute(Attribute attribute) {
         claseActual.addAttribute(attribute);

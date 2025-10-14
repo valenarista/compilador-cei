@@ -4,6 +4,7 @@ import exceptions.SyntacticException;
 import lexical.LexicalAnalyzerMultiDetect;
 import lexical.Token;
 import lexical.TokenType;
+import semantic.ast.sentence.*;
 import semantic.declarable.Attribute;
 import semantic.declarable.Constructor;
 import semantic.declarable.Method;
@@ -283,7 +284,7 @@ public class SyntacticAnalyzer {
             nuevoConstructor.addParameter(p);
         }
         symbolTable.addCurrentConstructor(nuevoConstructor);
-        bloque();
+        nuevoConstructor.setBlock(bloque());
     }
 
     List<Parameter> argsFormales(){
@@ -362,15 +363,21 @@ public class SyntacticAnalyzer {
         }
     }
 
-    void bloque(){
+    BlockNode bloque(){
         match(TokenType.openCurly);
-        listaSentencias();
+        BlockNode nuevoBloque = new BlockNode();
+        List<SentenceNode> sentenceNodeList = new java.util.ArrayList<>();
+        listaSentencias(sentenceNodeList);
+        for(SentenceNode s : sentenceNodeList){
+            nuevoBloque.addSentence(s);
+        }
         match(TokenType.closeCurly);
+        return nuevoBloque;
     }
-    void listaSentencias(){
+    void listaSentencias(List<SentenceNode> sentenceNodeList){
         if(primerosSentencia(currentToken)){
-            sentencia();
-            listaSentencias();
+            sentenceNodeList.add(sentencia());
+            listaSentencias(sentenceNodeList);
         }
         else{
             //epsilon
@@ -424,7 +431,7 @@ public class SyntacticAnalyzer {
     void bloqueOpcional(Method method){
         if(primerosBloque(currentToken)){
             method.setHasBody(true);
-            bloque();
+            method.setBlock(bloque());
         }else if(currentToken.getType().equals(TokenType.semicolon)){
             method.setHasBody(false);
             match(TokenType.semicolon);
@@ -485,33 +492,41 @@ public class SyntacticAnalyzer {
         }
 
     }
-    void sentencia(){
+    SentenceNode sentencia(){
         if(currentToken.getType().equals(TokenType.semicolon)){
             match(TokenType.semicolon);
+            return new EmptySentenceNode();
         }
         else if(primerosExpresion(currentToken)){
             expresion();
             match(TokenType.semicolon);
+            return new EmptySentenceNode(); //TODO ESTA BIEN?
         }
         else if(primerosFor(currentToken)){
             forSentencia();
+            return new ForStandardNode();
         }
         else if(primerosBloque(currentToken)){
-            bloque();
+            symbolTable.getCurrentInvocable().setBlock(bloque());
+            return symbolTable.getCurrentBlock(); //TODO ESTA BIEN?
         }
         else if(primerosIf(currentToken)){
             ifSentencia();
+            return new IfNode();
         }
         else if(primerosWhile(currentToken)){
             whileSentencia();
+            return new WhileNode();
         }
         else if(primerosReturn(currentToken)) {
             returnSentencia();
             match(TokenType.semicolon);
+            return new ReturnNode();
         }
         else if(primerosVarLocal(currentToken)){
             varLocal();
             match(TokenType.semicolon);
+            return new VarLocalNode();
         }
         else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con una sentencia valida" );

@@ -17,7 +17,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 
 @RunWith(Parameterized.class)
-public class TesterDeCasosSinErrores {
+public class TesterDeCasosSinErroresSemanticos1 {
 
     private static final String msgExito = "[SinErrores]";
     private static final String testFilesDirectoryPath = "resources/sinErrores/";
@@ -54,7 +54,7 @@ public class TesterDeCasosSinErrores {
     
     private String input;
     
-    public TesterDeCasosSinErrores(String input){
+    public TesterDeCasosSinErroresSemanticos1(String input){
         this.input = input;
     }
 

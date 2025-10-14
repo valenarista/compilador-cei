@@ -3,14 +3,16 @@ package semantic.declarable;
 import exceptions.SemanticException;
 import lexical.Token;
 import lexical.TokenType;
+import semantic.ast.sentence.BlockNode;
 import semantic.types.Type;
 
+import java.sql.Blob;
 import java.util.HashMap;
 import java.util.List;
 
 import static compiler.Main.symbolTable;
 
-public class Method {
+public class Method implements Invocable {
     private HashMap<String,Parameter> parameters;
     private List<Parameter> paramList;
     private Token idToken;
@@ -18,6 +20,7 @@ public class Method {
     private Token modifier;
     private Token visibility;
     private boolean hasBody;
+    private BlockNode block;
 
     public Method(Token idToken, Type returnType, Token modifier, Token visibility) {
         this.visibility = visibility;
@@ -46,6 +49,8 @@ public class Method {
             throw new SemanticException("Ya fue declarado un parametro con el nombre "+ parameter.getName()+" en el metodo "+this.getName(),parameter.getName(), parameter.getLine());
         }
     }
+    public void setBlock(BlockNode block) { this.block = block; }
+    public BlockNode getBlock() { return block; }
     public boolean hasBody() {
         return hasBody;
     }
@@ -80,7 +85,6 @@ public class Method {
                 param.estaBienDeclarado();
             }
         }
-
     }
 }
 

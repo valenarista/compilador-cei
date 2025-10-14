@@ -2,15 +2,16 @@ package semantic.declarable;
 
 import exceptions.SemanticException;
 import lexical.Token;
-
+import semantic.ast.sentence.BlockNode;
 import java.util.HashMap;
 import java.util.List;
 
-public class Constructor {
+public class Constructor implements Invocable{
     private Token idToken;
     private Token visibility;
     private HashMap<String,Parameter> parameters;
     private List<Parameter> paramList;
+    private BlockNode block;
 
     public Constructor(Token idToken, Token visibility) {
         this.idToken = idToken;
@@ -19,6 +20,8 @@ public class Constructor {
         paramList = new java.util.ArrayList<>();
     }
 
+    public void setBlock(BlockNode block) { this.block = block; }
+    public BlockNode getBlock() { return block; }
     public String getName(){
         return idToken.getLexeme();
     }
