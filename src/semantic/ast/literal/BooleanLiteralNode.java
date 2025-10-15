@@ -13,11 +13,11 @@ public class BooleanLiteralNode extends LiteralNode{
         return token;
     }
     @Override
-    public String getType() {
-        return "";
+    public Type getType() {
+        return new BooleanType();
     }
 
-    @Override
+
     public Type check() {
         return new BooleanType();
     }

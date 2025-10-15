@@ -14,12 +14,12 @@ public class StringLiteralNode extends LiteralNode{
         return token;
     }
     @Override
-    public String getType() {
-        return "";
+    public Type getType() {
+        return new ReferenceType(new Token(TokenType.classID,"String",token.getLineNumber()));
     }
 
     @Override
     public Type check() {
-        return new ReferenceType(new Token(TokenType.classID,"String",token.getLineNumber()));
+        return getType();
     }
 }

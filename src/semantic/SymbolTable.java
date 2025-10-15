@@ -94,38 +94,25 @@ public class SymbolTable {
         clases.forEach((name,clase) -> clase.estaBienDeclarado() );
         clases.forEach((name,clase) -> clase.consolidar() );
     }
-    public void chequeoSentencias() throws SemanticException {
+    public void chequeoSentencias()  {
         clases.forEach((name,clase) -> {
-            try {
                 clase.chequeoSentencias();
-            } catch (SemanticException e) {
-                throw new RuntimeException(e);
-            }
         } );
     }
 
 
     public void setCurrentClass(String lexeme, EntityClass nuevaClase) {
-        if(clases.get(lexeme) == null){
-            claseActual = nuevaClase;
+        claseActual = nuevaClase;
+    }
+
+    public void addCurrentClass() {
+        if(clases.get(claseActual.getName()) == null){
+            clases.put(claseActual.getName(),claseActual);
         } else{
-            throw new SemanticException("Error semantico en linea "+nuevaClase.getLine()+" Se intento crear una clase ya existente ",nuevaClase.getName(), nuevaClase.getLine());
+            throw new SemanticException("Error semantico en linea "+claseActual.getLine()+" Se intento crear una clase ya existente ",claseActual.getName(), claseActual.getLine());
         }
 
-    }
-    public void checkSentences() throws SemanticException{
 
-    }
-    public void addCurrentClass() {
-        clases.put(claseActual.getName(),claseActual);
-    }
-    public void setCurrentMethod(Method method) {
-        claseActual.addMethod(method);
-        this.methodActual = method;
-        this.currentInvocable = method;
-    }
-    public void setCurrentBlock(BlockNode block) {
-        this.currentBlock = block;
     }
     public void setCurrentInvocable(Invocable invocable) {
         this.currentInvocable = invocable;
@@ -133,6 +120,24 @@ public class SymbolTable {
     public Invocable getCurrentInvocable() {
         return this.currentInvocable;
     }
+    public void setCurrentMethod(Method method) {
+        this.methodActual = method;
+        setCurrentInvocable(method);
+    }
+    public void addCurrentMethod() {
+        claseActual.addMethod(methodActual);
+    }
+    public void setCurrentConstructor(Constructor constructor) {
+        this.constructorActual = constructor;
+        setCurrentInvocable(constructor);
+    }
+    public void addCurrentConstructor() {
+        claseActual.addConstructor(constructorActual);
+    }
+    public void setCurrentBlock(BlockNode block) {
+        this.currentBlock = block;
+    }
+
     public Method getCurrentMethod() {
         return this.methodActual;
     }
@@ -142,14 +147,12 @@ public class SymbolTable {
     public BlockNode getCurrentBlock() {
         return this.currentBlock;
     }
+
     public Constructor getCurrentConstructor() {
         return this.constructorActual;
     }
-    public void setCurrentConstructor(Constructor constructor) {
-        claseActual.addConstructor(constructor);
-        this.constructorActual = constructor;
-        this.currentInvocable = constructor;
-    }
+
+
     public Attribute getCurrentAttribute() {
         return this.attributeActual;
     }
@@ -157,12 +160,39 @@ public class SymbolTable {
         claseActual.addAttribute(attribute);
         this.attributeActual = attribute;
     }
-    public void addCurrentConstructor(Constructor constructor) {
-        claseActual.addConstructor(constructor);
-    }
+
     public EntityClass getClass(String lexeme) {
         return clases.get(lexeme);
     }
+    public boolean classExists(String lexeme) {
+        return clases.get(lexeme) != null;
+    }
+    public boolean isParameter(String id) {
+        if(currentInvocable != null){
+            return currentInvocable.getParamList().stream().anyMatch(p -> p.getName().equals(id));
+        }
+        return false;
+    }
+    public boolean isLocalVar(String id) {
+        if(currentBlock != null){
+            return currentBlock.getVarLocalMap().get(id) != null;
+        }
+        return false;
+    }
+    public boolean isAttribute(String id) {
+        if(claseActual != null){
+            return claseActual.getAttributes().get(id) != null;
+        }
+        return false;
+    }
+
+    public Parameter getParameter(String id) {
+        if (currentInvocable != null) {
+            return currentInvocable.getParamList().stream().filter(p -> p.getName().equals(id)).findFirst().orElse(null);
+        }
+        return null;
+    }
+
 
 
 }

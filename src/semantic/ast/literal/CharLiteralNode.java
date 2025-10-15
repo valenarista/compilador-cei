@@ -13,8 +13,8 @@ public class CharLiteralNode extends LiteralNode{
         return token;
     }
     @Override
-    public String getType() {
-        return "";
+    public Type getType() {
+        return new CharType();
     }
 
     @Override

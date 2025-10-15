@@ -49,6 +49,12 @@ public class Method implements Invocable {
             throw new SemanticException("Ya fue declarado un parametro con el nombre "+ parameter.getName()+" en el metodo "+this.getName(),parameter.getName(), parameter.getLine());
         }
     }
+
+    @Override
+    public boolean isStaticMethod() {
+        return modifier!=null && modifier.getType().equals(TokenType.sw_static);
+    }
+
     public void setBlock(BlockNode block) { this.block = block; }
     public BlockNode getBlock() { return block; }
     public boolean hasBody() {
@@ -88,11 +94,7 @@ public class Method implements Invocable {
         }
     }
     public void chequeoSentencias() throws SemanticException {
-        if(this.hasBody) {
-            if (block != null) {
-                block.check();
-            }
-        }
+        block.check();
     }
 }
 

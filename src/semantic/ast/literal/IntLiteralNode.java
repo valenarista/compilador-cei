@@ -13,8 +13,8 @@ public class IntLiteralNode extends LiteralNode{
         return token;
     }
     @Override
-    public String getType() {
-        return "";
+    public Type getType() {
+        return new IntType();
     }
 
     @Override

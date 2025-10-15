@@ -16,4 +16,14 @@ public class ThisReferenceNode extends ReferenceNode{
     public Type check() {
         return null;
     }
+
+    @Override
+    public Token getToken() {
+        return token;
+    }
+
+    @Override
+    public boolean isVariable() {
+        return false;
+    }
 }

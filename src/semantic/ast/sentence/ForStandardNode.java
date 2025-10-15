@@ -5,8 +5,7 @@ import semantic.types.Type;
 public class ForStandardNode extends SentenceNode{
 
     @Override
-    public Type check() {
+    public void check() {
 
-        return null;
     }
 }

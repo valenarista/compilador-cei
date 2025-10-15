@@ -1,11 +1,9 @@
 package semantic.ast.sentence;
 
-import semantic.types.Type;
 
 public class WhileNode extends SentenceNode{
     @Override
-    public Type check() {
+    public void check() {
 
-        return null;
     }
 }

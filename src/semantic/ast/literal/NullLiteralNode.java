@@ -1,6 +1,7 @@
 package semantic.ast.literal;
 
 import lexical.Token;
+import semantic.types.NullType;
 import semantic.types.Type;
 
 public class NullLiteralNode extends LiteralNode{
@@ -12,8 +13,8 @@ public class NullLiteralNode extends LiteralNode{
         return token;
     }
     @Override
-    public String getType() {
-        return "";
+    public Type getType() {
+        return new NullType();
     }
 
     @Override

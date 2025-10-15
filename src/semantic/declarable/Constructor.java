@@ -42,6 +42,12 @@ public class Constructor implements Invocable{
             throw new SemanticException("Error semantico en linea "+parameter.getLine()+" Ya fue declarado un parametro con el nombre "+ parameter.getName()+" en el constructor "+this.getName(),parameter.getName(), parameter.getLine());
         }
     }
+
+    @Override
+    public boolean isStaticMethod() {
+        return false;
+    }
+
     public void estaBienDeclarado() throws SemanticException{
         for(Parameter p : paramList){
             p.estaBienDeclarado();

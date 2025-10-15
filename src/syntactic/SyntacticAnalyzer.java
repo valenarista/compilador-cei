@@ -4,14 +4,9 @@ import exceptions.SyntacticException;
 import lexical.LexicalAnalyzerMultiDetect;
 import lexical.Token;
 import lexical.TokenType;
-import semantic.ast.expression.CompExpNode;
-import semantic.ast.expression.ExpressionNode;
-import semantic.ast.expression.OperandNode;
-import semantic.ast.expression.UnaryExpNode;
+import semantic.ast.expression.*;
 import semantic.ast.literal.*;
-import semantic.ast.reference.MethodCallNode;
-import semantic.ast.reference.ReferenceNode;
-import semantic.ast.reference.ThisReferenceNode;
+import semantic.ast.reference.*;
 import semantic.ast.sentence.*;
 import semantic.declarable.Attribute;
 import semantic.declarable.Constructor;
@@ -136,11 +131,13 @@ public class SyntacticAnalyzer {
             Token nombre = currentToken;
             match(TokenType.metVarID);
             Method nuevoMetodo = new Method(nombre,type,null,visibility);
+            symbolTable.setCurrentMethod(nuevoMetodo);
+            symbolTable.addCurrentMethod();
             List<Parameter> paramList = metodoTail(nuevoMetodo);
             for(Parameter p : paramList){
                 nuevoMetodo.addParameter(p);
             }
-            symbolTable.setCurrentMethod(nuevoMetodo);
+
 
         }
         else{
@@ -287,11 +284,12 @@ public class SyntacticAnalyzer {
     }
     void constructor(Token nombre,Token visibilidad){
         Constructor nuevoConstructor = new Constructor(nombre,visibilidad);
+        symbolTable.setCurrentConstructor(nuevoConstructor);
+        symbolTable.addCurrentConstructor();
         List<Parameter> paramList = argsFormales();
         for(Parameter p : paramList){
             nuevoConstructor.addParameter(p);
         }
-        symbolTable.addCurrentConstructor(nuevoConstructor);
         nuevoConstructor.setBlock(bloque());
     }
 
@@ -414,11 +412,13 @@ public class SyntacticAnalyzer {
         Token nombre = currentToken;
         match(TokenType.metVarID);
         Method nuevoMetodo = new Method(nombre,tipo,modificador,visibility);
+        symbolTable.setCurrentMethod(nuevoMetodo);
+        symbolTable.addCurrentMethod();
         List<Parameter> paramList = metodoTail(nuevoMetodo);
         for(Parameter p : paramList){
             nuevoMetodo.addParameter(p);
         }
-        symbolTable.setCurrentMethod(nuevoMetodo);
+
     }
     Type tipoMetodo(){
         if(currentToken.getType().equals(TokenType.sw_void)){
@@ -440,6 +440,7 @@ public class SyntacticAnalyzer {
             method.setBlock(bloque());
         }else if(currentToken.getType().equals(TokenType.semicolon)){
             method.setHasBody(false);
+            method.setBlock(new NullBlockNode());
             match(TokenType.semicolon);
         } else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un primero de bloque o un token: "+TokenType.semicolon);
@@ -459,11 +460,13 @@ public class SyntacticAnalyzer {
             Token nombre = currentToken;
             match(TokenType.metVarID);
             Method nuevoMetodo = new Method(nombre,type,null,visibility);
+            symbolTable.setCurrentMethod(nuevoMetodo);
+            symbolTable.addCurrentMethod();
             List<Parameter> paramList = metodoTail(nuevoMetodo);
             for(Parameter p : paramList){
                 nuevoMetodo.addParameter(p);
             }
-            symbolTable.setCurrentMethod(nuevoMetodo);
+
         }
         else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un  tipo o un token: "+TokenType.sw_void);
@@ -472,11 +475,13 @@ public class SyntacticAnalyzer {
     void miembroTail(Token nombre, Type tipo,Token visibility){
         if(primerosMetodoTail(currentToken)){
             Method nuevoMetodo = new Method(nombre,tipo,null,visibility);
-            List<Parameter> paramList = metodoTail(nuevoMetodo);
             symbolTable.setCurrentMethod(nuevoMetodo);
+            symbolTable.addCurrentMethod();
+            List<Parameter> paramList = metodoTail(nuevoMetodo);
             for(Parameter p : paramList){
                 nuevoMetodo.addParameter(p);
             }
+
         }
         else if(currentToken.getType().equals(TokenType.semicolon) || primerosAtributoTail(currentToken)){
             Attribute nuevoAtributo = new Attribute(nombre,tipo,visibility);
@@ -505,7 +510,7 @@ public class SyntacticAnalyzer {
             return new EmptySentenceNode();
         }
         else if(primerosExpresion(currentToken)){
-            nuevaSentencia = expresion();
+            nuevaSentencia = new SentenceWithExpressionNode(expresion());
             match(TokenType.semicolon);
             return nuevaSentencia;
         }
@@ -513,11 +518,12 @@ public class SyntacticAnalyzer {
             forSentencia();
         }
         else if(primerosBloque(currentToken)){
-            symbolTable.getCurrentInvocable().setBlock(bloque());
+            nuevaSentencia = bloque();
+
             //return symbolTable.getCurrentBlock(); //TODO ESTA BIEN?
         }
         else if(primerosIf(currentToken)){
-            ifSentencia();
+            nuevaSentencia = ifSentencia();
         }
         else if(primerosWhile(currentToken)){
             whileSentencia();
@@ -577,21 +583,24 @@ public class SyntacticAnalyzer {
         match(TokenType.colon);
         expresion();
     }
-    void ifSentencia(){
+    IfNode ifSentencia(){
+        IfNode ifNode;
         match(TokenType.sw_if);
         match(TokenType.openBracket);
-        expresion();
+        ExpressionNode cond = expresion();
         match(TokenType.closeBracket);
-        sentencia();
-        ifSentencia_Recursivo();
+        SentenceNode body = sentencia();
+        ifNode = new IfNode(cond,body,ifSentencia_Recursivo());
+        return ifNode;
     }
-    void ifSentencia_Recursivo(){
+    SentenceNode ifSentencia_Recursivo(){
         if(currentToken.getType().equals(TokenType.sw_else)){
             match(TokenType.sw_else);
-            sentencia();
+            return sentencia();
         }
         else{
             //epsilon
+            return new EmptySentenceNode();
         }
     }
     void whileSentencia(){
@@ -616,7 +625,7 @@ public class SyntacticAnalyzer {
         return nuevaVarLocal;
     }
     ExpressionNode expresion(){
-        CompExpNode expresionCompuesta = expresionCompuesta();
+        ExpressionNode expresionCompuesta = expresionCompuesta();
         return expresion_Recursiva(expresionCompuesta);
     }
     ExpressionNode expresion_Recursiva(ExpressionNode expressionNode){
@@ -635,7 +644,7 @@ public class SyntacticAnalyzer {
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba un operador de asignacion");
         }
     }
-    CompExpNode expresionCompuesta(){
+    ExpressionNode expresionCompuesta(){
         ExpressionNode expressionNode = expresionBasica();
         operacionTernariaOpcional();
         return  expresionCompuesta_Recursiva(expressionNode);
@@ -652,16 +661,18 @@ public class SyntacticAnalyzer {
         }
     }
 
-    CompExpNode expresionCompuesta_Recursiva(ExpressionNode left){
+    ExpressionNode expresionCompuesta_Recursiva(ExpressionNode left){
         if(primerosOperadorBinario(currentToken)) {
+            Token operator = currentToken;
             operadorBinario();
-            expresionBasica();
+            ExpressionNode expressionNode = expresionBasica();
             operacionTernariaOpcional();
-            expresionCompuesta_Recursiva(left);
-            return null;
+            BinaryExpNode binaryExpNode = new BinaryExpNode(left,operator,expressionNode);
+            ExpressionNode toRet = expresionCompuesta_Recursiva(binaryExpNode);
+            return toRet;
         }else{
             //epsilon
-            return null;
+            return left;
         }
     }
 
@@ -732,6 +743,7 @@ public class SyntacticAnalyzer {
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un operando valido" );
         }
     }
+
     OperandNode primitivo(){
         LiteralNode literalNode;
         if(currentToken.getType().equals(TokenType.intLiteral)){
@@ -754,8 +766,8 @@ public class SyntacticAnalyzer {
         }
         return literalNode;
     }
-    ReferenceNode referencia(){
-        ReferenceNode referenceNode = primario();
+    OperandNode referencia(){
+        OperandNode referenceNode = primario();
         referencia_Recursiva();
         return referenceNode;
     }
@@ -769,37 +781,49 @@ public class SyntacticAnalyzer {
             //epsilon
         }
     }
-    void argsActualesOpcional(){
+    List<ExpressionNode> argsActualesOpcional(){
+        List<ExpressionNode> argList = new java.util.ArrayList<>();
         if(primerosArgsActuales(currentToken)){
-            argsActuales();
+            argList = argsActuales();
         } else{
             //epsilon
         }
+        return argList;
     }
-    void argsActuales(){
+    List<ExpressionNode> argsActuales(){
         match(TokenType.openBracket);
-        listaExpresionesOpcional();
+        List<ExpressionNode> argList;
+        argList = listaExpresionesOpcional();
         match(TokenType.closeBracket);
+        return argList;
     }
-    void listaExpresionesOpcional(){
+    List<ExpressionNode> listaExpresionesOpcional(){
+        List<ExpressionNode> argList = new java.util.ArrayList<>();
         if(primerosListaExpresiones(currentToken)){
-            listaExpresiones();
+            argList = listaExpresiones();
         } else{
             //epsilon
         }
+        return argList;
     }
-    void listaExpresiones(){
-        expresion();
-        listaExpresiones_Recursiva();
+    List<ExpressionNode> listaExpresiones(){
+        List<ExpressionNode> head = new java.util.ArrayList<>();
+        head.add(expresion());
+        List<ExpressionNode> tail = listaExpresiones_Recursiva();
+        head.addAll(tail);
+        return head;
     }
-    void listaExpresiones_Recursiva(){
+    List<ExpressionNode> listaExpresiones_Recursiva(){
+        List<ExpressionNode> head = new java.util.ArrayList<>();
         if(currentToken.getType().equals(TokenType.comma)){
             match(TokenType.comma);
-            expresion();
-            listaExpresiones_Recursiva();
+            head.add(expresion());
+            List<ExpressionNode> tail = listaExpresiones_Recursiva();
+            head.addAll(tail);
         } else{
             //epsilon
         }
+        return head;
     }
     void expresionOpcional(){
         if(primerosExpresion(currentToken)){
@@ -817,33 +841,41 @@ public class SyntacticAnalyzer {
             operandNode = new ThisReferenceNode(currentToken,symbolTable.getCurrentClass().getName());
             match(TokenType.sw_this);
         } else if(currentToken.getType().equals(TokenType.metVarID)){
-            
+            Token nombre = currentToken;
             match(TokenType.metVarID);
-            llamadaTail();
-
+            operandNode = llamadaTail(nombre);
         } else if(primerosLlamadaConstructor(currentToken)){
-            llamadaConstructor();
+            operandNode = llamadaConstructor();
         } else if(primerosExpresionParentizada(currentToken)){
             expresionParentizada();
+            operandNode = new ToyReferenceNode();
         } else if(primerosLlamadaMetodoEstatico(currentToken)){
             llamadaMetodoEstatico();
+            operandNode = new ToyReferenceNode();
         } else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con una llamada a constructor, expresion parentizada, llamada a metodo estatico o [literalString-this-idMetodoVariable]" );
         }
         return operandNode;
     }
-    void llamadaTail(){
+    ReferenceNode llamadaTail(Token nombre){
         if(primerosArgsActuales(currentToken)){
-            argsActuales();
+            //llamada a metodo
+            MethodCallNode llamadaMetodo = new MethodCallNode(nombre,nombre.getLexeme());
+            llamadaMetodo.setArgList(argsActuales());
+            return llamadaMetodo;
         } else{
             //epsilon
+            return new VarCallNode(nombre,nombre.getLexeme());
         }
     }
-    void llamadaConstructor(){
+    ConstructorCallNode llamadaConstructor(){
         match(TokenType.sw_new);
+        Token nombre = currentToken;
         match(TokenType.classID);
+        ConstructorCallNode constructorCall = new ConstructorCallNode(nombre,nombre.getLexeme());
         tipoParametricoDiamanteOpcional();
-        argsActuales();
+        constructorCall.setArgList(argsActuales());
+        return constructorCall;
     }
     void tipoParametricoDiamanteOpcional(){
         if(currentToken.getType().equals(TokenType.lessOp)){

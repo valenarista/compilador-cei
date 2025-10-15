@@ -1,9 +1,10 @@
 package semantic.ast.expression;
 
+import lexical.Token;
 import semantic.ast.sentence.SentenceNode;
+import semantic.types.Type;
 
-abstract public class ExpressionNode extends SentenceNode {
-    abstract public String getType();
-
-
+abstract public class ExpressionNode{
+    public abstract boolean isVariable();
+    public abstract Type check();
 }

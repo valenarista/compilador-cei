@@ -26,8 +26,7 @@ public class VarLocalNode extends SentenceNode{
     public String getId() {
         return id;
     }
-    public Type check(){
+    public void check(){
 
-        return null;
     }
 }

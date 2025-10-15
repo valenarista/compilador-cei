@@ -1,5 +1,8 @@
 package semantic.ast.expression;
 
-abstract public class OperandNode extends ExpressionNode{
+import lexical.Token;
+import semantic.types.Type;
 
+abstract public class OperandNode extends ExpressionNode{
+    abstract public Token getToken();
 }

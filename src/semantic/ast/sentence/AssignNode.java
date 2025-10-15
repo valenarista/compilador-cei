@@ -1,5 +1,6 @@
 package semantic.ast.sentence;
 
+import exceptions.SemanticException;
 import semantic.ast.expression.ExpressionNode;
 import semantic.types.Type;
 
@@ -11,14 +12,27 @@ public class AssignNode extends ExpressionNode{
         this.left = left;
         this.right = right;
     }
+
     @Override
     public Type check() {
+        Type leftType = left.check();
+        Type rightType = right.check();
 
-        return null;
+        if(!left.isVariable()){
+            throw new SemanticException("Error semantico en linea "+leftType.getLine()+" El operando izquierdo de una asignacion debe ser una variable",leftType.getName(),leftType.getLine());
+        }
+
+
+        if (!leftType.equals(rightType)) {
+            throw new SemanticException("Error semantico en linea "+leftType.getLine()+" No se puede asignar un valor de tipo "+rightType.getName()+" a una variable de tipo "+leftType.getName(),leftType.getName(),leftType.getLine());
+        }
+
+        return leftType; // The type of the assignment expression is the type of the left side
     }
 
+
     @Override
-    public String getType() {
-        return "";
+    public boolean isVariable() {
+        return false;
     }
 }

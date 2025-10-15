@@ -16,4 +16,5 @@ public interface Invocable {
     Token getVisibility();
     void addParameter(Parameter param);
 
+    boolean isStaticMethod();
 }

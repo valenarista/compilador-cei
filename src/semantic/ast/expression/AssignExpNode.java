@@ -9,12 +9,18 @@ public class AssignExpNode extends ExpressionNode{
 
     @Override
     public Type check() {
-
         return null;
     }
+
     @Override
-    public String getType() {
-        return null;
+    public boolean isVariable() {
+        return false;
     }
 
+    public ExpressionNode getLeftSide(){
+        return leftSide;
+    }
+    public ExpressionNode getRightSide(){
+        return rightSide;
+    }
 }

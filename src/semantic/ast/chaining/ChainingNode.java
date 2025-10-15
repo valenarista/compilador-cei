@@ -1,4 +1,9 @@
 package semantic.ast.chaining;
 
-abstract public class ChainingNode {
+import semantic.types.Type;
+
+abstract public class ChainingNode  {
+    public Type check(Type check) {
+        return null;
+    }
 }

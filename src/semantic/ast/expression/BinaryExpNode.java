@@ -28,7 +28,7 @@ public class BinaryExpNode extends CompExpNode{
     }
 
     @Override
-    public String getType() {
-        return "";
+    public boolean isVariable() {
+        return false;
     }
 }
