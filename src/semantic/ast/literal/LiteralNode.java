@@ -1,4 +1,6 @@
 package semantic.ast.literal;
 
-abstract public class LiteralNode {
+import semantic.ast.expression.OperandNode;
+
+abstract public class LiteralNode extends OperandNode {
 }

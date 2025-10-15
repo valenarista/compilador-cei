@@ -47,4 +47,9 @@ public class Constructor implements Invocable{
             p.estaBienDeclarado();
         }
     }
+    public void chequeoSentencias() throws SemanticException{
+        if(block != null){
+            block.check();
+        }
+    }
 }

@@ -63,6 +63,18 @@ public class ConcreteClass implements EntityClass {
             checkImplementation();
         }
     }
+
+    public void chequeoSentencias(){
+        for(Method m : methods.values()) {
+            m.chequeoSentencias();
+        }
+        if(constructor!=null){
+            constructor.chequeoSentencias();
+        }
+    }
+
+
+
     public void checkInheritance(){
         if(herencia!=null && symbolTable.getClass(herencia.getLexeme())==null){
             throw new SemanticException("Error semantico en linea "+herencia.getLineNumber()+" La clase padre "+herencia.getLexeme()+" no existe.",herencia.getLexeme(), herencia.getLineNumber());

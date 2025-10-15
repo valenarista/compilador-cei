@@ -75,6 +75,7 @@ public class Method implements Invocable {
     public Token getModifier() {
         return modifier;
     }
+
     public void estaBienDeclarado() {
         if (!returnType.isPrimitive() && (symbolTable.getClass(returnType.getName()) == null)) {
             throw new SemanticException("Error semantico en linea "+returnType.getLine()+" El metodo fue declarado como tipo de clase inexistente. ", returnType.getName(), returnType.getLine());
@@ -83,6 +84,13 @@ public class Method implements Invocable {
         if(!paramList.isEmpty()) {
             for (Parameter param : paramList) {
                 param.estaBienDeclarado();
+            }
+        }
+    }
+    public void chequeoSentencias() throws SemanticException {
+        if(this.hasBody) {
+            if (block != null) {
+                block.check();
             }
         }
     }

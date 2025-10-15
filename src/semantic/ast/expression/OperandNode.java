@@ -1,4 +1,5 @@
 package semantic.ast.expression;
 
-abstract public class OperandNode extends CompExpNode{
+abstract public class OperandNode extends ExpressionNode{
+
 }

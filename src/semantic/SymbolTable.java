@@ -94,6 +94,15 @@ public class SymbolTable {
         clases.forEach((name,clase) -> clase.estaBienDeclarado() );
         clases.forEach((name,clase) -> clase.consolidar() );
     }
+    public void chequeoSentencias() throws SemanticException {
+        clases.forEach((name,clase) -> {
+            try {
+                clase.chequeoSentencias();
+            } catch (SemanticException e) {
+                throw new RuntimeException(e);
+            }
+        } );
+    }
 
 
     public void setCurrentClass(String lexeme, EntityClass nuevaClase) {
@@ -126,6 +135,9 @@ public class SymbolTable {
     }
     public Method getCurrentMethod() {
         return this.methodActual;
+    }
+    public EntityClass getCurrentClass() {
+        return this.claseActual;
     }
     public BlockNode getCurrentBlock() {
         return this.currentBlock;

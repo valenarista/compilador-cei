@@ -1,11 +1,10 @@
-package semantic.ast.sentence;
+package semantic.ast.reference;
 
 import semantic.types.Type;
 
-public class WhileNode extends SentenceNode{
+public class StaticMethodCallNode extends ReferenceNode{
     @Override
     public Type check() {
-
         return null;
     }
 }

@@ -8,6 +8,7 @@ import semantic.declarable.Method;
 public interface EntityClass {
     void estaBienDeclarado();
     void consolidar();
+    void chequeoSentencias();
 
     String getName();
     int getLine();

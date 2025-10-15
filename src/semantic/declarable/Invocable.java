@@ -11,6 +11,7 @@ public interface Invocable {
     BlockNode getBlock();
     int getLine();
     void estaBienDeclarado();
+    void chequeoSentencias();
     List<Parameter> getParamList();
     Token getVisibility();
     void addParameter(Parameter param);

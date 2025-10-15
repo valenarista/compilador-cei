@@ -4,6 +4,14 @@ import exceptions.SyntacticException;
 import lexical.LexicalAnalyzerMultiDetect;
 import lexical.Token;
 import lexical.TokenType;
+import semantic.ast.expression.CompExpNode;
+import semantic.ast.expression.ExpressionNode;
+import semantic.ast.expression.OperandNode;
+import semantic.ast.expression.UnaryExpNode;
+import semantic.ast.literal.*;
+import semantic.ast.reference.MethodCallNode;
+import semantic.ast.reference.ReferenceNode;
+import semantic.ast.reference.ThisReferenceNode;
 import semantic.ast.sentence.*;
 import semantic.declarable.Attribute;
 import semantic.declarable.Constructor;
@@ -368,9 +376,7 @@ public class SyntacticAnalyzer {
         BlockNode nuevoBloque = new BlockNode();
         List<SentenceNode> sentenceNodeList = new java.util.ArrayList<>();
         listaSentencias(sentenceNodeList);
-        for(SentenceNode s : sentenceNodeList){
-            nuevoBloque.addSentence(s);
-        }
+        nuevoBloque.setSentencesList(sentenceNodeList);
         match(TokenType.closeCurly);
         return nuevoBloque;
     }
@@ -493,44 +499,41 @@ public class SyntacticAnalyzer {
 
     }
     SentenceNode sentencia(){
+        SentenceNode nuevaSentencia = null;
         if(currentToken.getType().equals(TokenType.semicolon)){
             match(TokenType.semicolon);
             return new EmptySentenceNode();
         }
         else if(primerosExpresion(currentToken)){
-            expresion();
+            nuevaSentencia = expresion();
             match(TokenType.semicolon);
-            return new EmptySentenceNode(); //TODO ESTA BIEN?
+            return nuevaSentencia;
         }
         else if(primerosFor(currentToken)){
             forSentencia();
-            return new ForStandardNode();
         }
         else if(primerosBloque(currentToken)){
             symbolTable.getCurrentInvocable().setBlock(bloque());
-            return symbolTable.getCurrentBlock(); //TODO ESTA BIEN?
+            //return symbolTable.getCurrentBlock(); //TODO ESTA BIEN?
         }
         else if(primerosIf(currentToken)){
             ifSentencia();
-            return new IfNode();
         }
         else if(primerosWhile(currentToken)){
             whileSentencia();
-            return new WhileNode();
         }
         else if(primerosReturn(currentToken)) {
             returnSentencia();
             match(TokenType.semicolon);
-            return new ReturnNode();
         }
         else if(primerosVarLocal(currentToken)){
-            varLocal();
+            VarLocalNode nuevaVarLocal = varLocal();
             match(TokenType.semicolon);
-            return new VarLocalNode();
         }
         else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con una sentencia valida" );
         }
+        return nuevaSentencia;
     }
     void forSentencia(){
         match(TokenType.sw_for);
@@ -602,22 +605,27 @@ public class SyntacticAnalyzer {
         match(TokenType.sw_return);
         expresionOpcional();
     }
-    void varLocal(){
+    VarLocalNode varLocal(){
+        VarLocalNode nuevaVarLocal;
         match(TokenType.sw_var);
+        Token nombre = currentToken;
         match(TokenType.metVarID);
         match(TokenType.assignOp);
-        expresionCompuesta();
+        ExpressionNode expressionNode = expresionCompuesta();
+        nuevaVarLocal = new VarLocalNode(nombre,expressionNode);
+        return nuevaVarLocal;
     }
-    void expresion(){
-        expresionCompuesta();
-        expresion_Recursiva();
+    ExpressionNode expresion(){
+        CompExpNode expresionCompuesta = expresionCompuesta();
+        return expresion_Recursiva(expresionCompuesta);
     }
-    void expresion_Recursiva(){
+    ExpressionNode expresion_Recursiva(ExpressionNode expressionNode){
         if(primerosOperadorAsignacion(currentToken)){
             operadorAsignacion();
-            expresionCompuesta();
+            return new AssignNode(expressionNode,expresionCompuesta());
         } else{
             //epsilon
+            return expressionNode;
         }
     }
     void operadorAsignacion(){
@@ -627,10 +635,10 @@ public class SyntacticAnalyzer {
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba un operador de asignacion");
         }
     }
-    void expresionCompuesta(){
-        expresionBasica();
+    CompExpNode expresionCompuesta(){
+        ExpressionNode expressionNode = expresionBasica();
         operacionTernariaOpcional();
-        expresionCompuesta_Recursiva();
+        return  expresionCompuesta_Recursiva(expressionNode);
     }
 
     void operacionTernariaOpcional(){
@@ -644,28 +652,30 @@ public class SyntacticAnalyzer {
         }
     }
 
-    void expresionCompuesta_Recursiva(){
+    CompExpNode expresionCompuesta_Recursiva(ExpressionNode left){
         if(primerosOperadorBinario(currentToken)) {
             operadorBinario();
             expresionBasica();
             operacionTernariaOpcional();
-            expresionCompuesta_Recursiva();
+            expresionCompuesta_Recursiva(left);
+            return null;
         }else{
             //epsilon
+            return null;
         }
     }
 
-    void expresionBasica(){
+    ExpressionNode expresionBasica(){
         if(primerosOperadorUnario(currentToken)) {
-            operadorUnario();
-            operando();
+            return new UnaryExpNode(operadorUnario(),operando());
         } else if(primerosOperando(currentToken)){
-            operando();
+            return new UnaryExpNode(operando());
         } else {
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un operador unario o un operando valido" );
         }
     }
-    void operadorUnario(){
+    Token operadorUnario(){
+        Token operator = currentToken;
         if(currentToken.getType().equals(TokenType.addOp)){
             match(TokenType.addOp);
         } else if(currentToken.getType().equals(TokenType.subOp)){
@@ -680,6 +690,7 @@ public class SyntacticAnalyzer {
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType()
                     ,"Se esperaba matchear con un operador unario ["+TokenType.addOp+TokenType.subOp+TokenType.postDecrement+TokenType.postIncrement+TokenType.notOp+"]");
         }
+        return operator;
     }
     void operadorBinario(){
         if(currentToken.getType().equals(TokenType.orOp)){
@@ -712,33 +723,41 @@ public class SyntacticAnalyzer {
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un operador binario");
         }
     }
-    void operando(){
+    OperandNode operando(){
         if(primerosPrimitivo(currentToken)){
-            primitivo();
+            return primitivo();
         } else if(primerosReferencia(currentToken)){
-            referencia();
+            return referencia();
         } else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un operando valido" );
         }
     }
-    void primitivo(){
+    OperandNode primitivo(){
+        LiteralNode literalNode;
         if(currentToken.getType().equals(TokenType.intLiteral)){
+            literalNode = new IntLiteralNode(currentToken);
             match(TokenType.intLiteral);
         } else if(currentToken.getType().equals(TokenType.charLiteral)){
+            literalNode = new CharLiteralNode(currentToken);
             match(TokenType.charLiteral);
         } else if(currentToken.getType().equals(TokenType.sw_true)){
+            literalNode = new BooleanLiteralNode(currentToken);
             match(TokenType.sw_true);
         } else if(currentToken.getType().equals(TokenType.sw_false)){
+            literalNode = new BooleanLiteralNode(currentToken);
             match(TokenType.sw_false);
         } else if(currentToken.getType().equals(TokenType.sw_null)){
+            literalNode = new NullLiteralNode(currentToken);
             match(TokenType.sw_null);
         } else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un primitivo [literalInt-literalChar-true-false-null]" );
         }
+        return literalNode;
     }
-    void referencia(){
-        primario();
+    ReferenceNode referencia(){
+        ReferenceNode referenceNode = primario();
         referencia_Recursiva();
+        return referenceNode;
     }
     void referencia_Recursiva(){
         if(currentToken.getType().equals(TokenType.dot)){
@@ -789,14 +808,19 @@ public class SyntacticAnalyzer {
             //epsilon
         }
     }
-    void primario(){
+    OperandNode primario(){
+        OperandNode operandNode;
         if(currentToken.getType().equals(TokenType.stringLiteral)){
+            operandNode = new StringLiteralNode(currentToken);
             match(TokenType.stringLiteral);
         } else if(currentToken.getType().equals(TokenType.sw_this)){
+            operandNode = new ThisReferenceNode(currentToken,symbolTable.getCurrentClass().getName());
             match(TokenType.sw_this);
         } else if(currentToken.getType().equals(TokenType.metVarID)){
+            
             match(TokenType.metVarID);
             llamadaTail();
+
         } else if(primerosLlamadaConstructor(currentToken)){
             llamadaConstructor();
         } else if(primerosExpresionParentizada(currentToken)){
@@ -806,6 +830,7 @@ public class SyntacticAnalyzer {
         } else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con una llamada a constructor, expresion parentizada, llamada a metodo estatico o [literalString-this-idMetodoVariable]" );
         }
+        return operandNode;
     }
     void llamadaTail(){
         if(primerosArgsActuales(currentToken)){

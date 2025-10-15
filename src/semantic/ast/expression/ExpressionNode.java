@@ -1,4 +1,9 @@
 package semantic.ast.expression;
 
-abstract public class ExpressionNode {
+import semantic.ast.sentence.SentenceNode;
+
+abstract public class ExpressionNode extends SentenceNode {
+    abstract public String getType();
+
+
 }

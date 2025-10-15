@@ -10,324 +10,64 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d10e087-5673-4518-949a-be8557448ba8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/semantic/ast/reference/ConstructorCallNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/semantic/ast/reference/MethodCallNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/semantic/ast/reference/ParentizedExpressionNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/semantic/ast/reference/ReferenceNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/semantic/ast/reference/StaticMethodCallNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/semantic/ast/reference/ThisReferenceNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compilador-cei.jar" beforeDir="false" afterPath="$PROJECT_DIR$/compilador-cei.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/compiler/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/compiler/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError04.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError04.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError05.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError05.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError06.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError06.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError07.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError07.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError08.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError08.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError09.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError09.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError10.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError10.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError11.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError11.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError12.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError13.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError13.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError14.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError14.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError15.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError15.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError16.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError16.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError17.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError17.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError18.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError19.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError20.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError20.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError21.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError22.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError23.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError24.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError25.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError26.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError27.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError28.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError29.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError30.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError31.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError32.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError33.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError34.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError35.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError36.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError37.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError38.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError39.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError40.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError41.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError42.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError43.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError44.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError45.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError46.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError47.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError48.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError49.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError50.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError51.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError52.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError53.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError54.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError55.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError59.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError60.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErrores/semIError61.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError01.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError02.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError03.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError04.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError05.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError06.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError07.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError08.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError09.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError10.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError11.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError12.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError13.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError14.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError15.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError16.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError17.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError18.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError19.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semIError20.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError21.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError22.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError23.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError24.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError25.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError26.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError27.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError28.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError29.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError30.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError31.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError32.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError33.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError34.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError35.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError36.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError37.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError38.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError39.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError40.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError41.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError42.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError43.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/conErroresM/semlError44.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/SymbolTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Attribute.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Attribute.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/SymbolTable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/AssignExpNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/BinaryExpNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/BinaryExpNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/ExpressionNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/ExpressionNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/OperandNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/UnaryExpNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/AssignNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/BlockNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/EmptySentenceNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/ForStandardNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/ForStandardNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/IfNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/ReturnNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/SentenceNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/SentenceNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/VarLocalNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/WhileNode.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Constructor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Constructor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Invocable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Invocable.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Method.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Method.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Parameter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Parameter.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/ConcreteClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/ConcreteClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/EntityClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/EntityClass.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/Interface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/Interface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto01.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto01.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto07.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto07.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto08.java" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto08.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto09.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto11.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto12.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto13.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto14.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto15.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto16.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto17.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto18.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto19.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto20.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto21.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto22.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto23.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto24.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErrores/semICorrecto25.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semICorrecto01.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semICorrecto02.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semICorrecto03.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semICorrecto04.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semICorrecto05.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semICorrecto06.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semICorrecto07.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semICorrecto08.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto09.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto10.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto11.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto12.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto13.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto14.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto15.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto16.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto17.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto18.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto19.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto20.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto21.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto22.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto23.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto24.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto25.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto26.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto27.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto28.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto29.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/sinErroresM/semlCorrecto30.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/syntactic/SyntacticAnalyzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/syntactic/SyntacticAnalyzer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/resources/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError04.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError04.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError05.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError05.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError06.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError06.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError07.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError07.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError08.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError08.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError09.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError09.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError10.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError10.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError11.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError11.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError12.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError13.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError13.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError14.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError14.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError15.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError15.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError16.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError16.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError17.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError17.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError18.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError19.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError20.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semIError20.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError21.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError22.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError23.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError24.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError25.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError26.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError27.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError28.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError29.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError30.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError31.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError32.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError33.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError34.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError35.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError36.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError37.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError38.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError39.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError40.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError41.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError42.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError43.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError44.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError45.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError46.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError47.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError48.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError49.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError50.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError51.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError52.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError53.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError54.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError55.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError59.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError60.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErrores/semIError61.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError01.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError02.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError03.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError04.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError05.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError06.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError07.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError08.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError09.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError10.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError11.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError12.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError13.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError14.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError15.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError16.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError17.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError18.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError19.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semIError20.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError21.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError21.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError22.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError23.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError23.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError24.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError24.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError25.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError25.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError26.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError26.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError27.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError27.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError28.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError28.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError29.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError29.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError30.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError30.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError31.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError31.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError32.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError32.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError33.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError33.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError34.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError34.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError35.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError35.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError36.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError36.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError37.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError37.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError38.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError38.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError39.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError39.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError40.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError40.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError41.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError41.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError42.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError42.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError43.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError43.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/conErroresM/semlError44.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/conErrores/semlError44.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto01.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semICorrecto01.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto07.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semICorrecto07.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto08.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semICorrecto08.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto09.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto11.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto12.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto13.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto14.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto15.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto16.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto17.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto18.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto19.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto20.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto21.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto22.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto23.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto24.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semICorrecto25.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semICorrecto01.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semICorrecto02.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semICorrecto03.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semICorrecto04.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semICorrecto05.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semICorrecto06.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semICorrecto06.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semICorrecto07.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semICorrecto08.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto09.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto09.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto10.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto10.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto11.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto11.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto12.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto13.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto14.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto14.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto15.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto15.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto16.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto16.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto17.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto17.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto18.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto18.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto19.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto19.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto20.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto20.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto21.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto21.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto22.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto22.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto23.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto23.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto24.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto24.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto25.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto25.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto26.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto26.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto27.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto27.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto28.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto28.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto29.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto29.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sinErroresM/semlCorrecto30.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semlCorrecto30.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/compiler/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/compiler/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/SymbolTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Attribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Attribute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/expression/AssignExpNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/expression/AssignExpNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/expression/BinaryExpNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/expression/BinaryExpNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/expression/ExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/expression/ExpressionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/expression/OperandNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/expression/OperandNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/expression/UnaryExpNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/expression/UnaryExpNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/literal/BooleanLiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/literal/BooleanLiteralNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/literal/CharLiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/literal/CharLiteralNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/literal/IntLiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/literal/IntLiteralNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/literal/LiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/literal/LiteralNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/literal/NullLiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/literal/NullLiteralNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/literal/StringLiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/literal/StringLiteralNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/AssignNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/AssignNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/BlockNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/BlockNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/EmptySentenceNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/EmptySentenceNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/ForStandardNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/ForStandardNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/IfNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/IfNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/ReturnNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/ReturnNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/SentenceNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/SentenceNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/VarLocalNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/VarLocalNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/WhileNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/WhileNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Constructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Constructor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Invocable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Invocable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Method.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Method.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Parameter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Parameter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/entity/ConcreteClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/ConcreteClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/entity/EntityClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/EntityClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/entity/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/Interface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -346,8 +86,8 @@
         <option value="Enum" />
         <option value="Exception" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="editable-svg" />
+        <option value="Class" />
       </list>
     </option>
   </component>

@@ -67,6 +67,13 @@ public class Interface implements EntityClass {
         consolidated = true;
 
     }
+
+    public void chequeoSentencias(){
+        for(Method m : methods.values()) {
+            m.chequeoSentencias();
+        }
+    }
+
     private void consolidatedParent(){
         EntityClass parent = symbolTable.getClass(herencia.getLexeme());
         if(!parent.consolidated())
