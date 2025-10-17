@@ -504,7 +504,7 @@ public class SyntacticAnalyzer {
 
     }
     SentenceNode sentencia(){
-        SentenceNode nuevaSentencia = null;
+        SentenceNode nuevaSentencia = new EmptySentenceNode();
         if(currentToken.getType().equals(TokenType.semicolon)){
             match(TokenType.semicolon);
             return new EmptySentenceNode();
@@ -519,8 +519,6 @@ public class SyntacticAnalyzer {
         }
         else if(primerosBloque(currentToken)){
             nuevaSentencia = bloque();
-
-            //return symbolTable.getCurrentBlock(); //TODO ESTA BIEN?
         }
         else if(primerosIf(currentToken)){
             nuevaSentencia = ifSentencia();
@@ -529,7 +527,7 @@ public class SyntacticAnalyzer {
             whileSentencia();
         }
         else if(primerosReturn(currentToken)) {
-            returnSentencia();
+            nuevaSentencia = returnSentencia();
             match(TokenType.semicolon);
         }
         else if(primerosVarLocal(currentToken)){
@@ -600,8 +598,7 @@ public class SyntacticAnalyzer {
         }
         else{
             //epsilon
-            return new EmptySentenceNode();
-        }
+            return new EmptySentenceNode();        }
     }
     void whileSentencia(){
         match(TokenType.sw_while);
@@ -610,9 +607,9 @@ public class SyntacticAnalyzer {
         match(TokenType.closeBracket);
         sentencia();
     }
-    void returnSentencia(){
+    SentenceNode returnSentencia(){
         match(TokenType.sw_return);
-        expresionOpcional();
+        return new ReturnNode(expresionOpcional());
     }
     VarLocalNode varLocal(){
         VarLocalNode nuevaVarLocal;
@@ -825,11 +822,12 @@ public class SyntacticAnalyzer {
         }
         return head;
     }
-    void expresionOpcional(){
+    ExpressionNode expresionOpcional(){
         if(primerosExpresion(currentToken)){
-            expresion();
+            return expresion();
         } else{
             //epsilon
+            return new NullExpressionNode();
         }
     }
     OperandNode primario(){

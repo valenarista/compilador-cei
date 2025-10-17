@@ -1,7 +1,6 @@
-package semantic.ast.sentence;
+package semantic.ast.expression;
 
 import exceptions.SemanticException;
-import semantic.ast.expression.ExpressionNode;
 import semantic.types.Type;
 
 public class AssignNode extends ExpressionNode{
@@ -28,6 +27,16 @@ public class AssignNode extends ExpressionNode{
         }
 
         return leftType; // The type of the assignment expression is the type of the left side
+    }
+
+    @Override
+    public int getLine() {
+        return left.getLine();
+    }
+
+    @Override
+    public String getLexeme() {
+        return "corregir";
     }
 
 

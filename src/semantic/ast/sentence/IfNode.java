@@ -8,6 +8,7 @@ public class IfNode extends SentenceNode{
     private ExpressionNode condition;
     private SentenceNode body;
     private SentenceNode elseBody;
+
     public IfNode(ExpressionNode condition,SentenceNode body,SentenceNode elseBody){
         this.condition = condition;
         this.body = body;

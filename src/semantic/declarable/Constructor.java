@@ -3,6 +3,8 @@ package semantic.declarable;
 import exceptions.SemanticException;
 import lexical.Token;
 import semantic.ast.sentence.BlockNode;
+import semantic.types.Type;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,6 +44,8 @@ public class Constructor implements Invocable{
             throw new SemanticException("Error semantico en linea "+parameter.getLine()+" Ya fue declarado un parametro con el nombre "+ parameter.getName()+" en el constructor "+this.getName(),parameter.getName(), parameter.getLine());
         }
     }
+
+
 
     @Override
     public boolean isStaticMethod() {

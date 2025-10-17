@@ -1,8 +1,10 @@
 package semantic.ast.reference;
 
+import exceptions.SemanticException;
 import lexical.Token;
 import semantic.ast.chaining.ChainingNode;
 import semantic.types.Type;
+import static compiler.Main.symbolTable;
 
 public class ThisReferenceNode extends ReferenceNode{
     private Token token;
@@ -14,7 +16,23 @@ public class ThisReferenceNode extends ReferenceNode{
 
     @Override
     public Type check() {
-        return null;
+        if(symbolTable.getCurrentInvocable().isStaticMethod())
+            throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": no se puede usar 'this' en un metodo estatico", token.getLexeme(), token.getLineNumber());
+
+        if(optChaining != null) {
+            return optChaining.check();
+        }
+
+    }
+
+    @Override
+    public int getLine() {
+        return token.getLineNumber();
+    }
+
+    @Override
+    public String getLexeme() {
+        return token.getLexeme();
     }
 
     @Override

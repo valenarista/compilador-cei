@@ -1,6 +1,6 @@
 package semantic.types;
 
-public class PrimitiveType implements Type {
+abstract public class PrimitiveType implements Type {
     private String name;
     //null void int char boolean
     public PrimitiveType(String name) {

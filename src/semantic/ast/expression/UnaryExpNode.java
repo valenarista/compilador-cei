@@ -35,6 +35,17 @@ public class UnaryExpNode extends CompExpNode{
         }
         return type;
     }
+
+    @Override
+    public int getLine() {
+        return operator.getLineNumber();
+    }
+
+    @Override
+    public String getLexeme() {
+        return operand.getLexeme();
+    }
+
     private boolean operandIsBoolean(Type type){
         return type.equals(new BooleanType());
     }
@@ -45,7 +56,7 @@ public class UnaryExpNode extends CompExpNode{
         return operator.getType().equals(TokenType.notOp);
     }
     private boolean operatorIsInt(){
-        return operator.getType().equals(TokenType.addOp) || operator.getType().equals(TokenType.subOp);
+        return operator.getType().equals(TokenType.addOp) || operator.getType().equals(TokenType.subOp) || operator.getType().equals(TokenType.postDecrement) || operator.getType().equals(TokenType.postIncrement);
     }
 
 

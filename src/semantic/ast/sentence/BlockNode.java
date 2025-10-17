@@ -13,7 +13,7 @@ import static compiler.Main.symbolTable;
 public class BlockNode extends SentenceNode{
     private List<SentenceNode> sentences;
     private HashMap<String,VarLocalNode> varLocalMap;
-    private EntityClass nestedInClass; 
+    private EntityClass nestedInClass;
     private Invocable nestedInInvocable;
     private BlockNode parentBlock;
 

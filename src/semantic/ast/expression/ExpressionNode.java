@@ -7,4 +7,6 @@ import semantic.types.Type;
 abstract public class ExpressionNode{
     public abstract boolean isVariable();
     public abstract Type check();
+    public abstract int getLine();
+    public abstract String getLexeme();
 }

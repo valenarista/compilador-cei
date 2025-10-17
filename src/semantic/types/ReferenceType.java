@@ -18,4 +18,9 @@ public class ReferenceType implements Type{
     public int getLine() {
         return classIdName.getLineNumber();
     }
+
+    @Override
+    public boolean isSubtypeOf(Type rightType) {
+        return false;
+    }
 }

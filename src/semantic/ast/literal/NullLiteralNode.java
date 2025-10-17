@@ -21,4 +21,12 @@ public class NullLiteralNode extends LiteralNode{
     public Type check() {
         return null;
     }
+    @Override
+    public int getLine() {
+        return token.getLineNumber();
+    }
+    @Override
+    public String getLexeme() {
+        return token.getLexeme();
+    }
 }

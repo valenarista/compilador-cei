@@ -36,6 +36,16 @@ public class ConstructorCallNode extends ReferenceNode{
     }
 
     @Override
+    public int getLine() {
+        return token.getLineNumber();
+    }
+
+    @Override
+    public String getLexeme() {
+        return token.getLexeme();
+    }
+
+    @Override
     public boolean isVariable() {
         return false;
     }

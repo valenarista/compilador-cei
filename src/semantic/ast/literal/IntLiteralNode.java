@@ -21,4 +21,12 @@ public class IntLiteralNode extends LiteralNode{
     public Type check() {
         return new IntType();
     }
+    @Override
+    public int getLine() {
+        return token.getLineNumber();
+    }
+    @Override
+    public String getLexeme() {
+        return token.getLexeme();
+    }
 }

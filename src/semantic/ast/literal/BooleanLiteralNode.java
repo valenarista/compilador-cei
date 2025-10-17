@@ -21,4 +21,14 @@ public class BooleanLiteralNode extends LiteralNode{
     public Type check() {
         return new BooleanType();
     }
+
+    @Override
+    public int getLine() {
+        return token.getLineNumber();
+    }
+
+    @Override
+    public String getLexeme() {
+        return token.getLexeme();
+    }
 }
