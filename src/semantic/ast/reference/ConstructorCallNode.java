@@ -46,6 +46,16 @@ public class ConstructorCallNode extends ReferenceNode{
     }
 
     @Override
+    public boolean isAssign() {
+        return false;
+    }
+
+    @Override
+    public boolean isOperandWithCall() {
+        return true;
+    }
+
+    @Override
     public boolean isVariable() {
         return false;
     }

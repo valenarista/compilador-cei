@@ -3,13 +3,13 @@
 class A {
      int a1;
      int v1;
-    
+     B b1;
 
      void m1(int p1) 
     {
-        m2(p1+(v1-10), new B(), "hola!");
+        m2(p1+(v1-10), b1, "hola!");
     }
-    
+    //TODO CAMBIAR b1 por new B()
      void m2(int p1, String x, B p2)
     {}
          

@@ -20,9 +20,10 @@ public class ThisReferenceNode extends ReferenceNode{
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": no se puede usar 'this' en un metodo estatico", token.getLexeme(), token.getLineNumber());
 
         if(optChaining != null) {
-            return optChaining.check();
-        }
+//            return optChaining.check( );
 
+        }
+        return null; // Retornar el tipo de la clase actual
     }
 
     @Override
@@ -33,6 +34,16 @@ public class ThisReferenceNode extends ReferenceNode{
     @Override
     public String getLexeme() {
         return token.getLexeme();
+    }
+
+    @Override
+    public boolean isAssign() {
+        return false;
+    }
+
+    @Override
+    public boolean isOperandWithCall() {
+        return false;
     }
 
     @Override

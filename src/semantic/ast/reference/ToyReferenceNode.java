@@ -13,6 +13,26 @@ public class ToyReferenceNode extends ReferenceNode{
     }
 
     @Override
+    public int getLine() {
+        return 0;
+    }
+
+    @Override
+    public String getLexeme() {
+        return "";
+    }
+
+    @Override
+    public boolean isAssign() {
+        return false;
+    }
+
+    @Override
+    public boolean isOperandWithCall() {
+        return false;
+    }
+
+    @Override
     public Token getToken() {
         return null;
     }

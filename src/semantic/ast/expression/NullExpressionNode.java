@@ -22,4 +22,14 @@ public class NullExpressionNode extends ExpressionNode{
     public String getLexeme() {
         return "";
     }
+
+    @Override
+    public boolean isAssign() {
+        return false;
+    }
+
+    @Override
+    public boolean isOperandWithCall() {
+        return false;
+    }
 }

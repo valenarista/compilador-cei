@@ -10,6 +10,7 @@ import semantic.types.Type;
 public class UnaryExpNode extends CompExpNode{
     private Token operator;
     private OperandNode operand;
+    private Type type;
 
     public UnaryExpNode(Token operator, OperandNode operand) {
         this.operator = operator;
@@ -22,6 +23,7 @@ public class UnaryExpNode extends CompExpNode{
     @Override
     public Type check() {
         Type type = operand.check();
+        this.type = type;
         if(operator!=null){
             if(operatorIsNegation() && operandIsBoolean(type)){
                 return type;
@@ -38,7 +40,11 @@ public class UnaryExpNode extends CompExpNode{
 
     @Override
     public int getLine() {
-        return operator.getLineNumber();
+        return operand.getLine();
+    }
+
+    public Type getType(){
+        return type;
     }
 
     @Override
@@ -46,11 +52,21 @@ public class UnaryExpNode extends CompExpNode{
         return operand.getLexeme();
     }
 
+    @Override
+    public boolean isAssign() {
+        return false;
+    }
+
+    @Override
+    public boolean isOperandWithCall() {
+        return operand.isOperandWithCall();
+    }
+
     private boolean operandIsBoolean(Type type){
-        return type.equals(new BooleanType());
+        return type.getName().equals(new BooleanType().getName());
     }
     private boolean operandIsInt(Type type){
-        return type.equals(new IntType());
+        return type.getName().equals(new IntType().getName());
     }
     private boolean operatorIsNegation() {
         return operator.getType().equals(TokenType.notOp);
@@ -62,6 +78,6 @@ public class UnaryExpNode extends CompExpNode{
 
     @Override
     public boolean isVariable() {
-        return false;
+        return operand.isVariable();
     }
 }

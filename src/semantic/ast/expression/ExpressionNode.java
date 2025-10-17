@@ -9,4 +9,6 @@ abstract public class ExpressionNode{
     public abstract Type check();
     public abstract int getLine();
     public abstract String getLexeme();
+    public abstract boolean isAssign();
+    public abstract boolean isOperandWithCall();
 }

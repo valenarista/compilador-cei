@@ -1,6 +1,7 @@
 package semantic.types;
 
 import lexical.Token;
+import static compiler.Main.symbolTable;
 
 public class ReferenceType implements Type{
     private Token classIdName;
@@ -21,6 +22,12 @@ public class ReferenceType implements Type{
 
     @Override
     public boolean isSubtypeOf(Type rightType) {
+        if(rightType instanceof ReferenceType){
+            ReferenceType rightRefType = (ReferenceType) rightType;
+            if(symbolTable.checkCompatibility(this,rightRefType)){
+                return true;
+            }
+        }
         return false;
     }
 }

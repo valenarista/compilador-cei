@@ -53,6 +53,26 @@ public class VarCallNode extends ReferenceNode{
         return varType;
     }
 
+    @Override
+    public int getLine() {
+        return token.getLineNumber();
+    }
+
+    @Override
+    public String getLexeme() {
+        return token.getLexeme();
+    }
+
+    @Override
+    public boolean isAssign() {
+        return false;
+    }
+
+    @Override
+    public boolean isOperandWithCall() {
+        return false;
+    }
+
     public boolean isParameter(){
         for(Parameter p : symbolTable.getCurrentInvocable().getParamList()){
             if(p.getName().equals(varName)){

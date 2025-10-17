@@ -204,7 +204,22 @@ public class SymbolTable {
         }
         return null;
     }
-
-
-
+    public boolean checkCompatibility(ReferenceType leftType, ReferenceType rightType) {
+        if (leftType.equals(rightType)) {
+            return true;
+        }
+        EntityClass parentClass;
+        parentClass = clases.get(rightType.getName());
+        while (parentClass != null) {
+            if (parentClass.getName().equals(leftType.getName())) {
+                return true;
+            }
+            if (parentClass.getHerencia() != null) {
+                parentClass = clases.get(parentClass.getHerencia().getLexeme());
+            } else {
+                parentClass = null;
+            }
+        }
+        return false;
+    }
 }

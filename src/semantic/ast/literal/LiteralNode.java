@@ -8,8 +8,10 @@ abstract public class LiteralNode extends OperandNode {
     public boolean isVariable() {
         return false;
     }
-
     public abstract Type getType();
-
     public abstract Type check();
+    @Override
+    public boolean isAssign(){ return false; }
+    @Override
+    public boolean isOperandWithCall() { return false; }
 }

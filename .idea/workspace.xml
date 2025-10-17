@@ -10,67 +10,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d10e087-5673-4518-949a-be8557448ba8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semIICorrecto06.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semIICorrecto07.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/semantic/ast/expression/NullExpressionNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/conErrores/semIIError06.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semIICorrecto08.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semIICorrecto09.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semIICorrecto10.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semIICorrecto11.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semIICorrecto12.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semIICorrecto13.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semIICorrecto14.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/semIICorrecto15.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/SymbolTable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/SymbolTable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/AssignExpNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/AssignNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/AssignNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/BinaryExpNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/BinaryExpNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/ExpressionNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/ExpressionNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/UnaryExpNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/literal/BooleanLiteralNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/literal/CharLiteralNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/literal/CharLiteralNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/literal/IntLiteralNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/literal/NullLiteralNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/literal/NullLiteralNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/literal/StringLiteralNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/NullExpressionNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/NullExpressionNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/literal/LiteralNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/literal/LiteralNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/reference/ConstructorCallNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/reference/ConstructorCallNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/reference/MethodCallNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/reference/ParentizedExpressionNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/reference/StaticMethodCallNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/reference/ThisReferenceNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/reference/ToyReferenceNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/reference/VarCallNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/AssignNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/IfNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/IfNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/ReturnNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Constructor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/types/BooleanType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/types/BooleanType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/types/CharType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/types/IntType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/types/NullType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/types/NullType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/types/PrimitiveType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/types/PrimitiveType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/SentenceWithExpressionNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/SentenceWithExpressionNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/VarLocalNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/VarLocalNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/types/ReferenceType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/types/ReferenceType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/types/Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/types/Type.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/types/VoidType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/types/VoidType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/syntactic/SyntacticAnalyzer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sinErrores/semIICorrecto03.java" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sinErrores/semIICorrecto03.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/SymbolTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/SymbolTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ast/expression/AssignExpNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/expression/AssignNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/expression/AssignNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/ast/expression/BinaryExpNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/expression/BinaryExpNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/ast/expression/ExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/expression/ExpressionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/expression/NullExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/expression/NullExpressionNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/ast/expression/UnaryExpNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/expression/UnaryExpNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ast/literal/BooleanLiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/literal/BooleanLiteralNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ast/literal/CharLiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/literal/CharLiteralNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ast/literal/IntLiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/literal/IntLiteralNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ast/literal/NullLiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/literal/NullLiteralNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ast/literal/StringLiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/literal/StringLiteralNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/literal/LiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/literal/LiteralNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/ast/reference/ConstructorCallNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/reference/ConstructorCallNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/reference/MethodCallNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/reference/MethodCallNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/reference/ParentizedExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/reference/ParentizedExpressionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/reference/StaticMethodCallNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/reference/StaticMethodCallNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/ast/reference/ThisReferenceNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/reference/ThisReferenceNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/AssignNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/expression/AssignNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/BlockNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/BlockNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/IfNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/IfNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/ReturnNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/ReturnNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/WhileNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/WhileNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Constructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Constructor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/types/BooleanType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/types/BooleanType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/types/CharType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/types/CharType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/types/IntType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/types/IntType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/types/NullType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/types/NullType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/types/PrimitiveType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/types/PrimitiveType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/reference/ToyReferenceNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/reference/ToyReferenceNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/reference/VarCallNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/reference/VarCallNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/SentenceWithExpressionNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/SentenceWithExpressionNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/VarLocalNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/VarLocalNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/types/ReferenceType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/types/ReferenceType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/types/Type.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/types/Type.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/types/VoidType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/types/VoidType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/syntactic/SyntacticAnalyzer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -126,6 +105,8 @@
     "JUnit.TesterDeCasosConErroresLexicos.executor": "Run",
     "JUnit.TesterDeCasosConErroresSintacticos and 1 more.executor": "Run",
     "JUnit.TesterDeCasosSinErrores (1).executor": "Run",
+    "JUnit.TesterDeCasosSinErrores (2).executor": "Run",
+    "JUnit.TesterDeCasosSinErrores (3).executor": "Run",
     "JUnit.TesterDeCasosSinErrores.executor": "Run",
     "JUnit.TesterDeCasosSinErroresLexicos.executor": "Run",
     "JUnit.conErrores11.* and 2 more.executor": "Run",
@@ -145,7 +126,7 @@
     "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "project.propCompiler"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -172,27 +153,7 @@
       <recent name="lexical" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TesterDeCasosSinErrores">
-    <configuration name="Init" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Init" />
-      <module name="compilador-cei" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="compiler.Main" />
-      <module name="compilador-cei" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="compiler.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.TesterDeCasosConErrores">
     <configuration name="TesterDeCasosConErrores" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="compilador-cei" />
       <extension name="coverage">
@@ -224,6 +185,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TesterDeCasosSinErrores (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="compilador-cei" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="compiler.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="compiler" />
+      <option name="MAIN_CLASS_NAME" value="compiler.TesterDeCasosSinErrores" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="PARAMETERS" value="[semIICorrecto11.java]" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TesterDeCasosSinErrores (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="compilador-cei" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="compiler.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="compiler" />
+      <option name="MAIN_CLASS_NAME" value="compiler.TesterDeCasosSinErrores" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="PARAMETERS" value="[semIICorrecto02.java]" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TesterDeCasosSinErrores" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="compilador-cei" />
       <extension name="coverage">
@@ -241,11 +234,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TesterDeCasosSinErrores" />
-        <item itemvalue="JUnit.TesterDeCasosSinErrores (1)" />
-        <item itemvalue="Application.Init" />
         <item itemvalue="JUnit.TesterDeCasosConErrores" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.TesterDeCasosSinErrores" />
+        <item itemvalue="JUnit.TesterDeCasosSinErrores (3)" />
+        <item itemvalue="JUnit.TesterDeCasosSinErrores (2)" />
+        <item itemvalue="JUnit.TesterDeCasosSinErrores (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -269,6 +262,17 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/resources/sinErrores/semIICorrecto04.java</url>
+          <line>6</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/compilador_cei$TesterDeCasosConErrores.ic" NAME="TesterDeCasosConErrores Coverage Results" MODIFIED="1756429876687" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">

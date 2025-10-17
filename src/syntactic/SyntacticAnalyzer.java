@@ -531,7 +531,7 @@ public class SyntacticAnalyzer {
             match(TokenType.semicolon);
         }
         else if(primerosVarLocal(currentToken)){
-            VarLocalNode nuevaVarLocal = varLocal();
+            nuevaSentencia = varLocal();
             match(TokenType.semicolon);
         }
         else{
@@ -627,8 +627,9 @@ public class SyntacticAnalyzer {
     }
     ExpressionNode expresion_Recursiva(ExpressionNode expressionNode){
         if(primerosOperadorAsignacion(currentToken)){
+            Token operador = currentToken;
             operadorAsignacion();
-            return new AssignNode(expressionNode,expresionCompuesta());
+            return new AssignNode(expressionNode,expresionCompuesta(),operador);
         } else{
             //epsilon
             return expressionNode;
@@ -845,8 +846,7 @@ public class SyntacticAnalyzer {
         } else if(primerosLlamadaConstructor(currentToken)){
             operandNode = llamadaConstructor();
         } else if(primerosExpresionParentizada(currentToken)){
-            expresionParentizada();
-            operandNode = new ToyReferenceNode();
+            operandNode = expresionParentizada();
         } else if(primerosLlamadaMetodoEstatico(currentToken)){
             llamadaMetodoEstatico();
             operandNode = new ToyReferenceNode();
@@ -891,10 +891,11 @@ public class SyntacticAnalyzer {
             //epsilon
         }
     }
-    void expresionParentizada(){
+    ParentizedExpressionNode expresionParentizada(){
         match(TokenType.openBracket);
-        expresion();
+        ExpressionNode expressionNode = expresion();
         match(TokenType.closeBracket);
+        return new ParentizedExpressionNode(expressionNode);
     }
     void llamadaMetodoEstatico(){
         match(TokenType.classID);
