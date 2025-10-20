@@ -1,6 +1,7 @@
 package semantic.ast.reference;
 
 import lexical.Token;
+import semantic.ast.chaining.ChainingNode;
 import semantic.types.Type;
 
 public class ToyReferenceNode extends ReferenceNode{
@@ -10,6 +11,11 @@ public class ToyReferenceNode extends ReferenceNode{
     @Override
     public Type check() {
         return null;
+    }
+
+    @Override
+    public void setOptChaining(ChainingNode chainingNode) {
+
     }
 
     @Override

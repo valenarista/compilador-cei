@@ -6,4 +6,5 @@ abstract public class ChainingNode  {
     public Type check(Type check) {
         return null;
     }
+    abstract public boolean isOperandWithCall();
 }

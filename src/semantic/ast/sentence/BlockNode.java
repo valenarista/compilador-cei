@@ -22,7 +22,7 @@ public class BlockNode extends SentenceNode{
         varLocalMap = new HashMap<>();
         nestedInClass = symbolTable.getCurrentClass();
         nestedInInvocable = symbolTable.getCurrentInvocable();
-        parentBlock = symbolTable.getCurrentBlock();
+        parentBlock = null;
     }
 
     public void addSentence(SentenceNode sentence) {
@@ -50,6 +50,7 @@ public class BlockNode extends SentenceNode{
 
     @Override
     public void check() {
+        parentBlock = symbolTable.getCurrentBlock();
         symbolTable.setCurrentBlock(this);
         symbolTable.setCurrentInvocable(nestedInInvocable);
         symbolTable.setCurrentClass(nestedInClass.getName(),nestedInClass);
@@ -57,5 +58,9 @@ public class BlockNode extends SentenceNode{
         for (SentenceNode sentence : sentences) {
             sentence.check();
         }
+        if(parentBlock != null){
+            symbolTable.setCurrentBlock(parentBlock);
+        }
+
     }
 }

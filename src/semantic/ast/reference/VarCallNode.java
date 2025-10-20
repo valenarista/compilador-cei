@@ -31,7 +31,7 @@ public class VarCallNode extends ReferenceNode{
         System.out.println("Chequeando VarCallNode: " + varName + " en linea " + token.getLineNumber());
         Type varType;
         if(isParameter()){
-            varType =  symbolTable.getCurrentInvocable().getParamList().stream().filter(p -> p.getName().equals(varName)).findFirst().get().getType();
+            varType = symbolTable.getCurrentInvocable().getParamList().stream().filter(p -> p.getName().equals(varName)).findFirst().get().getType();
         }else if(isLocalVar()){
             varType = symbolTable.getCurrentBlock().getVarLocalMap().get(varName).getType();
         }else if(isAttribute()){
@@ -47,8 +47,9 @@ public class VarCallNode extends ReferenceNode{
         }else{
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": la variable '" + varName + "' no ha sido declarada.",token.getLexeme(), token.getLineNumber());
         }
+
         if(optChaining != null){
-            varType = optChaining.check(this.check());
+            return optChaining.check(varType);
         }
         return varType;
     }

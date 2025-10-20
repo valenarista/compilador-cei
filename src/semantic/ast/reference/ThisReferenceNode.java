@@ -2,7 +2,9 @@ package semantic.ast.reference;
 
 import exceptions.SemanticException;
 import lexical.Token;
+import lexical.TokenType;
 import semantic.ast.chaining.ChainingNode;
+import semantic.types.ReferenceType;
 import semantic.types.Type;
 import static compiler.Main.symbolTable;
 
@@ -19,11 +21,17 @@ public class ThisReferenceNode extends ReferenceNode{
         if(symbolTable.getCurrentInvocable().isStaticMethod())
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": no se puede usar 'this' en un metodo estatico", token.getLexeme(), token.getLineNumber());
 
+        String currentClassName = symbolTable.getCurrentClass().getName();
+        Type thisType = new ReferenceType(new Token(TokenType.classID,currentClassName, token.getLineNumber()));
         if(optChaining != null) {
-//            return optChaining.check( );
-
+            return optChaining.check(thisType);
         }
-        return null; // Retornar el tipo de la clase actual
+        return thisType;
+    }
+
+    @Override
+    public void setOptChaining(ChainingNode chainingNode) {
+        optChaining = chainingNode;
     }
 
     @Override
@@ -43,6 +51,9 @@ public class ThisReferenceNode extends ReferenceNode{
 
     @Override
     public boolean isOperandWithCall() {
+        if(optChaining != null) {
+            return optChaining.isOperandWithCall();
+        }
         return false;
     }
 

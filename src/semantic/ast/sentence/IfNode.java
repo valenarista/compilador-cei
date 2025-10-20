@@ -1,5 +1,6 @@
 package semantic.ast.sentence;
 
+import exceptions.SemanticException;
 import semantic.ast.expression.ExpressionNode;
 import semantic.types.BooleanType;
 import semantic.types.Type;
@@ -17,7 +18,8 @@ public class IfNode extends SentenceNode{
 
     @Override
     public void check() {
-        condition.check().equals(new BooleanType());
+        if(!condition.check().getName().equals(new BooleanType().getName()))
+            throw new SemanticException("Error semantico en linea "+condition.getLine()+" La condicion de un if debe ser de tipo booleano",condition.getLexeme(),condition.getLine());
         body.check();
         elseBody.check();
     }

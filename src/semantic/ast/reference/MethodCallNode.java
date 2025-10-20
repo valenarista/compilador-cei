@@ -2,6 +2,7 @@ package semantic.ast.reference;
 
 import exceptions.SemanticException;
 import lexical.Token;
+import semantic.ast.chaining.ChainingNode;
 import semantic.ast.expression.ExpressionNode;
 import semantic.declarable.Method;
 import semantic.declarable.Parameter;
@@ -14,6 +15,7 @@ import static compiler.Main.symbolTable;
 public class MethodCallNode extends ReferenceNode{
     private Token token;
     private String methodName;
+    private ChainingNode optChaining;
     private List<ExpressionNode> argList;
 
     public MethodCallNode(Token token, String methodName) {
@@ -38,6 +40,9 @@ public class MethodCallNode extends ReferenceNode{
         Method method = symbolTable.getCurrentClass().getMethods().get(methodName);
         List<Parameter> origArgList = method.getParamList();
         int index = 0;
+        if(argList.size() != origArgList.size()){
+            throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": el numero de argumentos no coincide con el numero de parametros esperados.",token.getLexeme(), token.getLineNumber());
+        }
         for(ExpressionNode arg : argList){
             Type type = arg.check();
             if(!type.isSubtypeOf(origArgList.get(index).getType())){
@@ -45,17 +50,25 @@ public class MethodCallNode extends ReferenceNode{
             }
             index++;
         }
+        if(optChaining != null) {
+            return optChaining.check(method.getReturnType());
+        }
         return method.getReturnType();
     }
 
     @Override
+    public void setOptChaining(ChainingNode chainingNode) {
+        optChaining = chainingNode;
+    }
+
+    @Override
     public int getLine() {
-        return 0;
+        return token.getLineNumber();
     }
 
     @Override
     public String getLexeme() {
-        return "";
+        return token.getLexeme();
     }
 
     @Override

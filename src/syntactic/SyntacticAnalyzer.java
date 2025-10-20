@@ -4,6 +4,9 @@ import exceptions.SyntacticException;
 import lexical.LexicalAnalyzerMultiDetect;
 import lexical.Token;
 import lexical.TokenType;
+import semantic.ast.chaining.ChainedCallNode;
+import semantic.ast.chaining.ChainedVarNode;
+import semantic.ast.chaining.ChainingNode;
 import semantic.ast.expression.*;
 import semantic.ast.literal.*;
 import semantic.ast.reference.*;
@@ -766,25 +769,37 @@ public class SyntacticAnalyzer {
     }
     OperandNode referencia(){
         OperandNode referenceNode = primario();
-        referencia_Recursiva();
+        referenceNode.setOptChaining(referencia_Recursiva());
         return referenceNode;
     }
-    void referencia_Recursiva(){
+    ChainingNode referencia_Recursiva(){
         if(currentToken.getType().equals(TokenType.dot)){
             match(TokenType.dot);
+            Token nombre = currentToken;
             match(TokenType.metVarID);
-            argsActualesOpcional();
-            referencia_Recursiva();
+            List<ExpressionNode> optArgs = argsActualesOpcional();
+            if(optArgs == null){
+                ChainedVarNode varCallNode = new ChainedVarNode(nombre,nombre.getLexeme());
+                varCallNode.setOptChaining(referencia_Recursiva());
+                return varCallNode;
+            } else{
+                ChainedCallNode methodCallNode = new ChainedCallNode(nombre,nombre.getLexeme());
+                methodCallNode.setArgList(optArgs);
+                methodCallNode.setOptChaining(referencia_Recursiva());
+                return methodCallNode;
+            }
         } else{
             //epsilon
+            return null;
         }
     }
     List<ExpressionNode> argsActualesOpcional(){
-        List<ExpressionNode> argList = new java.util.ArrayList<>();
+        List<ExpressionNode> argList;
         if(primerosArgsActuales(currentToken)){
             argList = argsActuales();
         } else{
             //epsilon
+            argList = null;
         }
         return argList;
     }
@@ -848,8 +863,7 @@ public class SyntacticAnalyzer {
         } else if(primerosExpresionParentizada(currentToken)){
             operandNode = expresionParentizada();
         } else if(primerosLlamadaMetodoEstatico(currentToken)){
-            llamadaMetodoEstatico();
-            operandNode = new ToyReferenceNode();
+            operandNode = llamadaMetodoEstatico();
         } else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con una llamada a constructor, expresion parentizada, llamada a metodo estatico o [literalString-this-idMetodoVariable]" );
         }
@@ -897,11 +911,15 @@ public class SyntacticAnalyzer {
         match(TokenType.closeBracket);
         return new ParentizedExpressionNode(expressionNode);
     }
-    void llamadaMetodoEstatico(){
+    StaticMethodCallNode llamadaMetodoEstatico(){
+        Token clase = currentToken;
         match(TokenType.classID);
         match(TokenType.dot);
+        Token nombreMetodo = currentToken;
         match(TokenType.metVarID);
-        argsActuales();
+        StaticMethodCallNode staticMethodCallNode = new StaticMethodCallNode(clase,nombreMetodo);
+        staticMethodCallNode.setArgList(argsActuales());
+        return staticMethodCallNode;
     }
 
 

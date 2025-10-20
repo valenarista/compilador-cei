@@ -1,18 +1,29 @@
 package semantic.ast.reference;
 
 import lexical.Token;
+import semantic.ast.chaining.ChainingNode;
 import semantic.ast.expression.ExpressionNode;
 import semantic.types.Type;
 
 public class ParentizedExpressionNode extends ReferenceNode{
     private ExpressionNode expression;
+    private ChainingNode optionalChaining;
     public ParentizedExpressionNode(ExpressionNode expression){
         this.expression = expression;
     }
 
     @Override
     public Type check() {
-        return expression.check();
+        Type type = expression.check();
+        if(optionalChaining != null){
+            return optionalChaining.check(type);
+        }
+        return type;
+    }
+
+    @Override
+    public void setOptChaining(ChainingNode chainingNode) {
+        optionalChaining = chainingNode;
     }
 
     @Override
@@ -32,6 +43,9 @@ public class ParentizedExpressionNode extends ReferenceNode{
 
     @Override
     public boolean isOperandWithCall() {
+        if(optionalChaining != null) {
+            return optionalChaining.isOperandWithCall();
+        }
         return false;
     }
 
