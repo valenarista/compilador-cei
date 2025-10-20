@@ -54,11 +54,7 @@ public class StaticMethodCallNode extends ReferenceNode {
             }
             index++;
         }
-        Type methodReturnType = symbolTable.getClass(className).getMethods().get(methodName).getReturnType();
-        if(optionalChaining!=null){
-            return optionalChaining.check(methodReturnType);
-        }
-        return methodReturnType;
+        return symbolTable.getClass(className).getMethods().get(methodName).getReturnType();
     }
 
 
@@ -94,7 +90,7 @@ public class StaticMethodCallNode extends ReferenceNode {
         if(optionalChaining != null) {
             return optionalChaining.isOperandWithCall();
         }
-        return false;
+        return true;
     }
 
     @Override

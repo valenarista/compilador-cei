@@ -32,7 +32,7 @@ public class VarLocalNode extends SentenceNode{
     }
     public void check(){
         type = value.check();
-        if(type.equals(new NullType()))
+        if(type.getName().equals(new NullType().getName()))
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": No se puede asignar null a una variable local",token.getLexeme(),token.getLineNumber());
         if(symbolTable.getCurrentInvocable().getParamList().stream().anyMatch(p -> p.getName().equals(id))){
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": La variable local '" + id + "' ya ha sido declarada como parametro del metodo actual.",token.getLexeme(),token.getLineNumber());

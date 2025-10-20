@@ -84,6 +84,9 @@ public class ConstructorCallNode extends ReferenceNode{
 
     @Override
     public boolean isOperandWithCall() {
+        if(optChaining != null) {
+            return optChaining.isOperandWithCall();
+        }
         return true;
     }
 

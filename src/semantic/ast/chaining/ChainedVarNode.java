@@ -42,6 +42,7 @@ public class ChainedVarNode extends ChainingNode{
     }
 
     private void notPrimitiveCalling(Type callingType){
+        System.out.println(callingType.getName());
         if(callingType.isPrimitive())
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": no se puede hacer una llamada a un atributo en un tipo primitivo.",token.getLexeme(), token.getLineNumber());
     }

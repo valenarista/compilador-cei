@@ -1,7 +1,7 @@
 //[Error:B|5]
 
 class A {
-    void m1(int a){
+    void m1(){
         var a = new B();
     }
 
