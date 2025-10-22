@@ -1,4 +1,4 @@
-//[Error:B|6]
+//[Error:;|6]
 
 class A {
     public int hola;

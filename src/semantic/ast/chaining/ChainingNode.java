@@ -7,4 +7,5 @@ abstract public class ChainingNode  {
         return null;
     }
     abstract public boolean isOperandWithCall();
+    abstract public boolean isVariable();
 }

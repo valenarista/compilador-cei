@@ -28,7 +28,6 @@ public class VarCallNode extends ReferenceNode{
     }
     @Override
     public Type check() {
-        System.out.println("Chequeando VarCallNode: " + varName + " en linea " + token.getLineNumber());
         Type varType;
         if(isParameter()){
             varType = symbolTable.getCurrentInvocable().getParamList().stream().filter(p -> p.getName().equals(varName)).findFirst().get().getType();
@@ -94,6 +93,9 @@ public class VarCallNode extends ReferenceNode{
 
     @Override
     public boolean isVariable() {
+        if(optChaining != null) {
+            return optChaining.isVariable();
+        }
         return true;
     }
 }

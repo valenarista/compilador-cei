@@ -25,7 +25,7 @@ public class ReturnNode extends SentenceWithExpressionNode{
     public void check() {
         Type returnType = expressionNode.check();
         if (!returnType.getName().equals(expectedType.getName())) {
-            throw new SemanticException("Error semantico en linea " + expressionNode.getLine() + ": Tipo de retorno incorrecto. Se esperaba " + expectedType + " pero se obtuvo " + returnType,expressionNode.getLexeme(),expressionNode.getLine());
+            throw new SemanticException("Error semantico en linea " + expressionNode.getLine() + ": Tipo de retorno incorrecto. Se esperaba " + expectedType.getName() + " pero se obtuvo " + returnType.getName(),expressionNode.getLexeme(),expressionNode.getLine());
         }
     }
 }

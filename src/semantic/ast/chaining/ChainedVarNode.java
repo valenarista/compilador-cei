@@ -28,6 +28,11 @@ public class ChainedVarNode extends ChainingNode{
         return false;
     }
 
+    @Override
+    public boolean isVariable() {
+        return true;
+    }
+
     public void setOptChaining(ChainingNode chainingNode) {
         optionalChaining = chainingNode;
     }

@@ -1,6 +1,7 @@
 package semantic.ast.expression;
 
 import semantic.types.Type;
+import semantic.types.VoidType;
 
 public class NullExpressionNode extends ExpressionNode{
     @Override
@@ -10,7 +11,7 @@ public class NullExpressionNode extends ExpressionNode{
 
     @Override
     public Type check() {
-        return null;
+        return new VoidType();
     }
 
     @Override

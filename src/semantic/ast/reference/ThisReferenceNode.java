@@ -64,6 +64,9 @@ public class ThisReferenceNode extends ReferenceNode{
 
     @Override
     public boolean isVariable() {
+        if(optChaining != null) {
+            return optChaining.isVariable();
+        }
         return false;
     }
 }

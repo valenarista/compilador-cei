@@ -13,16 +13,18 @@ public class VarLocalNode extends SentenceNode{
     private String id;
     private ExpressionNode value;
     private Token token;
+    private Token assignToken;
 
     public VarLocalNode(Type type, Token token) {
         this.type = type;
         this.id = token.getLexeme();
         this.token = token;
     }
-    public VarLocalNode(Token token, ExpressionNode value) {
+    public VarLocalNode(Token token, ExpressionNode value, Token assignToken) {
         this.id = token.getLexeme();
         this.value = value;
         this.token = token;
+        this.assignToken = assignToken;
     }
     public Type getType() {
         return type;
@@ -32,8 +34,8 @@ public class VarLocalNode extends SentenceNode{
     }
     public void check(){
         type = value.check();
-        if(type.getName().equals(new NullType().getName()))
-            throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": No se puede asignar null a una variable local",token.getLexeme(),token.getLineNumber());
+        if(type == null || type.getName().equals("null"))
+            throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": No se puede asignar null a una variable local",assignToken.getLexeme(),assignToken.getLineNumber());
         if(symbolTable.getCurrentInvocable().getParamList().stream().anyMatch(p -> p.getName().equals(id))){
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": La variable local '" + id + "' ya ha sido declarada como parametro del metodo actual.",token.getLexeme(),token.getLineNumber());
         }

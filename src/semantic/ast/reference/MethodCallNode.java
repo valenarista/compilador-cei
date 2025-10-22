@@ -86,6 +86,9 @@ public class MethodCallNode extends ReferenceNode{
 
     @Override
     public boolean isVariable() {
+        if(optChaining != null) {
+            return optChaining.isVariable();
+        }
         return false;
     }
 }

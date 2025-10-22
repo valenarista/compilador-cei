@@ -14,12 +14,12 @@ public class NullLiteralNode extends LiteralNode{
     }
     @Override
     public Type getType() {
-        return new NullType();
+        return new NullType(token);
     }
 
     @Override
     public Type check() {
-        return null;
+        return new NullType(token);
     }
     @Override
     public int getLine() {

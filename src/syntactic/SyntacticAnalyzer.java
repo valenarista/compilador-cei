@@ -514,6 +514,8 @@ public class SyntacticAnalyzer {
         }
         else if(primerosExpresion(currentToken)){
             nuevaSentencia = new SentenceWithExpressionNode(expresion());
+            Token finalToken = currentToken;
+            ((SentenceWithExpressionNode) nuevaSentencia).setFinalToken(finalToken);
             match(TokenType.semicolon);
             return nuevaSentencia;
         }
@@ -619,9 +621,10 @@ public class SyntacticAnalyzer {
         match(TokenType.sw_var);
         Token nombre = currentToken;
         match(TokenType.metVarID);
+        Token assignOp = currentToken;
         match(TokenType.assignOp);
         ExpressionNode expressionNode = expresionCompuesta();
-        nuevaVarLocal = new VarLocalNode(nombre,expressionNode);
+        nuevaVarLocal = new VarLocalNode(nombre,expressionNode,assignOp);
         return nuevaVarLocal;
     }
     ExpressionNode expresion(){

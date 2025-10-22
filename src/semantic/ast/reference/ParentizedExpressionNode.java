@@ -56,6 +56,9 @@ public class ParentizedExpressionNode extends ReferenceNode{
 
     @Override
     public boolean isVariable() {
+        if(optionalChaining != null) {
+            return optionalChaining.isVariable();
+        }
         return false;
     }
 }

@@ -26,12 +26,18 @@ public class AssignNode extends ExpressionNode{
             throw new SemanticException("Error semantico en linea "+getLine()+" El operando izquierdo de una asignacion debe ser una variable",getLexeme(),getLine());
         }
 
-
         if (!leftType.getName().equals(rightType.getName())) {
-            throw new SemanticException("Error semantico en linea "+getLine()+" No se puede asignar un valor de tipo "+rightType.getName()+" a una variable de tipo "+leftType.getName(),getLexeme(),getLine());
+            if(!areConformantTypes(leftType, rightType))
+                throw new SemanticException("Error semantico en linea "+getLine()+" No se puede asignar un valor de tipo "+rightType.getName()+" a una variable de tipo "+leftType.getName(),getLexeme(),getLine());
         }
 
         return leftType; // The type of the assignment expression is the type of the left side
+    }
+    public boolean areConformantTypes(Type leftType, Type rightType) {
+        if(leftType.getName().equals(rightType.getName())) return true;
+        if(leftType.getName().equals("null") && !rightType.isPrimitive()) return true;
+        if(rightType.getName().equals("null") && !leftType.isPrimitive()) return true;
+        return leftType.isSubtypeOf(rightType);
     }
 
     @Override

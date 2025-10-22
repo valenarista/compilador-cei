@@ -1,4 +1,4 @@
-//[Error:this|7]
+//[Error:;|7]
 
 class A {
     public int hola;

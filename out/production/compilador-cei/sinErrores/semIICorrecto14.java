@@ -7,6 +7,8 @@ class A {
         var b = 2;
         var c = a < b;
         var d = a > b;
+        if(c && d);
+        if(c || d);
         if (a <= b);
         if (a >= b);
         while (a == b);

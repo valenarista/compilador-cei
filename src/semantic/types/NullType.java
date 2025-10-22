@@ -1,8 +1,12 @@
 package semantic.types;
 
-public class NullType extends PrimitiveType{
-    public NullType() {
-        super("null");
+import lexical.Token;
+import lexical.TokenType;
+
+public class NullType extends ReferenceType{
+    private Token token;
+    public NullType(Token token) {
+        super(token);
     }
 
     @Override

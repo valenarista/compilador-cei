@@ -1,4 +1,4 @@
-//[Error:a|6]
+//[Error:;|6]
 
 class A {
     void m1(){

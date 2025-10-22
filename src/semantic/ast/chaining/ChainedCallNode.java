@@ -29,6 +29,12 @@ public class ChainedCallNode extends ChainingNode{
         }
         return true;
     }
+
+    @Override
+    public boolean isVariable() {
+        return false;
+    }
+
     public void setArgList(List<ExpressionNode> list) {
         this.argList = list;
     }
