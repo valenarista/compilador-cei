@@ -16,9 +16,16 @@ public class WhileNode extends SentenceNode{
     @Override
     public void check() {
         Type condType = condition.check();
-        if (condType == null || !condType.equals(new BooleanType())) {
+        if (condType == null || !condType.getName().equals(new BooleanType().getName())) {
             throw new SemanticException("Error semantico en linea " + condition.getLine() + ": La condicion del while debe ser de tipo booleano",condition.getLexeme(),condition.getLine());
         }
         body.check();
+    }
+
+    public void setBody(SentenceNode body) {
+        this.body = body;
+    }
+    public SentenceNode getBody() {
+        return body;
     }
 }

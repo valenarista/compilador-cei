@@ -32,10 +32,16 @@ public class VarLocalNode extends SentenceNode{
     public String getId() {
         return id;
     }
+    @Override
+    public boolean isAssign() {
+        return true;
+    }
     public void check(){
         type = value.check();
-        if(type == null || type.getName().equals("null"))
+        if(type == null || type.getName().equals("null") )
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": No se puede asignar null a una variable local",assignToken.getLexeme(),assignToken.getLineNumber());
+        if(type.getName().equals("void"))
+            throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": No se puede asignar void a una variable local",assignToken.getLexeme(),assignToken.getLineNumber());
         if(symbolTable.getCurrentInvocable().getParamList().stream().anyMatch(p -> p.getName().equals(id))){
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": La variable local '" + id + "' ya ha sido declarada como parametro del metodo actual.",token.getLexeme(),token.getLineNumber());
         }

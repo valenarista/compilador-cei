@@ -54,6 +54,11 @@ public class UnaryExpNode extends CompExpNode{
 
     @Override
     public boolean isAssign() {
+        if(operand.isVariable()){
+            if(operator!=null){
+                return operator.getType().equals(TokenType.postDecrement) || operator.getType().equals(TokenType.postIncrement);
+            }
+        }
         return false;
     }
 

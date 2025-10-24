@@ -23,4 +23,13 @@ public class IfNode extends SentenceNode{
         body.check();
         elseBody.check();
     }
+    public void setBody(SentenceNode body) {
+        this.body = body;
+    }
+    public SentenceNode getBody() {
+        return body;
+    }
+    public SentenceNode getElseBody() {
+        return elseBody;
+    }
 }

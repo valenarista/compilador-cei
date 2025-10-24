@@ -15,6 +15,7 @@ public interface EntityClass {
     Token getModificador();
     Token getHerencia();
     java.util.HashMap<String, Method> getMethods();
+    java.util.HashMap<String, Method> getInheritedMethods();
     java.util.HashMap<String, Attribute> getAttributes();
     Constructor getConstructor();
     boolean isAbstract();
@@ -23,6 +24,7 @@ public interface EntityClass {
     boolean isClass();
     boolean isInterface();
     boolean consolidated();
+
 
     void addAttribute(Attribute attribute);
     void addMethod(Method method);

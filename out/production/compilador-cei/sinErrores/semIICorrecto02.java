@@ -1,23 +1,14 @@
-// Prueba una expresion con operadores binarios y unarios
+//[SinErrores]
+class TestOperadoresUnarios {
+    void metodo() {
+        var a = 10;
+        var b = +a;
+        var c = -a;
+        var d = ++a;
+        var e = --a;
 
-class A {
-    int a1;
-    
-     void m1(boolean x)
-    {
-        x = ((4+ 10 + 33) > 12) || ((99*15) == 23) && (97<=12) || !true && ((4/2) != 2);
+        var f = true;
+        var g = !f;
+        var h = !false;
     }
-    
-     void m2()
-    {}
-         
-    
-
-}
-
-
-
-class Init{
-    static void main()
-    { }
 }

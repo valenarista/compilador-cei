@@ -50,17 +50,31 @@ public class BlockNode extends SentenceNode{
 
     @Override
     public void check() {
-        parentBlock = symbolTable.getCurrentBlock();
+        BlockNode previousBlock = symbolTable.getCurrentBlock();
+        Invocable previousInvocable = symbolTable.getCurrentInvocable();
+        EntityClass previousClass = symbolTable.getCurrentClass();
+
+        this.parentBlock = previousBlock;
         symbolTable.setCurrentBlock(this);
         symbolTable.setCurrentInvocable(nestedInInvocable);
-        symbolTable.setCurrentClass(nestedInClass.getName(),nestedInClass);
+        if(nestedInClass != null)
+            symbolTable.setCurrentClass(nestedInClass.getName(),nestedInClass);
 
         for (SentenceNode sentence : sentences) {
             sentence.check();
         }
-        if(parentBlock != null){
-            symbolTable.setCurrentBlock(parentBlock);
-        }
+
+        deadCodeCheck();
+
+        symbolTable.setCurrentBlock(previousBlock);
+        symbolTable.setCurrentInvocable(previousInvocable);
+        if(previousClass != null)
+            symbolTable.setCurrentClass(previousClass.getName(),previousClass);
+
+
+    }
+
+    public void deadCodeCheck(){
 
     }
 }

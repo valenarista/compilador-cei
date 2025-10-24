@@ -22,8 +22,7 @@ public class ReferenceType implements Type{
 
     @Override
     public boolean isSubtypeOf(Type rightType) {
-        if(rightType instanceof ReferenceType){
-            ReferenceType rightRefType = (ReferenceType) rightType;
+        if(rightType instanceof ReferenceType rightRefType){
             if(symbolTable.checkCompatibility(this,rightRefType)){
                 return true;
             }

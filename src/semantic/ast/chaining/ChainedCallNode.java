@@ -56,6 +56,8 @@ public class ChainedCallNode extends ChainingNode{
     public Type check(Type previousType) {
         notPrimitiveCalling(previousType);
         Method existingMethod = checkMethodExistence(previousType, methodName, token);
+        if(!symbolTable.getCurrentClass().getName().equals(previousType.getName()) && !existingMethod.isPublic())
+            throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": el metodo " + methodName + " es privado y no se puede acceder desde el metodo actual.",token.getLexeme(), token.getLineNumber());
         int index = 0;
         List<Parameter> origArgList = existingMethod.getParamList();
         if(argList.size() != origArgList.size()){

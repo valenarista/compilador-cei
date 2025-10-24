@@ -15,6 +15,7 @@ public interface Invocable {
     List<Parameter> getParamList();
     Token getVisibility();
     void addParameter(Parameter param);
+    boolean isPublic();
 
     boolean isStaticMethod();
 }

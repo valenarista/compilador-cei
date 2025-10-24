@@ -1,4 +1,4 @@
-//[Error:true|5]
+//[Error:;|5]
 
 class A {
      public int prueba(){

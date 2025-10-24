@@ -39,7 +39,6 @@ public class ChainedVarNode extends ChainingNode{
     public Type check(Type previousType) {
         notPrimitiveCalling(previousType);
         checkAttributeValidity(previousType);
-        //TODO PREGUNTAR, TIENE QUE SER PUBLICA?
         if(optionalChaining != null) {
             return optionalChaining.check(attribute.getType());
         }
@@ -47,7 +46,6 @@ public class ChainedVarNode extends ChainingNode{
     }
 
     private void notPrimitiveCalling(Type callingType){
-        System.out.println(callingType.getName());
         if(callingType.isPrimitive())
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": no se puede hacer una llamada a un atributo en un tipo primitivo.",token.getLexeme(), token.getLineNumber());
     }
@@ -56,7 +54,7 @@ public class ChainedVarNode extends ChainingNode{
         if(attribute == null){
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": la clase " + callingType.getName() + " no tiene un atributo llamado " + varName + ".",token.getLexeme(), token.getLineNumber());
         }
-        if(!attribute.isPublic())
+        if(!symbolTable.getCurrentClass().getName().equals(callingType.getName()) && !attribute.isPublic())
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": el atributo " + varName + " no es accesible desde la clase actual.",token.getLexeme(), token.getLineNumber());
     }
 }

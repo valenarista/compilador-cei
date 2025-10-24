@@ -6,6 +6,7 @@ import lexical.Token;
 import lexical.TokenType;
 import semantic.ast.sentence.BlockNode;
 import semantic.ast.sentence.NullBlockNode;
+import semantic.ast.sentence.VarLocalNode;
 import semantic.declarable.*;
 import semantic.entity.ConcreteClass;
 import semantic.entity.EntityClass;
@@ -186,11 +187,49 @@ public class SymbolTable {
         return false;
     }
     public boolean isLocalVar(String id) {
+        boolean found = false;
         if(currentBlock != null){
-            return currentBlock.getVarLocalMap().get(id) != null;
+            if(currentBlock.getParentBlock() != null){
+                found = currentBlock.getVarLocalMap().get(id) != null;
+                if(!found){
+                    BlockNode parentBlock = currentBlock.getParentBlock();
+                    while(parentBlock != null && !found){
+                        found = parentBlock.getVarLocalMap().get(id) != null;
+                        parentBlock = parentBlock.getParentBlock();
+                    }
+                    return found;
+                } else{
+                    return true;
+                }
+            }
+            found = currentBlock.getVarLocalMap().get(id) != null;
         }
-        return false;
+        return found;
     }
+    public Type getLocalVarType(String id) {
+        Type type = new NullType(new Token(TokenType.sw_null,"null",0));
+        VarLocalNode var = null;
+        if(currentBlock != null){
+            if(currentBlock.getParentBlock() != null){
+                var = currentBlock.getVarLocalMap().get(id);
+                if(var == null){
+                    BlockNode parentBlock = currentBlock.getParentBlock();
+                    while(var == null && parentBlock != null){
+                        var = parentBlock.getVarLocalMap().get(id);
+                        parentBlock = parentBlock.getParentBlock();
+                    }
+                    if(var != null)
+                        return var.getType();
+                } else{
+                    return var.getType();
+                }
+            }
+            var = currentBlock.getVarLocalMap().get(id);
+            type = var.getType();
+        }
+        return type;
+    }
+
     public boolean isAttribute(String id) {
         if(claseActual != null){
             return claseActual.getAttributes().get(id) != null;
@@ -205,13 +244,13 @@ public class SymbolTable {
         return null;
     }
     public boolean checkCompatibility(ReferenceType leftType, ReferenceType rightType) {
-        if (leftType.equals(rightType)) {
+        if (leftType.getName().equals(rightType.getName())) {
             return true;
         }
         EntityClass parentClass;
-        parentClass = clases.get(rightType.getName());
+        parentClass = clases.get(leftType.getName());
         while (parentClass != null) {
-            if (parentClass.getName().equals(leftType.getName())) {
+            if (parentClass.getName().equals(rightType.getName())) {
                 return true;
             }
             if (parentClass.getHerencia() != null) {

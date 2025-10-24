@@ -16,6 +16,7 @@ public class Interface implements EntityClass {
     private Token herencia;
     private Token modificador;
     HashMap<String,Method> methods;
+    HashMap<String,Method> inheritedMethods;
     HashMap<String,Attribute> attributes;
     private boolean consolidated;
 
@@ -23,6 +24,7 @@ public class Interface implements EntityClass {
         this.idToken = idToken;
         this.modificador = modificador;
         this.methods = new HashMap<>();
+        this.inheritedMethods = new HashMap<>();
         this.attributes = new HashMap<>();
     }
     public void estaBienDeclarado(){
@@ -69,6 +71,10 @@ public class Interface implements EntityClass {
     }
 
     public void chequeoSentencias(){
+        symbolTable.setCurrentClass(idToken.getLexeme(), this);
+        for(Attribute a : attributes.values()){
+            a.chequeoSentencias();
+        }
         for(Method m : methods.values()) {
             m.chequeoSentencias();
         }
@@ -89,6 +95,8 @@ public class Interface implements EntityClass {
     private void inheritanceMethod(Method m) {
         if (methods.get(m.getName()) == null) {
             methods.put(m.getName(), m);
+            inheritedMethods.put(m.getName(), m);
+
         } else {
             Method existingMethod = methods.get(m.getName());
             if (!(existingMethod.getReturnType().getName().equals(m.getReturnType().getName()))) {
@@ -121,6 +129,12 @@ public class Interface implements EntityClass {
     public HashMap<String, Method> getMethods() {
         return methods;
     }
+
+    @Override
+    public HashMap<String, Method> getInheritedMethods() {
+        return inheritedMethods;
+    }
+
 
     public int getLine() {
         return idToken.getLineNumber();

@@ -45,6 +45,10 @@ public class Constructor implements Invocable{
         }
     }
 
+    @Override
+    public boolean isPublic() {
+        return visibility == null || visibility.getLexeme().equals("public");
+    }
 
 
     @Override

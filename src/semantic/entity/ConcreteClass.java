@@ -3,6 +3,7 @@ package semantic.entity;
 import exceptions.SemanticException;
 import lexical.Token;
 import lexical.TokenType;
+import semantic.ast.sentence.*;
 import semantic.declarable.Attribute;
 import semantic.declarable.Constructor;
 import semantic.declarable.Method;
@@ -20,6 +21,7 @@ public class ConcreteClass implements EntityClass {
     HashMap<String,Attribute> attributes;
     HashMap<String,Attribute> shadowedAttributes;
     HashMap<String,Method> methods;
+    HashMap<String,Method> inheritedMethods;
     Constructor constructor;
     boolean consolidated;
 
@@ -30,6 +32,7 @@ public class ConcreteClass implements EntityClass {
         this.attributes = new HashMap<>();
         this.shadowedAttributes = new HashMap<>();
         this.methods = new HashMap<>();
+        this.inheritedMethods = new HashMap<>();
         this.constructor = null;
         consolidated = false;
     }
@@ -65,14 +68,61 @@ public class ConcreteClass implements EntityClass {
     }
 
     public void chequeoSentencias(){
+        symbolTable.setCurrentClass(idToken.getLexeme(), this);
+        symbolTable.setCurrentInvocable(null);
+        symbolTable.setCurrentBlock(null);
+
+        for(Attribute a : attributes.values()){
+            a.chequeoSentencias();
+        }
         for(Method m : methods.values()) {
-            m.chequeoSentencias();
+            if(inheritedMethods.get(m.getName())==null) {
+                m.chequeoSentencias();
+                checkDeadCode(m.getBlock(),true);
+            }
         }
         if(constructor!=null){
             constructor.chequeoSentencias();
         }
     }
 
+    boolean checkDeadCode(SentenceNode sentence, boolean reachable){
+        if(!reachable){
+            throw new SemanticException("Error semantico en linea "+sentence.getLine()+" Codigo inalcanzable detectado.",sentence.getLexeme(), sentence.getLine());
+        }
+        if(sentence instanceof BlockNode){
+            BlockNode block = (BlockNode) sentence;
+            boolean currentReachable = reachable;
+            for(SentenceNode s : block.getSentences()){
+                currentReachable = checkDeadCode(s, currentReachable);
+            }
+            return currentReachable;
+        }
+
+        if(sentence instanceof IfNode){
+            IfNode ifNode = (IfNode) sentence;
+            boolean thenReachable = checkDeadCode(ifNode.getBody(), true);
+
+            if(!(ifNode.getElseBody() instanceof EmptySentenceNode)){
+                boolean elseReachable = checkDeadCode(ifNode.getElseBody(), true);
+                return thenReachable || elseReachable;
+            }
+
+            return true;
+        }
+
+        if(sentence instanceof WhileNode){
+            WhileNode whileNode = (WhileNode) sentence;
+            checkDeadCode(whileNode.getBody(), true);
+            return reachable;
+        }
+
+        if(sentence instanceof ReturnNode){
+            return false;
+        }
+
+        return true;
+    }
 
 
     public void checkInheritance(){
@@ -185,6 +235,8 @@ public class ConcreteClass implements EntityClass {
             if(method.getModifier()!=null)
                 checkAbstractModifier(method);
             methods.put(method.getName(),method);
+            inheritedMethods.put(method.getName(),method);
+
         } else {
             Method existingMethod = methods.get(method.getName());
             if (!(existingMethod.getReturnType().getName().equals(method.getReturnType().getName())) || (existingMethod.getParamList().size() != method.getParamList().size())) {
@@ -261,6 +313,13 @@ public class ConcreteClass implements EntityClass {
     public HashMap<String, Method> getMethods() {
         return methods;
     }
+
+    @Override
+    public HashMap<String, Method> getInheritedMethods() {
+        return inheritedMethods;
+    }
+
+
     public Constructor getConstructor() {
         return constructor;
     }

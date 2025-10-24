@@ -38,12 +38,17 @@ public class ConstructorCallNode extends ReferenceNode{
     public String getClassName() {
         return className;
     }
+
     @Override
     public Type check(){
         if(symbolTable.getClass(className)==null){
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": no se puede llamar al constructor de la clase " + className + " porque no existe.", token.getLexeme(), token.getLineNumber());
         }
         Constructor constructor = symbolTable.getClass(className).getConstructor();
+
+        if(!constructor.isPublic())
+            throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": el constructor de la clase " + className + " es privado y no se puede acceder desde el contexto actual.", token.getLexeme(), token.getLineNumber());
+
         List<Parameter> origArgList = constructor.getParamList();
         int index = 0;
         if(argList.size() != origArgList.size()){
@@ -56,6 +61,7 @@ public class ConstructorCallNode extends ReferenceNode{
             }
             index++;
         }
+
         if(optChaining != null) {
             return optChaining.check(new ReferenceType(token));
         }

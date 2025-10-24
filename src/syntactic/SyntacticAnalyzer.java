@@ -489,7 +489,8 @@ public class SyntacticAnalyzer {
         else if(currentToken.getType().equals(TokenType.semicolon) || primerosAtributoTail(currentToken)){
             Attribute nuevoAtributo = new Attribute(nombre,tipo,visibility);
             symbolTable.setCurrentAttribute(nuevoAtributo);
-            atributoTail();
+            ExpressionNode optionalValue = atributoTail();
+            nuevoAtributo.setValue(optionalValue);
             match(TokenType.semicolon);
         }
         else{
@@ -497,12 +498,13 @@ public class SyntacticAnalyzer {
         }
     }
 
-    void atributoTail(){
+    ExpressionNode atributoTail(){
         if(currentToken.getType().equals(TokenType.assignOp)){
             match(TokenType.assignOp);
-            expresionCompuesta();
+            return expresionCompuesta();
         } else{
             //epsilon
+            return null;
         }
 
     }
@@ -520,7 +522,7 @@ public class SyntacticAnalyzer {
             return nuevaSentencia;
         }
         else if(primerosFor(currentToken)){
-            forSentencia();
+            nuevaSentencia = forSentencia();
         }
         else if(primerosBloque(currentToken)){
             nuevaSentencia = bloque();
@@ -529,10 +531,13 @@ public class SyntacticAnalyzer {
             nuevaSentencia = ifSentencia();
         }
         else if(primerosWhile(currentToken)){
-            whileSentencia();
+            nuevaSentencia = whileSentencia();
         }
         else if(primerosReturn(currentToken)) {
             nuevaSentencia = returnSentencia();
+            Token finalToken = currentToken;
+            if(nuevaSentencia instanceof ReturnNode)
+                ((ReturnNode) nuevaSentencia).setFinalToken(finalToken);
             match(TokenType.semicolon);
         }
         else if(primerosVarLocal(currentToken)){
@@ -544,43 +549,51 @@ public class SyntacticAnalyzer {
         }
         return nuevaSentencia;
     }
-    void forSentencia(){
+    SentenceNode forSentencia(){
         match(TokenType.sw_for);
         match(TokenType.openBracket);
-        contenidoFor();
+        SentenceNode sentenceNode = contenidoFor();
         match(TokenType.closeBracket);
-        sentencia();
+        SentenceNode block = sentencia();
+        if(sentenceNode instanceof ForStandardNode)
+            ((ForStandardNode) sentenceNode).setBody(block);
+        return sentenceNode;
     }
-    void contenidoFor(){
+    SentenceNode contenidoFor(){
         if(currentToken.getType().equals(TokenType.sw_var)){
             match(TokenType.sw_var);
+            Token nombre = currentToken;
             match(TokenType.metVarID);
-            forTipo();
+            return forTipo(nombre);
         }
         else if(primerosExpresion(currentToken)){
-            expresion();
-            forStandard();
+            ExpressionNode expressionNode = expresion();
+            SentenceNode initialization = new SentenceWithExpressionNode(expressionNode);
+            return forStandard(initialization);
         }
         else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con un tipo o una expresion");
         }
     }
-    void forTipo(){
+    SentenceNode forTipo(Token nombreVar){
         if(primerosForStandard(currentToken)){
+            Token assignOp = currentToken;
             match(TokenType.assignOp);
-            expresionCompuesta();
-            forStandard();
+            VarLocalNode varLocalNode = new VarLocalNode(nombreVar, expresionCompuesta(),assignOp);
+            return forStandard(varLocalNode);
         } else if (primerosForIterador(currentToken)) {
             forIterador();
+            return new EmptySentenceNode();
         } else{
             throw new SyntacticException(currentToken.getLexeme(),currentToken.getLineNumber(),currentToken.getType(),"Se esperaba matchear con el simbolo [:] o con el simbolo [=]");
         }
     }
-    void forStandard(){
+    ForStandardNode forStandard(SentenceNode initialization){
         match(TokenType.semicolon);
-        expresion();
+        ExpressionNode condition = expresion();
         match(TokenType.semicolon);
-        expresion();
+        ExpressionNode lastAssign = expresion();
+        return new ForStandardNode(initialization,condition,lastAssign);
     }
     void forIterador(){
         match(TokenType.colon);
@@ -605,12 +618,13 @@ public class SyntacticAnalyzer {
             //epsilon
             return new EmptySentenceNode();        }
     }
-    void whileSentencia(){
+    SentenceNode whileSentencia(){
         match(TokenType.sw_while);
         match(TokenType.openBracket);
-        expresion();
+        ExpressionNode condition = expresion();
         match(TokenType.closeBracket);
-        sentencia();
+        SentenceNode body = sentencia();
+        return new WhileNode(condition,body);
     }
     SentenceNode returnSentencia(){
         match(TokenType.sw_return);

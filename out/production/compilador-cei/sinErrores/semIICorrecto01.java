@@ -1,20 +1,10 @@
-// Prueba un lado izquierdo simple
-
-class A {
-    int a1;
-   
-    
-     void m1(){
-        a1 = 4;
-        
+//[SinErrores]
+class TestLiterales {
+    void metodo() {
+        var x = 42;
+        var y = true;
+        var z = false;
+        var c = 'a';
+        var s = "hola";
     }
-    
-}    
-
-
-class Init{
-    static void main()
-    { }
 }
-
-

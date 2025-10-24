@@ -22,6 +22,7 @@ public class Method implements Invocable {
     private boolean hasBody;
     private BlockNode block;
 
+
     public Method(Token idToken, Type returnType, Token modifier, Token visibility) {
         this.visibility = visibility;
         this.returnType = returnType;
@@ -48,6 +49,11 @@ public class Method implements Invocable {
         } else {
             throw new SemanticException("Ya fue declarado un parametro con el nombre "+ parameter.getName()+" en el metodo "+this.getName(),parameter.getName(), parameter.getLine());
         }
+    }
+
+    @Override
+    public boolean isPublic() {
+        return visibility == null || visibility.getType().equals(TokenType.sw_public);
     }
 
     @Override
@@ -96,6 +102,7 @@ public class Method implements Invocable {
     public void chequeoSentencias() throws SemanticException {
         block.check();
     }
+
 }
 
 

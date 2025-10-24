@@ -36,21 +36,23 @@ public class BinaryExpNode extends CompExpNode{
             if(!areConformantTypes(leftType,rightType)) {
                 throw new SemanticException("Error semantico en linea " + operator.getLineNumber() + ": Los tipos no son conformantes para el operador " + operator.getLexeme() + ". Se obtuvo " + leftType.getName() + " y " + rightType.getName(), operator.getLexeme(), operator.getLineNumber());
             }
-        }
-        if(leftType.isPrimitive() && rightType.isPrimitive()) {
-            if (!leftType.getName().equals(rightType.getName())) {
-                throw new SemanticException("Error semantico en linea " + operator.getLineNumber() + ": Los tipos de los operandos no son compatibles. Se obtuvo " + leftType.getName() + " y " + rightType.getName(), operator.getLexeme(), operator.getLineNumber());
+        }else{
+            if(leftType.getName().equals("null") || rightType.getName().equals("null")) {
+                if (expectedTypes != null && expectedTypes.isPrimitive()) {
+                    throw new SemanticException("Error semantico en linea " + operator.getLineNumber() + ": No se puede usar null con el operador " + operator.getLexeme() + ". Se esperaba un tipo "+expectedTypes.getName(), operator.getLexeme(), operator.getLineNumber());
+                }
             }
-            if (expectedTypes != null && (!leftType.getName().equals(expectedTypes.getName()))) {
-                throw new SemanticException("Error semantico en linea " + operator.getLineNumber() + ": El tipo de los operandos no es compatible con el operador " + operator.getLexeme() + ". Se esperaba " + expectedTypes.getName() + " pero se obtuvo " + leftType.getName(), operator.getLexeme(), operator.getLineNumber());
+            if(leftType.isPrimitive() && rightType.isPrimitive()) {
+                if (!leftType.getName().equals(rightType.getName())) {
+                    throw new SemanticException("Error semantico en linea " + operator.getLineNumber() + ": Los tipos de los operandos no son compatibles. Se obtuvo " + leftType.getName() + " y " + rightType.getName(), operator.getLexeme(), operator.getLineNumber());
+                }
+                if (expectedTypes != null && (!leftType.getName().equals(expectedTypes.getName()))) {
+                    throw new SemanticException("Error semantico en linea " + operator.getLineNumber() + ": El tipo de los operandos no es compatible con el operador " + operator.getLexeme() + ". Se esperaba " + expectedTypes.getName() + " pero se obtuvo " + leftType.getName(), operator.getLexeme(), operator.getLineNumber());
+                }
+            }else{
+                throw new SemanticException("Error semantico en linea " + operator.getLineNumber() + ": Los tipos de los operandos no son compatibles con el operador " + operator.getLexeme() + ". Se obtuvo " + leftType.getName() + " y " + rightType.getName(), operator.getLexeme(), operator.getLineNumber());
             }
         }
-        if(leftType.getName().equals("null") || rightType.getName().equals("null")) {
-            if (expectedTypes != null && expectedTypes.isPrimitive()) {
-                throw new SemanticException("Error semantico en linea " + operator.getLineNumber() + ": No se puede usar null con el operador " + operator.getLexeme() + ". Se esperaba un tipo "+expectedTypes.getName(), operator.getLexeme(), operator.getLineNumber());
-            }
-        }
-
         return resultType;
     }
     public boolean areConformantTypes(Type leftType, Type rightType) {

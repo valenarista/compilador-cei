@@ -32,16 +32,12 @@ public class VarCallNode extends ReferenceNode{
         if(isParameter()){
             varType = symbolTable.getCurrentInvocable().getParamList().stream().filter(p -> p.getName().equals(varName)).findFirst().get().getType();
         }else if(isLocalVar()){
-            varType = symbolTable.getCurrentBlock().getVarLocalMap().get(varName).getType();
+            varType = symbolTable.getLocalVarType(varName);
         }else if(isAttribute()){
-            if(!symbolTable.getCurrentInvocable().isStaticMethod()){
-                if(symbolTable.getCurrentClass().getAttributes().get(varName).isPublic()){
-                    varType = symbolTable.getCurrentClass().getAttributes().get(varName).getType();
-                }else{
-                    throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": el atributo '" + varName + "' es privado y no se puede acceder desde el metodo actual.",token.getLexeme(), token.getLineNumber());
-                }
-            }else{
+            if(symbolTable.getCurrentInvocable()!=null && symbolTable.getCurrentInvocable().isStaticMethod()){
                 throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": no se puede acceder al atributo '" + varName + "' en un metodo estatico.",token.getLexeme(), token.getLineNumber());
+            }else{
+                varType = symbolTable.getCurrentClass().getAttributes().get(varName).getType();
             }
         }else{
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": la variable '" + varName + "' no ha sido declarada.",token.getLexeme(), token.getLineNumber());
@@ -77,6 +73,9 @@ public class VarCallNode extends ReferenceNode{
     }
 
     public boolean isParameter(){
+        if(symbolTable.getCurrentInvocable() == null){
+            return false;
+        }
         for(Parameter p : symbolTable.getCurrentInvocable().getParamList()){
             if(p.getName().equals(varName)){
                 return true;
