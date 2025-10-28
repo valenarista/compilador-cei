@@ -32,4 +32,5 @@ public class IfNode extends SentenceNode{
     public SentenceNode getElseBody() {
         return elseBody;
     }
+
 }

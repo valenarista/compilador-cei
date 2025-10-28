@@ -25,6 +25,9 @@ public class AssignNode extends ExpressionNode{
         if(!left.isVariable()){
             throw new SemanticException("Error semantico en linea "+getLine()+" El operando izquierdo de una asignacion debe ser una variable",getLexeme(),getLine());
         }
+        if(right.isAssign()){
+            throw new SemanticException("Error semantico en linea "+getLine()+" El operando derecho de una asignacion no puede ser otra asignacion",getLexeme(),getLine());
+        }
 
         if (!leftType.getName().equals(rightType.getName())) {
             if(!areConformantTypes(leftType, rightType))

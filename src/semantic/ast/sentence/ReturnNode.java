@@ -40,4 +40,10 @@ public class ReturnNode extends SentenceWithExpressionNode{
     public void setFinalToken(Token finalToken) {
         this.finalToken = finalToken;
     }
+    public String getLexeme(){
+        return finalToken.getLexeme();
+    }
+    public int getLine(){
+        return finalToken.getLineNumber();
+    }
 }

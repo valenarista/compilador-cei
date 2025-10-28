@@ -511,8 +511,9 @@ public class SyntacticAnalyzer {
     SentenceNode sentencia(){
         SentenceNode nuevaSentencia = new EmptySentenceNode();
         if(currentToken.getType().equals(TokenType.semicolon)){
+            Token current = currentToken;
             match(TokenType.semicolon);
-            return new EmptySentenceNode();
+            return new EmptySentenceNode(current);
         }
         else if(primerosExpresion(currentToken)){
             nuevaSentencia = new SentenceWithExpressionNode(expresion());
@@ -616,7 +617,8 @@ public class SyntacticAnalyzer {
         }
         else{
             //epsilon
-            return new EmptySentenceNode();        }
+            return new EmptySentenceNode();
+        }
     }
     SentenceNode whileSentencia(){
         match(TokenType.sw_while);

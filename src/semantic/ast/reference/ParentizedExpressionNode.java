@@ -38,7 +38,7 @@ public class ParentizedExpressionNode extends ReferenceNode{
 
     @Override
     public boolean isAssign() {
-        return false;
+        return expression.isAssign();
     }
 
     @Override

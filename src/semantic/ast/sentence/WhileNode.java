@@ -28,4 +28,7 @@ public class WhileNode extends SentenceNode{
     public SentenceNode getBody() {
         return body;
     }
+    public ExpressionNode getCondition() {
+        return condition;
+    }
 }

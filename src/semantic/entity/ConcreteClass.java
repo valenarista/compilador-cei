@@ -8,6 +8,7 @@ import semantic.declarable.Attribute;
 import semantic.declarable.Constructor;
 import semantic.declarable.Method;
 import semantic.declarable.Parameter;
+import semantic.types.BooleanType;
 
 import java.util.HashMap;
 
@@ -78,7 +79,12 @@ public class ConcreteClass implements EntityClass {
         for(Method m : methods.values()) {
             if(inheritedMethods.get(m.getName())==null) {
                 m.chequeoSentencias();
-                checkDeadCode(m.getBlock(),true);
+                boolean completa = checkDeadCode(m.getBlock(),true);
+                if(!(m.getBlock() instanceof NullBlockNode)) {
+                    if (completa && !m.getReturnType().getName().equals("void")) {
+                        throw new SemanticException("Error semantico en linea " + m.getLine() + " El metodo " + m.getName() + " no retorna en todos los caminos posibles.", m.getName(), m.getLine());
+                    }
+                }
             }
         }
         if(constructor!=null){
@@ -113,8 +119,11 @@ public class ConcreteClass implements EntityClass {
 
         if(sentence instanceof WhileNode){
             WhileNode whileNode = (WhileNode) sentence;
-            checkDeadCode(whileNode.getBody(), true);
-            return reachable;
+            boolean whileReachable = checkDeadCode(whileNode.getBody(), true);
+            if(whileNode.getCondition().getLexeme().equals("true")){
+                return whileReachable;
+            }
+            return true;
         }
 
         if(sentence instanceof ReturnNode){

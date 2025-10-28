@@ -26,6 +26,17 @@ public class VarLocalNode extends SentenceNode{
         this.token = token;
         this.assignToken = assignToken;
     }
+
+    @Override
+    public String getLexeme() {
+        return assignToken.getLexeme();
+    }
+
+    @Override
+    public int getLine() {
+        return assignToken.getLineNumber();
+    }
+
     public Type getType() {
         return type;
     }
@@ -38,6 +49,8 @@ public class VarLocalNode extends SentenceNode{
     }
     public void check(){
         type = value.check();
+        if(value.isAssign())
+            throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": No se puede asignar otra asignacion a una variable local",assignToken.getLexeme(),assignToken.getLineNumber());
         if(type == null || type.getName().equals("null") )
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": No se puede asignar null a una variable local",assignToken.getLexeme(),assignToken.getLineNumber());
         if(type.getName().equals("void"))

@@ -48,6 +48,19 @@ public class BlockNode extends SentenceNode{
         varLocalMap.put(varLocal.getId(), varLocal);
     }
 
+    public int getLine(){
+        if(!sentences.isEmpty())
+            return sentences.getFirst().getLine();
+        else
+            return 0;
+    }
+    public String getLexeme(){
+        if(!sentences.isEmpty())
+            return sentences.getFirst().getLexeme();
+        else
+            return "";
+    }
+
     @Override
     public void check() {
         BlockNode previousBlock = symbolTable.getCurrentBlock();
@@ -64,7 +77,6 @@ public class BlockNode extends SentenceNode{
             sentence.check();
         }
 
-        deadCodeCheck();
 
         symbolTable.setCurrentBlock(previousBlock);
         symbolTable.setCurrentInvocable(previousInvocable);
@@ -74,7 +86,5 @@ public class BlockNode extends SentenceNode{
 
     }
 
-    public void deadCodeCheck(){
 
-    }
 }
