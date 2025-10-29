@@ -50,13 +50,13 @@ public class BlockNode extends SentenceNode{
 
     public int getLine(){
         if(!sentences.isEmpty())
-            return sentences.getFirst().getLine();
+            return sentences.get(0).getLine();
         else
             return 0;
     }
     public String getLexeme(){
         if(!sentences.isEmpty())
-            return sentences.getFirst().getLexeme();
+            return sentences.get(0).getLexeme();
         else
             return "";
     }

@@ -41,6 +41,7 @@ public class Main {
                         System.out.println(error.getDetailedErrorMessage());
                     }
                 } else{
+                    System.out.println("Compilacion exitosa.");
                     System.out.println("[SinErrores]");
                 }
 
