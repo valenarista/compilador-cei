@@ -46,7 +46,7 @@ public class MethodCallNode extends ReferenceNode{
                 throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": el metodo " + methodName + " es privado y no se puede acceder desde la clase actual.",token.getLexeme(), token.getLineNumber());
         }
 
-        if(symbolTable.getCurrentInvocable().isStaticMethod())
+        if(symbolTable.getCurrentInvocable().isStaticMethod() && !method.isStaticMethod())
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": no se puede llamar al metodo '" + methodName + "' en un metodo estatico.",token.getLexeme(), token.getLineNumber());
 
         List<Parameter> origArgList = method.getParamList();
@@ -57,8 +57,11 @@ public class MethodCallNode extends ReferenceNode{
         for(ExpressionNode arg : argList){
             Type type = arg.check();
             if(!(type.isSubtypeOf(origArgList.get(index).getType()))){
-                throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": el tipo del argumento " + (index+1) + " no coincide con el tipo del parametro esperado.",token.getLexeme(), token.getLineNumber());
+                if(!(type.getName().equals("null") && !origArgList.get(index).getType().isPrimitive()))
+                    throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": el tipo del argumento " + (index+1) + " no coincide con el tipo del parametro esperado.",token.getLexeme(), token.getLineNumber());
             }
+
+
             index++;
         }
         if(optChaining != null) {

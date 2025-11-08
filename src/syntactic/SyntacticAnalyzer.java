@@ -925,10 +925,11 @@ public class SyntacticAnalyzer {
         }
     }
     ParentizedExpressionNode expresionParentizada(){
+        Token openBracket = currentToken;
         match(TokenType.openBracket);
         ExpressionNode expressionNode = expresion();
         match(TokenType.closeBracket);
-        return new ParentizedExpressionNode(expressionNode);
+        return new ParentizedExpressionNode(expressionNode,openBracket);
     }
     StaticMethodCallNode llamadaMetodoEstatico(){
         Token clase = currentToken;

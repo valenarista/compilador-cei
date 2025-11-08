@@ -3,6 +3,7 @@ package semantic.ast.reference;
 import exceptions.SemanticException;
 import lexical.Token;
 import semantic.ast.chaining.ChainingNode;
+import semantic.declarable.Attribute;
 import semantic.declarable.Parameter;
 import semantic.types.Type;
 
@@ -37,7 +38,11 @@ public class VarCallNode extends ReferenceNode{
             if(symbolTable.getCurrentInvocable()!=null && symbolTable.getCurrentInvocable().isStaticMethod()){
                 throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": no se puede acceder al atributo '" + varName + "' en un metodo estatico.",token.getLexeme(), token.getLineNumber());
             }else{
-                varType = symbolTable.getCurrentClass().getAttributes().get(varName).getType();
+                Attribute attr = symbolTable.getCurrentClass().getAttributes().get(varName);
+                if(!attr.isPublic() && symbolTable.getCurrentClass().getInheritedAttributes().get(attr.getName())!=null){
+                    throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": el atributo '" + varName + "' es privado y no se puede acceder desde la clase actual.",token.getLexeme(), token.getLineNumber());
+                }
+                varType = attr.getType();
             }
         }else{
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": la variable '" + varName + "' no ha sido declarada.",token.getLexeme(), token.getLineNumber());

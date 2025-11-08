@@ -17,6 +17,7 @@ public class Interface implements EntityClass {
     private Token modificador;
     HashMap<String,Method> methods;
     HashMap<String,Method> inheritedMethods;
+    HashMap<String,Attribute> inheritedAtts;
     HashMap<String,Attribute> attributes;
     private boolean consolidated;
 
@@ -25,6 +26,7 @@ public class Interface implements EntityClass {
         this.modificador = modificador;
         this.methods = new HashMap<>();
         this.inheritedMethods = new HashMap<>();
+        this.inheritedAtts = new HashMap<>();
         this.attributes = new HashMap<>();
     }
     public void estaBienDeclarado(){
@@ -88,6 +90,7 @@ public class Interface implements EntityClass {
     private void inheritanceAttribute(Attribute attribute){
         if(attributes.get(attribute.getName())==null){
             attributes.put(attribute.getName(),attribute);
+            inheritedAtts.put(attribute.getName(),attribute);
         } else if (!attributes.get(attribute.getName()).getType().equals(attribute.getType())) {
             throw new SemanticException("Error semantico en linea "+attributes.get(attribute.getName()).getLine()+" No se puede heredar el atributo "+attribute.getName()+" porque ya fue declarado en la clase "+this.getName(),attribute.getName() ,attributes.get(attribute.getName()).getLine());
         }
@@ -134,7 +137,10 @@ public class Interface implements EntityClass {
     public HashMap<String, Method> getInheritedMethods() {
         return inheritedMethods;
     }
-
+    @Override
+    public HashMap<String, Attribute> getInheritedAttributes() {
+        return inheritedAtts;
+    }
 
     public int getLine() {
         return idToken.getLineNumber();

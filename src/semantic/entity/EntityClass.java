@@ -16,6 +16,7 @@ public interface EntityClass {
     Token getHerencia();
     java.util.HashMap<String, Method> getMethods();
     java.util.HashMap<String, Method> getInheritedMethods();
+    java.util.HashMap<String, Attribute> getInheritedAttributes();
     java.util.HashMap<String, Attribute> getAttributes();
     Constructor getConstructor();
     boolean isAbstract();

@@ -8,8 +8,10 @@ import semantic.types.Type;
 public class ParentizedExpressionNode extends ReferenceNode{
     private ExpressionNode expression;
     private ChainingNode optionalChaining;
-    public ParentizedExpressionNode(ExpressionNode expression){
+    private Token token;
+    public ParentizedExpressionNode(ExpressionNode expression,Token token){
         this.expression = expression;
+        this.token = token;
     }
 
     @Override
@@ -51,7 +53,7 @@ public class ParentizedExpressionNode extends ReferenceNode{
 
     @Override
     public Token getToken() {
-        return null;
+        return token;
     }
 
     @Override

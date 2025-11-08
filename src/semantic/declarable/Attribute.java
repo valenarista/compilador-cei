@@ -2,7 +2,13 @@ package semantic.declarable;
 
 import exceptions.SemanticException;
 import lexical.Token;
+import semantic.ast.expression.UnaryExpNode;
+import semantic.entity.ConcreteClass;
 import semantic.ast.expression.ExpressionNode;
+import semantic.ast.reference.ConstructorCallNode;
+import semantic.ast.reference.VarCallNode;
+import semantic.entity.EntityClass;
+import semantic.types.ReferenceType;
 import semantic.types.Type;
 import java.util.Objects;
 
@@ -36,8 +42,33 @@ public class Attribute {
         return visibility;
     }
     public void setValue(ExpressionNode value){
+        if(value != null){
+            ExpressionNode actualNode = value;
+            if(value instanceof UnaryExpNode) {
+                UnaryExpNode unaryNode = (UnaryExpNode) value;
+                actualNode = unaryNode.getOperand();
+            }
+
+            if(actualNode instanceof VarCallNode) {
+                VarCallNode varCallNode = (VarCallNode) actualNode;
+                String varName = varCallNode.getToken().getLexeme();
+
+                EntityClass currentClass = symbolTable.getCurrentClass();
+                if(currentClass != null){
+                    Attribute referencedAttr = currentClass.getAttributes().get(varName);
+                    if(referencedAttr == null){
+                        throw new SemanticException("Error semantico en linea " + varCallNode.getLine() + ": el atributo " + varName + " no esta declarado.", varName, varCallNode.getLine());
+                    }
+                }
+            }
+
+            if(value.isAssign())
+                throw new SemanticException("Error semantico en linea "+value.getLine()+" La expresion asignada al atributo de nombre "+ idToken.getLexeme() +" no puede ser una asignacion. ", value.getLexeme(), value.getLine());
+        }
         this.value = value;
     }
+
+
     public ExpressionNode getValue(){
         return value;
     }
@@ -49,7 +80,13 @@ public class Attribute {
     }
     public void chequeoSentencias(){
         if(value != null){
-            Type valueType = value.check();
+            Type valueType;
+            if(value instanceof ConstructorCallNode){
+                ConstructorCallNode constructorCallNode = (ConstructorCallNode) value;
+                valueType = new ReferenceType(constructorCallNode.getToken());
+            }else{
+                valueType = value.check();
+            }
             if(!valueType.isSubtypeOf(type)){
                 if(type.isPrimitive() && valueType.getName().equals("null")){
                     throw new SemanticException("Error semantico en linea "+value.getLine()+" El atributo de nombre "+ idToken.getLexeme() +" fue inicializado con null pero es de tipo primitivo. ", value.getLexeme(), value.getLine());

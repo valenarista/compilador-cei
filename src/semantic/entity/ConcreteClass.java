@@ -23,6 +23,7 @@ public class ConcreteClass implements EntityClass {
     HashMap<String,Attribute> shadowedAttributes;
     HashMap<String,Method> methods;
     HashMap<String,Method> inheritedMethods;
+    HashMap<String,Attribute> inheritedAtts;
     Constructor constructor;
     boolean consolidated;
 
@@ -32,6 +33,7 @@ public class ConcreteClass implements EntityClass {
         this.implementation = null;
         this.attributes = new HashMap<>();
         this.shadowedAttributes = new HashMap<>();
+        this.inheritedAtts = new HashMap<>();
         this.methods = new HashMap<>();
         this.inheritedMethods = new HashMap<>();
         this.constructor = null;
@@ -234,6 +236,7 @@ public class ConcreteClass implements EntityClass {
     private void inheriteAttribute(Attribute attribute) {
         if(attributes.get(attribute.getName())==null){
             attributes.put(attribute.getName(),attribute);
+            inheritedAtts.put(attribute.getName(),attribute);
         } else {
             shadowedAttributes.put(attribute.getName(),attribute);
         }
@@ -326,6 +329,11 @@ public class ConcreteClass implements EntityClass {
     @Override
     public HashMap<String, Method> getInheritedMethods() {
         return inheritedMethods;
+    }
+
+    @Override
+    public HashMap<String, Attribute> getInheritedAttributes() {
+        return inheritedAtts;
     }
 
 

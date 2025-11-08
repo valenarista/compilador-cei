@@ -32,10 +32,13 @@ public class UnaryExpNode extends CompExpNode{
                 return type;
             }
             else{
-                throw new SemanticException("Error semantico en linea "+operator.getLexeme()+" El tipo del operador "+operator.getLexeme()+" no es compatible con el operando "+operand.getToken().getLexeme(),operator.getLexeme(),operator.getLineNumber());
+                throw new SemanticException("Error semantico en linea "+operator.getLexeme()+" El tipo del operador "+operator.getLexeme()+" no es compatible con el tipo "+type.getName()+" del operando ",operator.getLexeme(),operator.getLineNumber());
             }
         }
         return type;
+    }
+    public OperandNode getOperand() {
+        return operand;
     }
 
     @Override
