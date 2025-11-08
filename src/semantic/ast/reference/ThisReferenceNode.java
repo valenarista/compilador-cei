@@ -58,6 +58,11 @@ public class ThisReferenceNode extends ReferenceNode{
     }
 
     @Override
+    public void generateCode() {
+
+    }
+
+    @Override
     public Token getToken() {
         return token;
     }

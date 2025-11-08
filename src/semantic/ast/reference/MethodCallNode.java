@@ -6,6 +6,7 @@ import semantic.ast.chaining.ChainingNode;
 import semantic.ast.expression.ExpressionNode;
 import semantic.declarable.Method;
 import semantic.declarable.Parameter;
+import semantic.entity.EntityClass;
 import semantic.types.Type;
 
 import java.util.List;
@@ -104,5 +105,45 @@ public class MethodCallNode extends ReferenceNode{
             return optChaining.isVariable();
         }
         return false;
+    }
+
+    @Override
+    public void generateCode(){
+        System.out.println("DEBUG: Generando llamada a " + methodName);
+
+        for(ExpressionNode arg : argList){
+            arg.generateCode();
+        }
+        Method method = symbolTable.getCurrentClass().getMethods().get(methodName);
+        String className;
+
+        if(method != null && symbolTable.getCurrentClass().getInheritedMethods().get(methodName) != null){
+            // Método heredado - buscar la clase padre que lo define
+            className = findMethodOwnerClass(methodName);
+        } else {
+            className = symbolTable.getCurrentClass().getName();
+        }
+
+        String methodLabel = className + "_" + methodName;
+        symbolTable.instructionList.add("PUSH " + methodLabel);
+        symbolTable.instructionList.add("CALL");
+    }
+    private String findMethodOwnerClass(String methodName){
+
+        String currentClassName = symbolTable.getCurrentClass().getName();
+        EntityClass currentClass = symbolTable.getCurrentClass();
+
+        while(currentClass != null){
+            if(currentClass.getMethods().containsKey(methodName) &&
+                    !currentClass.getInheritedMethods().containsKey(methodName)){
+                return currentClass.getName();
+            }
+            if(currentClass.getHerencia() != null){
+                currentClass = symbolTable.getClass(currentClass.getHerencia().getLexeme());
+            } else {
+                break;
+            }
+        }
+        return currentClassName;
     }
 }

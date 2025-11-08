@@ -3,6 +3,7 @@ package semantic.ast.literal;
 import lexical.Token;
 import semantic.types.CharType;
 import semantic.types.Type;
+import static compiler.Main.symbolTable;
 
 public class CharLiteralNode extends LiteralNode{
     private Token token;
@@ -28,5 +29,10 @@ public class CharLiteralNode extends LiteralNode{
     @Override
     public String getLexeme() {
         return token.getLexeme();
+    }
+
+    @Override
+    public void generateCode() {
+        symbolTable.instructionList.add("PUSH "+token.getLexeme());
     }
 }

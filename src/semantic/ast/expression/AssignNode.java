@@ -66,9 +66,15 @@ public class AssignNode extends ExpressionNode{
         return false;
     }
 
-
     @Override
     public boolean isVariable() {
         return false;
+    }
+
+    @Override
+    public void generateCode() {
+        left.setIsLeftSide(true);
+        right.generateCode();
+        left.generateCode();
     }
 }

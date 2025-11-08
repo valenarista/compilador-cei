@@ -4,6 +4,8 @@ import lexical.Token;
 import semantic.types.NullType;
 import semantic.types.Type;
 
+import static compiler.Main.symbolTable;
+
 public class NullLiteralNode extends LiteralNode{
     private Token token;
     public NullLiteralNode(Token token) {
@@ -28,5 +30,10 @@ public class NullLiteralNode extends LiteralNode{
     @Override
     public String getLexeme() {
         return token.getLexeme();
+    }
+
+    @Override
+    public void generateCode() {
+        symbolTable.instructionList.add("PUSH "+token.getLexeme());
     }
 }

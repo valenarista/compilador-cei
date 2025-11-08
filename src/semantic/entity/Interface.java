@@ -20,6 +20,7 @@ public class Interface implements EntityClass {
     HashMap<String,Attribute> inheritedAtts;
     HashMap<String,Attribute> attributes;
     private boolean consolidated;
+    private boolean isPredefined = false;
 
     public Interface(Token idToken,Token modificador) {
         this.idToken = idToken;
@@ -69,6 +70,20 @@ public class Interface implements EntityClass {
         }
 
         consolidated = true;
+
+    }
+
+    @Override
+    public boolean isPredefined() {
+        return isPredefined;
+    }
+    @Override
+    public void setPredefined(boolean predefined) {
+        isPredefined = predefined;
+    }
+
+    @Override
+    public void generateCode() {
 
     }
 

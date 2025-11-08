@@ -5,6 +5,8 @@ import lexical.TokenType;
 import semantic.types.ReferenceType;
 import semantic.types.Type;
 
+import static compiler.Main.symbolTable;
+
 public class StringLiteralNode extends LiteralNode {
     private Token token;
 
@@ -32,5 +34,10 @@ public class StringLiteralNode extends LiteralNode {
     @Override
     public String getLexeme() {
         return token.getLexeme();
+    }
+
+    @Override
+    public void generateCode() {
+        symbolTable.instructionList.add("PUSH "+token.getLexeme());
     }
 }

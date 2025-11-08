@@ -12,7 +12,9 @@ import semantic.entity.ConcreteClass;
 import semantic.entity.EntityClass;
 import semantic.types.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class SymbolTable {
     public EntityClass claseActual;
@@ -22,10 +24,12 @@ public class SymbolTable {
     Method methodActual;
     public HashMap<String,EntityClass> clases;
     BlockNode currentBlock;
+    public List<String> instructionList;
 
 
     public SymbolTable(){
         clases = new HashMap<>();
+        instructionList = new ArrayList<>();
     }
 
     public void createPredefinedClasses() {
@@ -36,18 +40,21 @@ public class SymbolTable {
         debugPrint.addParameter(new Parameter(new Token(TokenType.metVarID,"i",0),new IntType()));
         objectClass.addMethod(debugPrint);
         objectClass.addConstructor(new Constructor(new Token(TokenType.classID,"Object",0),null));
+        objectClass.setPredefined(true);
         clases.put("Object",objectClass);
 
         //String class
         EntityClass stringClass = new ConcreteClass(new Token(TokenType.classID,"String",0),null);
         stringClass.addInheritance(new Token(TokenType.classID,"Object",0));
         stringClass.addConstructor(new Constructor(new Token(TokenType.classID,"String",0),null));
+        stringClass.setPredefined(true);
         clases.put("String",stringClass);
 
         //System class
         EntityClass systemClass = new ConcreteClass(new Token(TokenType.classID,"System",0),null);
         systemClass.addInheritance(new Token(TokenType.classID,"Object",0));
         systemClass.addConstructor(new Constructor(new Token(TokenType.classID,"System",0),null));
+        systemClass.setPredefined(true);
         clases.put("System",systemClass);
 
         Method read = new Method(new Token(TokenType.metVarID,"read",0),new IntType(),new Token(TokenType.sw_static,"static",0));
@@ -261,4 +268,161 @@ public class SymbolTable {
         }
         return false;
     }
+
+    public void generateCode(){
+        initGenerator();
+        heapRoutinesGenerator();
+        defaultClassesGenerator();
+
+        for(EntityClass clase : clases.values()){
+            if(!clase.isPredefined())
+                clase.generateCode();
+        }
+    }
+    private void initGenerator(){
+        instructionList.add(".CODE");
+        instructionList.add("PUSH simple_heap_init");
+        instructionList.add("PUSH main");
+        instructionList.add("CALL");
+        instructionList.add("HALT");
+    }
+
+    private void heapRoutinesGenerator(){
+        instructionList.add("simple_heap_init:");
+        instructionList.add("RET 0");
+
+        instructionList.add("simple_malloc:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("LOADHL");
+        instructionList.add("DUP");
+        instructionList.add("PUSH 1");
+        instructionList.add("ADD");
+        instructionList.add("STORE 4");
+        instructionList.add("LOAD 3");
+        instructionList.add("ADD");
+        instructionList.add("STOREHL");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 1");
+    }
+    private void defaultClassesGenerator() {
+        //Object class
+        //static void debugPrint(int i)
+        instructionList.add("; Clase Object");
+        instructionList.add("Object_debugPrint:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("LOAD 3");
+        instructionList.add("IPRINT");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 1");
+
+        //System class
+        //static int read()
+        instructionList.add("; Clase System");
+        instructionList.add("System_read:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("READ");
+        instructionList.add("STORE 3");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 0");
+
+        //static void printB(boolean b)
+        instructionList.add("System_printB:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("LOAD 3");
+        instructionList.add("BPRINT");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 1");
+
+        //static void printC(char c)
+        instructionList.add("System_printC:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("LOAD 3");
+        instructionList.add("CPRINT");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 1");
+
+        //static void printI(int i)
+        instructionList.add("System_printI:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("LOAD 3");
+        instructionList.add("IPRINT");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 1");
+
+        //static void printS(String s)
+        instructionList.add("System_printS:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("LOAD 3");
+        instructionList.add("SPRINT");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 1");
+
+        //static void println()
+        instructionList.add("System_println:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("PRNLN");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 0");
+
+        //static void printBln(boolean b)
+        instructionList.add("System_printBln:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("LOAD 3");
+        instructionList.add("BPRINT");
+        instructionList.add("PRNLN");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 1");
+
+        //static void printCln(char c)
+        instructionList.add("System_printCln:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("LOAD 3");
+        instructionList.add("CPRINT");
+        instructionList.add("PRNLN");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 1");
+
+        //static void printIln(int i)
+        instructionList.add("System_printIln:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("LOAD 3");
+        instructionList.add("IPRINT");
+        instructionList.add("PRNLN");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 1");
+
+        //static void printSln(String s)
+        instructionList.add("System_printSln:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("LOAD 3");
+        instructionList.add("SPRINT");
+        instructionList.add("PRNLN");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 1");
+    }
+
 }

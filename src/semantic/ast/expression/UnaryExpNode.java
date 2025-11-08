@@ -6,6 +6,7 @@ import lexical.TokenType;
 import semantic.types.BooleanType;
 import semantic.types.IntType;
 import semantic.types.Type;
+import static compiler.Main.symbolTable;
 
 public class UnaryExpNode extends CompExpNode{
     private Token operator;
@@ -78,9 +79,41 @@ public class UnaryExpNode extends CompExpNode{
         return operator.getType().equals(TokenType.addOp) || operator.getType().equals(TokenType.subOp) || operator.getType().equals(TokenType.postDecrement) || operator.getType().equals(TokenType.postIncrement);
     }
 
-
     @Override
     public boolean isVariable() {
         return operand.isVariable();
+    }
+
+    @Override
+    public void generateCode() {
+        operand.generateCode();
+        generateOperator();
+    }
+
+    private void generateOperator(){
+        if(operator!=null){
+            switch (operator.getType()){
+                case notOp:
+                    symbolTable.instructionList.add("    NOT");
+                    break;
+                case addOp:
+                    //no operation needed
+                    break;
+                case subOp:
+                    symbolTable.instructionList.add("    NEG");
+                    break;
+                case postIncrement:
+                    symbolTable.instructionList.add("    LDC1");
+                    symbolTable.instructionList.add("    ADD");
+                    break;
+                case postDecrement:
+                    symbolTable.instructionList.add("    LDC1");
+                    symbolTable.instructionList.add("    SUB");
+                    break;
+                default:
+                    //no operation needed
+                    break;
+            }
+        }
     }
 }

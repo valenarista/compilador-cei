@@ -102,4 +102,9 @@ public class VarCallNode extends ReferenceNode{
         }
         return true;
     }
+    @Override
+    public void generateCode() {
+
+    }
+
 }

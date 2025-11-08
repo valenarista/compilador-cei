@@ -25,6 +25,9 @@ public interface EntityClass {
     boolean isClass();
     boolean isInterface();
     boolean consolidated();
+    boolean isPredefined();
+    void setPredefined(boolean predefined);
+    void generateCode();
 
 
     void addAttribute(Attribute attribute);

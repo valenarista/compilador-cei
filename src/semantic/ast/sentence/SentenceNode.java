@@ -11,4 +11,7 @@ abstract public class SentenceNode {
     public String getLexeme(){
         return "";
     }
+    void generateCode(){
+
+    }
 }

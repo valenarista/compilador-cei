@@ -19,6 +19,10 @@ public class ToyReferenceNode extends ReferenceNode{
     }
 
     @Override
+    public void generateCode() {
+
+    }
+    @Override
     public int getLine() {
         return 0;
     }

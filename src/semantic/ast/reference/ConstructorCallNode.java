@@ -97,6 +97,11 @@ public class ConstructorCallNode extends ReferenceNode{
     }
 
     @Override
+    public void generateCode() {
+
+    }
+
+    @Override
     public boolean isVariable() {
         if(optChaining != null) {
             return optChaining.isVariable();

@@ -4,6 +4,8 @@ import lexical.Token;
 import semantic.types.BooleanType;
 import semantic.types.Type;
 
+import static compiler.Main.symbolTable;
+
 public class BooleanLiteralNode extends LiteralNode{
     private Token token;
     public BooleanLiteralNode(Token token) {
@@ -30,5 +32,10 @@ public class BooleanLiteralNode extends LiteralNode{
     @Override
     public String getLexeme() {
         return token.getLexeme();
+    }
+
+    @Override
+    public void generateCode() {
+        symbolTable.instructionList.add("PUSH "+token.getLexeme());
     }
 }

@@ -102,6 +102,32 @@ public class Method implements Invocable {
     public void chequeoSentencias() throws SemanticException {
         block.check();
     }
+    public void generateCode(){
+        String label;
+        if(getName().equals("main") && isStaticMethod()){
+            label = "main";
+        } else {
+            label = symbolTable.getCurrentClass().getName() + "_" + getName();
+        }
+
+        // PRIMERO la etiqueta
+        symbolTable.instructionList.add(label + ":");
+
+        // DESPUÉS el prólogo
+        symbolTable.instructionList.add("LOADFP");
+        symbolTable.instructionList.add("LOADSP");
+        symbolTable.instructionList.add("STOREFP");
+
+        // Generar el cuerpo del método
+        if(block != null && hasBody()) {
+            block.generateCode();
+        }
+
+        // Epílogo
+        symbolTable.instructionList.add("STOREFP");
+        symbolTable.instructionList.add("RET " + paramList.size());
+    }
+
 
 }
 

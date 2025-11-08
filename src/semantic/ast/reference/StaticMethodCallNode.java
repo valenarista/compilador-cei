@@ -94,6 +94,11 @@ public class StaticMethodCallNode extends ReferenceNode {
     }
 
     @Override
+    public void generateCode() {
+
+    }
+
+    @Override
     public Token getToken() {
         return methodToken;
     }

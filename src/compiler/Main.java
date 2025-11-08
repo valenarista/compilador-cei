@@ -9,6 +9,9 @@ import sourcemanager.SourceManager;
 import sourcemanager.SourceManagerCharImpl;
 import syntactic.SyntacticAnalyzer;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 
@@ -16,17 +19,19 @@ public class Main {
     public static SymbolTable symbolTable = null;
     public static void main(String[] args) {
         String filePath;
+        String outputPath;
         SourceManager sourceManager = new SourceManagerCharImpl();
         LexicalAnalyzerMultiDetect lexicalAnalyzer = null;
         SyntacticAnalyzer syntacticAnalyzer;
 
-        if (args.length > 0) {
+        if (args.length == 2) {
             try{
                 //vaciar tabla de simbolos
                 symbolTable = new SymbolTable();
                 symbolTable.createPredefinedClasses();
 
                 filePath = args[0];
+                outputPath = args[1];
                 sourceManager.open(filePath);
                 lexicalAnalyzer = new LexicalAnalyzerMultiDetect(sourceManager);
                 syntacticAnalyzer = new SyntacticAnalyzer(lexicalAnalyzer);
@@ -35,6 +40,7 @@ public class Main {
                 symbolTable.chequeoDeclaraciones();
                 symbolTable.chequeoSentencias();
 
+                generate(outputPath);
 
                 if (!lexicalAnalyzer.getErrors().isEmpty()) {
                     for(LexicalException error : lexicalAnalyzer.getErrors()){
@@ -57,7 +63,31 @@ public class Main {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+    private static void generate(String outputPath){
+        //Generacion de codigo intermedio o maquina virtual
+        File outputFile;
+        FileWriter writer;
+        BufferedWriter bufferedWriter;
+        symbolTable.generateCode();
+        try{
+            if(outputPath == null)
+                outputFile = new File("output.txt");
+            else
+                outputFile = new File(outputPath);
 
+            writer = new FileWriter(outputFile);
+            BufferedWriter buffer = new BufferedWriter(writer);
+
+            for(String instruction : symbolTable.instructionList){
+                writer.write(instruction);
+                writer.write("\n");
+            }
+            writer.close();
+            buffer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -7,6 +7,8 @@ import semantic.types.BooleanType;
 import semantic.types.IntType;
 import semantic.types.Type;
 
+import static compiler.Main.symbolTable;
+
 public class BinaryExpNode extends CompExpNode{
     private Token operator;
     private ExpressionNode leftSide;
@@ -112,4 +114,29 @@ public class BinaryExpNode extends CompExpNode{
     public boolean isVariable() {
         return false;
     }
+
+    @Override
+    public void generateCode() {
+        leftSide.generateCode();
+        rightSide.generateCode();
+        generateOperator();
+    }
+
+    private void generateOperator(){
+        switch (operator.getType()){
+            case addOp -> symbolTable.instructionList.add("    ADD");
+            case subOp -> symbolTable.instructionList.add("    SUB");
+            case mulOp -> symbolTable.instructionList.add("    MUL");
+            case divOp -> symbolTable.instructionList.add("    DIV");
+            case modOp -> symbolTable.instructionList.add("    MOD");
+            case andOp -> symbolTable.instructionList.add("    AND");
+            case orOp -> symbolTable.instructionList.add("    OR");
+            case greaterOp -> symbolTable.instructionList.add("    GT");
+            case greaterEqualOp -> symbolTable.instructionList.add("    GE");
+            case lessOp -> symbolTable.instructionList.add("    LT");
+            case lessEqualOp -> symbolTable.instructionList.add("    LE");
+            case equalOp -> symbolTable.instructionList.add("    EQ");
+            case notEqualOp -> symbolTable.instructionList.add("    NEQ");
+        }
+    } 
 }

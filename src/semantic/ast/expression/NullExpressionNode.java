@@ -33,4 +33,9 @@ public class NullExpressionNode extends ExpressionNode{
     public boolean isOperandWithCall() {
         return false;
     }
+
+    @Override
+    public void generateCode() {
+        
+    }
 }

@@ -41,4 +41,8 @@ public class SentenceWithExpressionNode extends SentenceNode {
     public Token getFinalToken() {
         return finalToken;
     }
+
+    public void generateCode() {
+        expressionNode.generateCode();
+    }
 }

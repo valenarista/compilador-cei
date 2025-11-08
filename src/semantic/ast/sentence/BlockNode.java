@@ -86,5 +86,11 @@ public class BlockNode extends SentenceNode{
 
     }
 
+    public void generateCode() {
+        System.out.println("DEBUG: Generando bloque con " + sentences.size() + " sentencias");
+        for (SentenceNode sentence : sentences) {
+            sentence.generateCode();
+        }
+    }
 
 }

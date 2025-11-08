@@ -26,6 +26,7 @@ public class ConcreteClass implements EntityClass {
     HashMap<String,Attribute> inheritedAtts;
     Constructor constructor;
     boolean consolidated;
+    boolean predefined = false;
 
     public ConcreteClass(Token idToken,Token modificador) {
         this.idToken = idToken;
@@ -68,6 +69,15 @@ public class ConcreteClass implements EntityClass {
         if(implementation!=null){
             checkImplementation();
         }
+    }
+
+    @Override
+    public boolean isPredefined() {
+        return predefined;
+    }
+    @Override
+    public void setPredefined(boolean predefined) {
+        this.predefined = predefined;
     }
 
     public void chequeoSentencias(){
@@ -414,6 +424,25 @@ public class ConcreteClass implements EntityClass {
             }
         }
     }
+
+    public void generateCode(){
+        String className = getName();
+        String label = "class_" + className;
+        symbolTable.instructionList.add("\n; Clase " + getName());
+        symbolTable.instructionList.add(label + ":");
+
+        // Agregar NOP para evitar dos etiquetas consecutivas
+        symbolTable.instructionList.add("NOP");
+
+        for(Method method : methods.values()){
+            if(!inheritedMethods.containsKey(method.getName())){
+                method.generateCode();
+            }
+        }
+    }
+
+
+
 
 
 }

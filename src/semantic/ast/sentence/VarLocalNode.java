@@ -14,6 +14,7 @@ public class VarLocalNode extends SentenceNode{
     private ExpressionNode value;
     private Token token;
     private Token assignToken;
+    private int offset;
 
     public VarLocalNode(Type type, Token token) {
         this.type = type;
@@ -72,5 +73,19 @@ public class VarLocalNode extends SentenceNode{
             }
             parentBlock = parentBlock.getParentBlock();
         }
+    }
+
+    public void generateCode() {
+        if(value != null){
+            value.generateCode();
+            symbolTable.instructionList.add("STORE " + offset);
+        }
+    }
+
+    public int getOffset() {
+        return offset;
+    }
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 }
