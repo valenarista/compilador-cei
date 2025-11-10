@@ -9,7 +9,8 @@ import static compiler.Main.symbolTable;
 public class Parameter {
     private Token idToken;
     private Type type;
-    private int position;
+    private int offset;
+
 
     public Parameter(Token idToken, Type type) {
         this.idToken = idToken;
@@ -29,5 +30,11 @@ public class Parameter {
         if(!type.isPrimitive() && (symbolTable.getClass(type.getName())==null)){
             throw new SemanticException("Error semantico en linea "+type.getLine()+" El parametro con nombre "+ idToken.getLexeme() +" fue declarado como tipo de clase inexistente. ",type.getName(), type.getLine());
         }
+    }
+    public void setOffset(int offset){
+        this.offset = offset;
+    }
+    public int getOffset() {
+        return offset;
     }
 }

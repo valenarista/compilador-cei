@@ -270,6 +270,7 @@ public class SymbolTable {
     }
 
     public void generateCode(){
+        setOffsets();
         initGenerator();
         heapRoutinesGenerator();
         defaultClassesGenerator();
@@ -423,6 +424,11 @@ public class SymbolTable {
         instructionList.add("PRNLN");
         instructionList.add("STOREFP");
         instructionList.add("RET 1");
+    }
+    private void setOffsets(){
+        for(EntityClass clase : clases.values()){
+            clase.setOffsets();
+        }
     }
 
 }

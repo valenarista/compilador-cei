@@ -11,3 +11,4 @@ public class NullBlockNode extends BlockNode {
         // Nothing to check in a null block
     }
 }
+

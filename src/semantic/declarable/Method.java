@@ -4,6 +4,7 @@ import exceptions.SemanticException;
 import lexical.Token;
 import lexical.TokenType;
 import semantic.ast.sentence.BlockNode;
+import semantic.entity.EntityClass;
 import semantic.types.Type;
 
 import java.sql.Blob;
@@ -21,6 +22,10 @@ public class Method implements Invocable {
     private Token visibility;
     private boolean hasBody;
     private BlockNode block;
+    private EntityClass ownerClass;
+
+    private int offset;
+    private String label;
 
 
     public Method(Token idToken, Type returnType, Token modifier, Token visibility) {
@@ -31,6 +36,8 @@ public class Method implements Invocable {
         hasBody = true;
         parameters = new HashMap<>();
         paramList = new java.util.ArrayList<>();
+        ownerClass = symbolTable.getCurrentClass();
+        label = ownerClass.getName() + "_" + idToken.getLexeme();
     }
     public Method(Token idToken, Type returnType, Token modifier) {
         this.returnType = returnType;
@@ -103,29 +110,34 @@ public class Method implements Invocable {
         block.check();
     }
     public void generateCode(){
-        String label;
+        symbolTable.instructionList.add(".CODE");
         if(getName().equals("main") && isStaticMethod()){
             label = "main";
-        } else {
-            label = symbolTable.getCurrentClass().getName() + "_" + getName();
         }
-
-        // PRIMERO la etiqueta
         symbolTable.instructionList.add(label + ":");
-
-        // DESPUÉS el prólogo
         symbolTable.instructionList.add("LOADFP");
         symbolTable.instructionList.add("LOADSP");
         symbolTable.instructionList.add("STOREFP");
 
-        // Generar el cuerpo del método
         if(block != null && hasBody()) {
             block.generateCode();
         }
 
-        // Epílogo
+        int memoryNeeded = isStaticMethod() ? paramList.size() : paramList.size() + 1;
+
         symbolTable.instructionList.add("STOREFP");
-        symbolTable.instructionList.add("RET " + paramList.size());
+        symbolTable.instructionList.add("RET " + memoryNeeded);
+    }
+
+    public String getLabel() {
+        return label;
+    }
+    public void setOffset(int offset) {
+        this.offset = offset;
+
+    }
+    public int getOffset() {
+        return offset;
     }
 
 

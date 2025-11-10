@@ -112,11 +112,10 @@ SPRINT
 PRNLN
 STOREFP
 RET 1
-
-; Clase A
-class_A:
-NOP
-System_m1:
+.DATA
+lblVTInit: NOP
+.CODE
+A_m1:
 LOADFP
 LOADSP
 STOREFP
@@ -124,30 +123,43 @@ PUSH Object_debugPrint
 CALL
 PUSH Object_debugPrint
 CALL
+PUSH System_printSln
+CALL
+FMEM 0
 STOREFP
-RET 0
-System_setall:
+RET 1
+.CODE
+A_setall:
 LOADFP
 LOADSP
 STOREFP
 PUSH 2
     MUL
 PUSH "hola"
+FMEM 0
+STOREFP
+RET 2
+.CODE
+ctor_A:
+LOADFP
+LOADSP
+STOREFP
 STOREFP
 RET 1
-
-; Clase B
-class_B:
-NOP
-System_seta4:
+.DATA
+lblVTInit: NOP
+.CODE
+B_seta4:
 LOADFP
 LOADSP
 STOREFP
 PUSH 4000
 PUSH 55
+FMEM 0
 STOREFP
-RET 0
-System_m2:
+RET 1
+.CODE
+B_m2:
 LOADFP
 LOADSP
 STOREFP
@@ -155,16 +167,31 @@ PUSH Object_debugPrint
 CALL
 PUSH Object_debugPrint
 CALL
+FMEM 0
 STOREFP
-RET 0
-
-; Clase Init
-class_Init:
-NOP
+RET 1
+.CODE
+ctor_B:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+.DATA
+lblVTInit: NOP
+.CODE
 main:
 LOADFP
 LOADSP
 STOREFP
 STORE 0
+FMEM 0
 STOREFP
 RET 0
+.CODE
+ctor_Init:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1

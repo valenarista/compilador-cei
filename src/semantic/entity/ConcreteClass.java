@@ -428,16 +428,35 @@ public class ConcreteClass implements EntityClass {
     public void generateCode(){
         String className = getName();
         String label = "class_" + className;
-        symbolTable.instructionList.add("\n; Clase " + getName());
-        symbolTable.instructionList.add(label + ":");
-
-        // Agregar NOP para evitar dos etiquetas consecutivas
-        symbolTable.instructionList.add("NOP");
+        symbolTable.instructionList.add(".DATA");
+        symbolTable.instructionList.add("lblVTInit: NOP");
 
         for(Method method : methods.values()){
             if(!inheritedMethods.containsKey(method.getName())){
                 method.generateCode();
             }
+        }
+
+        constructor.generateCode();
+
+    }
+
+    public void setOffsets(){
+        setAttributeOffsets();
+        setMethodOffsets();
+    }
+    private void setAttributeOffsets(){
+        int offset = 0;
+        for(Attribute attribute : attributes.values()){
+            attribute.setOffset(offset);
+            offset += attribute.getType().getSize();
+        }
+    }
+    private void setMethodOffsets() {
+        int offset = 0;
+        for (Method method : methods.values()) {
+            method.setOffset(offset);
+            offset += 1;
         }
     }
 

@@ -91,6 +91,7 @@ public class BlockNode extends SentenceNode{
         for (SentenceNode sentence : sentences) {
             sentence.generateCode();
         }
+        symbolTable.instructionList.add("FMEM 0");
     }
 
 }

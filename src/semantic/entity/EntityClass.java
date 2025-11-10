@@ -34,4 +34,6 @@ public interface EntityClass {
     void addMethod(Method method);
     void addConstructor(Constructor constructor);
     void addInheritance(Token herencia);
+
+    void setOffsets();
 }

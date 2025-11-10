@@ -7,6 +7,7 @@ import semantic.types.Type;
 
 import java.util.HashMap;
 import java.util.List;
+import static compiler.Main.symbolTable;
 
 public class Constructor implements Invocable{
     private Token idToken;
@@ -15,11 +16,14 @@ public class Constructor implements Invocable{
     private List<Parameter> paramList;
     private BlockNode block;
 
+    private String label;
+
     public Constructor(Token idToken, Token visibility) {
         this.idToken = idToken;
         this.visibility = visibility;
         parameters = new HashMap<>();
         paramList = new java.util.ArrayList<>();
+        label = "ctor_" + idToken.getLexeme();
     }
 
     public void setBlock(BlockNode block) { this.block = block; }
@@ -65,5 +69,22 @@ public class Constructor implements Invocable{
         if(block != null){
             block.check();
         }
+    }
+
+    public void generateCode() {
+        symbolTable.instructionList.add(".CODE");
+        symbolTable.instructionList.add(label + ":");
+        symbolTable.instructionList.add("LOADFP");
+        symbolTable.instructionList.add("LOADSP");
+        symbolTable.instructionList.add("STOREFP");
+
+        if(block != null){
+            block.generateCode();
+        }
+
+        int memoryToFree = paramList.size() + 1;
+
+        symbolTable.instructionList.add("STOREFP");
+        symbolTable.instructionList.add("RET "+ memoryToFree);
     }
 }

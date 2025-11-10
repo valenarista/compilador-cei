@@ -95,7 +95,13 @@ public class StaticMethodCallNode extends ReferenceNode {
 
     @Override
     public void generateCode() {
-
+        for(ExpressionNode arg : argList){
+            arg.generateCode();
+        }
+        String className = classToken.getLexeme();
+        String methodName = methodToken.getLexeme();
+        symbolTable.instructionList.add("PUSH "+ className + "_" + methodName);
+        symbolTable.instructionList.add("CALL");
     }
 
     @Override
