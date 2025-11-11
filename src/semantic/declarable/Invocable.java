@@ -18,4 +18,5 @@ public interface Invocable {
     boolean isPublic();
 
     boolean isStaticMethod();
+    boolean isVoid();
 }

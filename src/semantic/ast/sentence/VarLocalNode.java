@@ -76,10 +76,13 @@ public class VarLocalNode extends SentenceNode{
     }
 
     public void generateCode() {
+        symbolTable.instructionList.add("RMEM 1");
+
         if(value != null){
             value.generateCode();
             symbolTable.instructionList.add("STORE " + offset);
         }
+
     }
 
     public int getOffset() {

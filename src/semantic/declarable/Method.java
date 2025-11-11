@@ -94,6 +94,10 @@ public class Method implements Invocable {
     public Token getModifier() {
         return modifier;
     }
+    public EntityClass getOwnerClass() {
+        return ownerClass;
+    }
+
 
     public void estaBienDeclarado() {
         if (!returnType.isPrimitive() && (symbolTable.getClass(returnType.getName()) == null)) {
@@ -123,10 +127,14 @@ public class Method implements Invocable {
             block.generateCode();
         }
 
-        int memoryNeeded = isStaticMethod() ? paramList.size() : paramList.size() + 1;
+        if(isVoid()) {
+            if(block.getVarLocalMap().size()>0)
+                symbolTable.instructionList.add("FMEM " + block.getVarLocalMap().size());
 
-        symbolTable.instructionList.add("STOREFP");
-        symbolTable.instructionList.add("RET " + memoryNeeded);
+            symbolTable.instructionList.add("STOREFP");
+            int memoryNeeded = isStaticMethod() ? paramList.size() : paramList.size() + 1;
+            symbolTable.instructionList.add("RET " + memoryNeeded);
+        }
     }
 
     public String getLabel() {
@@ -138,6 +146,9 @@ public class Method implements Invocable {
     }
     public int getOffset() {
         return offset;
+    }
+    public boolean isVoid() {
+        return returnType.getName().equals("void");
     }
 
 

@@ -98,4 +98,7 @@ public class Attribute {
         }
     }
 
+    public int getOffset() {
+        return 0;
+    }
 }

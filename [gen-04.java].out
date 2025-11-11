@@ -1,5 +1,6 @@
 .CODE
 PUSH simple_heap_init
+CALL
 PUSH main
 CALL
 HALT
@@ -113,17 +114,21 @@ PRNLN
 STOREFP
 RET 1
 .DATA
-lblVTInit: NOP
+VT_A: NOP
+DW A_m1
+DW null
+DW A_setall
 .CODE
 A_m1:
 LOADFP
 LOADSP
 STOREFP
-PUSH Object_debugPrint
+PUSH null
 CALL
-PUSH Object_debugPrint
+PUSH null
 CALL
-PUSH System_printSln
+RMEM 1
+PUSH null
 CALL
 FMEM 0
 STOREFP
@@ -147,7 +152,12 @@ STOREFP
 STOREFP
 RET 1
 .DATA
-lblVTInit: NOP
+VT_B: NOP
+DW B_seta4
+DW A_m1
+DW B_m2
+DW null
+DW A_setall
 .CODE
 B_seta4:
 LOADFP
@@ -163,9 +173,9 @@ B_m2:
 LOADFP
 LOADSP
 STOREFP
-PUSH Object_debugPrint
+PUSH null
 CALL
-PUSH Object_debugPrint
+PUSH null
 CALL
 FMEM 0
 STOREFP
@@ -178,14 +188,28 @@ STOREFP
 STOREFP
 RET 1
 .DATA
-lblVTInit: NOP
+VT_Init: NOP
+DW null
+DW Init_main
 .CODE
 main:
 LOADFP
 LOADSP
 STOREFP
+RMEM 1
+RMEM 1
+PUSH 6
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_B
+STOREREF 0
+DUP
+PUSH ctor_B
+CALL
 STORE 0
 FMEM 0
+FMEM 1
 STOREFP
 RET 0
 .CODE

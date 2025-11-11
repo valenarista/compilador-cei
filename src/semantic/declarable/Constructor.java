@@ -60,6 +60,11 @@ public class Constructor implements Invocable{
         return false;
     }
 
+    @Override
+    public boolean isVoid() {
+        return false;
+    }
+
     public void estaBienDeclarado() throws SemanticException{
         for(Parameter p : paramList){
             p.estaBienDeclarado();
@@ -69,6 +74,10 @@ public class Constructor implements Invocable{
         if(block != null){
             block.check();
         }
+    }
+
+    public String getLabel() {
+        return label;
     }
 
     public void generateCode() {

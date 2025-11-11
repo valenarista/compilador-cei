@@ -4,6 +4,7 @@ import exceptions.SemanticException;
 import lexical.Token;
 import semantic.ast.chaining.ChainingNode;
 import semantic.ast.expression.ExpressionNode;
+import semantic.declarable.Method;
 import semantic.types.Type;
 
 import java.util.List;
@@ -95,13 +96,22 @@ public class StaticMethodCallNode extends ReferenceNode {
 
     @Override
     public void generateCode() {
+        String methodName = methodToken.getLexeme();
+        Method method = symbolTable.getClass(classToken.getLexeme()).getMethods().get(methodName);
+        if(method.getReturnType().getName().equals("void")){
+            symbolTable.instructionList.add("RMEM 1");
+        }
         for(ExpressionNode arg : argList){
             arg.generateCode();
         }
-        String className = classToken.getLexeme();
-        String methodName = methodToken.getLexeme();
-        symbolTable.instructionList.add("PUSH "+ className + "_" + methodName);
+
+        symbolTable.instructionList.add("PUSH "+ method.getLabel());
         symbolTable.instructionList.add("CALL");
+
+        if(optionalChaining != null){
+            //optionalChaining.generateCode();
+        }
+
     }
 
     @Override

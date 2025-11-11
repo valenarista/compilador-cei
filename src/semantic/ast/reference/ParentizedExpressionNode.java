@@ -53,7 +53,10 @@ public class ParentizedExpressionNode extends ReferenceNode{
 
     @Override
     public void generateCode() {
-
+        expression.generateCode();
+        if(optionalChaining != null){
+            //optionalChaining.generateCode();
+        }
     }
 
     @Override

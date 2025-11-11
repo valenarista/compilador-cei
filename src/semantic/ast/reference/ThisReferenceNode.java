@@ -59,7 +59,10 @@ public class ThisReferenceNode extends ReferenceNode{
 
     @Override
     public void generateCode() {
-
+        symbolTable.instructionList.add("LOAD 3");
+        if(optChaining != null){
+            //optChaining.generateCode();
+        }
     }
 
     @Override

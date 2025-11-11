@@ -1,5 +1,6 @@
 .CODE
 PUSH simple_heap_init
+CALL
 PUSH main
 CALL
 HALT
@@ -113,14 +114,16 @@ PRNLN
 STOREFP
 RET 1
 .DATA
-lblVTInit: NOP
+VT_Init: NOP
+DW null
+DW Init_main
 .CODE
 main:
 LOADFP
 LOADSP
 STOREFP
 PUSH 1234
-PUSH Object_debugPrint
+PUSH null
 CALL
 FMEM 0
 STOREFP

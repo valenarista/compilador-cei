@@ -110,23 +110,42 @@ public class MethodCallNode extends ReferenceNode{
     @Override
     public void generateCode(){
         System.out.println("DEBUG: Generando llamada a " + methodName);
-
-        for(ExpressionNode arg : argList){
-            arg.generateCode();
-        }
         Method method = symbolTable.getCurrentClass().getMethods().get(methodName);
-        String className;
+        if(method.isStaticMethod()) {
+            if(!method.getReturnType().getName().equals("void"))
+                symbolTable.instructionList.add("RMEM 1; Reservando espacio para el valor de retorno");
 
-        if(method != null && symbolTable.getCurrentClass().getInheritedMethods().get(methodName) != null){
-            // Método heredado - buscar la clase padre que lo define
-            className = findMethodOwnerClass(methodName);
+            for (ExpressionNode arg : argList) {
+                arg.generateCode();
+            }
+
+            String methodLabel = method.getLabel();
+            symbolTable.instructionList.add("PUSH " + methodLabel);
+            symbolTable.instructionList.add("CALL");
+
         } else {
-            className = symbolTable.getCurrentClass().getName();
+            symbolTable.instructionList.add("LOAD 3");
+
+            if(!method.getReturnType().getName().equals("void")){
+                symbolTable.instructionList.add("RMEM 1; Reservando espacio para el valor de retorno");
+                symbolTable.instructionList.add("SWAP");
+            }
+
+            for (ExpressionNode arg : argList) {
+                arg.generateCode();
+                symbolTable.instructionList.add("SWAP");
+            }
+
+            symbolTable.instructionList.add("DUP");
+            symbolTable.instructionList.add("LOADREF 0");
+            symbolTable.instructionList.add("LOADREF "+method.getOffset());
+            symbolTable.instructionList.add("CALL");
+
+        }
+        if(optChaining != null){
+            //optChaining.generateCode();
         }
 
-        String methodLabel = className + "_" + methodName;
-        symbolTable.instructionList.add("PUSH " + methodLabel);
-        symbolTable.instructionList.add("CALL");
     }
     private String findMethodOwnerClass(String methodName){
 

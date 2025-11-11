@@ -104,7 +104,46 @@ public class VarCallNode extends ReferenceNode{
     }
     @Override
     public void generateCode() {
+        if(isParameter())
+            generateParameterCode();
+        else if(isLocalVar())
+            generateLocalVarCode();
+        else if(isAttribute())
+            generateAttributeCode();
 
+        if(optChaining != null) {
+            //optChaining.generateCode();
+        }
+    }
+
+    private void generateParameterCode(){
+        int paramOffset = getParameterOffset();
+        symbolTable.instructionList.add("LOAD " + paramOffset);
+    }
+    private void generateLocalVarCode(){
+        int localVarOffset = symbolTable.getLocalVarOffset(varName);
+        symbolTable.instructionList.add("LOAD " + localVarOffset);
+    }
+    private void generateAttributeCode() {
+        symbolTable.instructionList.add("LOAD 3");
+        Attribute attr = symbolTable.getCurrentClass().getAttributes().get(varName);
+        int attrOffset = attr.getOffset();
+        symbolTable.instructionList.add("LOADREF " + attrOffset);
+    }
+    private int getParameterOffset(){
+        int paramSize = symbolTable.getCurrentInvocable().getParamList().size();
+        int paramIndex = 0;
+        for(Parameter p : symbolTable.getCurrentInvocable().getParamList()){
+            if(p.getName().equals(varName)){
+                break;
+            }
+            paramIndex++;
+        }
+        int baseOffset = paramSize + 3;
+        if(!symbolTable.getCurrentInvocable().isVoid()){
+            baseOffset +=1;
+        }
+        return baseOffset - paramIndex;
     }
 
 }

@@ -7,6 +7,8 @@ import semantic.ast.expression.ExpressionNode;
 import semantic.declarable.Constructor;
 import semantic.declarable.Method;
 import semantic.declarable.Parameter;
+import semantic.entity.ConcreteClass;
+import semantic.entity.EntityClass;
 import semantic.types.ReferenceType;
 import semantic.types.Type;
 
@@ -19,6 +21,7 @@ public class ConstructorCallNode extends ReferenceNode{
     private String className;
     private ChainingNode optChaining;
     private List<ExpressionNode> argList;
+
 
     public ConstructorCallNode(Token token, String className) {
         this.token = token;
@@ -97,7 +100,33 @@ public class ConstructorCallNode extends ReferenceNode{
     }
 
     @Override
-    public void generateCode() {
+    public void generateCode(){
+        symbolTable.instructionList.add("RMEM 1");
+
+        EntityClass building = symbolTable.getClass(className);
+        int cirSize = building.getAttributes().size()+1;
+
+        symbolTable.instructionList.add("PUSH " + cirSize);
+        symbolTable.instructionList.add("PUSH simple_malloc");
+        symbolTable.instructionList.add("CALL");
+
+        symbolTable.instructionList.add("DUP");
+        symbolTable.instructionList.add("PUSH "+building.getVTLabel());
+        symbolTable.instructionList.add("STOREREF 0");
+
+        symbolTable.instructionList.add("DUP");
+
+        for(ExpressionNode arg : argList){
+            arg.generateCode();
+            symbolTable.instructionList.add("SWAP");
+        }
+        String constructorLabel = building.getConstructor().getLabel();
+        symbolTable.instructionList.add("PUSH " + constructorLabel);
+        symbolTable.instructionList.add("CALL");
+
+        if(optChaining != null){
+            //optChaining.generateCode();
+        }
 
     }
 

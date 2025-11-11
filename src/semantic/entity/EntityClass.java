@@ -36,4 +36,5 @@ public interface EntityClass {
     void addInheritance(Token herencia);
 
     void setOffsets();
+    String getVTLabel();
 }

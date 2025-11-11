@@ -22,6 +22,8 @@ public class Interface implements EntityClass {
     private boolean consolidated;
     private boolean isPredefined = false;
 
+    private String vtLabel;
+
     public Interface(Token idToken,Token modificador) {
         this.idToken = idToken;
         this.modificador = modificador;
@@ -29,6 +31,8 @@ public class Interface implements EntityClass {
         this.inheritedMethods = new HashMap<>();
         this.inheritedAtts = new HashMap<>();
         this.attributes = new HashMap<>();
+        this.consolidated = false;
+        this.vtLabel = "VT_" + idToken.getLexeme();
     }
     public void estaBienDeclarado(){
         if(modificador!=null && modificador.getType().equals(TokenType.sw_static))
@@ -186,6 +190,16 @@ public class Interface implements EntityClass {
     public void addInheritance(Token herencia) {
         this.herencia = herencia;
     }
+
+    @Override
+    public void setOffsets() {
+
+    }
+    @Override
+    public String getVTLabel() {
+        return vtLabel;
+    }
+
     private void checkInheritance() {
         //Una interface puede heredar de otra interface, pero no de una clase
 

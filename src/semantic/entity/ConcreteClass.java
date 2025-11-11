@@ -28,6 +28,8 @@ public class ConcreteClass implements EntityClass {
     boolean consolidated;
     boolean predefined = false;
 
+    private String VTLabel;
+
     public ConcreteClass(Token idToken,Token modificador) {
         this.idToken = idToken;
         this.modificador = modificador;
@@ -39,6 +41,7 @@ public class ConcreteClass implements EntityClass {
         this.inheritedMethods = new HashMap<>();
         this.constructor = null;
         consolidated = false;
+        this.VTLabel = "VT_" + idToken.getLexeme();
     }
     public boolean consolidated(){
         return consolidated;
@@ -425,11 +428,13 @@ public class ConcreteClass implements EntityClass {
         }
     }
 
+    @Override
+    public String getVTLabel() {
+        return VTLabel;
+    }
+
     public void generateCode(){
-        String className = getName();
-        String label = "class_" + className;
-        symbolTable.instructionList.add(".DATA");
-        symbolTable.instructionList.add("lblVTInit: NOP");
+        generateVirtualTable();
 
         for(Method method : methods.values()){
             if(!inheritedMethods.containsKey(method.getName())){
@@ -440,16 +445,29 @@ public class ConcreteClass implements EntityClass {
         constructor.generateCode();
 
     }
+    private void generateVirtualTable() {
+        symbolTable.instructionList.add(".DATA");
+
+        String className = getName();
+        String label = "VT_" + className;
+
+        symbolTable.instructionList.add(label + ": NOP");
+
+        for (Method method : methods.values()) {
+            symbolTable.instructionList.add("DW " + method.getLabel());
+        }
+    }
+
 
     public void setOffsets(){
-        setAttributeOffsets();
+        //setAttributeOffsets();
         setMethodOffsets();
     }
     private void setAttributeOffsets(){
         int offset = 0;
         for(Attribute attribute : attributes.values()){
-            attribute.setOffset(offset);
-            offset += attribute.getType().getSize();
+        //    attribute.setOffset(offset);
+          //  offset += attribute.getType().getSize();
         }
     }
     private void setMethodOffsets() {

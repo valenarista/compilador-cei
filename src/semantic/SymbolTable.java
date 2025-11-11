@@ -283,6 +283,8 @@ public class SymbolTable {
     private void initGenerator(){
         instructionList.add(".CODE");
         instructionList.add("PUSH simple_heap_init");
+        instructionList.add("CALL");
+
         instructionList.add("PUSH main");
         instructionList.add("CALL");
         instructionList.add("HALT");
@@ -431,4 +433,7 @@ public class SymbolTable {
         }
     }
 
+    public int getLocalVarOffset(String varName) {
+        return 0;
+    }
 }
