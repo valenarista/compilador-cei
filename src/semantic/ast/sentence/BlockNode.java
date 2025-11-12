@@ -88,10 +88,13 @@ public class BlockNode extends SentenceNode{
 
     public void generateCode() {
         System.out.println("DEBUG: Generando bloque con " + sentences.size() + " sentencias");
+        BlockNode previousBlock = symbolTable.getCurrentBlock();
+        symbolTable.setCurrentBlock(this);
         for (SentenceNode sentence : sentences) {
             sentence.generateCode();
         }
-        symbolTable.instructionList.add("FMEM 0");
+        symbolTable.setCurrentBlock(previousBlock);
+
     }
 
 }

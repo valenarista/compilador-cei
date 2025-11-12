@@ -42,6 +42,8 @@ public class SymbolTable {
         objectClass.addConstructor(new Constructor(new Token(TokenType.classID,"Object",0),null));
         objectClass.setPredefined(true);
         clases.put("Object",objectClass);
+        debugPrint.setOwnerClass(objectClass);
+
 
         //String class
         EntityClass stringClass = new ConcreteClass(new Token(TokenType.classID,"String",0),null);
@@ -60,45 +62,54 @@ public class SymbolTable {
         Method read = new Method(new Token(TokenType.metVarID,"read",0),new IntType(),new Token(TokenType.sw_static,"static",0));
         read.setBlock(new NullBlockNode());
         systemClass.addMethod(read);
+        read.setOwnerClass(systemClass);
 
         Method printB = new Method(new Token(TokenType.metVarID,"printB",0),new VoidType(),new Token(TokenType.sw_static,"static",0));
         printB.setBlock(new NullBlockNode());
         printB.addParameter(new Parameter(new Token(TokenType.metVarID,"b",0),new BooleanType()));
         systemClass.addMethod(printB);
+        printB.setOwnerClass(systemClass);
 
         Method printC = new Method(new Token(TokenType.metVarID,"printC",0),new VoidType(),new Token(TokenType.sw_static,"static",0));
         printC.setBlock(new NullBlockNode());
         printC.addParameter(new Parameter(new Token(TokenType.metVarID,"c",0),new CharType()));
         systemClass.addMethod(printC);
+        printC.setOwnerClass(systemClass);
 
         Method printI = new Method(new Token(TokenType.metVarID,"printI",0),new VoidType(),new Token(TokenType.sw_static,"static",0));
         printI.setBlock(new NullBlockNode());
         printI.addParameter(new Parameter(new Token(TokenType.metVarID,"i",0),new IntType()));
         systemClass.addMethod(printI);
+        printI.setOwnerClass(systemClass);
 
         Method printS = new Method(new Token(TokenType.metVarID,"printS",0),new VoidType(),new Token(TokenType.sw_static,"static",0));
         printS.setBlock(new NullBlockNode());
         printS.addParameter(new Parameter(new Token(TokenType.metVarID,"s",0),new ReferenceType(new Token(TokenType.classID,"String",0))));
         systemClass.addMethod(printS);
+        printS.setOwnerClass(systemClass);
 
         Method println = new Method(new Token(TokenType.metVarID,"println",0),new VoidType(),new Token(TokenType.sw_static,"static",0));
         println.setBlock(new NullBlockNode());
         systemClass.addMethod(println);
+        println.setOwnerClass(systemClass);
 
         Method printBln = new Method(new Token(TokenType.metVarID,"printBln",0),new VoidType(),new Token(TokenType.sw_static,"static",0));
         printBln.setBlock(new NullBlockNode());
         printBln.addParameter(new Parameter(new Token(TokenType.metVarID,"b",0),new BooleanType()));
         systemClass.addMethod(printBln);
+        printBln.setOwnerClass(systemClass);
 
         Method printCln = new Method(new Token(TokenType.metVarID,"printCln",0),new VoidType(),new Token(TokenType.sw_static,"static",0));
         printCln.setBlock(new NullBlockNode());
         printCln.addParameter(new Parameter(new Token(TokenType.metVarID,"c",0),new CharType()));
         systemClass.addMethod(printCln);
+        printCln.setOwnerClass(systemClass);
 
         Method printIln = new Method(new Token(TokenType.metVarID,"printIln",0),new VoidType(),new Token(TokenType.sw_static,"static",0));
         printIln.setBlock(new NullBlockNode());
         printIln.addParameter(new Parameter(new Token(TokenType.metVarID,"i",0),new IntType()));
         systemClass.addMethod(printIln);
+        printIln.setOwnerClass(systemClass);
 
         Method printSln = new Method(new Token(TokenType.metVarID,"printSln",0),new VoidType(),new Token(TokenType.sw_static,"static",0));
         printSln.setBlock(new NullBlockNode());
@@ -107,6 +118,7 @@ public class SymbolTable {
                         new Token(TokenType.metVarID,"s",0),
                         new ReferenceType(new Token(TokenType.classID,"String",0))));
         systemClass.addMethod(printSln);
+        printSln.setOwnerClass(systemClass);
 
     }
 
@@ -434,6 +446,26 @@ public class SymbolTable {
     }
 
     public int getLocalVarOffset(String varName) {
-        return 0;
+        System.out.println("DEBUG getLocalVarOffset: Buscando variable '" + varName + "'");
+
+        VarLocalNode var = null;
+        if (currentBlock != null) {
+            System.out.println("  -> Bloque actual tiene " + currentBlock.getVarLocalMap().size() + " variables");
+            var = currentBlock.getVarLocalMap().get(varName);
+            if (var == null) {
+                BlockNode parentBlock = currentBlock.getParentBlock();
+                while (var == null && parentBlock != null) {
+                    System.out.println("  -> Buscando en bloque padre...");
+                    var = parentBlock.getVarLocalMap().get(varName);
+                    parentBlock = parentBlock.getParentBlock();
+                }
+            }
+        }
+        if (var != null) {
+            System.out.println("  -> Variable encontrada con offset: " + var.getOffset());
+            return var.getOffset();
+        } else {
+            throw new SemanticException("Error semantico: La variable local '" + varName + "' no existe en el bloque actual.", varName, 0);
+        }
     }
 }

@@ -10,7 +10,9 @@ import semantic.declarable.Method;
 import semantic.declarable.Parameter;
 import semantic.types.BooleanType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static compiler.Main.symbolTable;
 
@@ -436,33 +438,61 @@ public class ConcreteClass implements EntityClass {
     public void generateCode(){
         generateVirtualTable();
 
+        symbolTable.instructionList.add(".CODE");
+
+        constructor.generateCode();
+
         for(Method method : methods.values()){
             if(!inheritedMethods.containsKey(method.getName())){
                 method.generateCode();
             }
         }
 
-        constructor.generateCode();
-
     }
     private void generateVirtualTable() {
+        List<Method> instanceMethods = new ArrayList<>();
+        for(Method method : methods.values()) {
+            if(!method.isStaticMethod()) {
+                instanceMethods.add(method);
+            }
+        }
+        if(instanceMethods.isEmpty()) {
+            return;
+        }
+
         symbolTable.instructionList.add(".DATA");
 
         String className = getName();
         String label = "VT_" + className;
+        symbolTable.instructionList.add(label + ":");
 
-        symbolTable.instructionList.add(label + ": NOP");
-
-        for (Method method : methods.values()) {
-            symbolTable.instructionList.add("DW " + method.getLabel());
+        List<String> addedMethodLabels = new ArrayList<>();
+        for (Method method : instanceMethods) {
+            addedMethodLabels.add(method.getLabel());
         }
+
+        symbolTable.instructionList.add("DW " + String.join(", ", addedMethodLabels));
     }
 
 
     public void setOffsets(){
         //setAttributeOffsets();
         setMethodOffsets();
+        for(Method method : methods.values()){
+            if(method.getBlock()!=null){
+                setBlockOffsets(method.getBlock());
+            }
+        }
     }
+
+    private void setBlockOffsets(BlockNode block) {
+        int offset = 0;
+        for(VarLocalNode varLocal : block.getVarLocalMap().values()){
+            varLocal.setOffset(offset);
+            offset--;
+        }
+    }
+
     private void setAttributeOffsets(){
         int offset = 0;
         for(Attribute attribute : attributes.values()){

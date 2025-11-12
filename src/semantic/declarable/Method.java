@@ -36,8 +36,12 @@ public class Method implements Invocable {
         hasBody = true;
         parameters = new HashMap<>();
         paramList = new java.util.ArrayList<>();
-        ownerClass = symbolTable.getCurrentClass();
-        label = ownerClass.getName() + "_" + idToken.getLexeme();
+        this.ownerClass = symbolTable.getCurrentClass();
+        if(this.ownerClass != null) {
+            this.label = ownerClass.getName() + "_" + idToken.getLexeme();
+        } else {
+            this.label = null;
+        }
     }
     public Method(Token idToken, Type returnType, Token modifier) {
         this.returnType = returnType;
@@ -47,6 +51,8 @@ public class Method implements Invocable {
         this.visibility = new Token(TokenType.sw_public,"public",idToken.getLineNumber());
         parameters = new HashMap<>();
         paramList = new java.util.ArrayList<>();
+        this.ownerClass = null;
+        this.label = null;
     }
 
     public void addParameter(Parameter parameter) throws SemanticException {
@@ -128,8 +134,14 @@ public class Method implements Invocable {
         }
 
         if(isVoid()) {
-            if(block.getVarLocalMap().size()>0)
-                symbolTable.instructionList.add("FMEM " + block.getVarLocalMap().size());
+            int localVarCount = 0;
+            if(block != null && block.getVarLocalMap() != null) {
+                localVarCount = block.getVarLocalMap().size();
+            }
+
+            if(localVarCount > 0) {
+                symbolTable.instructionList.add("FMEM " + localVarCount);
+            }
 
             symbolTable.instructionList.add("STOREFP");
             int memoryNeeded = isStaticMethod() ? paramList.size() : paramList.size() + 1;
@@ -138,6 +150,9 @@ public class Method implements Invocable {
     }
 
     public String getLabel() {
+        if(label == null && ownerClass != null) {
+            label = ownerClass.getName() + "_" + idToken.getLexeme();
+        }
         return label;
     }
     public void setOffset(int offset) {
@@ -151,6 +166,13 @@ public class Method implements Invocable {
         return returnType.getName().equals("void");
     }
 
+
+    public void setOwnerClass(EntityClass objectClass) {
+        this.ownerClass = objectClass;
+        if(ownerClass != null) {
+            label = ownerClass.getName() + "_" + idToken.getLexeme();
+        }
+    }
 
 }
 

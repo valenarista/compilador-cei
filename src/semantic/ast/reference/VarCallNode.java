@@ -104,12 +104,31 @@ public class VarCallNode extends ReferenceNode{
     }
     @Override
     public void generateCode() {
-        if(isParameter())
+        System.out.println("DEBUG VarCallNode: Generando código para variable '" + varName + "'");
+        System.out.println("  -> isParameter(): " + isParameter());
+        System.out.println("  -> isLocalVar(): " + isLocalVar());
+        System.out.println("  -> isAttribute(): " + isAttribute());
+        System.out.println("  -> currentBlock es null? " + (symbolTable.getCurrentBlock() == null));
+
+        if(symbolTable.getCurrentBlock() != null) {
+            System.out.println("  -> Variables en currentBlock: " + symbolTable.getCurrentBlock().getVarLocalMap().keySet());
+        }
+
+        if(isParameter()) {
+            System.out.println("  -> Generando como parámetro");
             generateParameterCode();
-        else if(isLocalVar())
+        }
+        else if(isLocalVar()) {
+            System.out.println("  -> Generando como variable local");
             generateLocalVarCode();
-        else if(isAttribute())
+        }
+        else if(isAttribute()) {
+            System.out.println("  -> Generando como atributo");
             generateAttributeCode();
+        }
+        else {
+            System.err.println("  -> ERROR: No se pudo determinar el tipo de variable!");
+        }
 
         if(optChaining != null) {
             //optChaining.generateCode();

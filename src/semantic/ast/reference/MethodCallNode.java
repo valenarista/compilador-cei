@@ -110,14 +110,20 @@ public class MethodCallNode extends ReferenceNode{
     @Override
     public void generateCode(){
         System.out.println("DEBUG: Generando llamada a " + methodName);
-        Method method = symbolTable.getCurrentClass().getMethods().get(methodName);
+        System.out.println("DEBUG: Cantidad de argumentos: " + argList.size());
+
+        Method method = findMethod(methodName);
         if(method.isStaticMethod()) {
             if(!method.getReturnType().getName().equals("void"))
-                symbolTable.instructionList.add("RMEM 1; Reservando espacio para el valor de retorno");
+                symbolTable.instructionList.add("RMEM 1");
 
-            for (ExpressionNode arg : argList) {
-                arg.generateCode();
+            for (int i = 0; i < argList.size(); i++) {
+                argList.get(i).generateCode();
             }
+
+            /*for (ExpressionNode arg : argList) {
+                arg.generateCode();
+            }*/
 
             String methodLabel = method.getLabel();
             symbolTable.instructionList.add("PUSH " + methodLabel);
@@ -146,6 +152,20 @@ public class MethodCallNode extends ReferenceNode{
             //optChaining.generateCode();
         }
 
+    }
+    private Method findMethod(String methodName){
+        EntityClass currentClass = symbolTable.getCurrentClass();
+        while(currentClass != null){
+            if(currentClass.getMethods().containsKey(methodName)){
+                return currentClass.getMethods().get(methodName);
+            }
+            if(currentClass.getHerencia() != null){
+                currentClass = symbolTable.getClass(currentClass.getHerencia().getLexeme());
+            } else {
+                break;
+            }
+        }
+        return null;
     }
     private String findMethodOwnerClass(String methodName){
 
