@@ -37,4 +37,5 @@ public interface EntityClass {
 
     void setOffsets();
     String getVTLabel();
+    int getCIRSize();
 }

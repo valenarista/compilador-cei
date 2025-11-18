@@ -46,4 +46,25 @@ public class ReturnNode extends SentenceWithExpressionNode{
     public int getLine(){
         return finalToken.getLineNumber();
     }
+    @Override
+    public void generateCode() {
+        Method currentMethod = (Method) symbolTable.getCurrentInvocable();
+        if(expressionNode!=null) {
+            expressionNode.generateCode();
+            int retValOffset = calculateRetValOffset();
+            symbolTable.instructionList.add("STORE " + retValOffset);
+        }
+    }
+
+    private int calculateRetValOffset() {
+        Method currentMethod = (Method) symbolTable.getCurrentInvocable();
+        int paramCount = currentMethod.getParamList().size();
+        int offset = paramCount + 4;
+
+        if(currentMethod.isStaticMethod()) {
+            offset--;
+        }
+
+        return offset;
+    }
 }

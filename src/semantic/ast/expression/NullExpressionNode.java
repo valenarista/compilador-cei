@@ -38,4 +38,8 @@ public class NullExpressionNode extends ExpressionNode{
     public void generateCode() {
         
     }
+    @Override
+    public void generateCode(boolean isLeftSide){
+        generateCode();
+    }
 }

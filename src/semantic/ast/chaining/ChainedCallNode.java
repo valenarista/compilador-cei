@@ -5,6 +5,7 @@ import lexical.Token;
 import semantic.ast.expression.ExpressionNode;
 import semantic.declarable.Method;
 import semantic.declarable.Parameter;
+import semantic.entity.EntityClass;
 import semantic.types.Type;
 
 import java.util.List;
@@ -15,6 +16,8 @@ public class ChainedCallNode extends ChainingNode{
     private String methodName;
     private ChainingNode optionalChaining;
     private List<ExpressionNode> argList;
+    private Method cachedMethod;
+    private Type cachedCallingType;
 
     public ChainedCallNode(Token token, String methodName) {
         this.token = token;
@@ -38,6 +41,7 @@ public class ChainedCallNode extends ChainingNode{
         return false;
     }
 
+
     public void setArgList(List<ExpressionNode> list) {
         this.argList = list;
     }
@@ -58,7 +62,11 @@ public class ChainedCallNode extends ChainingNode{
 
     public Type check(Type previousType) {
         notPrimitiveCalling(previousType);
+        this.cachedCallingType = previousType;
+
         Method existingMethod = checkMethodExistence(previousType, methodName, token);
+        this.cachedMethod = existingMethod;
+
         if(!symbolTable.getCurrentClass().getName().equals(previousType.getName()) && !existingMethod.isPublic())
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": el metodo " + methodName + " es privado y no se puede acceder desde el metodo actual.",token.getLexeme(), token.getLineNumber());
         int index = 0;
@@ -91,5 +99,44 @@ public class ChainedCallNode extends ChainingNode{
             throw new SemanticException("Error semantico en linea " + token.getLineNumber() + ": la clase " + className + " no contiene el metodo " + methodName + ".",token.getLexeme(), token.getLineNumber());
         }
         return symbolTable.getClass(className).getMethods().get(methodName);
+    }
+
+    @Override
+    public void generateCode() {
+        if(cachedMethod == null) {
+            throw new RuntimeException("Error interno: método no fue cacheado durante check() para " + methodName);
+        }
+
+        System.out.println("DEBUG ChainedCallNode: Generando llamada encadenada a " + methodName);
+        System.out.println("  -> Tipo del objeto: " + (cachedCallingType != null ? cachedCallingType.getName() : "null"));
+        System.out.println("  -> Offset del método: " + cachedMethod.getOffset());
+
+        if(!cachedMethod.getReturnType().getName().equals("void")) {
+            symbolTable.instructionList.add("RMEM 1");
+            symbolTable.instructionList.add("SWAP");
+        }
+
+        for(ExpressionNode arg : argList) {
+            arg.generateCode();
+            symbolTable.instructionList.add("SWAP");
+        }
+
+        symbolTable.instructionList.add("DUP");
+        symbolTable.instructionList.add("LOADREF 0 ");
+        symbolTable.instructionList.add("LOADREF " + cachedMethod.getOffset());
+        symbolTable.instructionList.add("CALL");
+
+        if(optionalChaining != null) {
+            optionalChaining.generateCode();
+        }
+    }
+    public Method findMethodInHierarchy(String methodName){
+        EntityClass currentClass = symbolTable.getCurrentClass();
+        Method method = currentClass.getMethods().get(methodName);
+        if(method != null){
+            return method;
+        }
+        method = currentClass.getInheritedMethods().get(methodName);
+        return method;
     }
 }

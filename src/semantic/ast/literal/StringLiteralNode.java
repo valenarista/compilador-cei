@@ -38,6 +38,7 @@ public class StringLiteralNode extends LiteralNode {
 
     @Override
     public void generateCode() {
-        symbolTable.instructionList.add("PUSH "+token.getLexeme());
+        String stringLabel = symbolTable.getOrCreateStringLiteralLabel(token.getLexeme());
+        symbolTable.instructionList.add("PUSH "+stringLabel);
     }
 }

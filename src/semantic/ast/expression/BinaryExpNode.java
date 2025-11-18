@@ -122,6 +122,11 @@ public class BinaryExpNode extends CompExpNode{
         generateOperator();
     }
 
+    @Override
+    public void generateCode(boolean isLeftSide) {
+        generateCode();
+    }
+
     private void generateOperator(){
         switch (operator.getType()){
             case addOp -> symbolTable.instructionList.add("    ADD");

@@ -27,6 +27,8 @@ public class VarCallNode extends ReferenceNode{
     public void setOptChaining(ChainingNode optChaining) {
         this.optChaining = optChaining;
     }
+
+
     @Override
     public Type check() {
         Type varType;
@@ -102,36 +104,33 @@ public class VarCallNode extends ReferenceNode{
         }
         return true;
     }
+
     @Override
-    public void generateCode() {
+    public void generateCode(){
+        generateCode(false);
+    }
+
+    @Override
+    public void generateCode(boolean isLeftSide) {
         System.out.println("DEBUG VarCallNode: Generando código para variable '" + varName + "'");
         System.out.println("  -> isParameter(): " + isParameter());
         System.out.println("  -> isLocalVar(): " + isLocalVar());
         System.out.println("  -> isAttribute(): " + isAttribute());
         System.out.println("  -> currentBlock es null? " + (symbolTable.getCurrentBlock() == null));
-
         if(symbolTable.getCurrentBlock() != null) {
             System.out.println("  -> Variables en currentBlock: " + symbolTable.getCurrentBlock().getVarLocalMap().keySet());
         }
 
-        if(isParameter()) {
-            System.out.println("  -> Generando como parámetro");
-            generateParameterCode();
-        }
-        else if(isLocalVar()) {
-            System.out.println("  -> Generando como variable local");
-            generateLocalVarCode();
-        }
-        else if(isAttribute()) {
-            System.out.println("  -> Generando como atributo");
-            generateAttributeCode();
-        }
-        else {
-            System.err.println("  -> ERROR: No se pudo determinar el tipo de variable!");
-        }
+        System.out.println("  -> Generando código para el lado " + (isLeftSide ? "izquierdo" : "derecho"));
+
+        if(isLeftSide)
+            generateLeftSideCode();
+        else
+            generateRightSideCode();
+
 
         if(optChaining != null) {
-            //optChaining.generateCode();
+            optChaining.generateCode();
         }
     }
 
@@ -163,6 +162,48 @@ public class VarCallNode extends ReferenceNode{
             baseOffset +=1;
         }
         return baseOffset - paramIndex;
+    }
+    private void generateLeftSideCode(){
+        System.out.println("  -> Generando lado izquierdo");
+
+        if(isParameter()) {
+            System.out.println("  -> Generando como parámetro");
+            int paramOffset = getParameterOffset();
+            symbolTable.instructionList.add("STORE " + paramOffset);
+        }
+        else if(isLocalVar()) {
+            System.out.println("  -> Generando como variable local");
+            int localVarOffset = symbolTable.getLocalVarOffset(varName);
+            symbolTable.instructionList.add("STORE " + localVarOffset);
+        }
+        else if(isAttribute()) {
+            System.out.println("  -> Generando como atributo");
+            symbolTable.instructionList.add("LOAD 3");
+            symbolTable.instructionList.add("SWAP");
+            Attribute attr = symbolTable.getCurrentClass().getAttributes().get(varName);
+            int attrOffset = attr.getOffset();
+            symbolTable.instructionList.add("STOREREF " + attrOffset);
+        }
+        else {
+            System.err.println("  -> ERROR: No se pudo determinar el tipo de variable!");
+        }
+    }
+    private void generateRightSideCode(){
+        if(isParameter()) {
+            System.out.println("  -> Generando como parámetro");
+            generateParameterCode();
+        }
+        else if(isLocalVar()) {
+            System.out.println("  -> Generando como variable local");
+            generateLocalVarCode();
+        }
+        else if(isAttribute()) {
+            System.out.println("  -> Generando como atributo");
+            generateAttributeCode();
+        }
+        else {
+            System.err.println("  -> ERROR: No se pudo determinar el tipo de variable!");
+        }
     }
 
 }

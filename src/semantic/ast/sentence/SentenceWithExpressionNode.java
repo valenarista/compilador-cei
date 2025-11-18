@@ -3,10 +3,13 @@ package semantic.ast.sentence;
 import exceptions.SemanticException;
 import lexical.Token;
 import semantic.ast.expression.ExpressionNode;
+import semantic.types.Type;
+import static compiler.Main.symbolTable;
 
 public class SentenceWithExpressionNode extends SentenceNode {
     private ExpressionNode expressionNode;
     private Token finalToken;
+    private Type expressionType;
     public SentenceWithExpressionNode(ExpressionNode expressionNode) {
         this.expressionNode = expressionNode;
     }
@@ -15,7 +18,7 @@ public class SentenceWithExpressionNode extends SentenceNode {
     }
     @Override
     public void check() {
-        expressionNode.check();
+        expressionType = expressionNode.check();
         if(!expressionNode.isAssign() && !expressionNode.isOperandWithCall()){
             if(finalToken == null){
                 throw new SemanticException("Error semantico en linea " + expressionNode.getLine() + ": La expresion no es una asignacion ni una llamada a funcion",expressionNode.getLexeme(),expressionNode.getLine());
@@ -44,5 +47,11 @@ public class SentenceWithExpressionNode extends SentenceNode {
 
     public void generateCode() {
         expressionNode.generateCode();
+        if(expressionNode.isOperandWithCall() && !expressionReturnsVoid()){
+            symbolTable.instructionList.add("POP");
+        }
+    }
+    private boolean expressionReturnsVoid() {
+        return expressionType != null && expressionType.getName().equals("void");
     }
 }

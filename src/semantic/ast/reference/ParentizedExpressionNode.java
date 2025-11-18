@@ -55,8 +55,12 @@ public class ParentizedExpressionNode extends ReferenceNode{
     public void generateCode() {
         expression.generateCode();
         if(optionalChaining != null){
-            //optionalChaining.generateCode();
+            optionalChaining.generateCode();
         }
+    }
+    @Override
+    public void generateCode(boolean isLeftSide){
+        generateCode();
     }
 
     @Override

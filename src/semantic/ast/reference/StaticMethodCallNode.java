@@ -98,7 +98,7 @@ public class StaticMethodCallNode extends ReferenceNode {
     public void generateCode() {
         String methodName = methodToken.getLexeme();
         Method method = symbolTable.getClass(classToken.getLexeme()).getMethods().get(methodName);
-        if(method.getReturnType().getName().equals("void")){
+        if(!method.getReturnType().getName().equals("void")){
             symbolTable.instructionList.add("RMEM 1");
         }
         for(ExpressionNode arg : argList){
@@ -109,7 +109,7 @@ public class StaticMethodCallNode extends ReferenceNode {
         symbolTable.instructionList.add("CALL");
 
         if(optionalChaining != null){
-            //optionalChaining.generateCode();
+            optionalChaining.generateCode();
         }
 
     }
@@ -119,7 +119,10 @@ public class StaticMethodCallNode extends ReferenceNode {
         return methodToken;
     }
 
-
+    @Override
+    public void generateCode(boolean isLeftSide){
+        generateCode();
+    }
     @Override
     public boolean isVariable() {
         if(optionalChaining != null) {

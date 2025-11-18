@@ -25,11 +25,14 @@ public class SymbolTable {
     public HashMap<String,EntityClass> clases;
     BlockNode currentBlock;
     public List<String> instructionList;
+    private HashMap<String, String> stringLiteralLabels = new HashMap<>();
+    private int stringLiteralCounter = 0;
 
 
     public SymbolTable(){
         clases = new HashMap<>();
         instructionList = new ArrayList<>();
+        stringLiteralLabels = new HashMap<>();
     }
 
     public void createPredefinedClasses() {
@@ -283,6 +286,13 @@ public class SymbolTable {
 
     public void generateCode(){
         setOffsets();
+        instructionList.add(".DATA");
+        for(EntityClass clase : clases.values()){
+            if(!clase.isPredefined() && clase instanceof ConcreteClass)
+                ((ConcreteClass) clase).generateVirtualTable();
+        }
+
+        instructionList.add(".CODE");
         initGenerator();
         heapRoutinesGenerator();
         defaultClassesGenerator();
@@ -291,9 +301,9 @@ public class SymbolTable {
             if(!clase.isPredefined())
                 clase.generateCode();
         }
+        generateStringLiterals();
     }
     private void initGenerator(){
-        instructionList.add(".CODE");
         instructionList.add("PUSH simple_heap_init");
         instructionList.add("CALL");
 
@@ -466,6 +476,30 @@ public class SymbolTable {
             return var.getOffset();
         } else {
             throw new SemanticException("Error semantico: La variable local '" + varName + "' no existe en el bloque actual.", varName, 0);
+        }
+    }
+
+    public String getOrCreateStringLiteralLabel(String lexeme) {
+        if(stringLiteralLabels.containsKey(lexeme))
+            return stringLiteralLabels.get(lexeme);
+        String label = "str_" + stringLiteralCounter;
+        stringLiteralCounter++;
+        stringLiteralLabels.put(lexeme, label);
+        return label;
+    }
+    private void generateStringLiterals() {
+        if(!stringLiteralLabels.isEmpty()) {
+            instructionList.add(".DATA");
+            for (var entry : stringLiteralLabels.entrySet()) {
+                String lexeme = entry.getKey();
+                String label = entry.getValue();
+
+                String cleanValue = lexeme;
+                if(lexeme.startsWith("\"") && lexeme.endsWith("\"") && lexeme.length() >= 2) {
+                    cleanValue = lexeme.substring(1, lexeme.length() - 1);
+                }
+                instructionList.add(label + ": DW \"" + cleanValue + "\", 0");
+            }
         }
     }
 }

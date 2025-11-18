@@ -21,4 +21,8 @@ abstract public class LiteralNode extends OperandNode {
     public boolean isAssign(){ return false; }
     @Override
     public boolean isOperandWithCall() { return false; }
+    @Override
+    public void generateCode(boolean isLeftSide){
+        generateCode();
+    }
 }

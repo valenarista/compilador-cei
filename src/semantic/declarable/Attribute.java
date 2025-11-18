@@ -19,6 +19,7 @@ public class Attribute {
     private Type type;
     private Token visibility;
     private ExpressionNode value;
+    private int offset;
 
     public Attribute(Token idToken, Type type,Token visibility){
         this.idToken = idToken;
@@ -99,6 +100,10 @@ public class Attribute {
     }
 
     public int getOffset() {
-        return 0;
+        return offset;
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 }

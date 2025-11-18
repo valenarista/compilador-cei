@@ -3,6 +3,7 @@ package semantic.declarable;
 import exceptions.SemanticException;
 import lexical.Token;
 import semantic.ast.sentence.BlockNode;
+import semantic.entity.EntityClass;
 import semantic.types.Type;
 
 import java.util.HashMap;
@@ -15,6 +16,7 @@ public class Constructor implements Invocable{
     private HashMap<String,Parameter> parameters;
     private List<Parameter> paramList;
     private BlockNode block;
+    private EntityClass ownerClass;
 
     private String label;
 
@@ -47,6 +49,9 @@ public class Constructor implements Invocable{
         } else {
             throw new SemanticException("Error semantico en linea "+parameter.getLine()+" Ya fue declarado un parametro con el nombre "+ parameter.getName()+" en el constructor "+this.getName(),parameter.getName(), parameter.getLine());
         }
+    }
+    public void setOwnerClass(EntityClass ownerClass) {
+        this.ownerClass = ownerClass;
     }
 
     @Override
@@ -81,11 +86,14 @@ public class Constructor implements Invocable{
     }
 
     public void generateCode() {
-        symbolTable.instructionList.add(".CODE");
         symbolTable.instructionList.add(label + ":");
         symbolTable.instructionList.add("LOADFP");
         symbolTable.instructionList.add("LOADSP");
         symbolTable.instructionList.add("STOREFP");
+
+        EntityClass previousClass = symbolTable.getCurrentClass();
+        symbolTable.setCurrentClass(ownerClass.getName(), ownerClass);
+        symbolTable.setCurrentInvocable(this);
 
         if(block != null){
             block.generateCode();
@@ -95,5 +103,8 @@ public class Constructor implements Invocable{
 
         symbolTable.instructionList.add("STOREFP");
         symbolTable.instructionList.add("RET "+ memoryToFree);
+
+        if(previousClass != null)
+            symbolTable.setCurrentClass(previousClass.getName(), previousClass);
     }
 }

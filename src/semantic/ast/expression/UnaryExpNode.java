@@ -86,7 +86,12 @@ public class UnaryExpNode extends CompExpNode{
 
     @Override
     public void generateCode() {
-        operand.generateCode();
+        generateCode(false);
+    }
+
+    @Override
+    public void generateCode(boolean isLeftSide) {
+        operand.generateCode(isLeftSide);
         generateOperator();
     }
 

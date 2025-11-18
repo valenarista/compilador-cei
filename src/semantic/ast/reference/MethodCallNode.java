@@ -121,9 +121,6 @@ public class MethodCallNode extends ReferenceNode{
                 argList.get(i).generateCode();
             }
 
-            /*for (ExpressionNode arg : argList) {
-                arg.generateCode();
-            }*/
 
             String methodLabel = method.getLabel();
             symbolTable.instructionList.add("PUSH " + methodLabel);
@@ -149,9 +146,13 @@ public class MethodCallNode extends ReferenceNode{
 
         }
         if(optChaining != null){
-            //optChaining.generateCode();
+            optChaining.generateCode();
         }
 
+    }
+    @Override
+    public void generateCode(boolean isLeftSide){
+        generateCode();
     }
     private Method findMethod(String methodName){
         EntityClass currentClass = symbolTable.getCurrentClass();

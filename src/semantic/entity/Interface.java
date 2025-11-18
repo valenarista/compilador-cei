@@ -200,6 +200,11 @@ public class Interface implements EntityClass {
         return vtLabel;
     }
 
+    @Override
+    public int getCIRSize() {
+        return 0;
+    }
+
     private void checkInheritance() {
         //Una interface puede heredar de otra interface, pero no de una clase
 

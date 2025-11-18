@@ -120,7 +120,6 @@ public class Method implements Invocable {
         block.check();
     }
     public void generateCode(){
-        symbolTable.instructionList.add(".CODE");
         if(getName().equals("main") && isStaticMethod()){
             label = "main";
         }
@@ -128,6 +127,10 @@ public class Method implements Invocable {
         symbolTable.instructionList.add("LOADFP");
         symbolTable.instructionList.add("LOADSP");
         symbolTable.instructionList.add("STOREFP");
+
+        EntityClass previousClass = symbolTable.getCurrentClass();
+        symbolTable.setCurrentClass(ownerClass.getName(), ownerClass);
+        symbolTable.setCurrentInvocable(this);
 
         if(block != null && hasBody()) {
             block.generateCode();
@@ -146,7 +149,20 @@ public class Method implements Invocable {
             symbolTable.instructionList.add("STOREFP");
             int memoryNeeded = isStaticMethod() ? paramList.size() : paramList.size() + 1;
             symbolTable.instructionList.add("RET " + memoryNeeded);
+        } else {
+            int localVarCount = 0;
+            if(block != null && block.getVarLocalMap() != null) {
+                localVarCount = block.getVarLocalMap().size();
+            }
+            if(localVarCount > 0) {
+                symbolTable.instructionList.add("FMEM " + localVarCount);
+            }
+            symbolTable.instructionList.add("STOREFP");
+            int memoryNeeded = isStaticMethod() ? paramList.size() : paramList.size() + 1;
+            symbolTable.instructionList.add("RET " + memoryNeeded);
         }
+        if(previousClass != null)
+            symbolTable.setCurrentClass(previousClass.getName(), previousClass);
     }
 
     public String getLabel() {

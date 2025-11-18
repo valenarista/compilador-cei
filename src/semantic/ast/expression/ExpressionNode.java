@@ -5,7 +5,6 @@ import semantic.ast.sentence.SentenceNode;
 import semantic.types.Type;
 
 abstract public class ExpressionNode{
-    boolean isLeftSide = false;
     public abstract boolean isVariable();
     public abstract Type check();
     public abstract int getLine();
@@ -13,11 +12,5 @@ abstract public class ExpressionNode{
     public abstract boolean isAssign();
     public abstract boolean isOperandWithCall();
     public abstract void generateCode();
-
-    public void setIsLeftSide(boolean b){
-        isLeftSide = b;
-    }
-    public boolean getIsLeftSide(){
-        return isLeftSide;
-    }
+    public abstract void generateCode(boolean isLeftSide);
 }

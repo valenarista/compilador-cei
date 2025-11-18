@@ -36,6 +36,11 @@ public class ChainedVarNode extends ChainingNode{
         return true;
     }
 
+    @Override
+    public void generateCode() {
+
+    }
+
     public void setOptChaining(ChainingNode chainingNode) {
         optionalChaining = chainingNode;
     }

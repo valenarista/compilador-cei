@@ -72,9 +72,17 @@ public class AssignNode extends ExpressionNode{
     }
 
     @Override
+    public void generateCode(boolean isLeftSide){
+        generateCode();
+    }
+
+    @Override
     public void generateCode() {
-        left.setIsLeftSide(true);
+        System.out.println("DEBUG AssignNode: Procesando asignación");
+        System.out.println("  -> left: " + left.getClass().getSimpleName());
+        System.out.println("  -> right: " + right.getClass().getSimpleName());
+
         right.generateCode();
-        left.generateCode();
+        left.generateCode(true);
     }
 }

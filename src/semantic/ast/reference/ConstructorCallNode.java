@@ -98,13 +98,17 @@ public class ConstructorCallNode extends ReferenceNode{
         }
         return true;
     }
+    @Override
+    public void generateCode(boolean isLeftSide){
+        generateCode();
+    }
 
     @Override
     public void generateCode(){
         symbolTable.instructionList.add("RMEM 1");
 
         EntityClass building = symbolTable.getClass(className);
-        int cirSize = building.getAttributes().size()+1;
+        int cirSize = building.getCIRSize();
 
         symbolTable.instructionList.add("PUSH " + cirSize);
         symbolTable.instructionList.add("PUSH simple_malloc");
@@ -125,7 +129,7 @@ public class ConstructorCallNode extends ReferenceNode{
         symbolTable.instructionList.add("CALL");
 
         if(optChaining != null){
-            //optChaining.generateCode();
+            optChaining.generateCode();
         }
 
     }
