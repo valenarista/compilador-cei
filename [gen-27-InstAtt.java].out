@@ -156,6 +156,8 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0
@@ -172,6 +174,9 @@ STOREFP
 LOAD 3
 LOADREF 1
 STORE 4
+JUMP end_method_Counter_getCount
+NOP
+end_method_Counter_getCount:
 STOREFP
 RET 1
 Counter_setCount:
@@ -182,5 +187,7 @@ LOAD 4
 LOAD 3
 SWAP
 STOREREF 1
+NOP
+end_method_Counter_setCount:
 STOREFP
 RET 2

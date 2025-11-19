@@ -104,6 +104,11 @@ public class ConcreteClass implements EntityClass {
                 if(!(m.getBlock() instanceof NullBlockNode)) {
                     if (completa && !m.getReturnType().getName().equals("void")) {
                         throw new SemanticException("Error semantico en linea " + m.getLine() + " El metodo " + m.getName() + " no retorna en todos los caminos posibles.", m.getName(), m.getLine());
+                    }else{
+                        for (SentenceNode sentence : m.getBlock().getSentences()) {
+                            if(sentence instanceof ReturnNode)
+                                m.setExplicitReturn(true);
+                        }
                     }
                 }
             }
@@ -442,6 +447,7 @@ public class ConcreteClass implements EntityClass {
     }
 
     public void generateCode(){
+
         constructor.generateCode();
 
         for(Method method : methods.values()){
@@ -490,13 +496,13 @@ public class ConcreteClass implements EntityClass {
             }
         }
 
+        vtMethods.sort(Comparator.comparingInt(Method::getOffset));
         symbolTable.instructionList.add("VT_" + getName() + ":");
 
         if(vtMethods.isEmpty()) {
             symbolTable.instructionList.add("DW 0  ; VT vacía");
             System.out.println("  -> VT vacía generada (sin métodos de instancia)");
         } else {
-            vtMethods.sort((m1, m2) -> Integer.compare(m1.getOffset(), m2.getOffset()));
 
             List<String> labels = new ArrayList<>();
             for(Method method : vtMethods) {

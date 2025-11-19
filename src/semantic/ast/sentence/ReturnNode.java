@@ -53,7 +53,10 @@ public class ReturnNode extends SentenceWithExpressionNode{
             expressionNode.generateCode();
             int retValOffset = calculateRetValOffset();
             symbolTable.instructionList.add("STORE " + retValOffset);
+
         }
+        String methodEndLabel = "end_method_" + currentMethod.getLabel();
+        symbolTable.instructionList.add("JUMP " + methodEndLabel);
     }
 
     private int calculateRetValOffset() {

@@ -138,6 +138,9 @@ LOAD 0
 LOAD -1
     ADD
 STORE 4
+JUMP end_method_Math1_compute
+NOP
+end_method_Math1_compute:
 FMEM 2
 STOREFP
 RET 1
@@ -172,6 +175,8 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0

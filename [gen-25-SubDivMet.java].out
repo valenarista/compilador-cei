@@ -132,6 +132,9 @@ LOAD 5
 LOAD 4
     DIV
 STORE 6
+JUMP end_method_MathOps_divide
+NOP
+end_method_MathOps_divide:
 STOREFP
 RET 3
 ctor_Init6:
@@ -169,6 +172,8 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0

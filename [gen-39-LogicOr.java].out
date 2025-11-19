@@ -138,9 +138,13 @@ PUSH 0
 BF end_if_9
 PUSH 1
 STORE 6
+JUMP end_method_LogicOr_testOr
 end_if_9:
 PUSH 0
 STORE 6
+JUMP end_method_LogicOr_testOr
+NOP
+end_method_LogicOr_testOr:
 STOREFP
 RET 3
 ctor_Init20:
@@ -178,6 +182,8 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0

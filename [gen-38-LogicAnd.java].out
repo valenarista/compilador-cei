@@ -153,6 +153,8 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0
@@ -176,8 +178,12 @@ PUSH 0
 BF end_if_8
 PUSH 1
 STORE 6
+JUMP end_method_LogicAnd_testAnd
 end_if_8:
 PUSH 0
 STORE 6
+JUMP end_method_LogicAnd_testAnd
+NOP
+end_method_LogicAnd_testAnd:
 STOREFP
 RET 3

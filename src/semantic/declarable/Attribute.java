@@ -99,6 +99,7 @@ public class Attribute {
         }
     }
 
+
     public int getOffset() {
         return offset;
     }

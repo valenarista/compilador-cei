@@ -66,7 +66,10 @@ public class ThisReferenceNode extends ReferenceNode{
     }
     @Override
     public void generateCode(boolean isLeftSide){
-        generateCode();
+        symbolTable.instructionList.add("LOAD 3");
+        if(optChaining != null){
+            optChaining.generateCode(isLeftSide);
+        }
     }
     @Override
     public Token getToken() {

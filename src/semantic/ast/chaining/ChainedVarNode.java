@@ -43,6 +43,19 @@ public class ChainedVarNode extends ChainingNode{
             optionalChaining.generateCode();
         }
     }
+    public void generateCode(boolean isLeftSideOfAssign) {
+        if(optionalChaining != null) {
+            symbolTable.instructionList.add("LOADREF " + attribute.getOffset());
+            optionalChaining.generateCode(isLeftSideOfAssign);
+        } else {
+            if(isLeftSideOfAssign) {
+                symbolTable.instructionList.add("SWAP");
+                symbolTable.instructionList.add("STOREREF " + attribute.getOffset());
+            }else
+                symbolTable.instructionList.add("LOADREF " + attribute.getOffset());
+
+        }
+    }
 
     public void setOptChaining(ChainingNode chainingNode) {
         optionalChaining = chainingNode;

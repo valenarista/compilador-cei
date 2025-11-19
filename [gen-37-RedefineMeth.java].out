@@ -132,6 +132,9 @@ LOADSP
 STOREFP
 PUSH 200
 STORE 4
+JUMP end_method_Derived_getValue
+NOP
+end_method_Derived_getValue:
 STOREFP
 RET 1
 ctor_Init18:
@@ -165,6 +168,8 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0
@@ -180,5 +185,8 @@ LOADSP
 STOREFP
 PUSH 100
 STORE 4
+JUMP end_method_Base_getValue
+NOP
+end_method_Base_getValue:
 STOREFP
 RET 1

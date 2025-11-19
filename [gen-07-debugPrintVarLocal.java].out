@@ -132,6 +132,8 @@ STORE 0
 LOAD 0
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0

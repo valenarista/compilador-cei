@@ -36,6 +36,10 @@ public class BooleanLiteralNode extends LiteralNode{
 
     @Override
     public void generateCode() {
-        symbolTable.instructionList.add("PUSH "+token.getLexeme());
+        if(token.getLexeme().equals("true")){
+            symbolTable.instructionList.add("PUSH 1");
+        }else{
+            symbolTable.instructionList.add("PUSH 0");
+        }
     }
 }

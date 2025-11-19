@@ -131,6 +131,8 @@ STOREFP
 LOAD 4
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_B_printNum:
 STOREFP
 RET 2
 ctor_Init2:
@@ -162,6 +164,8 @@ DUP
 LOADREF 0 
 LOADREF 0
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0

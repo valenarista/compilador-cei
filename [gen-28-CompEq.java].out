@@ -153,6 +153,8 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0
@@ -172,8 +174,12 @@ LOAD 4
 BF end_if_3
 PUSH 1
 STORE 6
+JUMP end_method_Compare_checkEqual
 end_if_3:
 PUSH 0
 STORE 6
+JUMP end_method_Compare_checkEqual
+NOP
+end_method_Compare_checkEqual:
 STOREFP
 RET 3

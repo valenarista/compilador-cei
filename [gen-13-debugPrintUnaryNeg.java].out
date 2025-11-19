@@ -151,6 +151,8 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0
@@ -167,5 +169,8 @@ STOREFP
 LOAD 4
     NEG
 STORE 5
+JUMP end_method_UnaryTest_negate
+NOP
+end_method_UnaryTest_negate:
 STOREFP
 RET 2

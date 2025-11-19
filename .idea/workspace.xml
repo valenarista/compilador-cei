@@ -10,36 +10,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d10e087-5673-4518-949a-be8557448ba8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-11-debugPrintAsigAtt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-12-debugPrintExpRet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-13-debugPrintUnaryNeg.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-14-debugPrintModule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-15-debugPrintComp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-16-debugPrintComp2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-17-debugPrintInheritance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-18-debugPrintPolimPR.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-19-debugPrintCompParams.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-20-debugPrintMultAtt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-21-VoidMetParam.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-22-MultMetParam.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-23-AritMet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-24-NestedCall.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-25-SubDivMet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-26-MulMet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-27-InstAtt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-28-CompEq.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-29-CompNotEq.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-30-CompLT.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-31-CompGT.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-32-WhileLoop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-33-IfElseCond.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-34-MultLocalVar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-35-ComplexOp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-36-SimpleInh.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-37-RedefineMeth.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-38-LogicAnd.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-39-LogicOr.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-40-IfElseCond.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-41-StaticCall.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-42-Ctor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-43-ParamCtor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-44-ModOp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-45-IncrementOp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-46-DecrementOp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-47-NestedIf.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-48-MultAtt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-49-MethodChain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-50-NegOp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-51-ParamCtorInh.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-52-PolimCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-53-InstParam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-54-NullLit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-55-NullLit2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-56-RedefMet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-57-SystBool.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-58-SystStr.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sinErrores/gen-59-SystStrLn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/[gen-01.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-01.java].out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/[gen-02.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-02.java].out" afterDir="false" />
@@ -49,22 +38,64 @@
       <change beforePath="$PROJECT_DIR$/[gen-06-debugPrintVarLocal.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-06-debugPrintVarLocal.java].out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/[gen-07-debugPrintVarLocal.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-07-debugPrintVarLocal.java].out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/[gen-08-debugPrintIfElse.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-08-debugPrintIfElse.java].out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/[gen-09-debugPrintReturnMethod.java].out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-09-debugPrintReturnMethod.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-09-debugPrintReturnMethod.java].out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/[gen-10-debugPrintSimpleObjects.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-10-debugPrintSimpleObjects.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-11-debugPrintAsigAtt.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-11-debugPrintAsigAtt.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-12-debugPrintExpRet.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-12-debugPrintExpRet.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-13-debugPrintUnaryNeg.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-13-debugPrintUnaryNeg.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-14-debugPrintModule.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-14-debugPrintModule.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-15-debugPrintComp.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-15-debugPrintComp.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-16-debugPrintComp2.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-16-debugPrintComp2.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-17-debugPrintInheritance.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-17-debugPrintInheritance.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-18-debugPrintPolimPR.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-18-debugPrintPolimPR.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-19-debugPrintCompParams.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-19-debugPrintCompParams.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-20-debugPrintMultAtt.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-20-debugPrintMultAtt.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-21-VoidMetParam.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-21-VoidMetParam.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-22-MultMetParam.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-22-MultMetParam.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-23-AritMet.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-23-AritMet.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-24-NestedCall.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-24-NestedCall.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-25-SubDivMet.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-25-SubDivMet.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-26-MulMet.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-26-MulMet.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-27-InstAtt.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-27-InstAtt.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-28-CompEq.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-28-CompEq.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-29-CompNotEq.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-29-CompNotEq.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-30-CompLT.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-30-CompLT.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-31-CompGT.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-31-CompGT.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-32-WhileLoop.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-32-WhileLoop.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-33-IfElseCond.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-33-IfElseCond.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-34-MultLocalVar.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-34-MultLocalVar.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-35-ComplexOp.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-35-ComplexOp.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-36-SimpleInh.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-36-SimpleInh.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-37-RedefineMeth.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-37-RedefineMeth.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-38-LogicAnd.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-38-LogicAnd.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-39-LogicOr.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-39-LogicOr.java].out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/[gen-40-IfElseCond.java].out" beforeDir="false" afterPath="$PROJECT_DIR$/[gen-40-IfElseCond.java].out" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/compilador_cei_jar/compilador-cei.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/chaining/ChainedCallNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/chaining/ChainedCallNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/chaining/ChainedVarNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/chaining/ChainedVarNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/BinaryExpNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/BinaryExpNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/chaining/ChainingNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/chaining/ChainingNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/UnaryExpNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/expression/UnaryExpNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/literal/BooleanLiteralNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/literal/BooleanLiteralNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/literal/NullLiteralNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/literal/NullLiteralNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/reference/ThisReferenceNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/reference/ThisReferenceNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/reference/VarCallNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/reference/VarCallNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/IfNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/IfNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/ReturnNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/ast/sentence/ReturnNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Attribute.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Attribute.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Constructor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Constructor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Method.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/declarable/Method.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/ConcreteClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/compilador-cei/semantic/entity/ConcreteClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/chaining/ChainedCallNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/chaining/ChainedCallNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/ast/chaining/ChainedVarNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/chaining/ChainedVarNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/semantic/ast/expression/BinaryExpNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/expression/BinaryExpNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/chaining/ChainingNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/chaining/ChainingNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/expression/UnaryExpNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/expression/UnaryExpNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/literal/BooleanLiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/literal/BooleanLiteralNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/literal/NullLiteralNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/literal/NullLiteralNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/ast/reference/ThisReferenceNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/reference/ThisReferenceNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/ast/reference/VarCallNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/reference/VarCallNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/IfNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/IfNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/ast/sentence/ReturnNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/ast/sentence/ReturnNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Attribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Attribute.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Constructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Constructor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/declarable/Method.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/declarable/Method.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/semantic/entity/ConcreteClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/semantic/entity/ConcreteClass.java" afterDir="false" />

@@ -130,6 +130,9 @@ LOAD 4
 LOAD 3
     ADD
 STORE 5
+JUMP end_method_Init_suma
+NOP
+end_method_Init_suma:
 STOREFP
 RET 2
 main:
@@ -143,5 +146,7 @@ PUSH Init_suma
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 STOREFP
 RET 0

@@ -153,6 +153,8 @@ LOADREF 2
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0
@@ -176,6 +178,9 @@ CALL
 PUSH 100
     ADD
 STORE 4
+JUMP end_method_Level2_level2Method
+NOP
+end_method_Level2_level2Method:
 STOREFP
 RET 1
 ctor_Level3:
@@ -198,6 +203,9 @@ CALL
 PUSH 100
     ADD
 STORE 4
+JUMP end_method_Level3_level3Method
+NOP
+end_method_Level3_level3Method:
 STOREFP
 RET 1
 ctor_Level1:
@@ -212,5 +220,8 @@ LOADSP
 STOREFP
 PUSH 100
 STORE 4
+JUMP end_method_Level1_level1Method
+NOP
+end_method_Level1_level1Method:
 STOREFP
 RET 1

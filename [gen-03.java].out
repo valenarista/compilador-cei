@@ -131,6 +131,8 @@ STOREFP
 LOAD 4
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_A_m1:
 STOREFP
 RET 2
 A_m2:
@@ -139,6 +141,9 @@ LOADSP
 STOREFP
 PUSH 33
 STORE 4
+JUMP end_method_A_m2
+NOP
+end_method_A_m2:
 STOREFP
 RET 1
 ctor_Init:
@@ -180,6 +185,8 @@ LOADREF 1
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0

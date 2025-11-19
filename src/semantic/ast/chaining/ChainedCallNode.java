@@ -130,13 +130,35 @@ public class ChainedCallNode extends ChainingNode{
             optionalChaining.generateCode();
         }
     }
-    public Method findMethodInHierarchy(String methodName){
-        EntityClass currentClass = symbolTable.getCurrentClass();
-        Method method = currentClass.getMethods().get(methodName);
-        if(method != null){
-            return method;
+
+    @Override
+    public void generateCode(boolean isLeftSide) {
+        if(cachedMethod == null) {
+            throw new RuntimeException("Error interno: método no fue cacheado durante check() para " + methodName);
         }
-        method = currentClass.getInheritedMethods().get(methodName);
-        return method;
+
+        System.out.println("DEBUG ChainedCallNode: Generando llamada encadenada a " + methodName);
+        System.out.println("  -> Tipo del objeto: " + (cachedCallingType != null ? cachedCallingType.getName() : "null"));
+        System.out.println("  -> Offset del método: " + cachedMethod.getOffset());
+
+        if(!cachedMethod.getReturnType().getName().equals("void")) {
+            symbolTable.instructionList.add("RMEM 1");
+            symbolTable.instructionList.add("SWAP");
+        }
+
+        for(ExpressionNode arg : argList) {
+            arg.generateCode();
+            symbolTable.instructionList.add("SWAP");
+        }
+
+        symbolTable.instructionList.add("DUP");
+        symbolTable.instructionList.add("LOADREF 0 ");
+        symbolTable.instructionList.add("LOADREF " + cachedMethod.getOffset());
+        symbolTable.instructionList.add("CALL");
+
+        if(optionalChaining != null) {
+            optionalChaining.generateCode(isLeftSide);
+        }
     }
+
 }

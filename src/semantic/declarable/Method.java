@@ -23,6 +23,7 @@ public class Method implements Invocable {
     private boolean hasBody;
     private BlockNode block;
     private EntityClass ownerClass;
+    private boolean explicitReturn;
 
     private int offset;
     private String label;
@@ -75,6 +76,12 @@ public class Method implements Invocable {
     }
 
     public void setBlock(BlockNode block) { this.block = block; }
+    public void setExplicitReturn(boolean explicitReturn) {
+        this.explicitReturn = explicitReturn;
+    }
+    public boolean hasExplicitReturn() {
+        return explicitReturn;
+    }
     public BlockNode getBlock() { return block; }
     public boolean hasBody() {
         return hasBody;
@@ -150,32 +157,22 @@ public class Method implements Invocable {
             block.generateCode();
         }
 
+        symbolTable.instructionList.add("NOP");
+        symbolTable.instructionList.add("end_method_" + getLabel() + ":");
 
-        if(isVoid()) {
-            int localVarCount = 0;
-            if(block != null && block.getVarLocalMap() != null) {
-                localVarCount = block.getVarLocalMap().size();
-            }
-
-            if(localVarCount > 0) {
-                symbolTable.instructionList.add("FMEM " + localVarCount);
-            }
-
-            symbolTable.instructionList.add("STOREFP");
-            int memoryNeeded = isStaticMethod() ? paramList.size() : paramList.size() + 1;
-            symbolTable.instructionList.add("RET " + memoryNeeded);
-        } else {
-            int localVarCount = 0;
-            if(block != null && block.getVarLocalMap() != null) {
-                localVarCount = block.getVarLocalMap().size();
-            }
-            if(localVarCount > 0) {
-                symbolTable.instructionList.add("FMEM " + localVarCount);
-            }
-            symbolTable.instructionList.add("STOREFP");
-            int memoryNeeded = isStaticMethod() ? paramList.size() : paramList.size() + 1;
-            symbolTable.instructionList.add("RET " + memoryNeeded);
+        int localVarCount = 0;
+        if(block != null && block.getVarLocalMap() != null) {
+            localVarCount = block.getVarLocalMap().size();
         }
+
+        if(localVarCount > 0) {
+            symbolTable.instructionList.add("FMEM " + localVarCount);
+        }
+
+        symbolTable.instructionList.add("STOREFP");
+        int memoryNeeded = isStaticMethod() ? paramList.size() : paramList.size() + 1;
+        symbolTable.instructionList.add("RET " + memoryNeeded);
+
         if(previousClass != null)
             symbolTable.setCurrentClass(previousClass.getName(), previousClass);
     }

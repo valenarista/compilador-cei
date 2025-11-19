@@ -149,6 +149,8 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0
@@ -177,6 +179,9 @@ LOAD -1
 LOAD -2
     ADD
 STORE 4
+JUMP end_method_MultiVar_sum
+NOP
+end_method_MultiVar_sum:
 FMEM 3
 STOREFP
 RET 1

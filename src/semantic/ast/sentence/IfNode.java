@@ -52,21 +52,40 @@ public class IfNode extends SentenceNode{
 
             body.generateCode();
 
-            System.out.println("  -> Generando JUMP a " + endIfLabel);
-            symbolTable.instructionList.add("JUMP "+endIfLabel);
+            boolean bodyEndsInReturn = bodyEndsInReturn(body);
+            boolean elseBodyEndsInReturn = bodyEndsInReturn(elseBody);
+
+            if(!bodyEndsInReturn || !elseBodyEndsInReturn) {
+                System.out.println("  -> Generando JUMP a " + endIfLabel);
+                symbolTable.instructionList.add("JUMP " + endIfLabel);
+            }
 
             System.out.println("  -> Generando etiqueta " + elseLabel + ":");
             symbolTable.instructionList.add(elseLabel+":");
 
             elseBody.generateCode();
 
-            System.out.println("  -> Generando etiqueta " + endIfLabel + ":");
-            symbolTable.instructionList.add(endIfLabel + ":");
+            if(!bodyEndsInReturn || !elseBodyEndsInReturn) {
+                System.out.println("  -> Generando etiqueta " + endIfLabel + ":");
+                symbolTable.instructionList.add(endIfLabel + ":");
+            }
         } else {
             symbolTable.instructionList.add("BF "+endIfLabel);
             body.generateCode();
             symbolTable.instructionList.add(endIfLabel + ":");
         }
+    }
+    private boolean bodyEndsInReturn(SentenceNode body) {
+        if (body instanceof ReturnNode) {
+            return true;
+        } else if (body instanceof BlockNode) {
+            BlockNode block = (BlockNode) body;
+            if (!block.getSentences().isEmpty()) {
+                SentenceNode lastSentence = block.getSentences().get(block.getSentences().size() - 1);
+                return bodyEndsInReturn(lastSentence);
+            }
+        }
+        return false;
     }
 
 }

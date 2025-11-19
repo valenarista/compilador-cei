@@ -130,7 +130,7 @@ public class VarCallNode extends ReferenceNode{
 
 
         if(optChaining != null) {
-            optChaining.generateCode();
+            optChaining.generateCode(isLeftSide);
         }
     }
 

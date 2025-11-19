@@ -142,6 +142,8 @@ PUSH 0
 PUSH Object_debugPrint
 CALL
 end_if_0:
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0

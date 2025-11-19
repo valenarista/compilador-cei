@@ -149,6 +149,8 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0
@@ -178,6 +180,9 @@ JUMP start_while_0
 end_while_0:
 LOAD 0
 STORE 4
+JUMP end_method_WhileLoop_countTo10
+NOP
+end_method_WhileLoop_countTo10:
 FMEM 1
 STOREFP
 RET 1

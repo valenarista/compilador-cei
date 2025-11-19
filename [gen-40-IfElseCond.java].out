@@ -151,6 +151,8 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0
@@ -170,10 +172,12 @@ PUSH 25
 BF else_10
 PUSH 50
 STORE 5
-JUMP end_if_10
+JUMP end_method_IfElse_conditional
 else_10:
 PUSH 25
 STORE 5
-end_if_10:
+JUMP end_method_IfElse_conditional
+NOP
+end_method_IfElse_conditional:
 STOREFP
 RET 2

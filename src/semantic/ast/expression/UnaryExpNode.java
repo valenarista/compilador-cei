@@ -108,11 +108,11 @@ public class UnaryExpNode extends CompExpNode{
                     symbolTable.instructionList.add("    NEG");
                     break;
                 case postIncrement:
-                    symbolTable.instructionList.add("    LDC1");
+                    symbolTable.instructionList.add("PUSH 1");
                     symbolTable.instructionList.add("    ADD");
                     break;
                 case postDecrement:
-                    symbolTable.instructionList.add("    LDC1");
+                    symbolTable.instructionList.add("PUSH 1");
                     symbolTable.instructionList.add("    SUB");
                     break;
                 default:

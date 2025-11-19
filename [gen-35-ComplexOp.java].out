@@ -153,6 +153,8 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0
@@ -177,6 +179,9 @@ LOAD 0
 PUSH 5
     SUB
 STORE 6
+JUMP end_method_Complex_calculate
+NOP
+end_method_Complex_calculate:
 FMEM 1
 STOREFP
 RET 3

@@ -152,6 +152,9 @@ LOADREF 1
 CALL
     ADD
 STORE 4
+JUMP end_method_Nested_process
+NOP
+end_method_Nested_process:
 STOREFP
 RET 1
 Nested_getBase:
@@ -160,6 +163,9 @@ LOADSP
 STOREFP
 PUSH 10
 STORE 4
+JUMP end_method_Nested_getBase
+NOP
+end_method_Nested_getBase:
 STOREFP
 RET 1
 ctor_Init5:
@@ -193,6 +199,8 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0

@@ -140,6 +140,8 @@ LOAD 4
 LOAD 3
 SWAP
 STOREREF 3
+NOP
+end_method_MultiAttr_init:
 STOREFP
 RET 4
 MultiAttr_sum:
@@ -155,6 +157,9 @@ LOAD 3
 LOADREF 3
     ADD
 STORE 4
+JUMP end_method_MultiAttr_sum
+NOP
+end_method_MultiAttr_sum:
 STOREFP
 RET 1
 ctor_InitA10:
@@ -199,6 +204,8 @@ LOADREF 1
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0

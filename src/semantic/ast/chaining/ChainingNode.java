@@ -9,4 +9,5 @@ abstract public class ChainingNode  {
     abstract public boolean isOperandWithCall();
     abstract public boolean isVariable();
     abstract public void generateCode();
+    abstract public void generateCode(boolean isLeftSide);
 }

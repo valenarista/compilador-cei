@@ -139,6 +139,8 @@ LOAD 3
 LOADREF 1
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_A_mc:
 STOREFP
 RET 1
 ctor_Init:
@@ -168,6 +170,8 @@ DUP
 LOADREF 0 
 LOADREF 0
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0

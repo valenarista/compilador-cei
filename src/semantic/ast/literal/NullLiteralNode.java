@@ -34,6 +34,6 @@ public class NullLiteralNode extends LiteralNode{
 
     @Override
     public void generateCode() {
-        symbolTable.instructionList.add("PUSH "+token.getLexeme());
+        symbolTable.instructionList.add("PUSH 0");
     }
 }

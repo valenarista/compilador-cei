@@ -132,6 +132,9 @@ LOAD 5
 LOAD 4
     ADD
 STORE 6
+JUMP end_method_Calculator_add
+NOP
+end_method_Calculator_add:
 STOREFP
 RET 3
 Calculator_multiply:
@@ -142,6 +145,9 @@ LOAD 5
 LOAD 4
     MUL
 STORE 6
+JUMP end_method_Calculator_multiply
+NOP
+end_method_Calculator_multiply:
 STOREFP
 RET 3
 ctor_Init3:
@@ -192,6 +198,8 @@ LOADREF 1
 CALL
 PUSH Object_debugPrint
 CALL
+NOP
+end_method_main:
 FMEM 1
 STOREFP
 RET 0
