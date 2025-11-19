@@ -1,6 +1,8 @@
 .DATA
 VT_A:
 DW A_m1, A_m2
+VT_Init:
+DW 0  ; VT vacía
 .CODE
 PUSH simple_heap_init
 CALL
@@ -151,7 +153,7 @@ LOADSP
 STOREFP
 RMEM 1
 RMEM 1
-PUSH 2
+PUSH 1
 PUSH simple_malloc
 CALL
 DUP

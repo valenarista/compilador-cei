@@ -95,6 +95,14 @@ public class Constructor implements Invocable{
         symbolTable.setCurrentClass(ownerClass.getName(), ownerClass);
         symbolTable.setCurrentInvocable(this);
 
+        int n = paramList.size();
+        for (int i = 0; i < paramList.size(); i++) {
+            Parameter param = paramList.get(i);
+            int offset = n + 3 - i;
+            param.setOffset(offset);
+            System.out.println("DEBUG: Asignando offset " + offset + " a parámetro " + param.getName());
+        }
+
         if(block != null){
             block.generateCode();
         }

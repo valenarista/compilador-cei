@@ -123,6 +123,20 @@ public class Method implements Invocable {
         if(getName().equals("main") && isStaticMethod()){
             label = "main";
         }
+
+        int n = paramList.size();
+        for (int i = 0; i < paramList.size(); i++) {
+            Parameter param = paramList.get(i);
+            int offset;
+            if(!isStaticMethod()) {
+                offset = n + 3 - i;
+            }else{
+                offset = n + 2 - i;
+            }
+            param.setOffset(offset);
+            System.out.println("DEBUG: Asignando offset " + offset + " a parámetro " + param.getName());
+        }
+
         symbolTable.instructionList.add(label + ":");
         symbolTable.instructionList.add("LOADFP");
         symbolTable.instructionList.add("LOADSP");
@@ -135,6 +149,7 @@ public class Method implements Invocable {
         if(block != null && hasBody()) {
             block.generateCode();
         }
+
 
         if(isVoid()) {
             int localVarCount = 0;

@@ -38,7 +38,10 @@ public class ChainedVarNode extends ChainingNode{
 
     @Override
     public void generateCode() {
-
+        symbolTable.instructionList.add("LOADREF " + attribute.getOffset());
+        if(optionalChaining != null) {
+            optionalChaining.generateCode();
+        }
     }
 
     public void setOptChaining(ChainingNode chainingNode) {

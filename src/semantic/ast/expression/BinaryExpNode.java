@@ -141,7 +141,7 @@ public class BinaryExpNode extends CompExpNode{
             case lessOp -> symbolTable.instructionList.add("    LT");
             case lessEqualOp -> symbolTable.instructionList.add("    LE");
             case equalOp -> symbolTable.instructionList.add("    EQ");
-            case notEqualOp -> symbolTable.instructionList.add("    NEQ");
+            case notEqualOp -> symbolTable.instructionList.add("    NE");
         }
     } 
 }

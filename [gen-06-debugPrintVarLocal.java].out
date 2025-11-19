@@ -1,4 +1,6 @@
 .DATA
+VT_Init:
+DW 0  ; VT vacía
 .CODE
 PUSH simple_heap_init
 CALL

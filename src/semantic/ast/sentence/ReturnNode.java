@@ -59,10 +59,10 @@ public class ReturnNode extends SentenceWithExpressionNode{
     private int calculateRetValOffset() {
         Method currentMethod = (Method) symbolTable.getCurrentInvocable();
         int paramCount = currentMethod.getParamList().size();
-        int offset = paramCount + 4;
+        int offset = paramCount + 3;
 
-        if(currentMethod.isStaticMethod()) {
-            offset--;
+        if(!currentMethod.isStaticMethod()) {
+            offset++;
         }
 
         return offset;

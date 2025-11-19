@@ -1,4 +1,6 @@
 .DATA
+VT_Init:
+DW 0  ; VT vacía
 .CODE
 PUSH simple_heap_init
 CALL
@@ -124,8 +126,8 @@ Init_suma:
 LOADFP
 LOADSP
 STOREFP
-LOAD 6
-LOAD 5
+LOAD 4
+LOAD 3
     ADD
 STORE 5
 STOREFP

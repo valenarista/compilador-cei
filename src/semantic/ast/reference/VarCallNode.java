@@ -135,8 +135,10 @@ public class VarCallNode extends ReferenceNode{
     }
 
     private void generateParameterCode(){
-        int paramOffset = getParameterOffset();
-        symbolTable.instructionList.add("LOAD " + paramOffset);
+        Parameter parameter = symbolTable.getCurrentInvocable().getParamList().stream().filter(p -> p.getName().equals(varName)).findFirst().get();
+        int offset = parameter.getOffset();
+        System.out.println("DEBUG generateParameterCode: parámetro lado der'" + varName + "' tiene offset " + offset);
+        symbolTable.instructionList.add("LOAD " + offset);
     }
     private void generateLocalVarCode(){
         int localVarOffset = symbolTable.getLocalVarOffset(varName);
@@ -168,7 +170,9 @@ public class VarCallNode extends ReferenceNode{
 
         if(isParameter()) {
             System.out.println("  -> Generando como parámetro");
-            int paramOffset = getParameterOffset();
+            Parameter parameter = symbolTable.getCurrentInvocable().getParamList().stream().filter(p -> p.getName().equals(varName)).findFirst().get();
+            int paramOffset = parameter.getOffset();
+            System.out.println("DEBUG generateParameterCode: parámetro lado izq'" + varName + "' tiene offset " + paramOffset);
             symbolTable.instructionList.add("STORE " + paramOffset);
         }
         else if(isLocalVar()) {

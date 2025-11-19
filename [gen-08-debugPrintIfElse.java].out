@@ -1,4 +1,6 @@
 .DATA
+VT_Init:
+DW 0  ; VT vacía
 .CODE
 PUSH simple_heap_init
 CALL
@@ -127,6 +129,19 @@ STOREFP
 RMEM 1
 PUSH 10
 STORE 0
+LOAD 0
+PUSH 5
+    GT
+BF else_0
+PUSH 1
+PUSH Object_debugPrint
+CALL
+JUMP end_if_0
+else_0:
+PUSH 0
+PUSH Object_debugPrint
+CALL
+end_if_0:
 FMEM 1
 STOREFP
 RET 0

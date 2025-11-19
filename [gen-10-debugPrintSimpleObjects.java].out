@@ -1,4 +1,8 @@
 .DATA
+VT_Test:
+DW 0  ; VT vacía
+VT_Punto:
+DW 0  ; VT vacía
 .CODE
 PUSH simple_heap_init
 CALL
@@ -126,7 +130,7 @@ LOADSP
 STOREFP
 RMEM 1
 RMEM 1
-PUSH 4
+PUSH 3
 PUSH simple_malloc
 CALL
 DUP
@@ -141,6 +145,7 @@ PUSH ctor_Punto
 CALL
 STORE 0
 LOAD 0
+LOADREF 1
 PUSH Object_debugPrint
 CALL
 FMEM 1
@@ -150,11 +155,11 @@ ctor_Punto:
 LOADFP
 LOADSP
 STOREFP
-LOAD 6
+LOAD 5
 LOAD 3
 SWAP
 STOREREF 1
-LOAD 5
+LOAD 4
 LOAD 3
 SWAP
 STOREREF 2

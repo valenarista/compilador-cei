@@ -454,74 +454,59 @@ public class ConcreteClass implements EntityClass {
     public void generateVirtualTable() {
         System.out.println("DEBUG generateVirtualTable: Clase " + getName());
 
-        // Crear lista ordenada de métodos por offset
         List<Method> vtMethods = new ArrayList<>();
 
-        // PASO 1: Agregar métodos heredados (mantienen orden/offset del padre)
         if(herencia != null) {
             EntityClass parentClass = symbolTable.getClass(herencia.getLexeme());
             if(parentClass != null) {
                 System.out.println("  -> Heredando VT de " + parentClass.getName());
 
-                // Agregar todos los métodos de instancia del padre EN ORDEN
                 List<Method> parentMethods = new ArrayList<>(parentClass.getMethods().values());
                 parentMethods.sort((m1, m2) -> Integer.compare(m1.getOffset(), m2.getOffset()));
 
                 for(Method parentMethod : parentMethods) {
                     if(!parentMethod.isStaticMethod()) {
-                        // Si el método fue redefinido, usar la versión de esta clase
                         if(redefinedMethods.containsKey(parentMethod.getName())) {
                             Method redefined = methods.get(parentMethod.getName());
                             vtMethods.add(redefined);
-                            System.out.println("  -> [" + redefined.getOffset() + "] " +
-                                    redefined.getLabel() + " (redefinido)");
+                            System.out.println("  -> [" + redefined.getOffset() + "] " + redefined.getLabel() + " (redefinido)");
                         } else {
-                            // Usar el método heredado tal cual
                             vtMethods.add(parentMethod);
-                            System.out.println("  -> [" + parentMethod.getOffset() + "] " +
-                                    parentMethod.getLabel() + " (heredado)");
+                            System.out.println("  -> [" + parentMethod.getOffset() + "] " + parentMethod.getLabel() + " (heredado)");
                         }
                     }
                 }
             }
         }
 
-        // PASO 2: Agregar métodos NUEVOS de esta clase (no heredados)
         for(Method method : methods.values()) {
             if(!method.isStaticMethod()) {
-                // Solo agregar si NO es heredado
-                boolean isInherited = (herencia != null &&
-                        symbolTable.getClass(herencia.getLexeme())
-                                .getMethods().containsKey(method.getName()));
+                boolean isInherited = (herencia != null && symbolTable.getClass(herencia.getLexeme()).getMethods().containsKey(method.getName()));
 
                 if(!isInherited) {
                     vtMethods.add(method);
-                    System.out.println("  -> [" + method.getOffset() + "] " +
-                            method.getLabel() + " (nuevo)");
+                    System.out.println("  -> [" + method.getOffset() + "] " + method.getLabel() + " (nuevo)");
                 }
             }
         }
 
-        // Solo generar VT si hay métodos de instancia
-        if(vtMethods.isEmpty()) {
-            System.out.println("  -> No hay métodos de instancia, no se genera VT");
-            return;
-        }
-
-        // PASO 3: Ordenar por offset (CRÍTICO)
-        vtMethods.sort((m1, m2) -> Integer.compare(m1.getOffset(), m2.getOffset()));
-
-        // PASO 4: Generar la VT
         symbolTable.instructionList.add("VT_" + getName() + ":");
 
-        List<String> labels = new ArrayList<>();
-        for(Method method : vtMethods) {
-            labels.add(method.getLabel());
+        if(vtMethods.isEmpty()) {
+            symbolTable.instructionList.add("DW 0  ; VT vacía");
+            System.out.println("  -> VT vacía generada (sin métodos de instancia)");
+        } else {
+            vtMethods.sort((m1, m2) -> Integer.compare(m1.getOffset(), m2.getOffset()));
+
+            List<String> labels = new ArrayList<>();
+            for(Method method : vtMethods) {
+                labels.add(method.getLabel());
+            }
+
+            symbolTable.instructionList.add("DW " + String.join(", ", labels));
+            System.out.println("  -> VT generada con " + labels.size() + " métodos");
         }
 
-        symbolTable.instructionList.add("DW " + String.join(", ", labels));
-
-        System.out.println("  -> VT generada con " + labels.size() + " métodos");
     }
 
     public int getCIRSize(){
@@ -529,7 +514,7 @@ public class ConcreteClass implements EntityClass {
         if(herencia!=null){
             EntityClass parentClass = symbolTable.getClass(herencia.getLexeme());
             if(parentClass!=null){
-                size += parentClass.getCIRSize();
+                size += parentClass.getAttributes().size();
             }
         }
         for(Attribute attribute : attributes.values()){
@@ -580,8 +565,6 @@ public class ConcreteClass implements EntityClass {
 
         int nextOffset = 0;
 
-        // PASO 1: Primero, asignar offsets a métodos HEREDADOS
-        // Los métodos heredados MANTIENEN su offset original
         if(herencia != null) {
             EntityClass parentClass = symbolTable.getClass(herencia.getLexeme());
             if(parentClass != null) {
@@ -591,24 +574,19 @@ public class ConcreteClass implements EntityClass {
                     if(!parentMethod.isStaticMethod()) {
                         String methodName = parentMethod.getName();
                         int parentOffset = parentMethod.getOffset();
-
-                        // Si el método está en esta clase (redefinido o heredado)
                         if(methods.containsKey(methodName)) {
                             Method localMethod = methods.get(methodName);
-                            // Asignar el MISMO offset que en el padre
                             localMethod.setOffset(parentOffset);
                             System.out.println("  -> Método heredado/redefinido: " + methodName +
                                     " mantiene offset " + parentOffset);
                         }
 
-                        // Actualizar nextOffset
                         nextOffset = Math.max(nextOffset, parentOffset + 1);
                     }
                 }
             }
         }
 
-        // PASO 2: Asignar offsets a métodos NUEVOS (no heredados)
         for(Method method : methods.values()) {
             if(!method.isStaticMethod()) {
                 String methodName = method.getName();

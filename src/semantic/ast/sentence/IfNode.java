@@ -5,10 +5,13 @@ import semantic.ast.expression.ExpressionNode;
 import semantic.types.BooleanType;
 import semantic.types.Type;
 
+import static compiler.Main.symbolTable;
+
 public class IfNode extends SentenceNode{
     private ExpressionNode condition;
     private SentenceNode body;
     private SentenceNode elseBody;
+    private static int labelCounter  = 0;
 
     public IfNode(ExpressionNode condition,SentenceNode body,SentenceNode elseBody){
         this.condition = condition;
@@ -31,6 +34,39 @@ public class IfNode extends SentenceNode{
     }
     public SentenceNode getElseBody() {
         return elseBody;
+    }
+    public void generateCode(){
+        int currentLabel = labelCounter++;
+        String elseLabel = "else_" + currentLabel;
+        String endIfLabel = "end_if_" + currentLabel;
+
+        System.out.println("DEBUG IfNode: Generando if #" + currentLabel);
+        System.out.println("  -> elseLabel: " + elseLabel);
+        System.out.println("  -> endIfLabel: " + endIfLabel);
+        System.out.println("  -> Tiene else: " + (elseBody != null));
+
+        condition.generateCode();
+        if(!(elseBody instanceof EmptySentenceNode)) {
+            System.out.println("  -> Generando BF a " + elseLabel);
+            symbolTable.instructionList.add("BF "+elseLabel);
+
+            body.generateCode();
+
+            System.out.println("  -> Generando JUMP a " + endIfLabel);
+            symbolTable.instructionList.add("JUMP "+endIfLabel);
+
+            System.out.println("  -> Generando etiqueta " + elseLabel + ":");
+            symbolTable.instructionList.add(elseLabel+":");
+
+            elseBody.generateCode();
+
+            System.out.println("  -> Generando etiqueta " + endIfLabel + ":");
+            symbolTable.instructionList.add(endIfLabel + ":");
+        } else {
+            symbolTable.instructionList.add("BF "+endIfLabel);
+            body.generateCode();
+            symbolTable.instructionList.add(endIfLabel + ":");
+        }
     }
 
 }
