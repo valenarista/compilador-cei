@@ -5,10 +5,12 @@ import exceptions.SemanticException;
 import semantic.ast.expression.ExpressionNode;
 import semantic.types.BooleanType;
 import semantic.types.Type;
+import static compiler.Main.symbolTable;
 
 public class WhileNode extends SentenceNode{
     private ExpressionNode condition;
     private SentenceNode body;
+    private static int labelCounter  = 0;
     public WhileNode(ExpressionNode condition, SentenceNode body) {
         this.condition = condition;
         this.body = body;
@@ -30,5 +32,30 @@ public class WhileNode extends SentenceNode{
     }
     public ExpressionNode getCondition() {
         return condition;
+    }
+    public void generateCode(){
+        int currentLabel = labelCounter++;
+        String startWhileLabel = "start_while_" + currentLabel;
+        String endWhileLabel = "end_while_" + currentLabel;
+
+        System.out.println("DEBUG WhileNode: Generando while #" + currentLabel);
+        System.out.println("  -> startWhileLabel: " + startWhileLabel);
+        System.out.println("  -> endWhileLabel: " + endWhileLabel);
+
+        System.out.println("  -> Generando etiqueta " + startWhileLabel + ":");
+        symbolTable.instructionList.add(startWhileLabel+":");
+
+        condition.generateCode();
+
+        System.out.println("  -> Generando BF a " + endWhileLabel);
+        symbolTable.instructionList.add("BF "+endWhileLabel);
+
+        body.generateCode();
+
+        System.out.println("  -> Generando JUMP a " + startWhileLabel);
+        symbolTable.instructionList.add("JUMP "+startWhileLabel);
+
+        System.out.println("  -> Generando etiqueta " + endWhileLabel + ":");
+        symbolTable.instructionList.add(endWhileLabel+":");
     }
 }
