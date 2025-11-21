@@ -40,14 +40,8 @@ public class IfNode extends SentenceNode{
         String elseLabel = "else_" + currentLabel;
         String endIfLabel = "end_if_" + currentLabel;
 
-        System.out.println("DEBUG IfNode: Generando if #" + currentLabel);
-        System.out.println("  -> elseLabel: " + elseLabel);
-        System.out.println("  -> endIfLabel: " + endIfLabel);
-        System.out.println("  -> Tiene else: " + (elseBody != null));
-
         condition.generateCode();
         if(!(elseBody instanceof EmptySentenceNode)) {
-            System.out.println("  -> Generando BF a " + elseLabel);
             symbolTable.instructionList.add("BF "+elseLabel);
 
             body.generateCode();
@@ -56,17 +50,14 @@ public class IfNode extends SentenceNode{
             boolean elseBodyEndsInReturn = bodyEndsInReturn(elseBody);
 
             if(!bodyEndsInReturn || !elseBodyEndsInReturn) {
-                System.out.println("  -> Generando JUMP a " + endIfLabel);
                 symbolTable.instructionList.add("JUMP " + endIfLabel);
             }
 
-            System.out.println("  -> Generando etiqueta " + elseLabel + ":");
             symbolTable.instructionList.add(elseLabel+":");
 
             elseBody.generateCode();
 
             if(!bodyEndsInReturn || !elseBodyEndsInReturn) {
-                System.out.println("  -> Generando etiqueta " + endIfLabel + ":");
                 symbolTable.instructionList.add(endIfLabel + ":");
             }
         } else {

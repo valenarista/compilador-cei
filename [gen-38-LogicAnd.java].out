@@ -200,11 +200,11 @@ LOAD 4
 PUSH 0
     GT
     AND
-BF end_if_14
+BF end_if_23
 PUSH 1
 STORE 6
 JUMP end_method_LogicAnd_testAnd
-end_if_14:
+end_if_23:
 PUSH 0
 STORE 6
 JUMP end_method_LogicAnd_testAnd

@@ -109,9 +109,6 @@ public class MethodCallNode extends ReferenceNode{
 
     @Override
     public void generateCode(){
-        System.out.println("DEBUG: Generando llamada a " + methodName);
-        System.out.println("DEBUG: Cantidad de argumentos: " + argList.size());
-
         Method method = findMethod(methodName);
         if(method.isStaticMethod()) {
             if(!method.getReturnType().getName().equals("void"))
@@ -130,7 +127,7 @@ public class MethodCallNode extends ReferenceNode{
             symbolTable.instructionList.add("LOAD 3");
 
             if(!method.getReturnType().getName().equals("void")){
-                symbolTable.instructionList.add("RMEM 1; Reservando espacio para el valor de retorno");
+                symbolTable.instructionList.add("RMEM 1");
                 symbolTable.instructionList.add("SWAP");
             }
 

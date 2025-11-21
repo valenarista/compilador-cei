@@ -193,11 +193,11 @@ PUSH 5
 PUSH 0
     GT
     NOT
-BF end_if_19
+BF end_if_28
 PUSH 1
 STORE 4
 JUMP end_method_NegationTest_testNegation
-end_if_19:
+end_if_28:
 PUSH 0
 STORE 4
 JUMP end_method_NegationTest_testNegation

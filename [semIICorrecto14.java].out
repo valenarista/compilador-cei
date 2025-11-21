@@ -1,0 +1,225 @@
+.DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
+VT_A:
+DW A_m1
+VT_Init:
+DW 0  ; VT vacía
+.CODE
+PUSH simple_heap_init
+CALL
+PUSH main
+CALL
+HALT
+simple_heap_init:
+RET 0
+simple_malloc:
+LOADFP
+LOADSP
+STOREFP
+LOADHL
+DUP
+PUSH 1
+ADD
+STORE 4
+LOAD 3
+ADD
+STOREHL
+STOREFP
+RET 1
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+; Clase Object
+Object_debugPrint:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+; Clase System
+System_read:
+LOADFP
+LOADSP
+STOREFP
+READ
+STORE 3
+STOREFP
+RET 0
+System_printB:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+STOREFP
+RET 1
+System_printC:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+STOREFP
+RET 1
+System_printI:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+System_printS:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+STOREFP
+RET 1
+System_println:
+LOADFP
+LOADSP
+STOREFP
+PRNLN
+STOREFP
+RET 0
+System_printBln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+PRNLN
+STOREFP
+RET 1
+System_printCln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+PRNLN
+STOREFP
+RET 1
+System_printIln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+PRNLN
+STOREFP
+RET 1
+System_printSln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+PRNLN
+STOREFP
+RET 1
+ctor_A:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+A_m1:
+LOADFP
+LOADSP
+STOREFP
+RMEM 1
+PUSH 0
+STORE 0
+RMEM 1
+PUSH 2
+STORE -1
+RMEM 1
+LOAD 0
+LOAD -1
+    LT
+STORE -2
+RMEM 1
+LOAD 0
+LOAD -1
+    GT
+STORE -3
+LOAD -2
+LOAD -3
+    AND
+BF end_if_10
+end_if_10:
+LOAD -2
+LOAD -3
+    OR
+BF end_if_11
+end_if_11:
+LOAD 0
+LOAD -1
+    LE
+BF end_if_12
+end_if_12:
+LOAD 0
+LOAD -1
+    GE
+BF end_if_13
+end_if_13:
+start_while_8:
+LOAD 0
+LOAD -1
+    EQ
+BF end_while_8
+JUMP start_while_8
+end_while_8:
+start_while_9:
+LOAD 0
+LOAD -1
+    NE
+BF end_while_9
+JUMP start_while_9
+end_while_9:
+JUMP end_method_A_m1
+NOP
+end_method_A_m1:
+FMEM 4
+STOREFP
+RET 1
+ctor_Init:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+main:
+LOADFP
+LOADSP
+STOREFP
+JUMP end_method_main
+NOP
+end_method_main:
+STOREFP
+RET 0

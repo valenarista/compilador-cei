@@ -141,7 +141,6 @@ public class Method implements Invocable {
                 offset = n + 2 - i;
             }
             param.setOffset(offset);
-            System.out.println("DEBUG: Asignando offset " + offset + " a parámetro " + param.getName());
         }
 
         symbolTable.instructionList.add(label + ":");

@@ -80,7 +80,6 @@ public class BlockNode extends SentenceNode{
             sentence.check();
         }
 
-
         symbolTable.setCurrentBlock(previousBlock);
         symbolTable.setCurrentInvocable(previousInvocable);
         if(previousClass != null)
@@ -90,8 +89,6 @@ public class BlockNode extends SentenceNode{
     }
 
     public void generateCode() {
-        System.out.println("DEBUG: Generando bloque con " + sentences.size() + " sentencias");
-
         if(parentBlock!=null)
             lastLocalVarOffset = parentBlock.lastLocalVarOffset;
         BlockNode previousBlock = symbolTable.getCurrentBlock();

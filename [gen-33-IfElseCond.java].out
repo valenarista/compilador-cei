@@ -194,11 +194,11 @@ STOREFP
 LOAD 4
 PUSH 25
     GT
-BF else_13
+BF else_22
 PUSH 50
 STORE 5
 JUMP end_method_IfElse_conditional
-else_13:
+else_22:
 PUSH 25
 STORE 5
 JUMP end_method_IfElse_conditional

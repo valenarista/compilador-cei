@@ -1,0 +1,188 @@
+.DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
+VT_Test27:
+DW 0  ; VT vacía
+.CODE
+PUSH simple_heap_init
+CALL
+PUSH main
+CALL
+HALT
+simple_heap_init:
+RET 0
+simple_malloc:
+LOADFP
+LOADSP
+STOREFP
+LOADHL
+DUP
+PUSH 1
+ADD
+STORE 4
+LOAD 3
+ADD
+STOREHL
+STOREFP
+RET 1
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+; Clase Object
+Object_debugPrint:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+; Clase System
+System_read:
+LOADFP
+LOADSP
+STOREFP
+READ
+STORE 3
+STOREFP
+RET 0
+System_printB:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+STOREFP
+RET 1
+System_printC:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+STOREFP
+RET 1
+System_printI:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+System_printS:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+STOREFP
+RET 1
+System_println:
+LOADFP
+LOADSP
+STOREFP
+PRNLN
+STOREFP
+RET 0
+System_printBln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+PRNLN
+STOREFP
+RET 1
+System_printCln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+PRNLN
+STOREFP
+RET 1
+System_printIln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+PRNLN
+STOREFP
+RET 1
+System_printSln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+PRNLN
+STOREFP
+RET 1
+ctor_Test27:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+main:
+LOADFP
+LOADSP
+STOREFP
+RMEM 1
+PUSH 10
+STORE 0
+LOAD 0
+PUSH 5
+    GT
+BF else_33
+LOAD 0
+PUSH 8
+    GT
+BF else_34
+PUSH str_0
+PUSH System_printSln
+CALL
+JUMP end_if_34
+else_34:
+PUSH str_1
+PUSH System_printSln
+CALL
+end_if_34:
+JUMP end_if_33
+else_33:
+PUSH str_2
+PUSH System_printSln
+CALL
+end_if_33:
+JUMP end_method_main
+NOP
+end_method_main:
+FMEM 1
+STOREFP
+RET 0
+.DATA
+str_2: DW "C", 0
+str_1: DW "B", 0
+str_0: DW "A", 0

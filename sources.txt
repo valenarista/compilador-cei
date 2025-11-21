@@ -27,8 +27,7 @@ C:\Users\valua\OneDrive\Documentos\compilador-cei\src\semantic\ast\reference\Met
 C:\Users\valua\OneDrive\Documentos\compilador-cei\src\semantic\ast\reference\ParentizedExpressionNode.java 
 C:\Users\valua\OneDrive\Documentos\compilador-cei\src\semantic\ast\reference\ReferenceNode.java 
 C:\Users\valua\OneDrive\Documentos\compilador-cei\src\semantic\ast\reference\StaticMethodCallNode.java 
-C:\Users\valua\OneDrive\Documentos\compilador-cei\src\semantic\ast\reference\ThisReferenceNode.java 
-C:\Users\valua\OneDrive\Documentos\compilador-cei\src\semantic\ast\reference\ToyReferenceNode.java 
+C:\Users\valua\OneDrive\Documentos\compilador-cei\src\semantic\ast\reference\ThisReferenceNode.java
 C:\Users\valua\OneDrive\Documentos\compilador-cei\src\semantic\ast\reference\VarCallNode.java 
 C:\Users\valua\OneDrive\Documentos\compilador-cei\src\semantic\ast\sentence\BlockNode.java 
 C:\Users\valua\OneDrive\Documentos\compilador-cei\src\semantic\ast\sentence\EmptySentenceNode.java 

@@ -106,6 +106,11 @@ public class Interface implements EntityClass {
     }
 
     @Override
+    public void setAttributeOffsets() {
+
+    }
+
+    @Override
     public int getNextMethodOffset() {
         return 0;
     }

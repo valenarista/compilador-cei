@@ -1,0 +1,199 @@
+.DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
+VT_A:
+DW 0  ; VT vacía
+VT_Test73:
+DW 0  ; VT vacía
+.CODE
+PUSH simple_heap_init
+CALL
+PUSH main
+CALL
+HALT
+simple_heap_init:
+RET 0
+simple_malloc:
+LOADFP
+LOADSP
+STOREFP
+LOADHL
+DUP
+PUSH 1
+ADD
+STORE 4
+LOAD 3
+ADD
+STOREHL
+STOREFP
+RET 1
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+; Clase Object
+Object_debugPrint:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+; Clase System
+System_read:
+LOADFP
+LOADSP
+STOREFP
+READ
+STORE 3
+STOREFP
+RET 0
+System_printB:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+STOREFP
+RET 1
+System_printC:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+STOREFP
+RET 1
+System_printI:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+System_printS:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+STOREFP
+RET 1
+System_println:
+LOADFP
+LOADSP
+STOREFP
+PRNLN
+STOREFP
+RET 0
+System_printBln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+PRNLN
+STOREFP
+RET 1
+System_printCln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+PRNLN
+STOREFP
+RET 1
+System_printIln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+PRNLN
+STOREFP
+RET 1
+System_printSln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+PRNLN
+STOREFP
+RET 1
+ctor_A:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_Test73:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+main:
+LOADFP
+LOADSP
+STOREFP
+RMEM 1
+RMEM 1
+PUSH 1
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_A
+STOREREF 0
+DUP
+PUSH ctor_A
+CALL
+STORE 0
+LOAD 0
+PUSH 0
+    NE
+BF end_if_7
+PUSH str_0
+PUSH System_printSln
+CALL
+end_if_7:
+PUSH 0
+STORE 0
+LOAD 0
+PUSH 0
+    EQ
+BF end_if_8
+PUSH str_1
+PUSH System_printSln
+CALL
+end_if_8:
+JUMP end_method_main
+NOP
+end_method_main:
+FMEM 1
+STOREFP
+RET 0
+.DATA
+str_0: DW "not null", 0
+str_1: DW "is null", 0

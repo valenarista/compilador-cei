@@ -192,17 +192,17 @@ STOREFP
 RMEM 1
 PUSH 0
 STORE 0
-start_while_1:
+start_while_2:
 LOAD 0
 PUSH 10
     LT
-BF end_while_1
+BF end_while_2
 LOAD 0
 PUSH 1
     ADD
 STORE 0
-JUMP start_while_1
-end_while_1:
+JUMP start_while_2
+end_while_2:
 LOAD 0
 STORE 4
 JUMP end_method_WhileLoop_countTo10

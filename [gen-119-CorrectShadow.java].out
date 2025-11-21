@@ -1,0 +1,254 @@
+.DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
+VT_ClaseA8:
+DW ClaseA8_obtenerHeredado
+VT_ClaseB8:
+DW ClaseA8_obtenerHeredado, ClaseB8_modificarValores, ClaseB8_obtenerPropio
+VT_TestShadowingModificacion:
+DW 0  ; VT vacía
+.CODE
+PUSH simple_heap_init
+CALL
+PUSH main
+CALL
+HALT
+simple_heap_init:
+RET 0
+simple_malloc:
+LOADFP
+LOADSP
+STOREFP
+LOADHL
+DUP
+PUSH 1
+ADD
+STORE 4
+LOAD 3
+ADD
+STOREHL
+STOREFP
+RET 1
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+; Clase Object
+Object_debugPrint:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+; Clase System
+System_read:
+LOADFP
+LOADSP
+STOREFP
+READ
+STORE 3
+STOREFP
+RET 0
+System_printB:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+STOREFP
+RET 1
+System_printC:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+STOREFP
+RET 1
+System_printI:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+System_printS:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+STOREFP
+RET 1
+System_println:
+LOADFP
+LOADSP
+STOREFP
+PRNLN
+STOREFP
+RET 0
+System_printBln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+PRNLN
+STOREFP
+RET 1
+System_printCln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+PRNLN
+STOREFP
+RET 1
+System_printIln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+PRNLN
+STOREFP
+RET 1
+System_printSln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+PRNLN
+STOREFP
+RET 1
+ctor_ClaseA8:
+LOADFP
+LOADSP
+STOREFP
+PUSH 100
+LOAD 3
+SWAP
+STOREREF 1
+STOREFP
+RET 1
+ClaseA8_obtenerHeredado:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+LOADREF 1
+STORE 4
+JUMP end_method_ClaseA8_obtenerHeredado
+NOP
+end_method_ClaseA8_obtenerHeredado:
+STOREFP
+RET 1
+ctor_ClaseB8:
+LOADFP
+LOADSP
+STOREFP
+PUSH 200
+LOAD 3
+SWAP
+STOREREF 2
+STOREFP
+RET 1
+ClaseB8_modificarValores:
+LOADFP
+LOADSP
+STOREFP
+PUSH 500
+LOAD 3
+SWAP
+STOREREF 2
+JUMP end_method_ClaseB8_modificarValores
+NOP
+end_method_ClaseB8_modificarValores:
+STOREFP
+RET 1
+ClaseB8_obtenerPropio:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+LOADREF 2
+STORE 4
+JUMP end_method_ClaseB8_obtenerPropio
+NOP
+end_method_ClaseB8_obtenerPropio:
+STOREFP
+RET 1
+ctor_TestShadowingModificacion:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+main:
+LOADFP
+LOADSP
+STOREFP
+RMEM 1
+RMEM 1
+PUSH 3
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_ClaseB8
+STOREREF 0
+DUP
+PUSH ctor_ClaseB8
+CALL
+STORE 0
+LOAD 0
+DUP
+LOADREF 0 
+LOADREF 1
+CALL
+LOAD 0
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 0
+CALL
+PUSH System_printIln
+CALL
+LOAD 0
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 2
+CALL
+PUSH System_printIln
+CALL
+JUMP end_method_main
+NOP
+end_method_main:
+FMEM 1
+STOREFP
+RET 0

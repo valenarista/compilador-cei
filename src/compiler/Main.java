@@ -24,14 +24,19 @@ public class Main {
         LexicalAnalyzerMultiDetect lexicalAnalyzer = null;
         SyntacticAnalyzer syntacticAnalyzer;
 
+        //if (args.length == 1) {
+        //CAMBIO PARA LOGROS DE ETAPA 4. DESCOMENTAR LINEA DE ARRIBA Y COMENTAR LINEA DE ABAJO
         if (args.length == 2) {
             try{
+
                 //vaciar tabla de simbolos
                 symbolTable = new SymbolTable();
                 symbolTable.createPredefinedClasses();
 
                 filePath = args[0];
+                //CAMBIO PARA LOGROS DE ETAPA 4. COMENTAR LINEA DE ABAJO
                 outputPath = args[1];
+
                 sourceManager.open(filePath);
                 lexicalAnalyzer = new LexicalAnalyzerMultiDetect(sourceManager);
                 syntacticAnalyzer = new SyntacticAnalyzer(lexicalAnalyzer);
@@ -40,6 +45,7 @@ public class Main {
                 symbolTable.chequeoDeclaraciones();
                 symbolTable.chequeoSentencias();
 
+                //CAMBIO PARA LOGROS DE ETAPA 4. COMENTAR LINEA DE ABAJO
                 generate(outputPath);
 
                 if (!lexicalAnalyzer.getErrors().isEmpty()) {
@@ -50,8 +56,6 @@ public class Main {
                     System.out.println("Compilacion exitosa.");
                     System.out.println("[SinErrores]");
                 }
-
-
 
             } catch (SemanticException | SyntacticException e) {
                 if(lexicalAnalyzer!=null && !lexicalAnalyzer.getErrors().isEmpty()){

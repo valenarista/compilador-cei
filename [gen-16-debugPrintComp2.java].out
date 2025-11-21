@@ -196,11 +196,11 @@ STOREFP
 LOAD 5
 LOAD 4
     GE
-BF end_if_8
+BF end_if_17
 PUSH 1
 STORE 6
 JUMP end_method_GETest_greaterThanOrEqual
-end_if_8:
+end_if_17:
 PUSH 0
 STORE 6
 JUMP end_method_GETest_greaterThanOrEqual

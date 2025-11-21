@@ -155,19 +155,19 @@ STOREFP
 LOAD 5
 PUSH 0
     GT
-BF end_if_17
+BF end_if_26
 LOAD 4
 PUSH 50
     GT
-BF end_if_18
+BF end_if_27
 PUSH 100
 STORE 6
 JUMP end_method_NestedIfTest_nestedCondition
-end_if_18:
+end_if_27:
 PUSH 50
 STORE 6
 JUMP end_method_NestedIfTest_nestedCondition
-end_if_17:
+end_if_26:
 PUSH 0
 STORE 6
 JUMP end_method_NestedIfTest_nestedCondition

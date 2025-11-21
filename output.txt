@@ -1,5 +1,15 @@
+.DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
+VT_Init:
+DW 0  ; VT vacía
 .CODE
 PUSH simple_heap_init
+CALL
 PUSH main
 CALL
 HALT
@@ -19,7 +29,24 @@ ADD
 STOREHL
 STOREFP
 RET 1
-.CODE
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
 ; Clase Object
 Object_debugPrint:
 LOADFP
@@ -113,3 +140,21 @@ SPRINT
 PRNLN
 STOREFP
 RET 1
+ctor_Init:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+main:
+LOADFP
+LOADSP
+STOREFP
+PUSH 1234
+PUSH Object_debugPrint
+CALL
+JUMP end_method_main
+NOP
+end_method_main:
+STOREFP
+RET 0

@@ -155,11 +155,11 @@ STOREFP
 LOAD 5
 LOAD 4
     LT
-BF end_if_11
+BF end_if_20
 PUSH 1
 STORE 6
 JUMP end_method_CompareLT_checkLess
-end_if_11:
+end_if_20:
 PUSH 0
 STORE 6
 JUMP end_method_CompareLT_checkLess

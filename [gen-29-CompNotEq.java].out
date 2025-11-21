@@ -155,11 +155,11 @@ STOREFP
 LOAD 5
 LOAD 4
     NE
-BF end_if_10
+BF end_if_19
 PUSH 1
 STORE 6
 JUMP end_method_CompareNE_checkNotEqual
-end_if_10:
+end_if_19:
 PUSH 0
 STORE 6
 JUMP end_method_CompareNE_checkNotEqual

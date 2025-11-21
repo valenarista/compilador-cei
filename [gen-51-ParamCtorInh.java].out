@@ -149,7 +149,7 @@ LOADFP
 LOADSP
 STOREFP
 LOAD 3
-RMEM 1; Reservando espacio para el valor de retorno
+RMEM 1
 SWAP
 DUP
 LOADREF 0

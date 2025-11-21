@@ -196,11 +196,11 @@ STOREFP
 LOAD 5
 LOAD 4
     GT
-BF end_if_12
+BF end_if_21
 PUSH 1
 STORE 6
 JUMP end_method_CompareGT_checkGreater
-end_if_12:
+end_if_21:
 PUSH 0
 STORE 6
 JUMP end_method_CompareGT_checkGreater

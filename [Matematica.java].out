@@ -1,0 +1,244 @@
+.DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
+VT_Matematica:
+DW Matematica_suma, Matematica_multiplica
+VT_TestMetodosEnExpresiones:
+DW TestMetodosEnExpresiones_metodo
+.CODE
+PUSH simple_heap_init
+CALL
+PUSH main
+CALL
+HALT
+simple_heap_init:
+RET 0
+simple_malloc:
+LOADFP
+LOADSP
+STOREFP
+LOADHL
+DUP
+PUSH 1
+ADD
+STORE 4
+LOAD 3
+ADD
+STOREHL
+STOREFP
+RET 1
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+; Clase Object
+Object_debugPrint:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+; Clase System
+System_read:
+LOADFP
+LOADSP
+STOREFP
+READ
+STORE 3
+STOREFP
+RET 0
+System_printB:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+STOREFP
+RET 1
+System_printC:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+STOREFP
+RET 1
+System_printI:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+System_printS:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+STOREFP
+RET 1
+System_println:
+LOADFP
+LOADSP
+STOREFP
+PRNLN
+STOREFP
+RET 0
+System_printBln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+PRNLN
+STOREFP
+RET 1
+System_printCln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+PRNLN
+STOREFP
+RET 1
+System_printIln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+PRNLN
+STOREFP
+RET 1
+System_printSln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+PRNLN
+STOREFP
+RET 1
+ctor_Matematica:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+Matematica_suma:
+LOADFP
+LOADSP
+STOREFP
+LOAD 5
+LOAD 4
+    ADD
+STORE 6
+JUMP end_method_Matematica_suma
+NOP
+end_method_Matematica_suma:
+STOREFP
+RET 3
+Matematica_multiplica:
+LOADFP
+LOADSP
+STOREFP
+LOAD 5
+LOAD 4
+    MUL
+STORE 6
+JUMP end_method_Matematica_multiplica
+NOP
+end_method_Matematica_multiplica:
+STOREFP
+RET 3
+ctor_TestMetodosEnExpresiones:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+TestMetodosEnExpresiones_metodo:
+LOADFP
+LOADSP
+STOREFP
+RMEM 1
+RMEM 1
+PUSH 1
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_Matematica
+STOREREF 0
+DUP
+PUSH ctor_Matematica
+CALL
+STORE 0
+RMEM 1
+LOAD 0
+RMEM 1
+SWAP
+PUSH 5
+SWAP
+PUSH 3
+SWAP
+DUP
+LOADREF 0 
+LOADREF 0
+CALL
+LOAD 0
+RMEM 1
+SWAP
+PUSH 2
+SWAP
+PUSH 4
+SWAP
+DUP
+LOADREF 0 
+LOADREF 1
+CALL
+    ADD
+STORE -1
+RMEM 1
+LOAD 0
+RMEM 1
+SWAP
+PUSH 1
+SWAP
+PUSH 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 0
+CALL
+PUSH 2
+    EQ
+STORE -2
+JUMP end_method_TestMetodosEnExpresiones_metodo
+NOP
+end_method_TestMetodosEnExpresiones_metodo:
+FMEM 3
+STOREFP
+RET 1

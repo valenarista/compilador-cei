@@ -100,7 +100,6 @@ public class Constructor implements Invocable{
             Parameter param = paramList.get(i);
             int offset = n + 3 - i;
             param.setOffset(offset);
-            System.out.println("DEBUG: Asignando offset " + offset + " a parámetro " + param.getName());
         }
 
         if(block != null){

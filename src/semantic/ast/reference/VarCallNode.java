@@ -113,17 +113,6 @@ public class VarCallNode extends ReferenceNode{
 
     @Override
     public void generateCode(boolean isLeftSide) {
-        System.out.println("DEBUG VarCallNode: Generando código para variable '" + varName + "'");
-        System.out.println("  -> isParameter(): " + isParameter());
-        System.out.println("  -> isLocalVar(): " + isLocalVar());
-        System.out.println("  -> isAttribute(): " + isAttribute());
-        System.out.println("  -> currentBlock es null? " + (symbolTable.getCurrentBlock() == null));
-        if(symbolTable.getCurrentBlock() != null) {
-            System.out.println("  -> Variables en currentBlock: " + symbolTable.getCurrentBlock().getVarLocalMap().keySet());
-        }
-
-        System.out.println("  -> Generando código para el lado " + (isLeftSide ? "izquierdo" : "derecho"));
-
         if(isLeftSide)
             generateLeftSideCode();
         else
@@ -134,18 +123,10 @@ public class VarCallNode extends ReferenceNode{
             optChaining.generateCode(isLeftSide);
         }
     }
-    private boolean needsRMEMForChaining() {
-        if(optChaining instanceof ChainedCallNode) {
-            ChainedCallNode chainedCall = (ChainedCallNode) optChaining;
-            return chainedCall.methodReturnsValue();
-        }
-        return false;
-    }
 
     private void generateParameterCode(){
         Parameter parameter = symbolTable.getCurrentInvocable().getParamList().stream().filter(p -> p.getName().equals(varName)).findFirst().get();
         int offset = parameter.getOffset();
-        System.out.println("DEBUG generateParameterCode: parámetro lado der'" + varName + "' tiene offset " + offset);
         symbolTable.instructionList.add("LOAD " + offset);
     }
     private void generateLocalVarCode(){
@@ -160,21 +141,15 @@ public class VarCallNode extends ReferenceNode{
     }
 
     private void generateLeftSideCode(){
-        System.out.println("  -> Generando lado izquierdo");
         if (optChaining == null) {
-
             if (isParameter()) {
-                System.out.println("  -> Generando como parámetro");
                 Parameter parameter = symbolTable.getCurrentInvocable().getParamList().stream().filter(p -> p.getName().equals(varName)).findFirst().get();
                 int paramOffset = parameter.getOffset();
-                System.out.println("DEBUG generateParameterCode: parámetro lado izq'" + varName + "' tiene offset " + paramOffset);
                 symbolTable.instructionList.add("STORE " + paramOffset);
             } else if (isLocalVar()) {
-                System.out.println("  -> Generando como variable local");
                 int localVarOffset = symbolTable.getLocalVarOffset(varName);
                 symbolTable.instructionList.add("STORE " + localVarOffset);
             } else if (isAttribute()) {
-                System.out.println("  -> Generando como atributo");
                 symbolTable.instructionList.add("LOAD 3");
                 symbolTable.instructionList.add("SWAP");
                 Attribute attr = symbolTable.getCurrentClass().getAttributes().get(varName);
@@ -182,35 +157,25 @@ public class VarCallNode extends ReferenceNode{
                 symbolTable.instructionList.add("STOREREF " + attrOffset);
             }
         } else{
-
             if(isParameter()) {
-                System.out.println("  -> Generando como parámetro");
                 generateParameterCode();
             }
             else if(isLocalVar()) {
-                System.out.println("  -> Generando como variable local");
                 generateLocalVarCode();
             }
             else if(isAttribute()) {
-                System.out.println("  -> Generando como atributo");
                 generateAttributeCode();
-            }
-            else {
-                System.err.println("  -> ERROR: No se pudo determinar el tipo de variable!");
             }
         }
     }
     private void generateRightSideCode(){
         if(isParameter()) {
-            System.out.println("  -> Generando como parámetro");
             generateParameterCode();
         }
         else if(isLocalVar()) {
-            System.out.println("  -> Generando como variable local");
             generateLocalVarCode();
         }
         else if(isAttribute()) {
-            System.out.println("  -> Generando como atributo");
             generateAttributeCode();
         }
     }

@@ -1,4 +1,4 @@
-//0&1&2&3&4&5&6&7&8&9&exitosamente
+//m0 estat de A&m0 estat de A&m1 estat de B&m0 estat de A&m0 estat de A&exitosamente
 class A {
 
     static void main(){

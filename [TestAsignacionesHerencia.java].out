@@ -1,0 +1,211 @@
+.DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
+VT_TestAsignacionesHerencia:
+DW TestAsignacionesHerencia_metodo
+VT_Animal:
+DW 0  ; VT vacía
+VT_Perro:
+DW 0  ; VT vacía
+.CODE
+PUSH simple_heap_init
+CALL
+PUSH main
+CALL
+HALT
+simple_heap_init:
+RET 0
+simple_malloc:
+LOADFP
+LOADSP
+STOREFP
+LOADHL
+DUP
+PUSH 1
+ADD
+STORE 4
+LOAD 3
+ADD
+STOREHL
+STOREFP
+RET 1
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+; Clase Object
+Object_debugPrint:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+; Clase System
+System_read:
+LOADFP
+LOADSP
+STOREFP
+READ
+STORE 3
+STOREFP
+RET 0
+System_printB:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+STOREFP
+RET 1
+System_printC:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+STOREFP
+RET 1
+System_printI:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+System_printS:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+STOREFP
+RET 1
+System_println:
+LOADFP
+LOADSP
+STOREFP
+PRNLN
+STOREFP
+RET 0
+System_printBln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+PRNLN
+STOREFP
+RET 1
+System_printCln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+PRNLN
+STOREFP
+RET 1
+System_printIln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+PRNLN
+STOREFP
+RET 1
+System_printSln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+PRNLN
+STOREFP
+RET 1
+ctor_TestAsignacionesHerencia:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+TestAsignacionesHerencia_metodo:
+LOADFP
+LOADSP
+STOREFP
+RMEM 1
+RMEM 1
+PUSH 1
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_Animal
+STOREREF 0
+DUP
+PUSH ctor_Animal
+CALL
+STORE 0
+RMEM 1
+RMEM 1
+PUSH 1
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_Perro
+STOREREF 0
+DUP
+PUSH ctor_Perro
+CALL
+STORE -1
+LOAD -1
+STORE 0
+RMEM 1
+PUSH 1
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_Perro
+STOREREF 0
+DUP
+PUSH ctor_Perro
+CALL
+STORE 0
+JUMP end_method_TestAsignacionesHerencia_metodo
+NOP
+end_method_TestAsignacionesHerencia_metodo:
+FMEM 2
+STOREFP
+RET 1
+ctor_Animal:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_Perro:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1

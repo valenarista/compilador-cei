@@ -78,10 +78,6 @@ public class AssignNode extends ExpressionNode{
 
     @Override
     public void generateCode() {
-        System.out.println("DEBUG AssignNode: Procesando asignación");
-        System.out.println("  -> left: " + left.getClass().getSimpleName());
-        System.out.println("  -> right: " + right.getClass().getSimpleName());
-
         right.generateCode();
         left.generateCode(true);
     }

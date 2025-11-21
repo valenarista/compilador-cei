@@ -196,11 +196,11 @@ STOREFP
 LOAD 5
 LOAD 4
     EQ
-BF end_if_9
+BF end_if_18
 PUSH 1
 STORE 6
 JUMP end_method_Compare_checkEqual
-end_if_9:
+end_if_18:
 PUSH 0
 STORE 6
 JUMP end_method_Compare_checkEqual

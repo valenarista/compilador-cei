@@ -159,11 +159,11 @@ LOAD 4
 PUSH 0
     GT
     OR
-BF end_if_15
+BF end_if_24
 PUSH 1
 STORE 6
 JUMP end_method_LogicOr_testOr
-end_if_15:
+end_if_24:
 PUSH 0
 STORE 6
 JUMP end_method_LogicOr_testOr

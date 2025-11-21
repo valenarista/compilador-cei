@@ -31,11 +31,12 @@ public interface EntityClass {
     void setPredefined(boolean predefined);
     void generateCode();
     void setMethodsOffsets();
+    void setAttributeOffsets();
     public int getNextMethodOffset();
 
 
 
-        void addAttribute(Attribute attribute);
+    void addAttribute(Attribute attribute);
     void addMethod(Method method);
     void addConstructor(Constructor constructor);
     void addInheritance(Token herencia);

@@ -32,6 +32,7 @@ public class ConcreteClass implements EntityClass {
     boolean consolidated;
     boolean predefined = false;
     boolean methodsOffsets = false;
+    boolean attributesOffsets = false;
 
     private String VTLabel;
 
@@ -472,27 +473,21 @@ public class ConcreteClass implements EntityClass {
 
     }
     public void generateVirtualTable() {
-        System.out.println("DEBUG generateVirtualTable: Clase " + getName());
-
         List<Method> vtMethods = new ArrayList<>();
 
         if(herencia != null) {
             EntityClass parentClass = symbolTable.getClass(herencia.getLexeme());
             if(parentClass != null) {
-                System.out.println("  -> Heredando VT de " + parentClass.getName());
-
                 List<Method> parentMethods = new ArrayList<>(parentClass.getMethods().values());
-                parentMethods.sort((m1, m2) -> Integer.compare(m1.getOffset(), m2.getOffset()));
+                parentMethods.sort(Comparator.comparingInt(Method::getOffset));
 
                 for(Method parentMethod : parentMethods) {
                     if(!parentMethod.isStaticMethod()) {
                         if(redefinedMethods.containsKey(parentMethod.getName())) {
                             Method redefined = methods.get(parentMethod.getName());
                             vtMethods.add(redefined);
-                            System.out.println("  -> [" + redefined.getOffset() + "] " + redefined.getLabel() + " (redefinido)");
                         } else {
                             vtMethods.add(parentMethod);
-                            System.out.println("  -> [" + parentMethod.getOffset() + "] " + parentMethod.getLabel() + " (heredado)");
                         }
                     }
                 }
@@ -505,7 +500,6 @@ public class ConcreteClass implements EntityClass {
 
                 if(!isInherited) {
                     vtMethods.add(method);
-                    System.out.println("  -> [" + method.getOffset() + "] " + method.getLabel() + " (nuevo)");
                 }
             }
         }
@@ -515,7 +509,6 @@ public class ConcreteClass implements EntityClass {
 
         if(vtMethods.isEmpty()) {
             symbolTable.instructionList.add("DW 0  ; VT vacía");
-            System.out.println("  -> VT vacía generada (sin métodos de instancia)");
         } else {
 
             List<String> labels = new ArrayList<>();
@@ -524,7 +517,6 @@ public class ConcreteClass implements EntityClass {
             }
 
             symbolTable.instructionList.add("DW " + String.join(", ", labels));
-            System.out.println("  -> VT generada con " + labels.size() + " métodos");
         }
 
     }
@@ -550,10 +542,12 @@ public class ConcreteClass implements EntityClass {
         setMethodsOffsets();
     }
 
-    private void setAttributeOffsets(){
+    public void setAttributeOffsets(){
         int offset = 1;
+        if(attributesOffsets) return;
         if(herencia!=null){
             EntityClass parentClass = symbolTable.getClass(herencia.getLexeme());
+            parentClass.setAttributeOffsets();
             if(parentClass!=null){
                 for(Attribute a : parentClass.getAttributes().values()){
                     offset++;
@@ -562,21 +556,19 @@ public class ConcreteClass implements EntityClass {
         }
         for(Attribute attribute : attributes.values()){
             if(!inheritedAtts.containsKey(attribute.getName())){
-                attribute.setOffset(offset);
-                offset++;
+                attribute.setOffset(offset++);
             }
         }
+        attributesOffsets = true;
     }
 
     public void setMethodsOffsets() {
         if(methodsOffsets) return;
-        System.out.println("DEBUG setMethodOffsets: Clase " + getName());
 
         int nextMethodOffset;
         if (notObjectClass()){
             EntityClass parentClass = symbolTable.getClass(herencia.getLexeme());
             parentClass.setMethodsOffsets();
-            System.out.println("  -> Heredando de " + parentClass.getName());
             nextMethodOffset = parentClass.getNextMethodOffset();
         } else nextMethodOffset = 0;
 

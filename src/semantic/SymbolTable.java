@@ -490,23 +490,18 @@ public class SymbolTable {
     }
 
     public int getLocalVarOffset(String varName) {
-        System.out.println("DEBUG getLocalVarOffset: Buscando variable '" + varName + "'");
-
         VarLocalNode var = null;
         if (currentBlock != null) {
-            System.out.println("  -> Bloque actual tiene " + currentBlock.getVarLocalMap().size() + " variables");
             var = currentBlock.getVarLocalMap().get(varName);
             if (var == null) {
                 BlockNode parentBlock = currentBlock.getParentBlock();
                 while (var == null && parentBlock != null) {
-                    System.out.println("  -> Buscando en bloque padre...");
                     var = parentBlock.getVarLocalMap().get(varName);
                     parentBlock = parentBlock.getParentBlock();
                 }
             }
         }
         if (var != null) {
-            System.out.println("  -> Variable encontrada con offset: " + var.getOffset());
             return var.getOffset();
         } else {
             throw new SemanticException("Error semantico: La variable local '" + varName + "' no existe en el bloque actual.", varName, 0);

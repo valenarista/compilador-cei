@@ -196,11 +196,11 @@ STOREFP
 LOAD 5
 LOAD 4
     LE
-BF end_if_7
+BF end_if_16
 PUSH 1
 STORE 6
 JUMP end_method_LETest_lessThanOrEqual
-end_if_7:
+end_if_16:
 PUSH 0
 STORE 6
 JUMP end_method_LETest_lessThanOrEqual

@@ -106,7 +106,6 @@ public class StaticMethodCallNode extends ReferenceNode {
         String methodName = methodToken.getLexeme();
         Method method = symbolTable.getClass(classToken.getLexeme()).getMethods().get(methodName);
         if(!method.getReturnType().getName().equals("void") && needsRMEM){
-            System.out.println("LIBERANDO MEMORIA PARA LLAMADA A METODO ESTATICO");
             symbolTable.instructionList.add("RMEM 1");
         }
         for(ExpressionNode arg : argList){

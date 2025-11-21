@@ -223,12 +223,12 @@ LOAD 0
 LOADREF 2
 PUSH 0
     EQ
-BF else_20
+BF else_29
 PUSH 0
 PUSH Object_debugPrint
 CALL
-JUMP end_if_20
-else_20:
+JUMP end_if_29
+else_29:
 LOAD 0
 RMEM 1
 SWAP
@@ -241,7 +241,7 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
-end_if_20:
+end_if_29:
 JUMP end_method_main
 NOP
 end_method_main:

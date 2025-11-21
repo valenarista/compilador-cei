@@ -103,25 +103,11 @@ public class ChainedCallNode extends ChainingNode{
 
     @Override
     public void generateCode() {
-        System.out.println("DEBUG ChainedCallNode.generateCode() para: " + methodName);
-        System.out.println("  -> optionalChaining es null? " + (optionalChaining == null));
-        if(optionalChaining != null) {
-            System.out.println("  -> optionalChaining tipo: " + optionalChaining.getClass().getSimpleName());
-        }
         if(cachedMethod == null) {
             throw new RuntimeException("Error interno: método no fue cacheado durante check() para " + methodName);
         }
 
-        System.out.println("DEBUG ChainedCallNode: Generando llamada encadenada a " + methodName);
-        System.out.println("  -> Tipo del objeto: " + (cachedCallingType != null ? cachedCallingType.getName() : "null"));
-        System.out.println("  -> Offset del método: " + cachedMethod.getOffset());
-
-        System.out.println("DEBUG: Llamando a método " + methodName + " con offset " + cachedMethod.getOffset() + " de clase " + cachedCallingType.getName());
-        System.out.println("DEBUG: Label del método: " + cachedMethod.getLabel());
-
         if(cachedMethod.isStaticMethod()){
-            System.out.println("  -> ENTRANDO A BRANCH ESTÁTICO");
-
             symbolTable.instructionList.add("POP");
 
             if(!cachedMethod.getReturnType().getName().equals("void")) {
@@ -133,8 +119,6 @@ public class ChainedCallNode extends ChainingNode{
             symbolTable.instructionList.add("PUSH " + cachedMethod.getLabel());
             symbolTable.instructionList.add("CALL");
         }else{
-            System.out.println("  -> ENTRANDO A BRANCH DE INSTANCIA");
-
             boolean hasReturnValue = !cachedMethod.getReturnType().getName().equals("void");
             boolean needsRMEM = hasReturnValue && !hasChainedCallWithReturn();
 
@@ -161,14 +145,8 @@ public class ChainedCallNode extends ChainingNode{
         }
     }
     private boolean hasChainedCallWithReturn() {
-        System.out.println("DEBUG hasChainedCallWithReturn:");
-        System.out.println("  -> optionalChaining: " + optionalChaining);
-        System.out.println("  -> optionalChaining instanceof ChainedCallNode: " + (optionalChaining instanceof ChainedCallNode));
-
         if(optionalChaining instanceof ChainedCallNode) {
             ChainedCallNode next = (ChainedCallNode) optionalChaining;
-            System.out.println("  -> next.cachedMethod: " + next.cachedMethod);
-            System.out.println("  -> next.methodReturnsValue(): " + next.methodReturnsValue());
             return next.methodReturnsValue();
         }
         return false;
@@ -180,12 +158,7 @@ public class ChainedCallNode extends ChainingNode{
             throw new RuntimeException("Error interno: método no fue cacheado durante check() para " + methodName);
         }
 
-        System.out.println("DEBUG ChainedCallNode: Generando llamada encadenada a " + methodName);
-        System.out.println("  -> Tipo del objeto: " + (cachedCallingType != null ? cachedCallingType.getName() : "null"));
-        System.out.println("  -> Offset del método: " + cachedMethod.getOffset());
-
         if(cachedMethod.isStaticMethod()){
-            System.out.println("  -> ENTRANDO A BRANCH ESTÁTICO con "+isLeftSide);
 
             symbolTable.instructionList.add("POP");
 
@@ -198,7 +171,6 @@ public class ChainedCallNode extends ChainingNode{
             symbolTable.instructionList.add("PUSH " + cachedMethod.getLabel());
             symbolTable.instructionList.add("CALL");
         } else {
-            System.out.println("  -> ENTRANDO A BRANCH DE INSTANCIA con "+isLeftSide);
             if (!cachedMethod.getReturnType().getName().equals("void")) {
                 symbolTable.instructionList.add("RMEM 1");
                 symbolTable.instructionList.add("SWAP");
