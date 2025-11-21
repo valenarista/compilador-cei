@@ -1,4 +1,10 @@
 .DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
 VT_Init27:
 DW 0  ; VT vacía
 VT_WithConstructor:
@@ -23,6 +29,24 @@ STORE 4
 LOAD 3
 ADD
 STOREHL
+STOREFP
+RET 1
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
 STOREFP
 RET 1
 ; Clase Object
@@ -156,6 +180,7 @@ LOADREF 1
 CALL
 PUSH Object_debugPrint
 CALL
+JUMP end_method_main
 NOP
 end_method_main:
 FMEM 1
@@ -175,6 +200,7 @@ LOAD 4
 LOAD 3
 SWAP
 STOREREF 1
+JUMP end_method_WithConstructor_init
 NOP
 end_method_WithConstructor_init:
 STOREFP

@@ -62,6 +62,20 @@ public class UnaryExpNode extends CompExpNode{
     }
 
     @Override
+    public boolean isConstructorCall() {
+        return operand.isConstructorCall();
+    }
+
+    public boolean isStaticCall() {
+        return operand.isStaticCall();
+    }
+
+    @Override
+    public void setNeedsRMEM(boolean b) {
+        operand.setNeedsRMEM(b);
+    }
+
+    @Override
     public boolean isOperandWithCall() {
         return operand.isOperandWithCall();
     }

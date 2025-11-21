@@ -13,6 +13,7 @@ public class ReturnNode extends SentenceWithExpressionNode{
     private Type expectedType;
     private ExpressionNode expressionNode;
     private Token finalToken;
+    private int parameterCount;
 
     public ReturnNode(ExpressionNode expressionNode){
         super(expressionNode);
@@ -46,6 +47,7 @@ public class ReturnNode extends SentenceWithExpressionNode{
     public int getLine(){
         return finalToken.getLineNumber();
     }
+
     @Override
     public void generateCode() {
         Method currentMethod = (Method) symbolTable.getCurrentInvocable();
@@ -64,7 +66,7 @@ public class ReturnNode extends SentenceWithExpressionNode{
         int paramCount = currentMethod.getParamList().size();
         int offset = paramCount + 3;
 
-        if(!currentMethod.isStaticMethod()) {
+        if (!currentMethod.isStaticMethod()) {
             offset++;
         }
 

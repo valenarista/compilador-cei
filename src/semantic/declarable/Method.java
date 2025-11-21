@@ -157,6 +157,10 @@ public class Method implements Invocable {
             block.generateCode();
         }
 
+        if(isVoid() && (block == null || !hasExplicitReturn())) {
+            symbolTable.instructionList.add("JUMP end_method_" + getLabel());
+        }
+
         symbolTable.instructionList.add("NOP");
         symbolTable.instructionList.add("end_method_" + getLabel() + ":");
 
@@ -170,6 +174,7 @@ public class Method implements Invocable {
         }
 
         symbolTable.instructionList.add("STOREFP");
+
         int memoryNeeded = isStaticMethod() ? paramList.size() : paramList.size() + 1;
         symbolTable.instructionList.add("RET " + memoryNeeded);
 

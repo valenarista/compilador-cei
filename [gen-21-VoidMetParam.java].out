@@ -1,4 +1,10 @@
 .DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
 VT_B:
 DW B_printNum
 VT_Init2:
@@ -23,6 +29,24 @@ STORE 4
 LOAD 3
 ADD
 STOREHL
+STOREFP
+RET 1
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
 STOREFP
 RET 1
 ; Clase Object
@@ -131,6 +155,7 @@ STOREFP
 LOAD 4
 PUSH Object_debugPrint
 CALL
+JUMP end_method_B_printNum
 NOP
 end_method_B_printNum:
 STOREFP
@@ -164,6 +189,7 @@ DUP
 LOADREF 0 
 LOADREF 0
 CALL
+JUMP end_method_main
 NOP
 end_method_main:
 FMEM 1

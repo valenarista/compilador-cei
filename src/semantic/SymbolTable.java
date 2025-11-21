@@ -287,6 +287,9 @@ public class SymbolTable {
     public void generateCode(){
         setOffsets();
         instructionList.add(".DATA");
+
+        generatePredefinedData();
+
         for(EntityClass clase : clases.values()){
             if(!clase.isPredefined() && clase instanceof ConcreteClass)
                 ((ConcreteClass) clase).generateVirtualTable();
@@ -302,6 +305,15 @@ public class SymbolTable {
                 clase.generateCode();
         }
         generateStringLiterals();
+    }
+    public void generatePredefinedData(){
+        instructionList.add("VT_Object:");
+        instructionList.add("DW 0  ; VT vacía");
+        instructionList.add("VT_String:");
+        instructionList.add("DW 0  ; VT vacía");
+        instructionList.add("VT_System:");
+        instructionList.add("DW 0  ; VT vacía");
+
     }
     private void initGenerator(){
         instructionList.add("PUSH simple_heap_init");
@@ -332,6 +344,28 @@ public class SymbolTable {
         instructionList.add("RET 1");
     }
     private void defaultClassesGenerator() {
+        instructionList.add("ctor_Object:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 1");
+
+        instructionList.add("ctor_String:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 1");
+
+        instructionList.add("ctor_System:");
+        instructionList.add("LOADFP");
+        instructionList.add("LOADSP");
+        instructionList.add("STOREFP");
+        instructionList.add("STOREFP");
+        instructionList.add("RET 1");
+
+
         //Object class
         //static void debugPrint(int i)
         instructionList.add("; Clase Object");

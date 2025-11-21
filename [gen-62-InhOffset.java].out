@@ -1,0 +1,289 @@
+.DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
+VT_A:
+DW C_m1, B_m2, A_m3, A_m4
+VT_B:
+DW C_m1, B_m2, B_m3
+VT_C:
+DW C_m1, C_m2
+.CODE
+PUSH simple_heap_init
+CALL
+PUSH main
+CALL
+HALT
+simple_heap_init:
+RET 0
+simple_malloc:
+LOADFP
+LOADSP
+STOREFP
+LOADHL
+DUP
+PUSH 1
+ADD
+STORE 4
+LOAD 3
+ADD
+STOREHL
+STOREFP
+RET 1
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+; Clase Object
+Object_debugPrint:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+; Clase System
+System_read:
+LOADFP
+LOADSP
+STOREFP
+READ
+STORE 3
+STOREFP
+RET 0
+System_printB:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+STOREFP
+RET 1
+System_printC:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+STOREFP
+RET 1
+System_printI:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+System_printS:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+STOREFP
+RET 1
+System_println:
+LOADFP
+LOADSP
+STOREFP
+PRNLN
+STOREFP
+RET 0
+System_printBln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+PRNLN
+STOREFP
+RET 1
+System_printCln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+PRNLN
+STOREFP
+RET 1
+System_printIln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+PRNLN
+STOREFP
+RET 1
+System_printSln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+PRNLN
+STOREFP
+RET 1
+ctor_A:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+A_m3:
+LOADFP
+LOADSP
+STOREFP
+PUSH str_0
+PUSH System_printSln
+CALL
+JUMP end_method_A_m3
+NOP
+end_method_A_m3:
+STOREFP
+RET 1
+A_m4:
+LOADFP
+LOADSP
+STOREFP
+PUSH str_1
+PUSH System_printSln
+CALL
+JUMP end_method_A_m4
+NOP
+end_method_A_m4:
+STOREFP
+RET 1
+main:
+LOADFP
+LOADSP
+STOREFP
+PUSH str_2
+PUSH System_printSln
+CALL
+RMEM 1
+RMEM 1
+PUSH 5
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_A
+STOREREF 0
+DUP
+PUSH ctor_A
+CALL
+STORE 0
+LOAD 0
+DUP
+LOADREF 0 
+LOADREF 0
+CALL
+LOAD 0
+DUP
+LOADREF 0 
+LOADREF 1
+CALL
+LOAD 0
+DUP
+LOADREF 0 
+LOADREF 2
+CALL
+LOAD 0
+DUP
+LOADREF 0 
+LOADREF 3
+CALL
+JUMP end_method_main
+NOP
+end_method_main:
+FMEM 1
+STOREFP
+RET 0
+ctor_B:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+B_m2:
+LOADFP
+LOADSP
+STOREFP
+PUSH str_3
+PUSH System_printSln
+CALL
+JUMP end_method_B_m2
+NOP
+end_method_B_m2:
+STOREFP
+RET 1
+B_m3:
+LOADFP
+LOADSP
+STOREFP
+PUSH str_4
+PUSH System_printSln
+CALL
+JUMP end_method_B_m3
+NOP
+end_method_B_m3:
+STOREFP
+RET 1
+ctor_C:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+C_m1:
+LOADFP
+LOADSP
+STOREFP
+PUSH str_5
+PUSH System_printSln
+CALL
+JUMP end_method_C_m1
+NOP
+end_method_C_m1:
+STOREFP
+RET 1
+C_m2:
+LOADFP
+LOADSP
+STOREFP
+PUSH str_6
+PUSH System_printSln
+CALL
+JUMP end_method_C_m2
+NOP
+end_method_C_m2:
+STOREFP
+RET 1
+.DATA
+str_5: DW "m1 de C", 0
+str_0: DW "m3 de A", 0
+str_4: DW "m3 de B", 0
+str_1: DW "m4 de A", 0
+str_2: DW "Ver los offsets", 0
+str_6: DW "m2 de C", 0
+str_3: DW "m2 de B", 0

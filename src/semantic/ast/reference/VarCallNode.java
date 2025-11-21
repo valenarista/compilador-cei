@@ -2,6 +2,7 @@ package semantic.ast.reference;
 
 import exceptions.SemanticException;
 import lexical.Token;
+import semantic.ast.chaining.ChainedCallNode;
 import semantic.ast.chaining.ChainingNode;
 import semantic.declarable.Attribute;
 import semantic.declarable.Parameter;
@@ -133,6 +134,13 @@ public class VarCallNode extends ReferenceNode{
             optChaining.generateCode(isLeftSide);
         }
     }
+    private boolean needsRMEMForChaining() {
+        if(optChaining instanceof ChainedCallNode) {
+            ChainedCallNode chainedCall = (ChainedCallNode) optChaining;
+            return chainedCall.methodReturnsValue();
+        }
+        return false;
+    }
 
     private void generateParameterCode(){
         Parameter parameter = symbolTable.getCurrentInvocable().getParamList().stream().filter(p -> p.getName().equals(varName)).findFirst().get();
@@ -150,46 +158,46 @@ public class VarCallNode extends ReferenceNode{
         int attrOffset = attr.getOffset();
         symbolTable.instructionList.add("LOADREF " + attrOffset);
     }
-    private int getParameterOffset(){
-        int paramSize = symbolTable.getCurrentInvocable().getParamList().size();
-        int paramIndex = 0;
-        for(Parameter p : symbolTable.getCurrentInvocable().getParamList()){
-            if(p.getName().equals(varName)){
-                break;
-            }
-            paramIndex++;
-        }
-        int baseOffset = paramSize + 3;
-        if(!symbolTable.getCurrentInvocable().isVoid()){
-            baseOffset +=1;
-        }
-        return baseOffset - paramIndex;
-    }
+
     private void generateLeftSideCode(){
         System.out.println("  -> Generando lado izquierdo");
+        if (optChaining == null) {
 
-        if(isParameter()) {
-            System.out.println("  -> Generando como parámetro");
-            Parameter parameter = symbolTable.getCurrentInvocable().getParamList().stream().filter(p -> p.getName().equals(varName)).findFirst().get();
-            int paramOffset = parameter.getOffset();
-            System.out.println("DEBUG generateParameterCode: parámetro lado izq'" + varName + "' tiene offset " + paramOffset);
-            symbolTable.instructionList.add("STORE " + paramOffset);
-        }
-        else if(isLocalVar()) {
-            System.out.println("  -> Generando como variable local");
-            int localVarOffset = symbolTable.getLocalVarOffset(varName);
-            symbolTable.instructionList.add("STORE " + localVarOffset);
-        }
-        else if(isAttribute()) {
-            System.out.println("  -> Generando como atributo");
-            symbolTable.instructionList.add("LOAD 3");
-            symbolTable.instructionList.add("SWAP");
-            Attribute attr = symbolTable.getCurrentClass().getAttributes().get(varName);
-            int attrOffset = attr.getOffset();
-            symbolTable.instructionList.add("STOREREF " + attrOffset);
-        }
-        else {
-            System.err.println("  -> ERROR: No se pudo determinar el tipo de variable!");
+            if (isParameter()) {
+                System.out.println("  -> Generando como parámetro");
+                Parameter parameter = symbolTable.getCurrentInvocable().getParamList().stream().filter(p -> p.getName().equals(varName)).findFirst().get();
+                int paramOffset = parameter.getOffset();
+                System.out.println("DEBUG generateParameterCode: parámetro lado izq'" + varName + "' tiene offset " + paramOffset);
+                symbolTable.instructionList.add("STORE " + paramOffset);
+            } else if (isLocalVar()) {
+                System.out.println("  -> Generando como variable local");
+                int localVarOffset = symbolTable.getLocalVarOffset(varName);
+                symbolTable.instructionList.add("STORE " + localVarOffset);
+            } else if (isAttribute()) {
+                System.out.println("  -> Generando como atributo");
+                symbolTable.instructionList.add("LOAD 3");
+                symbolTable.instructionList.add("SWAP");
+                Attribute attr = symbolTable.getCurrentClass().getAttributes().get(varName);
+                int attrOffset = attr.getOffset();
+                symbolTable.instructionList.add("STOREREF " + attrOffset);
+            }
+        } else{
+
+            if(isParameter()) {
+                System.out.println("  -> Generando como parámetro");
+                generateParameterCode();
+            }
+            else if(isLocalVar()) {
+                System.out.println("  -> Generando como variable local");
+                generateLocalVarCode();
+            }
+            else if(isAttribute()) {
+                System.out.println("  -> Generando como atributo");
+                generateAttributeCode();
+            }
+            else {
+                System.err.println("  -> ERROR: No se pudo determinar el tipo de variable!");
+            }
         }
     }
     private void generateRightSideCode(){
@@ -204,9 +212,6 @@ public class VarCallNode extends ReferenceNode{
         else if(isAttribute()) {
             System.out.println("  -> Generando como atributo");
             generateAttributeCode();
-        }
-        else {
-            System.err.println("  -> ERROR: No se pudo determinar el tipo de variable!");
         }
     }
 

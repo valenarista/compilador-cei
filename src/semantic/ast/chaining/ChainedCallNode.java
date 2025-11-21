@@ -103,6 +103,11 @@ public class ChainedCallNode extends ChainingNode{
 
     @Override
     public void generateCode() {
+        System.out.println("DEBUG ChainedCallNode.generateCode() para: " + methodName);
+        System.out.println("  -> optionalChaining es null? " + (optionalChaining == null));
+        if(optionalChaining != null) {
+            System.out.println("  -> optionalChaining tipo: " + optionalChaining.getClass().getSimpleName());
+        }
         if(cachedMethod == null) {
             throw new RuntimeException("Error interno: método no fue cacheado durante check() para " + methodName);
         }
@@ -111,24 +116,62 @@ public class ChainedCallNode extends ChainingNode{
         System.out.println("  -> Tipo del objeto: " + (cachedCallingType != null ? cachedCallingType.getName() : "null"));
         System.out.println("  -> Offset del método: " + cachedMethod.getOffset());
 
-        if(!cachedMethod.getReturnType().getName().equals("void")) {
-            symbolTable.instructionList.add("RMEM 1");
-            symbolTable.instructionList.add("SWAP");
-        }
+        System.out.println("DEBUG: Llamando a método " + methodName + " con offset " + cachedMethod.getOffset() + " de clase " + cachedCallingType.getName());
+        System.out.println("DEBUG: Label del método: " + cachedMethod.getLabel());
 
-        for(ExpressionNode arg : argList) {
-            arg.generateCode();
-            symbolTable.instructionList.add("SWAP");
-        }
+        if(cachedMethod.isStaticMethod()){
+            System.out.println("  -> ENTRANDO A BRANCH ESTÁTICO");
 
-        symbolTable.instructionList.add("DUP");
-        symbolTable.instructionList.add("LOADREF 0 ");
-        symbolTable.instructionList.add("LOADREF " + cachedMethod.getOffset());
-        symbolTable.instructionList.add("CALL");
+            symbolTable.instructionList.add("POP");
+
+            if(!cachedMethod.getReturnType().getName().equals("void")) {
+                symbolTable.instructionList.add("RMEM 1");
+            }
+            for(ExpressionNode arg : argList) {
+                arg.generateCode();
+            }
+            symbolTable.instructionList.add("PUSH " + cachedMethod.getLabel());
+            symbolTable.instructionList.add("CALL");
+        }else{
+            System.out.println("  -> ENTRANDO A BRANCH DE INSTANCIA");
+
+            boolean hasReturnValue = !cachedMethod.getReturnType().getName().equals("void");
+            boolean needsRMEM = hasReturnValue && !hasChainedCallWithReturn();
+
+            if(needsRMEM) {
+                symbolTable.instructionList.add("RMEM 1");
+                symbolTable.instructionList.add("SWAP");
+            }
+
+            for(ExpressionNode arg : argList) {
+                arg.generateCode();
+                symbolTable.instructionList.add("SWAP");
+            }
+
+            symbolTable.instructionList.add("DUP");
+            symbolTable.instructionList.add("LOADREF 0 ");
+            symbolTable.instructionList.add("LOADREF " + cachedMethod.getOffset());
+            symbolTable.instructionList.add("CALL");
+
+        }
 
         if(optionalChaining != null) {
             optionalChaining.generateCode();
+
         }
+    }
+    private boolean hasChainedCallWithReturn() {
+        System.out.println("DEBUG hasChainedCallWithReturn:");
+        System.out.println("  -> optionalChaining: " + optionalChaining);
+        System.out.println("  -> optionalChaining instanceof ChainedCallNode: " + (optionalChaining instanceof ChainedCallNode));
+
+        if(optionalChaining instanceof ChainedCallNode) {
+            ChainedCallNode next = (ChainedCallNode) optionalChaining;
+            System.out.println("  -> next.cachedMethod: " + next.cachedMethod);
+            System.out.println("  -> next.methodReturnsValue(): " + next.methodReturnsValue());
+            return next.methodReturnsValue();
+        }
+        return false;
     }
 
     @Override
@@ -141,24 +184,45 @@ public class ChainedCallNode extends ChainingNode{
         System.out.println("  -> Tipo del objeto: " + (cachedCallingType != null ? cachedCallingType.getName() : "null"));
         System.out.println("  -> Offset del método: " + cachedMethod.getOffset());
 
-        if(!cachedMethod.getReturnType().getName().equals("void")) {
-            symbolTable.instructionList.add("RMEM 1");
-            symbolTable.instructionList.add("SWAP");
+        if(cachedMethod.isStaticMethod()){
+            System.out.println("  -> ENTRANDO A BRANCH ESTÁTICO con "+isLeftSide);
+
+            symbolTable.instructionList.add("POP");
+
+            if(!cachedMethod.getReturnType().getName().equals("void")) {
+                symbolTable.instructionList.add("RMEM 1");
+            }
+            for(ExpressionNode arg : argList) {
+                arg.generateCode();
+            }
+            symbolTable.instructionList.add("PUSH " + cachedMethod.getLabel());
+            symbolTable.instructionList.add("CALL");
+        } else {
+            System.out.println("  -> ENTRANDO A BRANCH DE INSTANCIA con "+isLeftSide);
+            if (!cachedMethod.getReturnType().getName().equals("void")) {
+                symbolTable.instructionList.add("RMEM 1");
+                symbolTable.instructionList.add("SWAP");
+            }
+
+            for (ExpressionNode arg : argList) {
+                arg.generateCode();
+                symbolTable.instructionList.add("SWAP");
+            }
+
+            symbolTable.instructionList.add("DUP");
+            symbolTable.instructionList.add("LOADREF 0 ");
+            symbolTable.instructionList.add("LOADREF " + cachedMethod.getOffset());
+            symbolTable.instructionList.add("CALL");
         }
-
-        for(ExpressionNode arg : argList) {
-            arg.generateCode();
-            symbolTable.instructionList.add("SWAP");
-        }
-
-        symbolTable.instructionList.add("DUP");
-        symbolTable.instructionList.add("LOADREF 0 ");
-        symbolTable.instructionList.add("LOADREF " + cachedMethod.getOffset());
-        symbolTable.instructionList.add("CALL");
-
         if(optionalChaining != null) {
             optionalChaining.generateCode(isLeftSide);
         }
+    }
+    public boolean methodReturnsValue() {
+        if(cachedMethod != null) {
+            return !cachedMethod.getReturnType().getName().equals("void");
+        }
+        return false;
     }
 
 }

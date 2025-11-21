@@ -1,4 +1,10 @@
 .DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
 VT_Init12:
 DW 0  ; VT vacía
 VT_CompareGT:
@@ -23,6 +29,24 @@ STORE 4
 LOAD 3
 ADD
 STOREHL
+STOREFP
+RET 1
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
 STOREFP
 RET 1
 ; Clase Object
@@ -153,6 +177,7 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+JUMP end_method_main
 NOP
 end_method_main:
 FMEM 1
@@ -171,11 +196,11 @@ STOREFP
 LOAD 5
 LOAD 4
     GT
-BF end_if_6
+BF end_if_12
 PUSH 1
 STORE 6
 JUMP end_method_CompareGT_checkGreater
-end_if_6:
+end_if_12:
 PUSH 0
 STORE 6
 JUMP end_method_CompareGT_checkGreater

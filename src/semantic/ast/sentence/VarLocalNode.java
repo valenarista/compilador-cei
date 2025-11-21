@@ -3,6 +3,7 @@ package semantic.ast.sentence;
 import exceptions.SemanticException;
 import lexical.Token;
 import semantic.ast.expression.ExpressionNode;
+import semantic.ast.reference.ConstructorCallNode;
 import semantic.types.NullType;
 import semantic.types.Type;
 
@@ -31,6 +32,10 @@ public class VarLocalNode extends SentenceNode{
     @Override
     public String getLexeme() {
         return assignToken.getLexeme();
+    }
+
+    public ExpressionNode getValue() {
+        return value;
     }
 
     @Override
@@ -76,9 +81,9 @@ public class VarLocalNode extends SentenceNode{
     }
 
     public void generateCode() {
-        symbolTable.instructionList.add("RMEM 1");
-
         if(value != null){
+            if (value.isStaticCall()&& value.isConstructorCall())
+                value.setNeedsRMEM(false);
             value.generateCode();
             symbolTable.instructionList.add("STORE " + offset);
         }

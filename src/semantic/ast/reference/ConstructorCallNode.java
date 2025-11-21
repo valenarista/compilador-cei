@@ -27,6 +27,12 @@ public class ConstructorCallNode extends ReferenceNode{
         this.token = token;
         this.className = className;
     }
+
+    @Override
+    public boolean isConstructorCall() {
+        return true;
+    }
+
     public void setArgList(List<ExpressionNode> argList) {
         this.argList = argList;
     }
@@ -105,10 +111,10 @@ public class ConstructorCallNode extends ReferenceNode{
 
     @Override
     public void generateCode(){
-        symbolTable.instructionList.add("RMEM 1");
-
         EntityClass building = symbolTable.getClass(className);
         int cirSize = building.getCIRSize();
+
+        symbolTable.instructionList.add("RMEM 1");
 
         symbolTable.instructionList.add("PUSH " + cirSize);
         symbolTable.instructionList.add("PUSH simple_malloc");

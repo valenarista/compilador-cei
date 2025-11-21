@@ -1,25 +1,28 @@
 package semantic.ast.sentence;
 
+import semantic.ast.reference.ConstructorCallNode;
 import semantic.declarable.Invocable;
 import semantic.entity.EntityClass;
 import semantic.types.Type;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import static compiler.Main.symbolTable;
 
 public class BlockNode extends SentenceNode{
     private List<SentenceNode> sentences;
-    private HashMap<String,VarLocalNode> varLocalMap;
+    private LinkedHashMap<String,VarLocalNode> varLocalMap;
     private EntityClass nestedInClass;
     private Invocable nestedInInvocable;
     private BlockNode parentBlock;
+    private int lastLocalVarOffset = 0;
 
     public BlockNode() {
         sentences = new ArrayList<>();
-        varLocalMap = new HashMap<>();
+        varLocalMap = new LinkedHashMap<>();
         nestedInClass = symbolTable.getCurrentClass();
         nestedInInvocable = symbolTable.getCurrentInvocable();
         parentBlock = null;
@@ -32,7 +35,7 @@ public class BlockNode extends SentenceNode{
         return sentences;
     }
 
-    public HashMap<String, VarLocalNode> getVarLocalMap() {
+    public LinkedHashMap<String, VarLocalNode> getVarLocalMap() {
         return varLocalMap;
     }
     public void setParentBlock(BlockNode parentBlock) {
@@ -88,13 +91,27 @@ public class BlockNode extends SentenceNode{
 
     public void generateCode() {
         System.out.println("DEBUG: Generando bloque con " + sentences.size() + " sentencias");
+
+        if(parentBlock!=null)
+            lastLocalVarOffset = parentBlock.lastLocalVarOffset;
         BlockNode previousBlock = symbolTable.getCurrentBlock();
         symbolTable.setCurrentBlock(this);
+        int localVarCount = 0;
         for (SentenceNode sentence : sentences) {
-            sentence.generateCode();
-        }
-        symbolTable.setCurrentBlock(previousBlock);
+            if(sentence instanceof VarLocalNode) {
+                VarLocalNode varLocal = (VarLocalNode) sentence;
+                varLocal.setOffset(lastLocalVarOffset--);
+                localVarCount++;
+                symbolTable.instructionList.add("RMEM 1");
+                sentence.generateCode();
+            } else {
 
+                sentence.generateCode();
+            }
+        }
+        if(parentBlock!=null && localVarCount > 0)
+            symbolTable.instructionList.add("FMEM " + localVarCount);
+        symbolTable.setCurrentBlock(previousBlock);
     }
 
 }

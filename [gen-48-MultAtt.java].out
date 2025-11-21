@@ -1,4 +1,10 @@
 .DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
 VT_Init34:
 DW 0  ; VT vacía
 VT_MultipleAttrs:
@@ -23,6 +29,24 @@ STORE 4
 LOAD 3
 ADD
 STOREHL
+STOREFP
+RET 1
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
 STOREFP
 RET 1
 ; Clase Object
@@ -154,6 +178,7 @@ DUP
 LOADREF 0 
 LOADREF 0
 CALL
+JUMP end_method_main
 NOP
 end_method_main:
 FMEM 1
@@ -177,6 +202,7 @@ LOAD 3
 LOADREF 2
 PUSH Object_debugPrint
 CALL
+JUMP end_method_MultipleAttrs_printBoth
 NOP
 end_method_MultipleAttrs_printBoth:
 STOREFP
@@ -193,6 +219,7 @@ LOAD 4
 LOAD 3
 SWAP
 STOREREF 2
+JUMP end_method_MultipleAttrs_setValues
 NOP
 end_method_MultipleAttrs_setValues:
 STOREFP

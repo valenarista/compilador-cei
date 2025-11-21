@@ -13,4 +13,14 @@ abstract public class ExpressionNode{
     public abstract boolean isOperandWithCall();
     public abstract void generateCode();
     public abstract void generateCode(boolean isLeftSide);
+    public boolean isConstructorCall(){
+        return false;
+    }
+
+    public boolean isStaticCall() {
+        return false;
+    }
+
+    public void setNeedsRMEM(boolean b) {
+    }
 }

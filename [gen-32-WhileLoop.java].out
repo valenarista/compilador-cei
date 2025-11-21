@@ -1,4 +1,10 @@
 .DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
 VT_Init13:
 DW 0  ; VT vacía
 VT_WhileLoop:
@@ -23,6 +29,24 @@ STORE 4
 LOAD 3
 ADD
 STOREHL
+STOREFP
+RET 1
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
 STOREFP
 RET 1
 ; Clase Object
@@ -149,6 +173,7 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
+JUMP end_method_main
 NOP
 end_method_main:
 FMEM 1
@@ -167,17 +192,17 @@ STOREFP
 RMEM 1
 PUSH 0
 STORE 0
-start_while_0:
+start_while_1:
 LOAD 0
 PUSH 10
     LT
-BF end_while_0
+BF end_while_1
 LOAD 0
 PUSH 1
     ADD
 STORE 0
-JUMP start_while_0
-end_while_0:
+JUMP start_while_1
+end_while_1:
 LOAD 0
 STORE 4
 JUMP end_method_WhileLoop_countTo10

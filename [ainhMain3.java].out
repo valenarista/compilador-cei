@@ -1,0 +1,557 @@
+.DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
+VT_Clase0:
+DW Clase0_m4, Clase0_m5
+VT_Clase1:
+DW Clase2_m4, Clase1_m5, Clase2_m0, Clase1_m1, Clase1_m6, Clase1_m7
+VT_Clase2:
+DW Clase2_m4, Clase0_m5, Clase2_m0
+.CODE
+PUSH simple_heap_init
+CALL
+PUSH main
+CALL
+HALT
+simple_heap_init:
+RET 0
+simple_malloc:
+LOADFP
+LOADSP
+STOREFP
+LOADHL
+DUP
+PUSH 1
+ADD
+STORE 4
+LOAD 3
+ADD
+STOREHL
+STOREFP
+RET 1
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+; Clase Object
+Object_debugPrint:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+; Clase System
+System_read:
+LOADFP
+LOADSP
+STOREFP
+READ
+STORE 3
+STOREFP
+RET 0
+System_printB:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+STOREFP
+RET 1
+System_printC:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+STOREFP
+RET 1
+System_printI:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+STOREFP
+RET 1
+System_printS:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+STOREFP
+RET 1
+System_println:
+LOADFP
+LOADSP
+STOREFP
+PRNLN
+STOREFP
+RET 0
+System_printBln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+BPRINT
+PRNLN
+STOREFP
+RET 1
+System_printCln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+CPRINT
+PRNLN
+STOREFP
+RET 1
+System_printIln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+IPRINT
+PRNLN
+STOREFP
+RET 1
+System_printSln:
+LOADFP
+LOADSP
+STOREFP
+LOAD 3
+SPRINT
+PRNLN
+STOREFP
+RET 1
+ctor_Clase0:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+Clase0_m4:
+LOADFP
+LOADSP
+STOREFP
+PUSH 4
+STORE 4
+JUMP end_method_Clase0_m4
+NOP
+end_method_Clase0_m4:
+STOREFP
+RET 1
+Clase0_m5:
+LOADFP
+LOADSP
+STOREFP
+PUSH 5
+STORE 4
+JUMP end_method_Clase0_m5
+NOP
+end_method_Clase0_m5:
+STOREFP
+RET 1
+ctor_Clase1:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+Clase1_m1:
+LOADFP
+LOADSP
+STOREFP
+PUSH 1
+STORE 4
+JUMP end_method_Clase1_m1
+NOP
+end_method_Clase1_m1:
+STOREFP
+RET 1
+Clase1_test:
+LOADFP
+LOADSP
+STOREFP
+PUSH 1
+STORE 3
+JUMP end_method_Clase1_test
+NOP
+end_method_Clase1_test:
+STOREFP
+RET 0
+Clase1_m5:
+LOADFP
+LOADSP
+STOREFP
+PUSH 15
+STORE 4
+JUMP end_method_Clase1_m5
+NOP
+end_method_Clase1_m5:
+STOREFP
+RET 1
+Clase1_m6:
+LOADFP
+LOADSP
+STOREFP
+PUSH 6
+STORE 4
+JUMP end_method_Clase1_m6
+NOP
+end_method_Clase1_m6:
+STOREFP
+RET 1
+Clase1_m7:
+LOADFP
+LOADSP
+STOREFP
+PUSH 7
+STORE 4
+JUMP end_method_Clase1_m7
+NOP
+end_method_Clase1_m7:
+STOREFP
+RET 1
+ctor_Clase2:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+Clase2_m0:
+LOADFP
+LOADSP
+STOREFP
+PUSH 0
+STORE 4
+JUMP end_method_Clase2_m0
+NOP
+end_method_Clase2_m0:
+STOREFP
+RET 1
+Clase2_m4:
+LOADFP
+LOADSP
+STOREFP
+PUSH 24
+STORE 4
+JUMP end_method_Clase2_m4
+NOP
+end_method_Clase2_m4:
+STOREFP
+RET 1
+main:
+LOADFP
+LOADSP
+STOREFP
+RMEM 1
+RMEM 1
+PUSH 1
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_Clase0
+STOREREF 0
+DUP
+PUSH ctor_Clase0
+CALL
+STORE 0
+RMEM 1
+RMEM 1
+PUSH 1
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_Clase2
+STOREREF 0
+DUP
+PUSH ctor_Clase2
+CALL
+STORE -1
+RMEM 1
+RMEM 1
+PUSH 1
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_Clase1
+STOREREF 0
+DUP
+PUSH ctor_Clase1
+CALL
+STORE -2
+PUSH str_0
+PUSH System_printSln
+CALL
+LOAD 0
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 0
+CALL
+PUSH System_printIln
+CALL
+LOAD 0
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 1
+CALL
+PUSH System_printIln
+CALL
+PUSH System_println
+CALL
+RMEM 1
+PUSH 1
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_Clase2
+STOREREF 0
+DUP
+PUSH ctor_Clase2
+CALL
+STORE 0
+LOAD 0
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 0
+CALL
+PUSH System_printIln
+CALL
+LOAD 0
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 1
+CALL
+PUSH System_printIln
+CALL
+PUSH System_println
+CALL
+RMEM 1
+PUSH 1
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_Clase1
+STOREREF 0
+DUP
+PUSH ctor_Clase1
+CALL
+STORE 0
+LOAD 0
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 0
+CALL
+PUSH System_printIln
+CALL
+LOAD 0
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 1
+CALL
+PUSH System_printIln
+CALL
+PUSH System_println
+CALL
+PUSH System_println
+CALL
+PUSH str_1
+PUSH System_printSln
+CALL
+RMEM 1
+PUSH 1
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_Clase2
+STOREREF 0
+DUP
+PUSH ctor_Clase2
+CALL
+STORE -1
+LOAD -1
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 0
+CALL
+PUSH System_printIln
+CALL
+LOAD -1
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 1
+CALL
+PUSH System_printIln
+CALL
+LOAD -1
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 2
+CALL
+PUSH System_printIln
+CALL
+PUSH System_println
+CALL
+RMEM 1
+PUSH 1
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_Clase1
+STOREREF 0
+DUP
+PUSH ctor_Clase1
+CALL
+STORE -1
+LOAD -1
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 0
+CALL
+PUSH System_printIln
+CALL
+LOAD -1
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 1
+CALL
+PUSH System_printIln
+CALL
+LOAD -1
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 2
+CALL
+PUSH System_printIln
+CALL
+PUSH System_println
+CALL
+PUSH System_println
+CALL
+PUSH str_2
+PUSH System_printSln
+CALL
+RMEM 1
+PUSH 1
+PUSH simple_malloc
+CALL
+DUP
+PUSH VT_Clase1
+STOREREF 0
+DUP
+PUSH ctor_Clase1
+CALL
+STORE -2
+LOAD -2
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 0
+CALL
+PUSH System_printIln
+CALL
+LOAD -2
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 1
+CALL
+PUSH System_printIln
+CALL
+LOAD -2
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 2
+CALL
+PUSH System_printIln
+CALL
+LOAD -2
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 3
+CALL
+PUSH System_printIln
+CALL
+LOAD -2
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 4
+CALL
+PUSH System_printIln
+CALL
+LOAD -2
+RMEM 1
+SWAP
+DUP
+LOADREF 0 
+LOADREF 5
+CALL
+PUSH System_printIln
+CALL
+PUSH System_println
+CALL
+PUSH System_println
+CALL
+JUMP end_method_main
+NOP
+end_method_main:
+FMEM 3
+STOREFP
+RET 0
+.DATA
+str_0: DW "Testeando clase 0", 0
+str_2: DW "Testeando clase 1", 0
+str_1: DW "Testeando clase 2", 0

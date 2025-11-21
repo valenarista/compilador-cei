@@ -34,6 +34,17 @@ public class Interface implements EntityClass {
         this.consolidated = false;
         this.vtLabel = "VT_" + idToken.getLexeme();
     }
+
+    @Override
+    public boolean methodOffsetsSet() {
+        return false;
+    }
+
+    @Override
+    public void setMethodOffsetsSet(boolean methodOffsetsSet) {
+
+    }
+
     public void estaBienDeclarado(){
         if(modificador!=null && modificador.getType().equals(TokenType.sw_static))
             throw new SemanticException("Error semantico en linea "+idToken.getLineNumber()+" Una Interface no anidada no puede ser static.",idToken.getLexeme(), idToken.getLineNumber());
@@ -70,9 +81,7 @@ public class Interface implements EntityClass {
             for(Method method : parent.getMethods().values()){
                 inheritanceMethod(method);
             }
-
         }
-
         consolidated = true;
 
     }
@@ -89,6 +98,16 @@ public class Interface implements EntityClass {
     @Override
     public void generateCode() {
 
+    }
+
+    @Override
+    public void setMethodsOffsets() {
+
+    }
+
+    @Override
+    public int getNextMethodOffset() {
+        return 0;
     }
 
     public void chequeoSentencias(){
@@ -206,7 +225,6 @@ public class Interface implements EntityClass {
     }
 
     private void checkInheritance() {
-        //Una interface puede heredar de otra interface, pero no de una clase
 
         if (herencia != null) {
             if (symbolTable.getClass(herencia.getLexeme()) == null)

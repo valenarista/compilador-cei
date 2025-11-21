@@ -168,22 +168,5 @@ public class MethodCallNode extends ReferenceNode{
         }
         return null;
     }
-    private String findMethodOwnerClass(String methodName){
 
-        String currentClassName = symbolTable.getCurrentClass().getName();
-        EntityClass currentClass = symbolTable.getCurrentClass();
-
-        while(currentClass != null){
-            if(currentClass.getMethods().containsKey(methodName) &&
-                    !currentClass.getInheritedMethods().containsKey(methodName)){
-                return currentClass.getName();
-            }
-            if(currentClass.getHerencia() != null){
-                currentClass = symbolTable.getClass(currentClass.getHerencia().getLexeme());
-            } else {
-                break;
-            }
-        }
-        return currentClassName;
-    }
 }

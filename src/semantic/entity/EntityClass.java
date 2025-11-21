@@ -6,6 +6,8 @@ import semantic.declarable.Constructor;
 import semantic.declarable.Method;
 
 public interface EntityClass {
+    boolean methodOffsetsSet();
+    void setMethodOffsetsSet(boolean methodOffsetsSet);
     void estaBienDeclarado();
     void consolidar();
     void chequeoSentencias();
@@ -28,9 +30,12 @@ public interface EntityClass {
     boolean isPredefined();
     void setPredefined(boolean predefined);
     void generateCode();
+    void setMethodsOffsets();
+    public int getNextMethodOffset();
 
 
-    void addAttribute(Attribute attribute);
+
+        void addAttribute(Attribute attribute);
     void addMethod(Method method);
     void addConstructor(Constructor constructor);
     void addInheritance(Token herencia);

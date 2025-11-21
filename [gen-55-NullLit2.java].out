@@ -1,4 +1,10 @@
 .DATA
+VT_Object:
+DW 0  ; VT vacía
+VT_String:
+DW 0  ; VT vacía
+VT_System:
+DW 0  ; VT vacía
 VT_A:
 DW A_m3
 VT_B:
@@ -25,6 +31,24 @@ STORE 4
 LOAD 3
 ADD
 STOREHL
+STOREFP
+RET 1
+ctor_Object:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_String:
+LOADFP
+LOADSP
+STOREFP
+STOREFP
+RET 1
+ctor_System:
+LOADFP
+LOADSP
+STOREFP
 STOREFP
 RET 1
 ; Clase Object
@@ -199,7 +223,7 @@ LOAD 0
 LOADREF 2
 PUSH 0
     NE
-BF else_15
+BF else_21
 LOAD 0
 RMEM 1
 SWAP
@@ -212,12 +236,13 @@ LOADREF 0
 CALL
 PUSH Object_debugPrint
 CALL
-JUMP end_if_15
-else_15:
+JUMP end_if_21
+else_21:
 PUSH 0
 PUSH Object_debugPrint
 CALL
-end_if_15:
+end_if_21:
+JUMP end_method_main
 NOP
 end_method_main:
 FMEM 1
